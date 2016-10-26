@@ -1,7 +1,7 @@
 ﻿#include "DeviceManager.h"
 _USING_FRAMEWORK
 
-DeviceManager* DeviceManager_instance = nullptr;
+DeviceManager* DeviceManager::_instance = nullptr;
 
 DeviceManager::DeviceManager()
 {
@@ -53,7 +53,7 @@ DeviceManager::~DeviceManager()
 		_surface->Release();
 }
 
-DeviceManager* DeviceManager::getInstace()
+DeviceManager* DeviceManager::getInstance()
 {
 	if (_instance == NULL)
 		_instance = new DeviceManager();

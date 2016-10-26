@@ -6,12 +6,15 @@ _NAMESPACE_FRAMEWORK_BEGIN
 ///Gồm D3DirectX
 ///DEVICE
 ///SURFACE
+///_instance sẽ là con trỏ của DeviceManger và là static để truy cập thông quan tên class
+///vô game sẽ gọi DeviceManager::getInstance->Init(Graphics);
+///
 class DeviceManager
 {
 public:
 	~DeviceManager();
 	//Trả về đối tượng DeviceManager
-	static DeviceManager* getInstace();
+	static DeviceManager* getInstance();
 	static void release();
 	void clearScreen();
 	//gọi hàm present để vẽ lên front-buffer
@@ -27,5 +30,5 @@ private:
 	LPDIRECT3DSURFACE9		_surface;
 	DeviceManager();
 };
-
+typedef DeviceManager* pDeviceManager;
 _NAMESPACE_FRAMEWORK_END
