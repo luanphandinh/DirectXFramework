@@ -37,5 +37,7 @@ private:
 	void setELapsedGameTime(TimeSpan& elapsedGameTime);
 	void setTotalGameTime(TimeSpan& TotalGameTime);
 };
+
+typedef GameTime* pGameTime;
 _NAMESPACE_FRAMEWORK_END
 

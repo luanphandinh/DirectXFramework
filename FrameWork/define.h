@@ -9,6 +9,9 @@
 #include<exception>
 
 using namespace std;
+#define WINDOW_WIDTH 512
+#define WINDOW_HEIGHT 448
+
 typedef D3DXVECTOR2 GVector2;
 typedef D3DXVECTOR3 GVector3;
 #define C_WHITE D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)	//màu trắng

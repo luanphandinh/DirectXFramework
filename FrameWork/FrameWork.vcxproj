@@ -68,8 +68,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CastlevaniaGame.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Texture.h" />
@@ -77,7 +79,9 @@
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CastlevaniaGame.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Texture.cpp" />
