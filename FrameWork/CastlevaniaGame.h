@@ -15,7 +15,7 @@ public:
 	void updateInput(float deltaTime);
 	void update(float deltaTime);
 	void draw();		//draw your objects
-	void LoadResource();//
+	void loadResource();//
 
 	/////include để test texture sau này xóa ko cân thiết
 	Texture* _test_texture;

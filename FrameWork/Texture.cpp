@@ -53,6 +53,7 @@ HRESULT Texture::loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCO
 
 void Texture::render(LPD3DXSPRITE spriteHandle, const RECT* rect, const GVector3* center, const GVector3* position)
 {
+	spriteHandle->Begin(D3DXSPRITE_ALPHABLEND);
 	spriteHandle->Draw(
 		this->_texture,
 		rect,
@@ -60,6 +61,7 @@ void Texture::render(LPD3DXSPRITE spriteHandle, const RECT* rect, const GVector3
 		position,
 		_color
 	);
+	spriteHandle->End();
 }
 
 void Texture::setColor(D3DXCOLOR color)

@@ -28,16 +28,16 @@ void CastlevaniaGame::update(float deltaTime)
 void CastlevaniaGame::draw()
 {
 	RECT* rect = new RECT();
-	rect->top = 100;
-	rect->right = 200;
-	rect->left = 100;
-	rect->bottom = 200;
+	rect->top = 0;
+	rect->right = 100;
+	rect->left = 0;
+	rect->bottom = 100;
 	GVector3* pos = new GVector3(20, 20, 0.0f);
 
-	_test_texture->render(_spriteHandler,NULL,NULL,pos);
+	_test_texture->render(_spriteHandler,rect,NULL,pos);
 }
 
-void CastlevaniaGame::LoadResource()
+void CastlevaniaGame::loadResource()
 {
 	_test_texture = new Texture();
 	//if (_test_texture->loadFromFile(_spriteHandler, L"kitty_right.bmp") != )
