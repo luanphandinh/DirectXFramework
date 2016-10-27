@@ -32,9 +32,14 @@ void CastlevaniaGame::draw()
 	rect->right = 100;
 	rect->left = 0;
 	rect->bottom = 100;
-	GVector3* pos = new GVector3(20, 20, 0.0f);
-
-	_test_texture->render(_spriteHandler,rect,NULL,pos);
+	GVector2 pos = GVector2(200, 200);
+	GVector2 center = GVector2(100, 100);
+	GVector2	_origin = GVector2(0.5f, 0.5f);
+		//ko scale
+	GVector2	_scale = GVector2(2.0f, 2.0f);
+	float    _zIndex = 1;
+	float    _rotate = 90.0f;
+	_test_texture->render(_spriteHandler, rect, pos,_scale,_rotate,_origin,0.0f);
 }
 
 void CastlevaniaGame::loadResource()

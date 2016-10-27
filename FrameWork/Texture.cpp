@@ -64,6 +64,58 @@ void Texture::render(LPD3DXSPRITE spriteHandle, const RECT* rect, const GVector3
 	spriteHandle->End();
 }
 
+void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, Viewport viewport, GVector2 position,
+	GVector2 scale, float rotate, GVector2 origin, float zIndex)
+{
+	GVector3 positionViewport;
+	positionViewport = viewport.getPositionInViewport(&GVector3(position.x, position.y, zIndex));
+	// ver 05/10/2015 - 7ung : ép kiêu về int. để tránh trường hợp bị hụt pixel 
+	render(spriteHandle, srcRect, GVector2((int)positionViewport.x, (int)positionViewport.y), scale, rotate, origin, positionViewport.z);
+}
+
+void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, GVector2 position,
+	GVector2 scale, float rotate, GVector2 origin, float zIndex)
+{
+	D3DXMATRIX matFinal;
+	D3DXMATRIX matTransformed;
+	D3DXMATRIX matOld;
+
+	//origin postion
+	GVector3 center = GVector3(abs(srcRect->right - srcRect->left) * origin.x, abs(srcRect->top - srcRect->bottom)
+		* (1 - origin.y), zIndex);
+	//get matrix texture
+	spriteHandle->GetTransform(&matOld);
+
+	D3DXMatrixTransformation2D(
+		&matTransformed,
+		&position,
+		0.0f,
+		&scale,
+		&position,
+		D3DXToRadian(rotate),
+		0
+		);
+
+	matFinal = matTransformed * matOld;
+
+	//set matrix transform
+	spriteHandle->SetTransform(&matFinal);
+
+	//Vẽ
+	spriteHandle->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_DONOTSAVESTATE);
+
+	spriteHandle->Draw(
+		this->_texture,
+		srcRect,
+		&center,
+		&GVector3(position.x, position.y, zIndex),
+		_color);
+
+	spriteHandle->SetTransform(&matOld);
+
+	spriteHandle->End();
+}
+
 void Texture::setColor(D3DXCOLOR color)
 {
 	this->_color = color;
