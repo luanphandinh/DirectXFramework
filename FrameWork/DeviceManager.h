@@ -2,13 +2,16 @@
 #include "define.h"
 #include "Graphics.h"
 _NAMESPACE_FRAMEWORK_BEGIN
-///Hàm quản lý device cho game
-///Gồm D3DirectX
-///DEVICE
-///SURFACE
-///_instance sẽ là con trỏ của DeviceManger và là static để truy cập thông quan tên class
-///vô game sẽ gọi DeviceManager::getInstance->Init(Graphics);
-///
+
+/*
+	+ Class dùng để quản lý device và surface cho game
+	+ _instance sẽ là con trỏ của DeviceManger và là static để truy cập thông quan tên class
+	được gọi để sử dụng thông qua DeviceManager::getInstance()
+	+ _instance được khởi tạo tại game init() và được sử dụng global thông qua lời gọi
+	DeviceManager::getInstance()
+	+ vì bản thân DeviceManager::getInstance() là một device manager lên sẽ bao
+	gồm getDevice() và getSurface() để sử dụng tại bất cứ đâu
+*/
 class DeviceManager
 {
 public:
@@ -31,4 +34,5 @@ private:
 	DeviceManager();
 };
 typedef DeviceManager* pDeviceManager;
+
 _NAMESPACE_FRAMEWORK_END

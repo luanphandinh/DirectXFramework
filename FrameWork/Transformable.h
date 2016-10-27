@@ -1,10 +1,9 @@
 ﻿#pragma once
 #include"define.h"
 _NAMESPACE_FRAMEWORK_BEGIN
-	/*
-	Được dùng cho Sprite để biểu thị toa độ
-	zoom xoay các kiểu
-	*/
+/*
+	Lớp được sử dụng cho sprite biểu thị tọa độ,xoay scale....
+*/
 class Transformable
 {
 public:

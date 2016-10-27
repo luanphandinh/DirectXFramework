@@ -2,10 +2,12 @@
 #include "define.h"
 #include "TimeSpan.h"
 _NAMESPACE_FRAMEWORK_BEGIN
-///Tương tự graphics
-///GameTime sử dụng 1 static member getInstance()
-///để lấy một instance thông qua tên class mà có thể sử dụng ở bất kì đâu sau 
-///lời gọi getInstance()->Init() trong mainGame
+/*
+	+ Dùng để quản lý thời gian 2 frame của Game
+	+ Tương tự graphics GameTime sử dụng 1 static member getInstance()
+	+ được init tại hàm init trong game
+	+ Được gọi tại bất cứ đâu thông lời gọi  getInstance()
+*/
 class GameTime
 {
 public:

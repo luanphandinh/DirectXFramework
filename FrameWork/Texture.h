@@ -4,6 +4,11 @@
 #include"DeviceManager.h"
 #include"Viewport.h"
 _NAMESPACE_FRAMEWORK_BEGIN
+/*
+	Là lớp dùng để vẽ texture được load lên và lưu trong LPDIRECT3DTEXTURE9
+	Cho phép vẽ toàn bộ texture hoặc 1 rect cụ thể trên rect lên màn hình
+	Có khả năng vẽ hình được transform qua viewport hay center,roate và scale
+*/
 class Texture
 {
 public:
@@ -17,7 +22,8 @@ public:
 		@filePath : đường dẫn của file
 		@colora : transparent color
 	*/
-	HRESULT loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCOLOR color = C_WHITE, D3DXCOLOR colorkey = COLOR_KEY);
+	HRESULT loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, 
+		D3DXCOLOR color = C_WHITE, D3DXCOLOR colorkey = COLOR_KEY);
 
 	/*
 		vẽ LPDIRECT3DTEXTURE9 lên screen,directX quản lý việc vẽ vào buffer
@@ -65,7 +71,7 @@ private:
 	LPDIRECT3DTEXTURE9	_texture;	//giữ image loaded từ file
 	D3DXIMAGE_INFO		_imageInfo;	//giữ info như width,height của image loaded từ file
 
-	D3DCOLOR			_color;		//hinhfd dược load có backcolor,backcolor sẽ bị bỏ qua khi draw
+	D3DCOLOR			_color;		//hình dược load có backcolor,backcolor sẽ bị bỏ qua khi draw
 };
 
 typedef Texture* pTexture;

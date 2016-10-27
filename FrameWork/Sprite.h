@@ -7,7 +7,14 @@
 #include"Transformable.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
-
+/*
+	+ Lớp này được kế thừa từ lớp Transformable sỡ hữu các 
+		tuộc tính cơ bản như postion,scale,orgin....
+	+ Lớp có hàm render chứa texture để render theo viewport
+	+ Có frameRect với frameWidth,frameHeight để vẽ lên màn hình
+	+ Gồm các frame(rect) trên texture được đánh index và có hàm update 
+	để tạo hiệu ứng chuyển động
+*/
 class Sprite : public Transformable
 {
 public:
