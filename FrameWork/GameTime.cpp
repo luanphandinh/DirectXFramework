@@ -19,7 +19,7 @@ GameTime::GameTime(TimeSpan& elapsedGameTime)
 
 void GameTime::setELapsedGameTime(TimeSpan& elapsedGameTime)
 {
-	this->getElapsedGameTime = elapsedGameTime;
+	this->_elapsedGameTime = elapsedGameTime;
 }
 
 void GameTime::setTotalGameTime(TimeSpan& TotalGameTime)
@@ -40,7 +40,7 @@ GameTime* GameTime::getInstance()
 	return _instance;
 }
 
-void GameTime::GameTime::init()
+void GameTime::init()
 {
 	//lấy số xung nhịp cpu/giây
 	QueryPerformanceFrequency(&this->_Query);

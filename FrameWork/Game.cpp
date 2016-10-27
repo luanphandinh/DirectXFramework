@@ -41,7 +41,11 @@ void Game::init()
 	_deviceManager->Init(*hWindow);
 	this->_frameRate = 1000.0f / hWindow->getFrameRate();//1000/30 = 33 milisecond
 
-	D3DXCreateSprite(_deviceManager->getDevice(), &this->_spriteHandler);
+	HRESULT result = D3DXCreateSprite(_deviceManager->getDevice(), &this->_spriteHandler);
+	if (result != D3D_OK)
+	{
+		MessageBox(hWindow->getWnd(), L"Error",L"Error",NULL);
+	}
 	//override in inheritance game class
 	this->loadResource();
 

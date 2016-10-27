@@ -15,7 +15,10 @@ Graphics::Graphics(HINSTANCE hInstance, LPWSTR name, int width, int height, int 
 
 }
 Graphics::~Graphics()
-{}
+{
+
+}
+
 void Graphics::InitWindow()
 {
 		//===Init Window class extra===///
@@ -66,7 +69,7 @@ void Graphics::InitWindow()
 	UpdateWindow(this->_hWnd);
 }
 
-static HRESULT CALLBACK winProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+HRESULT CALLBACK Graphics::winProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{

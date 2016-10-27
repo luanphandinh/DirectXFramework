@@ -17,7 +17,7 @@ void Texture::release()
 
 }
 
-HRESULT Texture::loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCOLOR color = C_WHITE, D3DXCOLOR colorkey = COLOR_KEY)
+HRESULT Texture::loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCOLOR color, D3DXCOLOR colorkey) 
 {
 	HRESULT	result;
 
@@ -62,15 +62,23 @@ void Texture::render(LPD3DXSPRITE spriteHandle, const RECT* rect, const GVector3
 	);
 }
 
-void Texture::setColor(D3DXCOLOR)
-{}
+void Texture::setColor(D3DXCOLOR color)
+{
+	this->_color = color;
+}
 
 D3DXCOLOR Texture::getColor()
-{}
+{
+	return _color;
+}
 
 
 int Texture::getWidth()
-{}
+{
+	return this->_imageInfo.Width;
+}
 
 int Texture::getHeight()
-{}
+{
+	return this->_imageInfo.Height;
+}
