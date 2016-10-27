@@ -1,2 +1,28 @@
-﻿  CastlevaniaGame.cpp
-  FrameWork.vcxproj -> C:\Users\_L_\Documents\GitHub\FrameWork\Debug\FrameWork.exe
+﻿Build started 2016/10/27 20:33:25.
+     1>Project "C:\Users\L\Documents\GitHub\DirectXFramework\FrameWork\FrameWork.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CastlevaniaGame.cpp main.cpp
+         CastlevaniaGame.cpp
+         Generating Code...
+         Compiling...
+         main.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.lib" /MACHINE:X86 Debug\CastlevaniaGame.obj
+         Debug\DeviceManager.obj
+         Debug\Game.obj
+         Debug\GameTime.obj
+         Debug\Graphics.obj
+         Debug\main.obj
+         Debug\Sprite.obj
+         Debug\Surface.obj
+         Debug\Texture.obj
+         Debug\TimeSpan.obj
+         Debug\Transformable.obj
+         Debug\Viewport.obj
+         FrameWork.vcxproj -> C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.exe
+     1>Done Building Project "C:\Users\L\Documents\GitHub\DirectXFramework\FrameWork\FrameWork.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.38

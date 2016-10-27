@@ -29,6 +29,27 @@ public:
 	~Sprite();
 
 	void release();
+	//override methods của transformable
+	//======================================//
+
+	void setPosition(float x, float y, float z = 1);
+	void setPosition(GVector3 vector);
+	void setPosition(GVector2 position);
+	void setPositionX(float x);
+	void setPositionY(float y);
+
+	void setScale(GVector2 scale);
+	void setScale(float scale);
+	void setScaleX(float sx);
+	void setScaleY(float sy);
+
+	void setRotate(float degree);
+
+	void setOrigin(GVector2 origin);
+
+	void setZIndex(float z);
+
+	//======================================//
 
 	/*
 		vẽ hình
@@ -40,7 +61,13 @@ public:
 	*/
 	void render(LPD3DXSPRITE spriteHandler, Viewport * viewport);
 
+	/*
+		getBounding để xử lý va chạm theo decac
+	*/
 	RECT getBounding();
+	/*
+		setFrameRect để vẽ
+	*/
 	void setFrameRect(RECT rect);
 	void setFrameRect(float top, float left, float bottom, float right);
 	void setFrameRect(float x, float y, int width, int height);
@@ -77,7 +104,7 @@ public:
 	int getTextureHeight();
 
 	void drawBounding();
-	void setOpacity();
+	void setOpacity(float _opacity);
 	float getOpacity();
 
 	
@@ -97,7 +124,7 @@ private:
 	int				_totalFrames;
 	int				_columns;
 	int				_index;
-	GVector2		_currentFrame;//frame hiện tại
+	GVector2		_currentFrame;//frame hiện tại theo hàng x và cột y
 
 	RECT			_frameRect;
 	int				_frameWidth;

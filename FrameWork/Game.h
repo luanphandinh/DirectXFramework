@@ -39,6 +39,7 @@
 #include"DeviceManager.h"
 #include"GameTime.h"
 #include"Texture.h"
+#include"Viewport.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
 class Game
@@ -67,6 +68,8 @@ protected:
 	pDeviceManager _deviceManager;
 	LPD3DXSPRITE _spriteHandler;
 	static Graphics *hWindow;
+	//sau này sẽ chuyển sang Scenceplay
+	Viewport* _viewport;
 private:
 	float _frameRate;
 	float _oldTime;

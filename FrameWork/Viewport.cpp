@@ -14,8 +14,9 @@ Viewport::Viewport(float x, float y)
 
 Viewport::Viewport(float x, float y, float width, float height)
 {
-	Viewport(x, y);
-	this->_width = _width;
+	_positionWorld.x = x;
+	_positionWorld.y = y;
+	this->_width = width;
 	this->_height = height;
 }
 
