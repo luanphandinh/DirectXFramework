@@ -22,12 +22,16 @@ void CastlevaniaGame::release()
 {}
 
 void CastlevaniaGame::updateInput(float deltaTime)
-{}
+{
+	if (_input->isKeyDown(DIK_D))
+		_test_sprite->setPositionX(_test_sprite->getPositionX() + 2.0f);
+}
 
 void CastlevaniaGame::update(float deltaTime)
 {
 	//=====================TESTING==========================//
 	_test_sprite->nextFrame();
+	//=====================TESTING==========================//
 }
 
 void CastlevaniaGame::draw()
@@ -48,7 +52,6 @@ void CastlevaniaGame::draw()
 	//float    _rotate = 00.0f;
 	////_test_texture->render(_spriteHandler, rect,/**_viewport,*/ pos,_scale,_rotate,_origin,1.0f);
 	//_test_texture->render(_spriteHandler, rect, new GVector3(center.x, center.y, 0.0f), new GVector3(pos.x, pos.y, 0.0f));
-	_test_sprite->setPosition(46, 30);
 	_test_sprite->render(_spriteHandler,_viewport);
 }
 
@@ -61,4 +64,5 @@ void CastlevaniaGame::loadResource()
 
 	_test_sprite = new Sprite(_spriteHandler, L"kitty_right.bmp",6,3);
 	
+	_test_sprite->setPosition(46, 30);
 }

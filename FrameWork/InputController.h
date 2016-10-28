@@ -7,11 +7,14 @@
 			With key down you can hold key to keep action.
 	if you want to check if key is pressed:
 			InputController::getInstance()->_keyPress += (EventFunction)&[Insert name of function here];
+
 	if you want tỏ check if key is released:
 			InputController::getInstance()->_keyReleased += (EventFunction)&[Insert name of function here];
+
 	if you dont want to refference this function any more, call:
 			InputController::getInstance()->_keyPress -= (EventFunction)&[Insert name of function here]
 			InputController::getInstance()->_keyReleased -= (EventFunction)&[Insert name of function here];
+
 	The referenced function have prototype:
 		void <FunctionName>(KeyEventArg* e);
 	Should call InputController::release() at Game::release()

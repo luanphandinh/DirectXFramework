@@ -21,7 +21,7 @@ InputController* InputController::_instance = nullptr;
 
 InputController* InputController::getInstance()
 {
-	if (_instance != NULL)
+	if (_instance == nullptr)
 		_instance = new InputController();
 	return _instance;
 }
@@ -38,7 +38,7 @@ bool InputController::init(HWND hWnd, HINSTANCE hInstance)
 	//khởi tạo _input
 	rs = DirectInput8Create(
 		hInstance,
-		DIRECT3D_VERSION,
+		DIRECTINPUT_VERSION,
 		IID_IDirectInput8,
 		(void**)&_input,
 		NULL
@@ -54,7 +54,7 @@ bool InputController::init(HWND hWnd, HINSTANCE hInstance)
 	if (rs != DI_OK)
 		return false;
 	//coorperative level
-	rs = _keyBoard->SetCooperativeLevel(hWnd, DISCL_BACKGROUND | DISCL_FOREGROUND);
+	rs = _keyBoard->SetCooperativeLevel(hWnd, DISCL_BACKGROUND | DISCL_NONEXCLUSIVE);
 	if (rs != DI_OK)
 		return false;
 	//Set Property cho keyboard buffer
@@ -79,7 +79,7 @@ bool InputController::init(HWND hWnd, HINSTANCE hInstance)
 
 }
 
-void	InputController::update()
+void InputController::update()
 {
 	for (int i = 0; i < 256; i++)
 	{
@@ -88,10 +88,10 @@ void	InputController::update()
 
 	//collect state of all keys
 	_keyBoard->GetDeviceState(sizeof(this->_keyBuffer), _keyBuffer);
+
 	if (isKeyDown(DIK_ESCAPE))
 	{
-		//
-		PostMessage(_hWnd, WM_DESTROY, 0, 0);
+		PostMessage(_hWnd, WM_QUIT, 0, 0);
 	}
 
 	DWORD dw = KEYBOARD_BUFFER_SIZE;
@@ -119,14 +119,6 @@ void	InputController::update()
 }			
 int	InputController::isKeyDown(int keyCode)
 {
-	return ((_keyBuffer[keyCode]) & 0x80 > 0);
+	return ((_keyBuffer[keyCode] & 0x80) > 0);
 }
 
-int	InputController::isKeyPressed(int keyCode)
-{
-
-}
-
-int	InputController::isKeyRelease(int keyCode)
-{
-}

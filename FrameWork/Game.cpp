@@ -29,6 +29,7 @@ Game::Game(HINSTANCE hInstance, LPWSTR name, int width , int height,int fps, int
 	hWindow = new Graphics(hInstance,name,width,height,fps,isFullScreen);
 	_gameTime = GameTime::getInstance();
 	_deviceManager = DeviceManager::getInstance();
+	_input = InputController::getInstance();
 	_spriteHandler = NULL;
 	//=====================TESTING==========================//
 	_viewport = new Viewport(0, height, width, height);
@@ -42,6 +43,7 @@ void Game::init()
 	hWindow->InitWindow();
 	_gameTime->init();
 	_deviceManager->Init(*hWindow);
+	_input->init(hWindow->getWnd(), hWindow->gethInstance());
 	this->_frameRate = 1000.0f / hWindow->getFrameRate();//1000/30 = 33 milisecond
 
 	HRESULT result = D3DXCreateSprite(_deviceManager->getDevice(), &this->_spriteHandler);
@@ -76,6 +78,7 @@ void Game::run()
 		if (_deltaTime >= _frameRate)
 		{
 			_oldTime += _frameRate;
+			_input->update();
 			this->render();
 		}
 		else
@@ -100,9 +103,13 @@ void Game::render()
 	}
 
 	device->getDevice()->BeginScene();
+
 	device->clearScreen();
+
+	updateInput(time);
 	update(time);
 	draw();
+
 	device->getDevice()->EndScene();
 	device->present();
 
@@ -112,6 +119,7 @@ void Game::release()
 {
 	_deviceManager->release();
 	_gameTime->release();
+	_input->release();
 }
 
 void Game::draw()

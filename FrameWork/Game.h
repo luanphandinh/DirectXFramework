@@ -40,6 +40,7 @@
 #include"GameTime.h"
 #include"Texture.h"
 #include"Viewport.h"
+#include"InputController.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
 class Game
@@ -68,6 +69,7 @@ protected:
 	pDeviceManager _deviceManager;
 	LPD3DXSPRITE _spriteHandler;
 	static Graphics *hWindow;
+	pInputController _input;
 	//sau này sẽ chuyển sang Scenceplay
 	Viewport* _viewport;
 private:
