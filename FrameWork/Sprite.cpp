@@ -245,6 +245,7 @@ void Sprite::setFrameRect(float x, float y, int width, int height)
 
 	this->updateBounding();
 }
+
 RECT Sprite::getFrameRect()
 {
 	return _frameRect;
@@ -320,7 +321,9 @@ void Sprite::drawBounding(bool isDrawBouding)
 	if (isDrawBouding != _isDrawBounding)
 		_isDrawBounding = isDrawBouding;
 }
-
+/*
+	Độ trong suốt của sprite
+*/
 void Sprite::setOpacity(float opacity)
 {
 	if (_opacity == opacity)
@@ -337,7 +340,7 @@ float Sprite::getOpacity()
 
 
 /*
-Màu vẽ sprite
+	Màu vẽ sprite
 */
 void Sprite::setColor(D3DXCOLOR color)
 {
