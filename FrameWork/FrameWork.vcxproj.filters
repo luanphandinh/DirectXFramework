@@ -63,6 +63,12 @@
     <ClInclude Include="Sprite.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="InputController.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -99,6 +105,12 @@
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="InputController.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
   </ItemGroup>
