@@ -3,6 +3,7 @@
 //include để test texture sau này xóa ko cân thiết
 #include"Texture.h"
 #include"Sprite.h"
+#include"Animation.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
@@ -21,6 +22,7 @@ public:
 	/////include để test texture sau này xóa ko cân thiết
 	Texture* _test_texture;
 	Sprite* _test_sprite; 
+	Animation* _test_animation;
 };
 _NAMESPACE_FRAMEWORK_END
 

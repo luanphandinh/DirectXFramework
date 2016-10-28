@@ -1,18 +1,9 @@
-﻿Build started 2016/10/28 20:07:15.
+﻿Build started 2016/10/28 21:36:50.
      1>Project "C:\Users\L\Documents\GitHub\DirectXFramework\FrameWork\FrameWork.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Animation.cpp
-         Animation.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CastlevaniaGame.cpp
+         CastlevaniaGame.cpp
          c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(50): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(169): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(170): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(171): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(172): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(179): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(180): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(181): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
-     1>c:\users\l\documents\github\directxframework\framework\animation.cpp(182): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib dsound.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.lib" /MACHINE:X86 Debug\Animation.obj
          Debug\CastlevaniaGame.obj
@@ -34,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.95
+Time Elapsed 00:00:00.80

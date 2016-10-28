@@ -67,7 +67,7 @@ void Animation::setIndex(int index)
 
 	this->_index = index;
 
-	if (_index > _totalFrames)
+	if (_index > _endFrame)
 		_index = _startFrame;
 
 	_currentRect = _frameRectList[_index];
@@ -85,6 +85,8 @@ void Animation::update(float dt)
 {
 	if (!_canAnimate && !_canFlash)
 		return;
+
+	_timer += dt / 1000;
 	if (_timer >= _timeAnimate)
 	{
 		if (_canAnimate)
@@ -163,7 +165,7 @@ void Animation::addFrameRect(RECT rect)
 	_endFrame = _totalFrames - 1;
 }
 
-void Animation::addFrameRect(float top, float left, int width, int height)
+void Animation::addFrameRect(float left, float top, int width, int height)
 {
 	RECT rect;
 	rect.top = top;
@@ -173,7 +175,7 @@ void Animation::addFrameRect(float top, float left, int width, int height)
 	this->addFrameRect(rect);
 }
 
-void Animation::addFrameRect(float top, float left, float right, float bottom)
+void Animation::addFrameRect(float left, float top, float right, float bottom)
 {
 	RECT rect;
 	rect.top = top;

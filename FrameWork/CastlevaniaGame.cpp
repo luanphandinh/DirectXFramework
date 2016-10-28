@@ -30,7 +30,10 @@ void CastlevaniaGame::updateInput(float deltaTime)
 void CastlevaniaGame::update(float deltaTime)
 {
 	//=====================TESTING==========================//
-	_test_sprite->nextFrame();
+	//_test_animation->setTimeAnimate(deltaTime);
+	_test_animation->update(deltaTime);
+	_test_animation->setLoop(true);
+	//_test_animation->setIndex(2);
 	//=====================TESTING==========================//
 }
 
@@ -52,7 +55,8 @@ void CastlevaniaGame::draw()
 	//float    _rotate = 00.0f;
 	////_test_texture->render(_spriteHandler, rect,/**_viewport,*/ pos,_scale,_rotate,_origin,1.0f);
 	//_test_texture->render(_spriteHandler, rect, new GVector3(center.x, center.y, 0.0f), new GVector3(pos.x, pos.y, 0.0f));
-	_test_sprite->render(_spriteHandler,_viewport);
+	//_test_sprite->render(_spriteHandler,_viewport);
+	_test_animation->draw(_spriteHandler, _viewport);
 }
 
 void CastlevaniaGame::loadResource()
@@ -62,7 +66,9 @@ void CastlevaniaGame::loadResource()
 	
 	_test_texture->loadFromFile(_spriteHandler, L"kitty_right.bmp");
 
-	_test_sprite = new Sprite(_spriteHandler, L"kitty_right.bmp",6,3);
+	_test_sprite = new Sprite(_spriteHandler, L"kitty_right.bmp");
 	
 	_test_sprite->setPosition(46, 30);
+
+	_test_animation = new Animation(_test_sprite, 6, 3, 0.05f);
 }
