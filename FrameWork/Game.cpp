@@ -30,7 +30,9 @@ Game::Game(HINSTANCE hInstance, LPWSTR name, int width , int height,int fps, int
 	_gameTime = GameTime::getInstance();
 	_deviceManager = DeviceManager::getInstance();
 	_spriteHandler = NULL;
-	_viewport = new Viewport(0, width, width, height);
+	//=====================TESTING==========================//
+	_viewport = new Viewport(0, height, width, height);
+	//=====================TESTING==========================//
 }
 //init your objects
 void Game::init()

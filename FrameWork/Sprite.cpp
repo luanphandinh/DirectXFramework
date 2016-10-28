@@ -3,19 +3,15 @@ _USING_FRAMEWORK
 
 Sprite::Sprite(LPD3DXSPRITE spriteHandle, LPWSTR filePath, int totalFrames, int cols)
 {
-	//Lấy vào trung tâm của hình
 	_origin = GVector2(0.5f, 0.5f);
-	//ko scale
 	_scale = GVector2(1.0f, 1.0f);
 	_zIndex = 1;
-	//ko xoay
 	_rotate = 0.0f;
 
-	//load texture lên
 	auto rs = _texture.loadFromFile(spriteHandle, filePath);
 	if (rs != D3D_OK)
 		throw;
-	//Tổng số frame để chạy
+
 	_totalFrames = totalFrames;
 	_columns = cols;
 	_textureWidth = _texture.getWidth();
@@ -28,12 +24,10 @@ Sprite::Sprite(LPD3DXSPRITE spriteHandle, LPWSTR filePath, int totalFrames, int 
 	this->setIndex(0);
 	this->updateBounding();
 
-	//ko vẽ bounding và ko có surface
 	_isDrawBounding = false;
 	_surface = nullptr;
 
-
-	//Create surface
+	//create surface
 	DeviceManager::getInstance()->getDevice()->CreateOffscreenPlainSurface(
 		WINDOW_WIDTH,
 		WINDOW_HEIGHT,
@@ -87,7 +81,7 @@ void Sprite::render(LPD3DXSPRITE spriteHandler, Viewport * viewport)
 		_zIndex
 		);
 
-	//vẽ bouding để xem
+	//vẽ bounding để xem
 	if (_surface == nullptr || _isDrawBounding == false)
 		return;
 	RECT r;
@@ -96,7 +90,7 @@ void Sprite::render(LPD3DXSPRITE spriteHandler, Viewport * viewport)
 	 r.bottom = WINDOW_HEIGHT - _bound.bottom;
 	 r.right = _bound.right;
 
-	 DeviceManager::getInstance()->getDevice()->ColorFill(_surface, NULL, D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f));
+	 DeviceManager::getInstance()->getDevice()->ColorFill(_surface, NULL, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
 	 DeviceManager::getInstance()->getDevice()->StretchRect(
 		 _surface,
@@ -321,9 +315,10 @@ int Sprite::getTextureHeight()
 	return _textureHeight;
 }
 
-void Sprite::drawBounding()
+void Sprite::drawBounding(bool isDrawBouding)
 {
-
+	if (isDrawBouding != _isDrawBounding)
+		_isDrawBounding = isDrawBouding;
 }
 
 void Sprite::setOpacity(float opacity)
@@ -375,12 +370,69 @@ void Sprite::setCurrentFrame()
 	this->setFrameRect();
 }
 
+//Tính bounding cho sprite để  xét va chạm,theo tọa độ decac
 void Sprite::updateBounding()
 {
+	float scaleW = _frameWidth * abs(_scale.x);
+	float scaleH = _frameHeight * abs(_scale.y);
 
+	//left và right vẫn giữ nguyên theo trục x
+	this->_bound.left = _position.x - scaleW * _origin.x;
+	//vì sẽ lấy position là tâm nếu có origin
+	//nên top và bottom sẽ dịch lên trên
+	//left và right dịch sang bên phải
+	//tính từ tọa độ position gốc theo origin
+	this->_bound.bottom = _position.y - scaleH * _origin.y;
+	this->_bound.right = _bound.left + scaleW;
+	this->_bound.top = _bound.bottom + scaleH;
+
+	// 4 điểm của hcn
+	GVector2 p1 = GVector2(_bound.left, _bound.top);
+	GVector2 p2 = GVector2(_bound.right, _bound.top);
+	GVector2 p3 = GVector2(_bound.right, _bound.bottom);
+	GVector2 p4 = GVector2(_bound.left, _bound.bottom);
+	_anchorPoint = GVector2(_bound.left + scaleW * _origin.x, _bound.bottom + scaleH * _origin.y);
+
+	//rotate 4 điểm
+	p1 = rotatePointAroundOrigin(p1, _rotate, _anchorPoint);
+	p2 = rotatePointAroundOrigin(p2, _rotate, _anchorPoint);
+	p3 = rotatePointAroundOrigin(p3, _rotate, _anchorPoint);
+	p4 = rotatePointAroundOrigin(p4, _rotate, _anchorPoint);
+
+	///so sánh các tọa độ để lấy dữ liệu cho bound
+	_bound.left = min(min(p1.x, p2.x), min(p3.x, p4.x));
+	_bound.top = max(max(p1.y, p2.y), max(p3.y, p4.y));
+	_bound.right = max(max(p1.x, p2.x), max(p3.x, p4.x));
+	_bound.bottom = min(min(p1.y, p2.y), min(p3.y, p4.y));
 }
-//
-//GVector2	Sprite::rotatePointAroundOrigin(GVector2 point, float angle, GVector2 origin)
-//{
-//
-//}
+
+GVector2	Sprite::rotatePointAroundOrigin(GVector2 point, float angle, GVector2 origin)
+{
+	// nhân ma trận xoay
+	/*
+	x' = x.cos(t) - y.sin(t)
+	y' = x.sin(t) + y.cos(t)
+
+	t là góc quay theo radian
+	vậy quanh quanh 1 điểm mình dời về góc rồi quay xong dời lại
+	*/
+
+	GVector2 newPoint;
+	//trừ vì sprite xoay với cái này lệch 90*
+	float rad = -angle * (3.14 / 180);
+
+	float _sin = sin(rad);
+	float _cos = cos(rad);
+
+	//dời điểm về góc
+	point -= origin;
+
+	//xoay
+	newPoint.x = point.x * _cos - point.y * _sin;
+	newPoint.y = point.x * _sin + point.y * _cos;
+
+	//dời về chổ cũ
+	newPoint += origin;
+
+	return newPoint;
+}

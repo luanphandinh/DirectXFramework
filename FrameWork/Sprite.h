@@ -103,7 +103,7 @@ public:
 	*/
 	int getTextureHeight();
 
-	void drawBounding();
+	void drawBounding(bool);
 	void setOpacity(float _opacity);
 	float getOpacity();
 

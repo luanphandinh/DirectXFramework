@@ -7,7 +7,7 @@
 #include<d3dx9.h>
 //Để handle error cho game
 #include<exception>
-
+#include<math.h>
 using namespace std;
 #define WINDOW_WIDTH 512
 #define WINDOW_HEIGHT 448
