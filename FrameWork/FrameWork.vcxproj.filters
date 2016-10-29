@@ -75,6 +75,9 @@
     <ClInclude Include="SpriteManager.h">
       <Filter>Header Files\Framework\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="BaseObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="SpriteManager.cpp">
       <Filter>Source Files\Framework\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,12 +1,8 @@
-﻿Build started 2016/10/29 17:23:49.
+﻿Build started 2016/10/29 19:32:16.
      1>Project "C:\Users\L\Documents\GitHub\DirectXFramework\FrameWork\FrameWork.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CastlevaniaGame.cpp
-         CastlevaniaGame.cpp
-         c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-     1>c:\users\l\documents\github\directxframework\framework\castlevaniagame.cpp(76): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-       Link:
+     1>Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9.lib dinput8.lib dxguid.lib dsound.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.lib" /MACHINE:X86 Debug\Animation.obj
+         Debug\BaseObject.obj
          Debug\CastlevaniaGame.obj
          Debug\DeviceManager.obj
          Debug\Event.obj
@@ -22,9 +18,43 @@
          Debug\TimeSpan.obj
          Debug\Transformable.obj
          Debug\Viewport.obj
-         FrameWork.vcxproj -> C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.exe
-     1>Done Building Project "C:\Users\L\Documents\GitHub\DirectXFramework\FrameWork\FrameWork.vcxproj" (Build target(s)).
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setStatus(enum eStatus)" (?setStatus@BaseObject@FrameWork@@UAEXW4eStatus@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::addStatus(enum eStatus)" (?addStatus@BaseObject@FrameWork@@UAEXW4eStatus@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::removeStatus(enum eStatus)" (?removeStatus@BaseObject@FrameWork@@UAEXW4eStatus@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::isInStatus(enum eStatus)" (?isInStatus@BaseObject@FrameWork@@UAEXW4eStatus@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual struct D3DXVECTOR2 __thiscall FrameWork::BaseObject::getPosition(void)" (?getPosition@BaseObject@FrameWork@@UAE?AUD3DXVECTOR2@@XZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual float __thiscall FrameWork::BaseObject::getPositionX(void)" (?getPositionX@BaseObject@FrameWork@@UAEMXZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual float __thiscall FrameWork::BaseObject::getPositionY(void)" (?getPositionY@BaseObject@FrameWork@@UAEMXZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setPosition(struct D3DXVECTOR3)" (?setPosition@BaseObject@FrameWork@@UAEXUD3DXVECTOR3@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setPosition(struct D3DXVECTOR2)" (?setPosition@BaseObject@FrameWork@@UAEXUD3DXVECTOR2@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setPosition(float,float,float)" (?setPosition@BaseObject@FrameWork@@UAEXMMM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setPosition(float,float)" (?setPosition@BaseObject@FrameWork@@UAEXMM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setPositionX(float)" (?setPositionX@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setPositionY(float)" (?setPositionY@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual struct D3DXVECTOR2 __thiscall FrameWork::BaseObject::getScale(void)" (?getScale@BaseObject@FrameWork@@UAE?AUD3DXVECTOR2@@XZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setScale(struct D3DXVECTOR2)" (?setScale@BaseObject@FrameWork@@UAEXUD3DXVECTOR2@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setScale(float)" (?setScale@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setScaleX(float)" (?setScaleX@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setScaleY(float)" (?setScaleY@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual float __thiscall FrameWork::BaseObject::getRotate(void)" (?getRotate@BaseObject@FrameWork@@UAEMXZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setRotate(float)" (?setRotate@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual struct D3DXVECTOR2 __thiscall FrameWork::BaseObject::getOrigin(void)" (?getOrigin@BaseObject@FrameWork@@UAE?AUD3DXVECTOR2@@XZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setOrigin(struct D3DXVECTOR2)" (?setOrigin@BaseObject@FrameWork@@UAEXUD3DXVECTOR2@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setZIndex(float)" (?setZIndex@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual float __thiscall FrameWork::BaseObject::getZIndex(void)" (?getZIndex@BaseObject@FrameWork@@UAEMXZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setOpacity(float)" (?setOpacity@BaseObject@FrameWork@@UAEXM@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual float __thiscall FrameWork::BaseObject::getOpacity(void)" (?getOpacity@BaseObject@FrameWork@@UAEMXZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setColor(struct D3DXCOLOR)" (?setColor@BaseObject@FrameWork@@UAEXUD3DXCOLOR@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual struct D3DXCOLOR __thiscall FrameWork::BaseObject::getColor(void)" (?getColor@BaseObject@FrameWork@@UAE?AUD3DXCOLOR@@XZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual struct D3DXVECTOR2 __thiscall FrameWork::BaseObject::getAnchorPoint(void)" (?getAnchorPoint@BaseObject@FrameWork@@UAE?AUD3DXVECTOR2@@XZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual struct tagRECT __thiscall FrameWork::BaseObject::getBounding(void)" (?getBounding@BaseObject@FrameWork@@UAE?AUtagRECT@@XZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual float __thiscall FrameWork::BaseObject::checkCollision(class FrameWork::BaseObject *,float)" (?checkCollision@BaseObject@FrameWork@@UAEMPAV12@M@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual struct D3DXVECTOR2 __thiscall FrameWork::BaseObject::getVelocity(void)" (?getVelocity@BaseObject@FrameWork@@UAE?AUD3DXVECTOR2@@XZ)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall FrameWork::BaseObject::setPhysicBodySide(enum eDirection)" (?setPhysicBodySide@BaseObject@FrameWork@@UAEXW4eDirection@@@Z)
+     1>BaseObject.obj : error LNK2001: unresolved external symbol "public: virtual enum eDirection __thiscall FrameWork::BaseObject::getPhysicBodySide(void)" (?getPhysicBodySide@BaseObject@FrameWork@@UAE?AW4eDirection@@XZ)
+     1>C:\Users\L\Documents\GitHub\DirectXFramework\Debug\FrameWork.exe : fatal error LNK1120: 34 unresolved externals
+     1>Done Building Project "C:\Users\L\Documents\GitHub\DirectXFramework\FrameWork\FrameWork.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:01.03
+Time Elapsed 00:00:00.17

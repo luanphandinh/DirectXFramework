@@ -12,6 +12,8 @@ _NAMESPACE_FRAMEWORK_BEGIN
 		tuộc tính cơ bản như postion,scale,orgin....
 	+ Lớp có hàm render chứa texture để render theo viewport
 	+ Có frameRect với frameWidth,frameHeight để vẽ lên màn hình
+	+ *Hàm UpdateBounding được gọi lại mỗi khi sprite bị thay đổi postion,scale,orgin....
+		hay update lại frameRect để vẽ thì Bounding sẽ được update để xét va chạm sau này
 	+ Gồm các frame(rect) trên texture được đánh index và có hàm update 
 	để tạo hiệu ứng chuyển động
 */

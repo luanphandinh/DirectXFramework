@@ -31,6 +31,23 @@ enum eID
 	SIMON = 0, // Main character.
 };
 
+//status cho nhân vật
+enum eStatus
+{
+	NORMAL = 0,					// 00000 = 0	
+	MOVING_LEFT = (1 << 0),		// 00001 = 2^0
+};
+
+enum eDirection
+{
+	NONE = 0,
+	TOP = 1,
+	BOTTOM = 2,
+	LEFT = 4,
+	RIGHT = 8,
+	ALL = (TOP | BOTTOM | LEFT | RIGHT),
+};
+
 #define _NAMESPACE_FRAMEWORK_END	}
 
 

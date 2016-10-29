@@ -1,4 +1,4 @@
-#include "Animation.h"
+﻿#include "Animation.h"
 _USING_FRAMEWORK
 
 Animation::~Animation()
@@ -112,6 +112,11 @@ void Animation::update(float dt)
 
 void Animation::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
+	/*
+		Khi draw thì setFrameRect cho _spriteSheet
+		Từ đó sprite sẽ cập nhập lại bounding để xét va chạm
+		Rồi dùng sprite để vẽ
+	*/
 	_spriteSheet->setFrameRect(_currentRect);
 	_spriteSheet->render(spriteHandle, viewport);
 }

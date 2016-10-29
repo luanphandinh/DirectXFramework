@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BaseObject.h" />
     <ClInclude Include="CastlevaniaGame.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="Event.cpp" />

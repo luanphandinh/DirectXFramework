@@ -4,6 +4,7 @@
 #include"Texture.h"
 #include"Sprite.h"
 #include"Animation.h"
+#include<map>
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
@@ -19,10 +20,11 @@ public:
 	void draw();		//draw your objects
 	void loadResource();//
 
-	/////include để test texture sau này xóa ko cân thiết
+	//==========================TEST=========================//
 	Texture* _test_texture;
 	Sprite* _test_sprite; 
-	Animation* _test_animation;
+	map<eStatus,Animation*> _test_animations;
+	float vX = 0;
 };
 _NAMESPACE_FRAMEWORK_END
 

@@ -3,7 +3,7 @@
 	Là class dùng để tạo animation(chuyển động) cho object
 	+ Lớp bao gồm một Sprite Sheet(SS)
 	+ Danh sách các rect để vẽ từ SS lên màn hình
-	+ Một animation sẽ gồm các frame được đánh theo index hoặc _currentRect
+	+ Một animation sẽ gồm các frames được đánh theo index hoặc _currentRect
 		từ _startFrame tới _endFrame
 	+ Thời gian animate cho 1 frame
 */

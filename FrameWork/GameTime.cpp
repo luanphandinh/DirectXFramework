@@ -45,7 +45,7 @@ void GameTime::init()
 	//lấy số xung nhịp cpu/giây
 	QueryPerformanceFrequency(&this->_Query);
 	//lưu vào _freQuery
-	this->_freQuery = (float)_Query.QuadPart / TimeSpan::TicksPerSecond;
+	this->_freQuery = (float)_Query.QuadPart / 10000000;
 	// hàm QueryPerformanceCounter(LARGE_INTEGER *) để thực hiện việc đo thời gian
 	// Hàm này có kiểu trả về là BOOL và trả về giá trị là thời gian tính bằng giây từ lúc chương trình bắt đầu chạy,
 	//tham số đầu vào là con trỏ tới một biến kiểu LARGE_INTEGER.
