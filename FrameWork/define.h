@@ -14,6 +14,7 @@
 #include<math.h>
 #include <algorithm>    // std::find
 #include<vector>
+#include<map>
 
 using namespace std;
 
