@@ -14,7 +14,7 @@ Texture::~Texture()
 
 void Texture::release()
 {
-
+	this->_texture->Release();
 }
 
 HRESULT Texture::loadFromFile(LPD3DXSPRITE spriteHandle, LPWSTR filePath, D3DXCOLOR color, D3DXCOLOR colorkey) 

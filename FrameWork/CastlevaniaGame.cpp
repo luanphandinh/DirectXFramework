@@ -62,7 +62,7 @@ void CastlevaniaGame::draw()
 void CastlevaniaGame::loadResource()
 {
 	//=====================TESTING==========================//
-	_test_texture = new Texture();
+	/*_test_texture = new Texture();
 	
 	_test_texture->loadFromFile(_spriteHandler, L"kitty_right.bmp");
 
@@ -70,5 +70,10 @@ void CastlevaniaGame::loadResource()
 	
 	_test_sprite->setPosition(46, 30);
 
-	_test_animation = new Animation(_test_sprite, 6, 3, 0.05f);
+	_test_animation = new Animation(_test_sprite, 6, 3, 0.05f);*/
+	SpriteManager::getInstance()->loadResource(_spriteHandler);
+	_test_sprite = SpriteManager::getInstance()->getSprite(eID::SIMON);
+	_test_sprite->setPosition(_test_sprite->getTextureWidth() / 2, _test_sprite->getTextureHeight() / 2,1.0f);
+	_test_animation = new Animation(_test_sprite, 0.12f);
+	_test_animation->addFrameRect(eID::SIMON, "run_01", "run_02", "run_03", NULL);
 }

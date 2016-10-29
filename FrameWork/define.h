@@ -15,6 +15,7 @@
 #include <algorithm>    // std::find
 #include<vector>
 #include<map>
+#include <stdio.h>
 
 using namespace std;
 
@@ -25,6 +26,10 @@ typedef D3DXVECTOR2 GVector2;
 typedef D3DXVECTOR3 GVector3;
 #define C_WHITE D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)	//màu trắng
 #define COLOR_KEY D3DXCOLOR(1.0f,0.0f,1.0f,1.0f)
+enum eID
+{
+	SIMON = 0, // Main character.
+};
 
 #define _NAMESPACE_FRAMEWORK_END	}
 

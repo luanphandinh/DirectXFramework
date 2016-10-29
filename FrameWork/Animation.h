@@ -10,6 +10,8 @@
 #include"define.h"
 #include"Sprite.h"
 #include"Viewport.h"
+#include <stdarg.h>     /* va_list, va_start, va_arg, va_end */
+#include"SpriteManager.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class Animation
 {
@@ -54,9 +56,16 @@ public:
 	void addFrameRect(RECT rect);
 	void addFrameRect(float top, float left, int width, int height);
 	void addFrameRect(float top, float left, float right, float bottom);
-
 	void setLoop(bool isLoop);
 	bool isLoop();
+
+	/*
+	Tạo nhiều framerect liên tiếp nhau, không giới hạn tham số
+		@id: ID của sprite
+		@firstRectName,...: các tên của frame rect
+		Sau khi truyền xong các tên, kết thúc PHẢI bằng NULL để xác định được kết thúc.
+	*/
+	void addFrameRect(eID id, char* firstRectName, ...);
 
 	/*
 		Chạy lại animate

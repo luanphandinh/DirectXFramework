@@ -186,6 +186,25 @@ void Animation::addFrameRect(float left, float top, float right, float bottom)
 
 }
 
+void Animation::addFrameRect(eID id, char* firstRectName, ...)
+{
+	va_list vl;
+
+	char* name;
+
+	va_start(vl, firstRectName);
+
+	name = firstRectName;
+
+	while (name != NULL)
+	{
+		this->addFrameRect(SpriteManager::getInstance()->getSourceRect(id, name));
+		name = va_arg(vl, char*);
+	}
+
+	va_end(vl);
+}
+
 void Animation::setLoop(bool isLoop)
 {
 	if (isLoop != _isLoop)
