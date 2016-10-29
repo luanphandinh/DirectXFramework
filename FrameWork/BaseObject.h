@@ -29,7 +29,7 @@ public:
 	virtual void setStatus(eStatus status);
 	virtual void addStatus(eStatus status);
 	virtual void removeStatus(eStatus status);
-	virtual void isInStatus(eStatus status);
+	virtual bool isInStatus(eStatus status);
 
 	virtual GVector2 getPosition();
 	virtual float getPositionX();
