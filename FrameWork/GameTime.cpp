@@ -42,16 +42,24 @@ GameTime* GameTime::getInstance()
 
 void GameTime::init()
 {
+	//http://stackoverflow.com/questions/1739259/how-to-use-queryperformancecounter
 	//lấy số xung nhịp cpu/giây
+	//vd : QueryPerformanceFrequency sẽ trả về ! 3 000 000
 	QueryPerformanceFrequency(&this->_Query);
 	//lưu vào _freQuery
-	this->_freQuery = (float)_Query.QuadPart / 10000000;
-	// hàm QueryPerformanceCounter(LARGE_INTEGER *) để thực hiện việc đo thời gian
-	// Hàm này có kiểu trả về là BOOL và trả về giá trị là thời gian tính bằng giây từ lúc chương trình bắt đầu chạy,
-	//tham số đầu vào là con trỏ tới một biến kiểu LARGE_INTEGER.
-	//ở đây giá trị LARGE_INTEGER là _Query 
+	/*
+		Dùng dây thì chia 1
+		Dùng milisecond thì chia 1000
+		Dùng Ticks thì chia 10000000
+	*/
+	this->_freQuery = (float)_Query.QuadPart / TimeSpan::TicksPerSecond;
+	/* 
+	Hàm QueryPerformanceCounter(LARGE_INTEGER *) để thực hiện việc đo thời gian
+	Ở đây giá trị LARGE_INTEGER là _Query 
+	Hàm này sẽ lấy số QueryPerformanceCounter hiện tại sau đó lưu vào startTIcks và lastTicks
+	*/
 	QueryPerformanceCounter(&_Query);
-	//gán startTIcks và lastTicks bằng thời gian khi init();
+	//gán startTicks và lastTicks bằng thời gian khi init();
 	startTicks = lastTicks = _Query.QuadPart;
 	_totalGameTime = (TimeSpan)0;
 }
@@ -73,8 +81,11 @@ void GameTime::updateGameTime()
 	{
 		return;
 	}
+	//Tính số ticks đã trổi qua
 	auto gt = ((float)(curTicks - lastTicks)) / _freQuery;
+	//gán lại totalGameTime theo ticks
 	this->setTotalGameTime(_totalGameTime + gt);
+	//gán thời gian trôi qua của frame
 	this->setELapsedGameTime(TimeSpan((UINT64)gt));
 	lastTicks = curTicks;
 }

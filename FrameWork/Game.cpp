@@ -72,9 +72,13 @@ void Game::run()
 			DispatchMessage(&msg);
 		}
 
+		//Tăng thời gian của game chạy lên
 		_gameTime->updateGameTime();
+		//_deltaTime được tính theo milisecond
+		//_frameRate là 33.3 milisecond
 		_deltaTime = _gameTime->getTotalGameTime() - _oldTime;
 
+		//Nếu _deltaTime >= _frameRate
 		if (_deltaTime >= _frameRate)
 		{
 			_oldTime += _frameRate;

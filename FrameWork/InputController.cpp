@@ -37,10 +37,10 @@ bool InputController::init(HWND hWnd, HINSTANCE hInstance)
 	HRESULT rs;
 	//khởi tạo _input
 	rs = DirectInput8Create(
-		hInstance,
-		DIRECTINPUT_VERSION,
+		hInstance,//hinstance của chương trình
+		DIRECTINPUT_VERSION,//Tham số mặc định
 		IID_IDirectInput8,
-		(void**)&_input,
+		(void**)&_input,//con trỏ nhận dữ liệu trả về
 		NULL
 		);
 	if (rs != DI_OK)
@@ -53,7 +53,7 @@ bool InputController::init(HWND hWnd, HINSTANCE hInstance)
 	rs = _keyBoard->SetDataFormat(&c_dfDIKeyboard);
 	if (rs != DI_OK)
 		return false;
-	//coorperative level
+	//coorperative level,loại hoạt động. DISCL_FOREGROUND nghĩa là chỉ hoạt động khi của sổ hWnd đang được handle
 	rs = _keyBoard->SetCooperativeLevel(hWnd, DISCL_BACKGROUND | DISCL_NONEXCLUSIVE);
 	if (rs != DI_OK)
 		return false;

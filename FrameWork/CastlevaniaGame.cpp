@@ -25,7 +25,7 @@ void CastlevaniaGame::updateInput(float deltaTime)
 {
 	if (_input->isKeyDown(DIK_D))
 	{
-		vX = 1.0f;
+		vX = 3.0f;
 		
 	}
 	else vX = 0.0f;
