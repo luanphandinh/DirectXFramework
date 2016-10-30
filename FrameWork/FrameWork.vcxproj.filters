@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Objects">
       <UniqueIdentifier>{e5fe41d2-c6aa-48b1-b4fa-0d12991cf1ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Framework\Map">
+      <UniqueIdentifier>{db079ee1-3882-4176-82c4-4fe063c06a3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework\Map">
+      <UniqueIdentifier>{68cae828-9a8c-4428-8a0b-78456bc0d0bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h">
@@ -87,6 +93,18 @@
     <ClInclude Include="Simon.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -142,6 +160,15 @@
     </ClCompile>
     <ClCompile Include="Simon.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet.cpp">
+      <Filter>Source Files\Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\Framework\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

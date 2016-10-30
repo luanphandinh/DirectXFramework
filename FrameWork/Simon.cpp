@@ -148,7 +148,5 @@ void  Simon::updateCurrentAnimateIndex()
 		// animate move left/right xài cung 1 animate là running nên cũng bỏ nó ra
 		_currentAnimationIndex = (eStatus)(_currentAnimationIndex & ~(eStatus::MOVING_LEFT | MOVING_RIGHT));
 		_currentAnimationIndex = (eStatus)(_currentAnimationIndex | eStatus::RUNNING);
-	}
-	 
-		
+	}	
 }

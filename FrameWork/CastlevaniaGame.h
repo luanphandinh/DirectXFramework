@@ -22,10 +22,6 @@ public:
 	void loadResource();//
 
 	//==========================TEST=========================//
-	Texture* _test_texture;
-	Sprite* _test_sprite; 
-	map<eStatus,Animation*> _test_animations;
-	float vX = 0;
 	Simon* _simon;
 };
 _NAMESPACE_FRAMEWORK_END
