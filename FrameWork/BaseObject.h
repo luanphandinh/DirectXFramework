@@ -78,15 +78,21 @@ public:
 	virtual void setPhysicBodySide(eDirection direction);
 	virtual eDirection getPhysicBodySide();
 
-private:
+protected:
 	Sprite* _sprite;
 
 	/*
 		Nếu muốn dùng animation thì khai báo trong lớp kế thừa
 		Tham chiếu đến sprite 
 	*/
-
+	/*
+		Id tương ứng với đối tượng
+	*/
 	eID _id;
+	/*
+		Lưu status của đối tượng
+		Có thể có nhiều status khác nhau
+	*/
 	eStatus _status;
 	eDirection _physicsSide;
 };

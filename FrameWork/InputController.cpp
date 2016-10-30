@@ -104,14 +104,12 @@ void InputController::update()
 		if ((keyState & 0x80) > 0)
 		{
 			KeyEventArg* arg = new KeyEventArg(keyCode);
-			_keyPressed.fireEvent(arg);
 			__raise __enventKeyPressed(arg);
 			delete arg;
 		}
 		else
 		{
 			KeyEventArg* arg = new KeyEventArg(keyCode);
-			_keyReleased.fireEvent(arg);
 			__raise __enventKeyReleased(arg);
 			delete arg;
 		}

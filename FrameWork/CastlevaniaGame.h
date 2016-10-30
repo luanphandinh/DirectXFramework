@@ -5,6 +5,7 @@
 #include"Sprite.h"
 #include"Animation.h"
 #include<map>
+#include"Simon.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
@@ -25,6 +26,7 @@ public:
 	Sprite* _test_sprite; 
 	map<eStatus,Animation*> _test_animations;
 	float vX = 0;
+	Simon* _simon;
 };
 _NAMESPACE_FRAMEWORK_END
 

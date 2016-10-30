@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"define.h"
 #include"Animation.h"
 #include"InputController.h"
@@ -31,9 +31,20 @@ public:
 
 	void setStatus(eStatus status) override;
 
+	/*
+		Cập nhật lại trạng thái cho nhân vật
+	*/
+	void updateStatus(float deltatime);
+
+	/*
+		Cập nhật lại rect để vẽ 
+	*/
+	void updateCurrentAnimateIndex();
+
 	// Character action.
 	void standing();
 	void moveRight();
+	void moveLeft();
 
 	float getMovingSpeed();
 
@@ -45,7 +56,8 @@ private:
 
 	eStatus _currentAnimationIndex;
 
-	GVector2 getVelocity();
+	//GVector2 getVelocity();
+
 };
 _NAMESPACE_FRAMEWORK_END
 
