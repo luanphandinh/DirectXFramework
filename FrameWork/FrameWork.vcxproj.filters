@@ -105,6 +105,9 @@
     <ClInclude Include="Map.h">
       <Filter>Header Files\Framework\Map</Filter>
     </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -169,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>Source Files\Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@
 #include<vector>
 #include<map>
 #include <stdio.h>
-
+#include"utils.h"
 using namespace std;
 
 #define WINDOW_WIDTH 512
