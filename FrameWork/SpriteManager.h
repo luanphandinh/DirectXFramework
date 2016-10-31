@@ -3,6 +3,7 @@
 #include"define.h"
 #include"Sprite.h"
 #include <fstream>
+#include"Config.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 /*
 	+ SpriteManager là class dùng để quản lý việc load và release sprite và texture

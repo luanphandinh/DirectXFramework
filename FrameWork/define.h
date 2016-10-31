@@ -29,6 +29,7 @@ typedef D3DXVECTOR3 GVector3;
 enum eID
 {
 	SIMON = 0, // Main character.
+	MAPSTAGE1 = 1,
 };
 
 //status cho nhân vật

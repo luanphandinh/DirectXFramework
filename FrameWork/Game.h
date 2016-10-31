@@ -71,7 +71,7 @@ protected:
 	static Graphics *hWindow;
 	pInputController _input;
 	//sau này sẽ chuyển sang Scenceplay
-	Viewport* _viewport;
+
 private:
 	float _frameRate;
 	float _oldTime;

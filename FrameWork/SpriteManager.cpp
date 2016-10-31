@@ -1,4 +1,5 @@
-#include "SpriteManager.h"
+﻿#include "SpriteManager.h"
+
 _USING_FRAMEWORK
 
 
@@ -16,9 +17,41 @@ SpriteManager::~SpriteManager()
 
 void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 {
-	Sprite* simon = new Sprite(spriteHandler, L"Resources//Images//simon_animation.png");
-	this->_listSprite[eID::SIMON] = simon;
+	Sprite* sp = new Sprite(spriteHandler, L"Resources//Images//simon_animation.png");
+	this->_listSprite[eID::SIMON] = sp;
 	this->loadSpriteInfo(eID::SIMON, "Resources//Images//simon_animation.txt");
+
+	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
+	this->_listSprite[eID::MAPSTAGE1] = sp;
+}
+
+//Dùng để load sprite từ file map
+//Vì ta sử dụng map .xml và map.png cùng tên
+Sprite* SpriteManager::loadXMLDoc(LPD3DXSPRITE spriteHandler, LPWSTR path)
+{
+	xml_document doc;
+	xml_parse_result result = doc.load_file(path, parse_default | parse_pi);
+	if (result == false)
+	{
+		OutputDebugString(L"Khong tìm thấy file xml");
+		return nullptr;
+	}
+	xml_node root = doc.first_child();//Tilesmap
+	xml_node tileSet_node = root.child("TileSet");
+	//Tìm tên file
+	//Cắt từ chuỗi path ra để tìm thư mục
+	//Sau đó ghép với tên file ảnh được lấy từ file xml để laod ảnh
+	string fileName = tileSet_node.attribute("FileName").as_string();//Lấy tên hình từ file xml
+	wstring L_fileName = wstring(fileName.begin(), fileName.end());//convert to wstring
+
+	wstring strPath = wstring(path);
+	int index = strPath.find_last_of(L'//');
+	strPath = strPath.substr(0, index);
+	strPath += L"/" + L_fileName;
+	//tìm số dòng và số cột để add cho sprite
+	int rows = tileSet_node.attribute("Rows").as_int();
+	int columns = tileSet_node.attribute("Columns").as_int();
+	return new Sprite(spriteHandler, (LPWSTR)strPath.c_str(), rows * columns, columns);
 }
 
 Sprite*  SpriteManager::getSprite(eID id)

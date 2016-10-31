@@ -6,6 +6,7 @@
 #include"Animation.h"
 #include<map>
 #include"Simon.h"
+#include"Map.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
@@ -23,6 +24,8 @@ public:
 
 	//==========================TEST=========================//
 	Simon* _simon;
+	Map* _backGround;
+	Viewport* _viewport;
 };
 _NAMESPACE_FRAMEWORK_END
 

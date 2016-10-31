@@ -57,9 +57,9 @@ Map* Map::LoadFromFile(const string path, eID spriteId)
 	Map* map = new Map();
 	/*
 	Đọc dữ liệu từ element Tilesmap
-	<Tilesmap columns="208" rows="14">
+		<Tilesmap columns="208" rows="14">
 		
-	</Tilesmap>
+		</Tilesmap>
 	*/
 	xml_node tilesMap = doc.child("Tilesmap");
 	if (tilesMap == NULL)

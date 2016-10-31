@@ -33,7 +33,7 @@ void Simon::init()
 
 	this->_movingSpeed = 3.0f;
 
-	this->setPosition(30, 30);
+	this->setPosition(30, 75);
 
 	this->setStatus(eStatus::NORMAL);
 }

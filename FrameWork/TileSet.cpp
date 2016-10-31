@@ -28,7 +28,7 @@ void TileSet::loadListTiles(pugi::xml_node &node)
 	int id = 0;
 	for each (pugi::xml_node_iterator it in tileListNode)
 	{
-		id = it->attribute("id").as_int();
+		id = it->attribute("Id").as_int();
 		srcRect.top = it->child("Rect").attribute("Y").as_int();
 		srcRect.left = it->child("Rect").attribute("X").as_int();
 		srcRect.right = srcRect.left + it->child("Rect").attribute("Width").as_int() + 1;
