@@ -29,7 +29,7 @@ void Simon::init()
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::NORMAL]->addFrameRect(eID::SIMON, "normal", NULL);
 
-	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.08f);
+	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::SIMON, "run_01", "run_02", "run_03", NULL);
 	
 	
@@ -39,12 +39,12 @@ void Simon::init()
 	_animations[eStatus::SITTING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::SITTING]->addFrameRect(eID::SIMON, "sit", NULL);
 
-	_animations[eStatus::HITTING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03", NULL);
 	this->_movingSpeed = 3.0f;
 
 	this->setPosition(500, 90);
-
+	this->_sprite->drawBounding(true);
 	this->setStatus(eStatus::NORMAL);
 }
 

@@ -85,10 +85,10 @@ void Sprite::render(LPD3DXSPRITE spriteHandler, Viewport * viewport)
 	if (_surface == nullptr || _isDrawBounding == false)
 		return;
 	RECT r;
-	 r.top = WINDOW_HEIGHT - _bound.top;
+	 r.top = viewport->getHeight() - _bound.top;
 	 r.left = _bound.left;
-	 r.bottom = WINDOW_HEIGHT - _bound.bottom;
-	 r.right = _bound.right;
+	 r.bottom = viewport->getHeight() - _bound.bottom;
+	 r.right =  _bound.right;
 
 	 DeviceManager::getInstance()->getDevice()->ColorFill(_surface, NULL, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
