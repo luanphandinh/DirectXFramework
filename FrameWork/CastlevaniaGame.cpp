@@ -1,4 +1,4 @@
-#include "CastlevaniaGame.h"
+﻿#include "CastlevaniaGame.h"
 
 _USING_FRAMEWORK
 
@@ -31,7 +31,7 @@ void CastlevaniaGame::update(float deltaTime)
 {
 	//=====================TESTING==========================//
 	_simon->update(deltaTime);
-	_viewport->setPositionWorld(GVector2(_simon->getPositionX() - WINDOW_WIDTH / 2, WINDOW_HEIGHT));
+	updateViewport(_simon);
 	//=====================TESTING==========================//
 }
 
@@ -53,3 +53,22 @@ void CastlevaniaGame::loadResource()
 	//=====================TESTING==========================//
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 }
+//=====================TESTING==========================//
+void CastlevaniaGame::updateViewport(BaseObject* objTracker)
+{
+	// Vị trí hiện tại của viewport. 
+	GVector2 current_position = _viewport->getPositionWorld();
+
+	GVector2 worldsize = this->_backGround->getWorldSize();
+	// Bám theo object.
+	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, 0), WINDOW_HEIGHT);
+
+	// Không cho đi quá map.
+	if (new_position.x + WINDOW_WIDTH > worldsize.x)
+	{
+		new_position.x = worldsize.x - WINDOW_WIDTH;
+	}
+
+	_viewport->setPositionWorld(new_position);
+}
+//=====================TESTING==========================//

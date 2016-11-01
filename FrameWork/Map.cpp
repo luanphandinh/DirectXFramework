@@ -20,13 +20,26 @@ void Map::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 		viewport->getPositionWorld().x + viewport->getWidth(),
 		viewport->getPositionWorld().y - viewport->getHeight()
 	};//Vẽ theo tọa đồ decac
-
+	/*
+		Giả sử ma trận _mapIndex sẽ có 10 hàng và 20 cột mỗi frame sẽ là (100,100)
+		viewport sẽ view có x = 250,y = 500
+	*/
 	int iBegin = max(screenRectEx.left / _frameWidth, 0);
 	int iEnd = min(screenRectEx.right / _frameWidth + 1, _mapSize.x);
 	int jBegin = _mapSize.y - min(screenRectEx.top / this->_frameHeight + 1, _mapSize.y);
 	int jEnd = _mapSize.y - max(screenRectEx.bottom / _frameHeight, 0);
 
 	GVector2 pos;
+	/*
+		Vì ma trận _mapIndex lưu các tile theo chiều x sang ngang y xuống dưới
+		Có nghĩa là ma trận sẽ lưu theo vị trí từ hàng 1 trên cùng màn hình và phát
+		triển ra theo hàng ngang qua bên phải theo cột
+
+		Mà khi ta vẽ map thì ta phát triển từ vị trí 0,0 theo hệ tọa độ để các
+		Nghĩa là với vị trí i = 0 -> i = n - 1 cột sang ngang
+		và j = 0 -> j = m - 1 lên trên 
+		Thì tương ứng với vị trí đó sẽ là _mapIndex[m - 1 - j][i]
+	*/
 	for (int i = iBegin; i < iEnd; i++)
 	{
 		for (int j = jBegin; j < jEnd; j++)

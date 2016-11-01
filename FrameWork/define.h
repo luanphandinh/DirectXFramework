@@ -39,6 +39,9 @@ enum eStatus
 	MOVING_LEFT = (1 << 0),		// 00001 = 2^0
 	MOVING_RIGHT = (1 << 1),
 	RUNNING = (1 << 2),
+	JUMPING = (1 << 3),
+	HITTING = (1 << 4),
+	SITTING = (1 << 5),
 };
 
 enum eDirection

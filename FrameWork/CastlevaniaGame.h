@@ -23,6 +23,7 @@ public:
 	void loadResource();//
 
 	//==========================TEST=========================//
+	void updateViewport(BaseObject* objTracker);
 	Simon* _simon;
 	Map* _backGround;
 	Viewport* _viewport;

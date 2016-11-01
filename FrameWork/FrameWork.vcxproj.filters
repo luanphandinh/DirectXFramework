@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Framework\Map">
       <UniqueIdentifier>{68cae828-9a8c-4428-8a0b-78456bc0d0bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Framework\Components">
+      <UniqueIdentifier>{be02faed-2e73-4665-88e6-e03e7aec635c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework\Components">
+      <UniqueIdentifier>{4bc5487f-03e7-42eb-b875-8a3eedaeabf5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h">
@@ -108,6 +114,12 @@
     <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionBody.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -175,6 +187,12 @@
     </ClCompile>
     <ClCompile Include="utils.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBody.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

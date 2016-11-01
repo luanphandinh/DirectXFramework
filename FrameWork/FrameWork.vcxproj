@@ -73,6 +73,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="CastlevaniaGame.h" />
+    <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Event.h" />
@@ -80,6 +81,7 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Simon.h" />
@@ -98,11 +100,13 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />
+    <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
