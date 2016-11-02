@@ -23,9 +23,14 @@ void CollisionBody::checkCollision(BaseObject* otherObject, float dt, bool updat
 
 	if (timeCollision < 1.0f)//có va chạm
 	{
+		if (otherObject->getPhysicBodySide() != eDirection::NONE && (direction & otherObject->getPhysicBodySide()) == direction)
+		{
 
+		}
 	}
 }
+
+
 
 float CollisionBody::sweptAABB(BaseObject* otherObject, eDirection& direction, float dt)
 {
@@ -121,10 +126,15 @@ float CollisionBody::sweptAABB(BaseObject* otherObject, eDirection& direction, f
 		//Nếu _dxEntry < 0 có nghĩa là object đang xét ở phía bên phải otherObject
 		if (_dxEntry < 0.0f)
 		{
+			//direction là phí va chạm với otherObject
 			direction = eDirection::RIGHT;
 		}
 		else
 		{
+			/*
+				vì _dxEntry là khoảng cách dương otherObject nằm phía bên phải của object đang xét
+				nên phía va chạm trả về sẽ là bên trái của otherObject
+			*/
 			direction = eDirection::LEFT;
 		}
 	}

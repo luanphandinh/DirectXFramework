@@ -46,12 +46,12 @@ enum eStatus
 
 enum eDirection
 {
-	NONE = 0,
-	TOP = 1,
-	BOTTOM = 2,
-	LEFT = 4,
-	RIGHT = 8,
-	ALL = (TOP | BOTTOM | LEFT | RIGHT),
+	NONE	=		0,
+	TOP		=		1,
+	BOTTOM	=		2,
+	LEFT	=		4,
+	RIGHT	=		8,
+	ALL		= (TOP | BOTTOM | LEFT | RIGHT),
 };
 
 #define _NAMESPACE_FRAMEWORK_END	}
