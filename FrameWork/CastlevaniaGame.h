@@ -7,6 +7,7 @@
 #include<map>
 #include"Simon.h"
 #include"Map.h"
+#include"Land.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
@@ -27,6 +28,7 @@ public:
 	Simon* _simon;
 	Map* _backGround;
 	Viewport* _viewport;
+	Land* _land;
 };
 _NAMESPACE_FRAMEWORK_END
 

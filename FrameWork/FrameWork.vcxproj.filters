@@ -120,6 +120,9 @@
     <ClInclude Include="IComponent.h">
       <Filter>Header Files\Framework\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Land.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -193,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="IComponent.cpp">
       <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Land.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

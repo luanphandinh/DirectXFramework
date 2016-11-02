@@ -40,7 +40,7 @@ void CastlevaniaGame::draw()
 	//=====================TESTING==========================//
 	_backGround->draw(_spriteHandler, _viewport);
 	_simon->draw(_spriteHandler, _viewport);
-
+	_land->draw(_spriteHandler, _viewport);
 	//=====================TESTING==========================//
 }
 
@@ -50,8 +50,11 @@ void CastlevaniaGame::loadResource()
 	SpriteManager::getInstance()->loadResource(_spriteHandler);
 	_simon = new Simon();
 	_simon->init();
-	//=====================TESTING==========================//
+	
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
+
+	_land = new Land(0, 64, 200, 20, eDirection::TOP);
+	//=====================TESTING==========================//
 }
 //=====================TESTING==========================//
 void CastlevaniaGame::updateViewport(BaseObject* objTracker)

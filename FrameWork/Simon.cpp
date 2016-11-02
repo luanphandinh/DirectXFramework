@@ -44,7 +44,6 @@ void Simon::init()
 	this->_movingSpeed = 3.0f;
 
 	this->setPosition(500, 90);
-	this->_sprite->drawBounding(true);
 	this->setStatus(eStatus::NORMAL);
 }
 
