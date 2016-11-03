@@ -30,11 +30,13 @@ void Simon::init()
 	_componentList["Movement"] = movement;
 
 	Gravity* gravity = new Gravity(GVector2(0,-GRAVITY),movement);
-	gravity->setStatus(eGravityStatus::SHALLOWED);
+	//gravity->setStatus(eGravityStatus::SHALLOWED);
 	_componentList["Gravity"] = gravity;
 
 	CollisionBody* collisionBody = new CollisionBody(this);
 	_componentList["CollisionBody"] = collisionBody;
+	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Simon::onCollisionBegin);
+	__hook(&CollisionBody::onCollisionEnd, collisionBody, &Simon::onCollisionEnd);
 	//_test_sprite->drawBounding(true);
 	//_test_sprite->setPosition(50, 50, 1.0f);
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
@@ -57,7 +59,7 @@ void Simon::init()
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
 	_animations[eStatus::HITTING]->setLoop(false);
 	this->_movingSpeed = SIMON_MOVING_SPEED;
-	this->setPosition(500, 90);
+	this->setPosition(150, 120);
 	this->setStatus(eStatus::NORMAL);
 }
 
@@ -170,6 +172,9 @@ void Simon::standing()
 {
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(GVector2Zero);
+
+	this->removeStatus(eStatus::FALLING);
+	this->removeStatus(eStatus::JUMPING);
 }
 
 float Simon::getMovingSpeed()
@@ -197,6 +202,10 @@ void Simon::updateStatus(float deltatime)
 	if ((this->getStatus() & eStatus::SITTING) == eStatus::SITTING) 
 	{
 	}
+	else if ((this->getStatus() & eStatus::FALLING) == eStatus::FALLING)
+	{
+		this->falling();
+	}
 	else if ((this->getStatus() & eStatus::JUMPING) != eStatus::JUMPING)
 	{
 		this->standing();
@@ -217,6 +226,11 @@ void Simon::jump()
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(GVector2(move->getVelocity().x, SIMON_JUMP_VELOCITY));
 
+	auto gravity = (Gravity*)this->_componentList["Gravity"];
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+}
+void Simon::falling()
+{
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 }
@@ -244,6 +258,40 @@ GVector2 Simon::getVelocity()
 	auto move = (Movement*)this->_componentList["Movement"];
 	return move->getVelocity();
 }
+#pragma region Collision
+void Simon::onCollisionBegin(CollisionEventArg* collision_arg)
+{
+	eID objectID = collision_arg->_otherObject->getId();
+	switch (objectID)
+	{
+
+	case eID::LAND:
+	default:
+		break;
+	}
+}
+
+void Simon::onCollisionEnd(CollisionEventArg* collision_arg)
+{
+	eID objectID = collision_arg->_otherObject->getId();
+
+	switch (objectID)
+	{
+	case eID::LAND:
+	{
+		if (_preObject == collision_arg->_otherObject)
+		{
+			// hết chạm với land là fall chứ ko có jump
+			this->removeStatus(eStatus::JUMPING);
+			
+			_preObject = nullptr;
+		}
+		break;
+	}
+	default:
+		break;
+	}
+}
 
 float Simon::checkCollision(BaseObject* otherObject, float dt)
 {
@@ -261,12 +309,58 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	//Kiểm tra va chạm với land
 	if (otherObjectID == eID::LAND)
 	{
+		// Nếu simon ko trong trạng thái nhảy hoặc falling
+		//thì kiểm tra va chạm với lane
+		if (!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) 
+			&& collisionBody->checkCollision(otherObject, direction, dt, false))
+		{
+			if (otherObjectID == eID::LAND)
+			{
+				auto land = (Land*)otherObject;
+				_canJumpDown = land->canJump();
+			}
+			/*auto gravity = (Gravity*)this->_componentList["Gravity"];
+			gravity->setStatus(eGravityStatus::SHALLOWED);*/
 
+			//Nếu chạm top mà trừ trường hợp nhảy lên với vận tốc lớn hơn 200
+			if (direction == eDirection::TOP && !(this->getVelocity().y > -200 && this->isInStatus(eStatus::JUMPING)))
+			{
+				//vận tốc 200 hướng xuống => cho trường hợp nhảy từ dưới lên
+				//xử lý đặc biệt,collision body update position bt ko được
+				//khi vào đây mới update position cho nó
+				/*		float moveX, moveY;
+				if (collisionBody->isColliding(otherObject, moveX, moveY, dt))
+				{
+				collisionBody->updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
+				}
+				*/
+				auto gravity = (Gravity*)this->_componentList["Gravity"];
+				gravity->setStatus(eGravityStatus::SHALLOWED);
+
+				this->standing();
+
+				_preObject = otherObject;
+			}
+		}
 	}
+	else if (_preObject == otherObject)
+	{
+		// kiểm tra coi nhảy hết qua cái land cũ chưa
+		// để gọi event end.
+		collisionBody->checkCollision(otherObject, dt, false);
 
+		auto gravity = (Gravity*)this->_componentList["Gravity"];
+		gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+		if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
+		{
+			this->addStatus(eStatus::FALLING);
+		}
+	}
 	return 0.0f;
 }
 
+#pragma endregion 
 void  Simon::updateCurrentAnimateIndex()
 {
 	_currentAnimationIndex = this->getStatus();

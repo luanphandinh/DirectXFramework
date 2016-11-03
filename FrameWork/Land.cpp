@@ -9,7 +9,7 @@ Land::Land(int x, int y, int width, int height, eDirection physicalBodyDirection
 	this->_bound.right = _bound.left + width;
 	setPhysicBodySide(physicalBodyDirection);
 
-	_canJump = true;
+	_canJump = false;
 
 	_surface = nullptr;
 

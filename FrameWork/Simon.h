@@ -5,6 +5,7 @@
 #include"BaseObject.h"
 #include"IComponent.h"
 #include"CollisionBody.h"
+#include"Land.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 150
 #define GRAVITY 800
@@ -43,6 +44,8 @@ public:
 		CheckCollision
 	*/
 	float checkCollision(BaseObject* object, float dt);
+	void onCollisionBegin(CollisionEventArg* collision_arg);
+	void onCollisionEnd(CollisionEventArg* collision_arg);
 
 	/*
 		Cập nhật lại rect để vẽ 
@@ -53,7 +56,14 @@ public:
 	void standing();
 	void moveRight();
 	void moveLeft();
+	/*
+		Trạng thái lúc object nhảy lên
+	*/
 	void jump();
+	/*
+		Trạng thái lúc objec rơi xuống
+	*/
+	void falling();
 
 	float getMovingSpeed();
 
@@ -69,6 +79,8 @@ private:
 	eStatus _currentAnimationIndex;
 
 	GVector2 getVelocity();
+
+	BaseObject* _preObject;
 };
 _NAMESPACE_FRAMEWORK_END
 

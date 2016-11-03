@@ -29,6 +29,7 @@ public:
 	Map* _backGround;
 	Viewport* _viewport;
 	Land* _land;
+	Land* _land2;
 };
 _NAMESPACE_FRAMEWORK_END
 

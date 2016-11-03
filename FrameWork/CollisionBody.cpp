@@ -26,10 +26,24 @@ void CollisionBody::checkCollision(BaseObject* otherObject, float dt, bool updat
 	{
 		if (otherObject->getPhysicBodySide() != eDirection::NONE && (direction & otherObject->getPhysicBodySide()) == direction)
 		{
-
+			updateTargetPosition(otherObject, direction, true);
 		}
+		CollisionEventArg* e = new CollisionEventArg(otherObject);
+		e->_sideCollision = direction;
+
+		__raise onCollisionBegin(e);
+		_listColliding[otherObject] = true;
+	}
+	else
+	{
+		CollisionEventArg* e = new CollisionEventArg(otherObject);
+		e->_sideCollision = direction;
+		__raise onCollisionEnd(e);
+		_listColliding.erase(otherObject);
 	}
 }
+
+
 
 bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& direction, float dt, bool updatePosition)
 {
@@ -42,7 +56,7 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 		if (otherObject->getPhysicBodySide() != eDirection::NONE && (direction & otherObject->getPhysicBodySide()) == otherObject->getPhysicBodySide())
 		{
 			// cập nhật tọa độ
-			//updateTargetPosition(otherObject, direction, true);
+			updateTargetPosition(otherObject, direction, true);
 		}
 
 		return true;
@@ -51,6 +65,10 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 	{
 
 	}
+
+	direction = eDirection::NONE;
+
+	return false;
 }
 
 
@@ -238,10 +256,38 @@ void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection dir
 			_target->setPosition(pos);
 		}
 	}
-	else
-	{
+}
 
-	}
+bool CollisionBody::isColliding(BaseObject * otherObject, float & moveX, float & moveY, float dt)
+{
+	moveX = moveY = 0.0f;
+	auto myRect = _target->getBounding();
+	auto otherRect = otherObject->getBounding();
+
+	float left = otherRect.left - myRect.right;
+	float top = otherRect.top - myRect.bottom;
+	float right = otherRect.right - myRect.left;
+	float bottom = otherRect.bottom - myRect.top;
+
+	// kt coi có va chạm không
+	//  CÓ va chạm khi 
+	//  left < 0 && right > 0 && top > 0 && bottom < 0
+	//
+	if (left > 0 || right < 0 || top < 0 || bottom > 0)
+		return false;
+
+	// tính offset x, y để đi hết va chạm
+	// lấy khoảng cách nhỏ nhất
+	moveX = abs(left) < right ? left : right;
+	moveY = top < abs(bottom) ? top : bottom;
+
+	// chỉ lấy phần lấn vào nhỏ nhất
+	if (abs(moveX) < abs(moveY))
+		moveY = 0.0f;
+	else
+		moveX = 0.0f;
+
+	return true;
 }
 
 void CollisionBody::update(float deltaTime)

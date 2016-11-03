@@ -41,6 +41,7 @@ public:
 	eDirection _sideCollision;
 };
 
+[event_source(native)]
 class CollisionBody : public IComponent
 {
 public:
@@ -85,7 +86,7 @@ public:
 		xét va chạm,nếu có thì dùng swept để lấy timecollision
 	*/
 	bool isAABB(RECT myRect, RECT otherRect);
-
+	bool isColliding(BaseObject * otherObject, float & moveX, float & moveY, float dt);
 	/*
 		Lấy vùng broadphase để check cho swept cho AABB
 		Được tính bằng vị trí đầu và vị trí cuối của bounding được dự đoán trước 
@@ -94,6 +95,10 @@ public:
 	RECT getSweptBroadphaseRect(BaseObject* object, float dt);
 
 	void update(float deltaTime);
+
+	__event void onCollisionBegin(CollisionEventArg*);
+	__event void onCollisionEnd(CollisionEventArg*);
+
 private:
 	BaseObject* _target;
 	RECT _collisionBodyRect;
