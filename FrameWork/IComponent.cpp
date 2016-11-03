@@ -37,3 +37,41 @@ GVector2 Movement::getVelocity()
 	return this->_velocity;
 }
 #pragma endregion
+#pragma region Gravity
+Gravity::Gravity(GVector2 gravity, Movement *movement)
+{
+	this->_gravity = gravity;
+	this->_refMovement = movement;
+	this->_status = FALLING_DOWN;
+}
+
+void Gravity::update(float deltatime)
+{
+	switch (_status)
+	{
+	case FALLING_DOWN:
+		this->_additionalVeloc = this->_gravity * deltatime / 1000;
+		break;
+	case SHALLOWED:
+		this->_additionalVeloc = GVector2Zero;
+		break;
+	default:
+		break;
+	}
+
+	auto veloc = this->_refMovement->getVelocity();
+	this->_refMovement->setVelocity(veloc + _additionalVeloc);
+}
+
+void Gravity::setStatus(eGravityStatus status)
+{
+	if (this->_status != status)
+		_status = status;
+}
+
+void Gravity::setGravity(GVector2 gravity)
+{
+	if (this->_gravity != gravity)
+		_gravity = gravity;
+}
+#pragma endregion

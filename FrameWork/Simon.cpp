@@ -27,6 +27,9 @@ void Simon::init()
 
 	Movement* movement = new Movement(GVector2Zero, GVector2Zero, _sprite);
 	_componentList["Movement"] = movement;
+
+	Gravity* gravity = new Gravity(GVector2(0,-GRAVITY),movement);
+	_componentList["Gravity"] = gravity;
 	//_test_sprite->drawBounding(true);
 	//_test_sprite->setPosition(50, 50, 1.0f);
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
