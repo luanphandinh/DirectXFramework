@@ -44,6 +44,7 @@ enum eStatus
 	JUMPING = (1 << 3),
 	HITTING = (1 << 4),
 	SITTING = (1 << 5),
+	FALLING = (1 << 6),
 };
 
 enum eDirection

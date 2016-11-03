@@ -243,3 +243,8 @@ void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection dir
 
 	}
 }
+
+void CollisionBody::update(float deltaTime)
+{
+
+}

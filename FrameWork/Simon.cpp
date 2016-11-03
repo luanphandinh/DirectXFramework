@@ -3,6 +3,7 @@ _USING_FRAMEWORK
 
 Simon::Simon() :BaseObject(eID::SIMON)
 {
+	_canJumpDown = true;//cho phép nhảy từ trên xuống
 }
 
 
@@ -29,7 +30,11 @@ void Simon::init()
 	_componentList["Movement"] = movement;
 
 	Gravity* gravity = new Gravity(GVector2(0,-GRAVITY),movement);
+	gravity->setStatus(eGravityStatus::SHALLOWED);
 	_componentList["Gravity"] = gravity;
+
+	CollisionBody* collisionBody = new CollisionBody(this);
+	_componentList["CollisionBody"] = collisionBody;
 	//_test_sprite->drawBounding(true);
 	//_test_sprite->setPosition(50, 50, 1.0f);
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
@@ -41,6 +46,9 @@ void Simon::init()
 	
 	_animations[eStatus::JUMPING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::JUMPING]->addFrameRect(eID::SIMON, "jump", NULL);
+
+	_animations[eStatus::FALLING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::FALLING]->addFrameRect(eID::SIMON, "run_03", NULL);
 
 	_animations[eStatus::SITTING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::SITTING]->addFrameRect(eID::SIMON, "sit", NULL);
@@ -90,6 +98,22 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 {
 	switch (key_event->_key)
 	{
+	case DIK_X:
+		if (!this->isInStatus(eStatus::SITTING) || this->isInStatus(eStatus::MOVING_LEFT)
+			|| this->isInStatus(eStatus::MOVING_RIGHT))
+		{
+			this->jump();
+		}
+		else
+		{
+			if (_canJumpDown && !this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
+			{
+				this->removeStatus(eStatus::HITTING);
+				this->addStatus(eStatus::JUMPING);
+				this->addStatus(eStatus::FALLING);
+			}
+		}
+		break;
 	case DIK_RIGHT:
 		this->removeStatus(eStatus::MOVING_RIGHT);
 		this->removeStatus(eStatus::SITTING);
@@ -128,6 +152,7 @@ void Simon::onKeyReleased(KeyEventArg* key_event)
 		break;
 	case DIK_DOWN:
 		this->removeStatus(eStatus::SITTING);
+		break;
 	case DIK_C:
 		//this->removeStatus(eStatus::HITTING);
 	default:
@@ -154,7 +179,7 @@ float Simon::getMovingSpeed()
 
 RECT Simon::getBounding() 
 {
-	return this->getBounding();
+	return _sprite->getBounding();
 }
 
 void Simon::updateStatus(float deltatime)
@@ -172,10 +197,28 @@ void Simon::updateStatus(float deltatime)
 	if ((this->getStatus() & eStatus::SITTING) == eStatus::SITTING) 
 	{
 	}
-	else
+	else if ((this->getStatus() & eStatus::JUMPING) != eStatus::JUMPING)
 	{
 		this->standing();
 	}
+}
+
+void Simon::jump()
+{
+	//Nếu object đã và đang nhảy rồi thì return
+	if (this->isInStatus(JUMPING) || this->isInStatus(FALLING))
+	{
+		return;
+	}
+
+	//Chưa nhảy thì add trạng thái nhảy vào
+	this->addStatus(eStatus::JUMPING);
+
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(move->getVelocity().x, SIMON_JUMP_VELOCITY));
+
+	auto gravity = (Gravity*)this->_componentList["Gravity"];
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 }
 
 void Simon::moveLeft()
@@ -202,6 +245,27 @@ GVector2 Simon::getVelocity()
 	return move->getVelocity();
 }
 
+float Simon::checkCollision(BaseObject* otherObject, float dt)
+{
+	//Sau này implent kiểm tra nhân vật đã chết hay bị hủy tại đây
+
+	//Nếu object cần kiểm tra bị trùng thì trả về 0
+	if (this == otherObject)
+		return 0.0f;
+
+	//Lấy collision body của simon ra để checkCollision
+	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+	eID otherObjectID = otherObject->getId();
+	eDirection direction;
+
+	//Kiểm tra va chạm với land
+	if (otherObjectID == eID::LAND)
+	{
+
+	}
+
+	return 0.0f;
+}
 
 void  Simon::updateCurrentAnimateIndex()
 {
@@ -219,7 +283,7 @@ void  Simon::updateCurrentAnimateIndex()
 		_currentAnimationIndex = this->getStatus();
 	}
 
-
+	//Đang di chuyển
 	if ((_currentAnimationIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT 
 		|| ((_currentAnimationIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT)) 
 	{
@@ -228,9 +292,20 @@ void  Simon::updateCurrentAnimateIndex()
 		_currentAnimationIndex = (eStatus)(_currentAnimationIndex | eStatus::RUNNING);
 	}	
 
-	
+	//Đang ngồi
 	if ((_currentAnimationIndex & eStatus::SITTING) == eStatus::SITTING)
 	{
 		_currentAnimationIndex = (eStatus)(_currentAnimationIndex | eStatus::SITTING);
+	}
+
+	//Nếu đang nhảy hoặc rớt thì animate duy nhất nhảy
+	if ((_currentAnimationIndex & eStatus::FALLING) == eStatus::FALLING)
+	{
+		_currentAnimationIndex = eStatus::FALLING;
+	}
+
+	if ((_currentAnimationIndex & eStatus::JUMPING) == eStatus::JUMPING)
+	{
+		_currentAnimationIndex = eStatus::JUMPING;
 	}
 }

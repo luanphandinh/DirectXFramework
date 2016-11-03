@@ -4,10 +4,11 @@
 #include"InputController.h"
 #include"BaseObject.h"
 #include"IComponent.h"
-
+#include"CollisionBody.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 150
 #define GRAVITY 800
+#define SIMON_JUMP_VELOCITY 450
 
 [event_receiver(native)]
 class Simon : public BaseObject,public IControlable
@@ -38,6 +39,10 @@ public:
 		Cập nhật lại trạng thái cho nhân vật
 	*/
 	void updateStatus(float deltatime);
+	/*
+		CheckCollision
+	*/
+	float checkCollision(BaseObject* object, float dt);
 
 	/*
 		Cập nhật lại rect để vẽ 
@@ -48,6 +53,7 @@ public:
 	void standing();
 	void moveRight();
 	void moveLeft();
+	void jump();
 
 	float getMovingSpeed();
 
@@ -57,6 +63,8 @@ private:
 	map<string, IComponent*> _componentList;
 
 	float _movingSpeed;
+
+	bool _canJumpDown;
 
 	eStatus _currentAnimationIndex;
 

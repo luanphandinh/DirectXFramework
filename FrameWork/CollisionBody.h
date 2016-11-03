@@ -92,6 +92,8 @@ public:
 			bằng vận tốc trong frame đó
 	*/
 	RECT getSweptBroadphaseRect(BaseObject* object, float dt);
+
+	void update(float deltaTime);
 private:
 	BaseObject* _target;
 	RECT _collisionBodyRect;
