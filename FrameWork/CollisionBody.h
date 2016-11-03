@@ -52,6 +52,24 @@ public:
 			@updatePosition : collision body sẽ cập nhật lại vị trí của object
 	*/
 	void checkCollision(BaseObject* otherObject,float dt,bool updatePosition = true);
+	/*
+		kiểm tra va chạm với object khác lấy được hướng va chạm, KO  gọi event Begin, End.
+			@otherObject: object cần kt va chạm
+			@direction: lấy hướng va chạm của otherObject
+			@dt: delta time của mỗi frame
+			@updatePosition: collision body sẽ cập nhật vị trí object lại nếu object
+			chồng lấp lên object khác khi set = true
+	*/
+	bool checkCollision(BaseObject* otherObject, eDirection& direction, float dt, bool updatePosition = true);
+
+	/*
+		Cập nhập lại target position khi có va chạm:
+			@otherObject : Đối tượng mà target va chạm với
+			@direction : Hướng va chạm của otherObject
+			@withVelocity : True khi kt va chạm với vận tốc,false khi kt với RECT
+			@move : khoảng chồng lấp giữ 2 object
+	*/
+	void updateTargetPosition(BaseObject* otherObject, eDirection direction, bool withVelocity, GVector2 move = GVector2Zero);
 
 	~CollisionBody();
 
@@ -62,8 +80,16 @@ public:
 	float sweptAABB(BaseObject* otherObject,eDirection& direction,float dt);
 
 	/*
+		Check bằng AABB
+		Được dùng để check BroadphaseRect với otherOBject->getBounding để 
+		xét va chạm,nếu có thì dùng swept để lấy timecollision
+	*/
+	bool isAABB(RECT myRect, RECT otherRect);
+
+	/*
 		Lấy vùng broadphase để check cho swept cho AABB
-		Được tính bằng vị trí đầu và vị trí cuối của BoudingObject
+		Được tính bằng vị trí đầu và vị trí cuối của bounding được dự đoán trước 
+			bằng vận tốc trong frame đó
 	*/
 	RECT getSweptBroadphaseRect(BaseObject* object, float dt);
 private:

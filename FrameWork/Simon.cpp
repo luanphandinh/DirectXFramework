@@ -24,6 +24,9 @@ void Simon::init()
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SIMON);
 	_sprite->setScale(2.0f);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::SIMON, "normal"));
+
+	Movement* movement = new Movement(GVector2Zero, GVector2Zero, _sprite);
+	_componentList["Movement"] = movement;
 	//_test_sprite->drawBounding(true);
 	//_test_sprite->setPosition(50, 50, 1.0f);
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
@@ -40,9 +43,9 @@ void Simon::init()
 	_animations[eStatus::SITTING]->addFrameRect(eID::SIMON, "sit", NULL);
 
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
-	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03", NULL);
-	this->_movingSpeed = 3.0f;
-
+	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
+	_animations[eStatus::HITTING]->setLoop(false);
+	this->_movingSpeed = SIMON_MOVING_SPEED;
 	this->setPosition(500, 90);
 	this->setStatus(eStatus::NORMAL);
 }
@@ -57,6 +60,13 @@ void Simon::update(float deltatime)
 
 	_animations[_currentAnimationIndex]->update(deltatime);
 
+	//update component list
+	// update component để sau cùng để sửa bên trên sau đó nó cập nhật đúng
+	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		it->second->update(deltatime);
+	}
+
 }
 
 void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
@@ -64,7 +74,10 @@ void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
 }
 
-void Simon::release(){}
+void Simon::release()
+{
+
+}
 
 
 /*
@@ -91,6 +104,8 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		break;
 	case DIK_C:
 		this->addStatus(eStatus::HITTING);
+		_animations[eStatus::HITTING]->canAnimate(true);
+		//_animations[eStatus::HITTING]->setIndex(0);
 	default:
 		break;
 	}
@@ -111,7 +126,7 @@ void Simon::onKeyReleased(KeyEventArg* key_event)
 	case DIK_DOWN:
 		this->removeStatus(eStatus::SITTING);
 	case DIK_C:
-		this->removeStatus(eStatus::HITTING);
+		//this->removeStatus(eStatus::HITTING);
 	default:
 		break;
 	}
@@ -123,7 +138,11 @@ void Simon::setStatus(eStatus status)
 }
 
 // Character action.
-void Simon::standing(){}
+void Simon::standing()
+{
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2Zero);
+}
 
 float Simon::getMovingSpeed()
 {
@@ -150,20 +169,34 @@ void Simon::updateStatus(float deltatime)
 	if ((this->getStatus() & eStatus::SITTING) == eStatus::SITTING) 
 	{
 	}
+	else
+	{
+		this->standing();
+	}
 }
 
 void Simon::moveLeft()
 {
 	if (this->getScale().x > 0)
 		this->setScaleX(this->getScale().x * (-1));
-	this->setPositionX(this->getPositionX() - _movingSpeed);
+	
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(-_movingSpeed,move->getVelocity().y));
 }
 
 void Simon::moveRight()
 {
 	if (this->getScale().x < 0)
 		this->setScaleX(this->getScale().x * (-1));
-	this->setPositionX(this->getPositionX() + _movingSpeed);
+
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(_movingSpeed, move->getVelocity().y));
+}
+
+GVector2 Simon::getVelocity()
+{
+	auto move = (Movement*)this->_componentList["Movement"];
+	return move->getVelocity();
 }
 
 
@@ -172,7 +205,7 @@ void  Simon::updateCurrentAnimateIndex()
 	_currentAnimationIndex = this->getStatus();
 	if (isInStatus(eStatus::HITTING) && //nếu đang vung roi
 		//mà di chuyển
-		isInStatus(eStatus::MOVING_LEFT) || isInStatus(eStatus::MOVING_RIGHT))
+		(isInStatus(eStatus::MOVING_LEFT) || isInStatus(eStatus::MOVING_RIGHT)))
 	{
 		//bỏ animation vung roi đi ,chỉ di chuyển thôi
 		_currentAnimationIndex = (eStatus)(this->getStatus() & ~eStatus::HITTING);
@@ -185,7 +218,8 @@ void  Simon::updateCurrentAnimateIndex()
 
 
 	if ((_currentAnimationIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT 
-		|| ((_currentAnimationIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT)) {
+		|| ((_currentAnimationIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT)) 
+	{
 		// animate move left/right xài cung 1 animate là running nên cũng bỏ nó ra
 		_currentAnimationIndex = (eStatus)(_currentAnimationIndex & ~(eStatus::MOVING_LEFT | MOVING_RIGHT));
 		_currentAnimationIndex = (eStatus)(_currentAnimationIndex | eStatus::RUNNING);

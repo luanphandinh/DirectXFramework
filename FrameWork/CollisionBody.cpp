@@ -19,6 +19,7 @@ CollisionBody::~CollisionBody()
 void CollisionBody::checkCollision(BaseObject* otherObject, float dt, bool updatePosition)
 {
 	eDirection direction;
+	//check sweptAABB
 	float timeCollision = sweptAABB(otherObject,direction, dt);
 
 	if (timeCollision < 1.0f)//có va chạm
@@ -27,6 +28,28 @@ void CollisionBody::checkCollision(BaseObject* otherObject, float dt, bool updat
 		{
 
 		}
+	}
+}
+
+bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& direction, float dt, bool updatePosition)
+{
+	float timeCollision = sweptAABB(otherObject, direction, dt);
+
+	if (timeCollision < 1.0f)//Nếu có va chạm xảy ra
+	{
+		//otherObject phải có hướng va chạm của nó và hướng va chạm của nó phải bằng với hướng va chạm được 
+		//xét sau khi sweptAABB 
+		if (otherObject->getPhysicBodySide() != eDirection::NONE && (direction & otherObject->getPhysicBodySide()) == otherObject->getPhysicBodySide())
+		{
+			// cập nhật tọa độ
+			//updateTargetPosition(otherObject, direction, true);
+		}
+
+		return true;
+	}
+	else
+	{
+
 	}
 }
 
@@ -39,6 +62,12 @@ float CollisionBody::sweptAABB(BaseObject* otherObject, eDirection& direction, f
 
 	// sử dụng Broadphase rect để kt vùng tiếp theo có va chạm ko
 	//
+	RECT broadphaseRect = this->getSweptBroadphaseRect(_target, dt);
+	if (!isAABB(broadphaseRect, otherRect))
+	{
+		direction = eDirection::NONE;
+		return 1.0f;
+	}
 
 	//swept AABB
 	//Tính vận tốc theo mỗi frame
@@ -47,7 +76,7 @@ float CollisionBody::sweptAABB(BaseObject* otherObject, eDirection& direction, f
 	GVector2 otherVelocity = GVector2(otherObject->getVelocity().x * dt / 1000, otherObject->getVelocity().y * dt / 1000);
 	GVector2 velocity = myVeclocity;
 	
-	if (otherVelocity != GVector2(0.0f, 0.0f))
+	if (otherVelocity != GVector2Zero)
 	{
 		velocity = otherVelocity - myVeclocity;
 	}
@@ -168,4 +197,49 @@ RECT CollisionBody::getSweptBroadphaseRect(BaseObject* object, float dt)
 	rect.right = velocity.x > 0 ? myRect.right + velocity.x : myRect.right;
 
 	return rect;
+}
+
+bool CollisionBody::isAABB(RECT myRect, RECT otherRect)
+{
+	float left = otherRect.left - myRect.right;
+	float right = otherRect.right - otherRect.left;
+	float top = otherRect.top - myRect.bottom;
+	float bottom = otherRect.bottom - myRect.top;
+
+	//Nếu mà left > 0 có nghĩa là otherRect.left  nằm hẳn về phía bên phải của myRect 
+	//thì va chạm không thể xảy ra,tương tự với 3 trường hợp còn lại
+	return !(left > 0 || right < 0 || top < 0 || bottom > 0);
+}
+
+void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection direction, bool withVelocity, GVector2 move)
+{
+	//Nếu update bằng vận tốc
+	if (withVelocity)
+	{
+		if (otherObject->getPhysicBodySide() != eDirection::NONE && (direction & otherObject->getPhysicBodySide()) == direction)
+		{
+			GVector2 veloc = _target->getVelocity();
+			GVector2 pos = _target->getPosition();
+			//va chạm theo trục x
+			if (_txEntry > _tyEntry)
+			{
+				if (0 < _txEntry && _txEntry < 1)
+				{
+					pos.x += _dxEntry;
+				}
+			}
+			else//va chạm theo trục y
+			{
+				if (0 < _tyEntry && _tyEntry < 1)
+				{
+					pos.y += _dyEntry;
+				}
+			}
+			_target->setPosition(pos);
+		}
+	}
+	else
+	{
+
+	}
 }

@@ -3,8 +3,10 @@
 #include"Animation.h"
 #include"InputController.h"
 #include"BaseObject.h"
+#include"IComponent.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
+#define SIMON_MOVING_SPEED 150
 
 [event_receiver(native)]
 class Simon : public BaseObject,public IControlable
@@ -51,13 +53,13 @@ public:
 	RECT getBounding() override;
 private:
 	map<eStatus, Animation*> _animations;
+	map<string, IComponent*> _componentList;
 
 	float _movingSpeed;
 
 	eStatus _currentAnimationIndex;
 
-	//GVector2 getVelocity();
-
+	GVector2 getVelocity();
 };
 _NAMESPACE_FRAMEWORK_END
 

@@ -77,7 +77,7 @@ void Land::setPosition(GVector2 position)
 
 GVector2 Land::getOrigin()
 {
-	return GVevtor2Zero;
+	return GVector2Zero;
 }
 
 RECT Land::getBounding()
@@ -139,7 +139,7 @@ void Land::setOrigin(GVector2 origin) {}
 
 GVector2 Land::getScale() 
 {
-	return GVevtor2Zero;
+	return GVector2Zero;
 }
 
 void Land::setScale(GVector2 scale) 
