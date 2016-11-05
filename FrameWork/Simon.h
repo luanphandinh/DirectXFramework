@@ -64,6 +64,7 @@ public:
 		Trạng thái lúc objec rơi xuống
 	*/
 	void falling();
+	void sit();
 
 	float getMovingSpeed();
 

@@ -34,12 +34,40 @@ void CollisionBody::checkCollision(BaseObject* otherObject, float dt, bool updat
 		__raise onCollisionBegin(e);
 		_listColliding[otherObject] = true;
 	}
-	else
+	else if (_listColliding.find(otherObject) == _listColliding.end())	// ko có trong list đã va chạm
 	{
-		CollisionEventArg* e = new CollisionEventArg(otherObject);
-		e->_sideCollision = direction;
-		__raise onCollisionEnd(e);
-		_listColliding.erase(otherObject);
+		if (isAABB(_target->getBounding(), otherObject->getBounding()))
+		{
+			CollisionEventArg* e = new CollisionEventArg(otherObject);
+			e->_sideCollision = this->getSide(otherObject);
+
+			__raise onCollisionBegin(e);
+
+			_listColliding[otherObject] = true;
+		}
+	}
+	else	// có trong list đã va chạm
+	{
+		float moveX, moveY;
+		if (isCollidingIntersected(otherObject, moveX, moveY, dt))		// kt va trạm lấy khoảng chồng lấp của 2 object
+		{
+			auto side = this->getSide(otherObject);
+
+			if (otherObject->getPhysicBodySide() == eDirection::NONE || (side & otherObject->getPhysicBodySide()) != side)
+				return;
+
+			// cập nhật tọa độ
+			if (updatePosition)
+				updateTargetPosition(otherObject, side, false, GVector2(moveX, moveY));
+		}
+		else // nếu ko va chạm nữa là kết thúc va chạm
+		{
+			CollisionEventArg* e = new CollisionEventArg(otherObject);
+			e->_sideCollision = eDirection::NONE;
+
+			__raise onCollisionEnd(e);
+			_listColliding.erase(otherObject);
+		}
 	}
 }
 
@@ -61,9 +89,24 @@ bool CollisionBody::checkCollision(BaseObject* otherObject, eDirection& directio
 
 		return true;
 	}
-	else
+	else//Trường hợp sweptAABB ko xảy ra va chạm,kiểm tra xem giữa 2 object có intersectd với nhau ko
+		//Từ đó update lại position
 	{
+		float moveX, moveY;
+		if (isCollidingIntersected(otherObject, moveX, moveY, dt))
+		{
+			auto side = this->getSide(otherObject);
+			direction = side;
 
+			if (otherObject->getPhysicBodySide() == eDirection::NONE || (side & otherObject->getPhysicBodySide()) != side)
+				return false;
+
+			//Cập nhật tọa độ
+			if (updatePosition)
+				this->updateTargetPosition(otherObject,direction ,false,GVector2(moveX,moveY));
+
+			return true;
+		}
 	}
 
 	direction = eDirection::NONE;
@@ -256,14 +299,36 @@ void CollisionBody::updateTargetPosition(BaseObject* otherObject, eDirection dir
 			_target->setPosition(pos);
 		}
 	}
+	else//Nếu update bằng khoảng chồng lấp của 2 object
+	{
+		//Nếu object đang rơi xuống hoặc di chuyển mà va chạm cần xét lại tọa độ
+		if (move.y > 0 && (otherObject->getPhysicBodySide() & eDirection::TOP) == eDirection::TOP && _target->getVelocity().y <= 0)
+		{
+			_target->setPositionY(_target->getPositionY() + move.y);
+		}
+		else if (move.y < 0 && (otherObject->getPhysicBodySide() & eDirection::BOTTOM) == eDirection::BOTTOM && _target->getVelocity().y >= 0)
+		{
+			_target->setPositionY(_target->getPositionY() + move.y);
+		}
+
+		if (move.x > 0 && (otherObject->getPhysicBodySide() & eDirection::RIGHT) == eDirection::RIGHT && _target->getVelocity().x <= 0)
+		{
+			_target->setPositionX(_target->getPositionX() + move.x);
+		}
+		else if (move.x < 0 && (otherObject->getPhysicBodySide() & eDirection::LEFT) == eDirection::LEFT && _target->getVelocity().x >= 0)
+		{
+			_target->setPositionX(_target->getPositionX() + move.x);
+		}
+	}
 }
 
-bool CollisionBody::isColliding(BaseObject * otherObject, float & moveX, float & moveY, float dt)
+bool CollisionBody::isCollidingIntersected(BaseObject * otherObject, float & moveX, float & moveY, float dt)
 {
 	moveX = moveY = 0.0f;
 	auto myRect = _target->getBounding();
 	auto otherRect = otherObject->getBounding();
 
+	//Xét giống trong AABB để xem hai đối tượng có xảy ra intersected hay ko
 	float left = otherRect.left - myRect.right;
 	float top = otherRect.top - myRect.bottom;
 	float right = otherRect.right - myRect.left;
@@ -276,7 +341,7 @@ bool CollisionBody::isColliding(BaseObject * otherObject, float & moveX, float &
 	if (left > 0 || right < 0 || top < 0 || bottom > 0)
 		return false;
 
-	// tính offset x, y để đi hết va chạm
+	// tính offset chồng lấp giữa x,y
 	// lấy khoảng cách nhỏ nhất
 	moveX = abs(left) < right ? left : right;
 	moveY = top < abs(bottom) ? top : bottom;
@@ -288,6 +353,59 @@ bool CollisionBody::isColliding(BaseObject * otherObject, float & moveX, float &
 		moveX = 0.0f;
 
 	return true;
+}
+
+eDirection CollisionBody::getSide(BaseObject* otherObject)
+{
+	auto myRect = _target->getBounding();
+	auto otherRect = otherObject->getBounding();
+
+	float left = otherRect.left - myRect.right;
+	float top = otherRect.top - myRect.bottom;
+	float right = otherRect.right - myRect.left;
+	float bottom = otherRect.bottom - myRect.top;
+
+	// kt va chạm
+	if (left > 0 || right < 0 || top < 0 || bottom > 0)
+		return eDirection::NONE;
+
+	float minX;
+	float minY;
+	eDirection sideY;
+	eDirection sideX;
+
+	if (top > abs(bottom))
+	{
+		minY = bottom;
+		sideY = eDirection::BOTTOM;
+	}
+	else
+	{
+		minY = top;
+		sideY = eDirection::TOP;
+	}
+
+
+	if (abs(left) > right)
+	{
+		minX = right;
+		sideX = eDirection::RIGHT;
+	}
+	else
+	{
+		minX = left;
+		sideX = eDirection::LEFT;
+	}
+
+
+	if (abs(minX) < abs(minY))
+	{
+		return sideX;
+	}
+	else
+	{
+		return sideY;
+	}
 }
 
 void CollisionBody::update(float deltaTime)

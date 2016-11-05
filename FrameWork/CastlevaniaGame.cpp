@@ -30,10 +30,12 @@ void CastlevaniaGame::updateInput(float deltaTime)
 void CastlevaniaGame::update(float deltaTime)
 {
 	//=====================TESTING==========================//
+	
 	_simon->update(deltaTime);
 	updateViewport(_simon);
 	_simon->checkCollision(_land, deltaTime);
 	_simon->checkCollision(_land2, deltaTime);
+	
 	//=====================TESTING==========================//
 }
 
@@ -58,7 +60,7 @@ void CastlevaniaGame::loadResource()
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
 	_land = new Land(0, 64, 200, 20, eDirection::TOP);
-	_land2 = new Land(50, 120, 200, 20, eDirection::TOP);
+	_land2 = new Land(100, 120, 200, 20, eDirection::TOP);
 	//=====================TESTING==========================//
 }
 //=====================TESTING==========================//

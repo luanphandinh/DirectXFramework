@@ -76,7 +76,10 @@ public:
 
 	/*
 		Trả về giá trị entry time dựa trên dt(delta Time) được truyền vào
+			@otherObject : Đối tượng mà target va chạm với
+			@direction : Là hướng va chạm của otherObject xảy ra với _target
 			@dt : là thời gian của 1 frame
+			
 	*/
 	float sweptAABB(BaseObject* otherObject,eDirection& direction,float dt);
 
@@ -86,7 +89,18 @@ public:
 		xét va chạm,nếu có thì dùng swept để lấy timecollision
 	*/
 	bool isAABB(RECT myRect, RECT otherRect);
-	bool isColliding(BaseObject * otherObject, float & moveX, float & moveY, float dt);
+
+	/*
+		Hàm này dùng để sử dụng cho hàm updatePosition khi withveloc = false và có vector move
+		Là hàm lấy khoảng chồng lấp giữa hai object theo chiều x hoặc y:
+			@otheroBject	: đối tượng cần xét khoảng chồng lấp
+			@moveX,moveY	: khoảng chồng lấp giữa hai đối tượng theo trục X và Y
+								chỉ trả ra một trong giá trị nhỏ nhất giữa 2 trục,giá trị còn lại là 0
+			@dt				: deltatime
+			
+	*/
+	bool isCollidingIntersected(BaseObject * otherObject, float & moveX, float & moveY, float dt);
+	eDirection getSide(BaseObject* otherObject);
 	/*
 		Lấy vùng broadphase để check cho swept cho AABB
 		Được tính bằng vị trí đầu và vị trí cuối của bounding được dự đoán trước 
@@ -104,9 +118,10 @@ private:
 	RECT _collisionBodyRect;
 
 	float	_dxEntry,//Khoảng cách gần nhất theo trục x giữa 2 rect
-		_dxExit,//Khoảng cách xa nhất theo trục x giữa 2 rect
-		_dyEntry,//Khoảng cách gần nhất theo trục y giữa 2 rect
-		_dyExit;//Khoảng cách xa nhất theo trục y giữa 2 rect
+			_dxExit,//Khoảng cách xa nhất theo trục x giữa 2 rect
+			_dyEntry,//Khoảng cách gần nhất theo trục y giữa 2 rect
+			_dyExit;//Khoảng cách xa nhất theo trục y giữa 2 rect
+
 	float  _txEntry, _tyEntry, _txExit, _tyExit;//thời gian
 
 	map<BaseObject*, bool> _listColliding;//Danh sách các objet mà base object collide với
