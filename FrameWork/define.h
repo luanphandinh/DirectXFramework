@@ -31,7 +31,8 @@ enum eID
 {
 	SIMON = 0, // Main character.
 	LAND = 1,
-	MAPSTAGE1 = 2,
+	STAIR = 2,
+	MAPSTAGE1 = 10,
 };
 
 //status cho nhân vật
@@ -45,6 +46,8 @@ enum eStatus
 	HITTING = (1 << 4),
 	SITTING = (1 << 5),
 	FALLING = (1 << 6),
+	UPSTAIR = (1 << 7),
+	DOWNSTAIR = (1 << 8),
 };
 
 enum eDirection
