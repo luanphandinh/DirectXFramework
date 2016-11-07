@@ -53,6 +53,10 @@ public:
 	void updateCurrentAnimateIndex();
 
 	// Character action.
+
+	/*
+		romve hết 2 trạng thái jump và falling của simon
+	*/
 	void standing();
 	void moveRight();
 	void moveLeft();
@@ -65,12 +69,14 @@ public:
 	*/
 	void falling();
 	void sit();
+	void upstair();
+	void downstair();
 
 	float getMovingSpeed();
 
 	RECT getBounding() override;
 private:
-	map<eStatus, Animation*> _animations;
+	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
 
 	float _movingSpeed;

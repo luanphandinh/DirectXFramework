@@ -34,8 +34,9 @@ enum eID
 {
 	SIMON = 0, // Main character.
 	LAND = 1,
-	MAPSTAGE1 = 2,
-	SPEARKNIGHT
+	SPEARKNIGHT =2,
+	STAIR = 3,
+	MAPSTAGE1 = 10,
 };
 
 //status cho nhân vật
@@ -49,6 +50,7 @@ enum eStatus
 	HITTING = (1 << 4),
 	SITTING = (1 << 5),
 	FALLING = (1 << 6),
+
 	DYING= (1 << 7),
 	WALKING=(1<<8),
 	// Trạng thái huỷ, lúc này, đối tượng không update, không draw, 
@@ -56,6 +58,9 @@ enum eStatus
 	DESTROY = (1 << 9),
 	WAITING = (1 << 10),
 
+
+	UPSTAIR = (1 << 11),
+	DOWNSTAIR = (1 << 12),
 };
 
 enum eDirection
