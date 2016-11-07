@@ -21,6 +21,10 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite[eID::SIMON] = sp;
 	this->loadSpriteInfo(eID::SIMON, "Resources//Images//simon_animation.txt");
 
+	sp = new Sprite(spriteHandler, L"Resources//Images//spearKnight.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::SPEARKNIGHT, sp));
+	this->loadSpriteInfo(eID::SPEARKNIGHT, "Resources//Images//spearKnight_animation.txt");
+
 	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	sp->setOrigin(GVector2(0.0f, 0.0f));
 	this->_listSprite[eID::MAPSTAGE1] = sp;
