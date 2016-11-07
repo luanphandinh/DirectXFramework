@@ -13,12 +13,13 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FE01BEB2-3864-41E5-8772-BC0046A0B3D0}</ProjectGuid>
     <RootNamespace>FrameWork</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -71,6 +72,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BaseEnemy.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="CastlevaniaGame.h" />
     <ClInclude Include="CollisionBody.h" />
@@ -86,9 +88,11 @@
     <ClInclude Include="Land.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
-    <ClInclude Include="Surface.h" />
+    <ClInclude Include="Stair.h" />
+    <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
@@ -99,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />
     <ClCompile Include="CollisionBody.cpp" />
@@ -113,9 +118,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
-    <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="Stair.cpp" />
+    <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
