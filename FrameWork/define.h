@@ -27,11 +27,15 @@ typedef D3DXVECTOR3 GVector3;
 #define C_WHITE D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)	//màu trắng
 #define COLOR_KEY D3DXCOLOR(1.0f,0.0f,1.0f,1.0f)
 #define GVector2Zero D3DXVECTOR2(0,0)
+
+#define SCALE_FACTOR 2.0f
+
 enum eID
 {
 	SIMON = 0, // Main character.
 	LAND = 1,
 	MAPSTAGE1 = 2,
+	SPEARKNIGHT
 };
 
 //status cho nhân vật
@@ -45,6 +49,13 @@ enum eStatus
 	HITTING = (1 << 4),
 	SITTING = (1 << 5),
 	FALLING = (1 << 6),
+	DYING= (1 << 7),
+	WALKING=(1<<8),
+	// Trạng thái huỷ, lúc này, đối tượng không update, không draw, 
+	// ở scene kiểm tra nếu phát hiện trạng thái này thì huỷ đối tượng.
+	DESTROY = (1 << 9),
+	WAITING = (1 << 10),
+
 };
 
 enum eDirection
@@ -62,5 +73,16 @@ enum eDirection
 
 #define _USING_FRAMEWORK using namespace FrameWork;
 
+
+#ifndef SAFE_DELETE
+
+#define SAFE_DELETE(p) \
+if(p) \
+{\
+	delete (p); \
+	p = nullptr; \
+} \
+
+#endif // !SAFE_DELETE
 
 #endif 
