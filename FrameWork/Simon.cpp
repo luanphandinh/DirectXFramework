@@ -60,9 +60,9 @@ void Simon::init()
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
 	_animations[eStatus::HITTING]->setLoop(false);
 	this->_movingSpeed = SIMON_MOVING_SPEED;
-	this->setPosition(150, 400);
+	this->setPosition(300, 100);
 	this->setStatus(eStatus::NORMAL);
-	_sprite->drawBounding(true);
+	_sprite->drawBounding(false);
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 }
 
