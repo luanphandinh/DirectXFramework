@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Tilesmap columns="32" rows="5">
   <MatrixIndex>
-    <Row id="0">2	3	4	2	2	2	2	2	2	2	3	4	0	0	2	2	3	4	7	8	0	0	2	2	2	2	2	2	2	2	3	4</Row>
-    <Row id="1">2	3	4	2	2	2	2	2	2	2	3	4	0	0	2	2	3	4	11	12	0	0	2	2	2	2	2	2	2	2	3	4</Row>
-    <Row id="2">2	3	4	2	9	10	2	2	2	2	3	4	0	0	2	2	3	4	13	14	0	0	2	2	2	2	2	2	2	2	3	4</Row>
+    <Row id="0">2	3	4	2	2	2	2	2	18	1	3	4	0	0	2	2	3	4	7	8	0	0	2	2	2	2	2	2	2	2	3	4</Row>
+    <Row id="1">2	3	4	2	2	2	2	6	2	2	3	4	0	0	2	2	3	4	11	12	0	0	2	2	2	2	2	2	2	2	3	4</Row>
+    <Row id="2">2	3	4	2	9	10	6	2	2	2	3	4	0	0	2	2	3	4	13	14	0	0	2	2	2	2	2	2	2	2	3	4</Row>
     <Row id="3">1	1	1	1	1	1	1	1	1	1	1	1	19	19	1	1	1	1	1	1	19	19	1	1	1	1	1	1	1	1	1	1</Row>
     <Row id="4">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
   </MatrixIndex>
@@ -320,6 +320,24 @@
     </Item>
     <Item Id="2" Name="land2" X="707" Y="57" Width="319" Height="2">
       <ActiveBound X="707" Y="57" Width="319" Height="2" />
+    </Item>
+    <Item Id="2" Name="object3" X="192" Y="77" Width="16" Height="14">
+      <ActiveBound X="192" Y="77" Width="16" Height="14" />
+    </Item>
+    <Item Id="2" Name="object4" X="209" Y="95" Width="14" Height="16">
+      <ActiveBound X="209" Y="95" Width="14" Height="16" />
+    </Item>
+    <Item Id="2" Name="object5" X="225" Y="111" Width="14" Height="15">
+      <ActiveBound X="225" Y="111" Width="14" Height="15" />
+    </Item>
+    <Item Id="2" Name="object6" X="242" Y="128" Width="13" Height="14">
+      <ActiveBound X="242" Y="128" Width="13" Height="14" />
+    </Item>
+    <Item Id="2" Name="object7" X="256" Y="143" Width="16" Height="14">
+      <ActiveBound X="256" Y="143" Width="16" Height="14" />
+    </Item>
+    <Item Id="2" Name="object8" X="275" Y="160" Width="44" Height="28">
+      <ActiveBound X="275" Y="160" Width="44" Height="28" />
     </Item>
   </Objects>
 </Tilesmap>
