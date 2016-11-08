@@ -18,6 +18,7 @@ CastlevaniaGame::CastlevaniaGame(HINSTANCE hInstance, LPWSTR title) :Game(hInsta
 void CastlevaniaGame::init()
 {
 	Game::init();
+	
 }
 
 void CastlevaniaGame::release()
@@ -34,6 +35,10 @@ void CastlevaniaGame::update(float deltaTime)
 	_simon->checkCollision(_land, deltaTime);
 	_simon->checkCollision(_land2, deltaTime);
 	_simon->update(deltaTime);
+	_spearKnight->update(deltaTime);
+	_spearKnight->checkCollision(_land, deltaTime);
+
+	//_spearKnight->checkCollision(_simon, deltaTime);
 	//=====================TESTING==========================//
 }
 
@@ -44,6 +49,9 @@ void CastlevaniaGame::draw()
 	_land->draw(_spriteHandler, _viewport);
 	_land2->draw(_spriteHandler, _viewport);
 	_simon->draw(_spriteHandler, _viewport);
+
+
+	_spearKnight->draw(_spriteHandler, _viewport);
 	//=====================TESTING==========================//
 }
 
@@ -54,9 +62,12 @@ void CastlevaniaGame::loadResource()
 	_simon = new Simon();
 	_simon->init();
 	
+	_spearKnight = new SpearKnight(NORMAL,NULL,NULL,1);
+	_spearKnight->init();
+
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
-	_land = new Land(0, 64, 200, 20, eDirection::TOP);
+	_land = new Land(0, 64, 400, 20, eDirection::TOP);
 	_land2 = new Land(100, 120, 200, 20, eDirection::TOP);
 	//=====================TESTING==========================//
 }

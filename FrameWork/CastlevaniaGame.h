@@ -8,6 +8,7 @@
 #include"Simon.h"
 #include"Map.h"
 #include"Land.h"
+#include "SpearKnight.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
@@ -26,6 +27,7 @@ public:
 	//==========================TEST=========================//
 	void updateViewport(BaseObject* objTracker);
 	Simon* _simon;
+	SpearKnight* _spearKnight;
 	Map* _backGround;
 	Viewport* _viewport;
 	Land* _land;

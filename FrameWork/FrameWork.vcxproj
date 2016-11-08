@@ -86,9 +86,10 @@
     <ClInclude Include="Land.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
-    <ClInclude Include="Surface.h" />
+    <ClInclude Include="StopWatch.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
@@ -113,9 +114,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
-    <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="StopWatch.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
