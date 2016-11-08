@@ -75,6 +75,8 @@ public:
 	float getMovingSpeed();
 
 	RECT getBounding() override;
+
+	
 private:
 	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
@@ -88,6 +90,8 @@ private:
 	GVector2 getVelocity();
 
 	BaseObject* _preObject;
+	// reset các thuộc tính lại giá trị ban đầu.
+	void resetValues();
 };
 _NAMESPACE_FRAMEWORK_END
 
