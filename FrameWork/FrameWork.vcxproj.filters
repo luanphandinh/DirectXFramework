@@ -43,6 +43,12 @@
     <Filter Include="Header Files\Framework\Components">
       <UniqueIdentifier>{4bc5487f-03e7-42eb-b875-8a3eedaeabf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects\Enemies">
+      <UniqueIdentifier>{57f74a16-66bc-443e-b849-10ba2ffe7b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Enemies">
+      <UniqueIdentifier>{da92c4fa-7d70-4a92-9b76-f5f3a2f0bf36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h">
@@ -120,9 +126,6 @@
     <ClInclude Include="Land.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="SpearKnight.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="StopWatch.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
@@ -131,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="Stair.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearKnight.h">
+      <Filter>Header Files\Objects\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +212,6 @@
     <ClCompile Include="Land.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="SpearKnight.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="StopWatch.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="Stair.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearKnight.cpp">
+      <Filter>Source Files\Objects\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
