@@ -410,5 +410,4 @@ eDirection CollisionBody::getSide(BaseObject* otherObject)
 
 void CollisionBody::update(float deltaTime)
 {
-
 }

@@ -7,7 +7,7 @@
 #include"CollisionBody.h"
 #include"Land.h"
 _NAMESPACE_FRAMEWORK_BEGIN
-#define SIMON_MOVING_SPEED 150
+#define SIMON_MOVING_SPEED 125
 #define GRAVITY 800
 #define SIMON_JUMP_VELOCITY 450
 
@@ -70,7 +70,7 @@ public:
 
 	RECT getBounding() override;
 private:
-	map<eStatus, Animation*> _animations;
+	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
 
 	float _movingSpeed;

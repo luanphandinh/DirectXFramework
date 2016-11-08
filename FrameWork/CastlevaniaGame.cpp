@@ -30,12 +30,10 @@ void CastlevaniaGame::updateInput(float deltaTime)
 void CastlevaniaGame::update(float deltaTime)
 {
 	//=====================TESTING==========================//
-	
-	_simon->update(deltaTime);
 	updateViewport(_simon);
 	_simon->checkCollision(_land, deltaTime);
 	_simon->checkCollision(_land2, deltaTime);
-	
+	_simon->update(deltaTime);
 	//=====================TESTING==========================//
 }
 
@@ -46,7 +44,6 @@ void CastlevaniaGame::draw()
 	_land->draw(_spriteHandler, _viewport);
 	_land2->draw(_spriteHandler, _viewport);
 	_simon->draw(_spriteHandler, _viewport);
-
 	//=====================TESTING==========================//
 }
 

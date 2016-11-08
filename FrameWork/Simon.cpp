@@ -42,9 +42,8 @@ void Simon::init()
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::NORMAL]->addFrameRect(eID::SIMON, "normal", NULL);
 
-	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::SIMON, "run_01", "run_02", "run_03", NULL);
-	
 	
 	_animations[eStatus::JUMPING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::JUMPING]->addFrameRect(eID::SIMON, "jump", NULL);
@@ -57,10 +56,10 @@ void Simon::init()
 	
 
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
-	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
-	_animations[eStatus::HITTING]->setLoop(false);
+	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03", "normal", NULL);
+	//_animations[eStatus::HITTING]->setLoop(false);
 	this->_movingSpeed = SIMON_MOVING_SPEED;
-	this->setPosition(150, 400);
+	this->setPosition(150, 200);
 	this->setStatus(eStatus::NORMAL);
 	_sprite->drawBounding(true);
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
@@ -381,7 +380,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 #pragma endregion 
 void  Simon::updateCurrentAnimateIndex()
 {
-	//_currentAnimationIndex = this->getStatus();
+	_currentAnimationIndex = this->getStatus();
 
 	if (isInStatus(eStatus::HITTING) && //nếu đang vung roi
 		//mà di chuyển
@@ -390,7 +389,7 @@ void  Simon::updateCurrentAnimateIndex()
 		//bỏ animation vung roi đi ,chỉ di chuyển thôi
 		_currentAnimationIndex = (eStatus)(this->getStatus() & ~eStatus::HITTING);
 	}
-	else 
+	else if ((_currentAnimationIndex & eStatus::HITTING) == eStatus::HITTING)
 	{
 		_currentAnimationIndex = this->getStatus();
 	}
