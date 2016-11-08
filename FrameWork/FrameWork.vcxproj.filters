@@ -43,6 +43,12 @@
     <Filter Include="Header Files\Framework\Components">
       <UniqueIdentifier>{4bc5487f-03e7-42eb-b875-8a3eedaeabf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects\Enemies">
+      <UniqueIdentifier>{b184db42-96b4-47cb-9ff0-54f524817c82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Enemies">
+      <UniqueIdentifier>{f7783f57-a80d-478b-a942-6f56c526a7eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h">
@@ -71,9 +77,6 @@
     </ClInclude>
     <ClInclude Include="CastlevaniaGame.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Surface.h">
-      <Filter>Header Files\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Transformable.h">
       <Filter>Header Files\Framework</Filter>
@@ -123,6 +126,18 @@
     <ClInclude Include="Land.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Stair.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearKnight.h">
+      <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -151,9 +166,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Surface.cpp">
-      <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Transformable.cpp">
       <Filter>Source Files\Framework</Filter>
@@ -199,6 +211,18 @@
     </ClCompile>
     <ClCompile Include="Land.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Stair.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>Source Files\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearKnight.cpp">
+      <Filter>Source Files\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>Source Files\Framework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

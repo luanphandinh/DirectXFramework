@@ -7,7 +7,7 @@
 #include"CollisionBody.h"
 #include"Land.h"
 _NAMESPACE_FRAMEWORK_BEGIN
-#define SIMON_MOVING_SPEED 150
+#define SIMON_MOVING_SPEED 125
 #define GRAVITY 800
 #define SIMON_JUMP_VELOCITY 450
 
@@ -75,6 +75,8 @@ public:
 	float getMovingSpeed();
 
 	RECT getBounding() override;
+
+	
 private:
 	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
@@ -88,6 +90,8 @@ private:
 	GVector2 getVelocity();
 
 	BaseObject* _preObject;
+	// reset các thuộc tính lại giá trị ban đầu.
+	void resetValues();
 };
 _NAMESPACE_FRAMEWORK_END
 
