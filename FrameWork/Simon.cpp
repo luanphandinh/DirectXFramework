@@ -55,13 +55,13 @@ void Simon::init()
 	_animations[eStatus::SITTING]->addFrameRect(eID::SIMON, "sit", NULL);
 	
 	_animations[eStatus::UPSTAIR] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::UPSTAIR]->addFrameRect(eID::SIMON, "up_stair", NULL);
+	_animations[eStatus::UPSTAIR]->addFrameRect(eID::SIMON, "up_stair_01", "up_stair_02", NULL);
 
-	_animations[eStatus::UPSTAIR] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::UPSTAIR]->addFrameRect(eID::SIMON, "normal", "up_stair", NULL);
+	/*_animations[eStatus::UPSTAIR] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::UPSTAIR]->addFrameRect(eID::SIMON, "normal", "up_stair", NULL);*/
 
 	_animations[eStatus::DOWNSTAIR] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::DOWNSTAIR]->addFrameRect(eID::SIMON, "normal", "down_stair", NULL);
+	_animations[eStatus::DOWNSTAIR]->addFrameRect(eID::SIMON, "down_stair_01", "down_stair_02", NULL);
 
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
 
@@ -311,7 +311,10 @@ void Simon::moveRight()
 }
 
 void Simon::upstair()
-{}
+{
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(_movingSpeed, 100));
+}
 
 void Simon::downstair()
 {}
