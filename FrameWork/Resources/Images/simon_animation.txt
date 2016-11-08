@@ -5,8 +5,10 @@ run_02		224	0	240	32
 run_03		278	0	296	32
 jump		195	8	213	32
 sit		195	8	213	32
-down_stair	152	0	168	32
-up_stair	126	0	144	32
+down_stair_01	152	0	168	32
+down_stair_02	252	0	265	32
+up_stair_01	126	0	144	32
+up_stair_02	252	0	265	32	
 hitted		2	92	20	122
 dead		56	16	88	32
 no_whip		44	200	68	230
