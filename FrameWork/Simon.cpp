@@ -45,7 +45,6 @@ void Simon::init()
 	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::SIMON, "run_01", "run_02", "run_03", NULL);
 	
-	
 	_animations[eStatus::JUMPING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::JUMPING]->addFrameRect(eID::SIMON, "jump", NULL);
 
@@ -67,10 +66,26 @@ void Simon::init()
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
 	_animations[eStatus::HITTING]->setLoop(false);
+	this->resetValues();
+
 	this->_movingSpeed = SIMON_MOVING_SPEED;
 	this->setPosition(300, 100);
-	this->setStatus(eStatus::NORMAL);	_sprite->drawBounding(false);
+	this->setStatus(eStatus::NORMAL);	
+	_sprite->drawBounding(true);
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+}
+
+void Simon::resetValues() {
+	this->setScale(SCALE_FACTOR);
+
+	_preObject = nullptr;
+
+	_movingSpeed = SIMON_MOVING_SPEED;
+
+
+	for (auto animate : _animations) {
+		animate.second->setColorFlash(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+	}
 }
 
 void Simon::update(float deltatime)
@@ -339,6 +354,9 @@ void Simon::onCollisionEnd(CollisionEventArg* collision_arg)
 		break;
 	}
 }
+
+
+
 
 float Simon::checkCollision(BaseObject* otherObject, float dt)
 {
