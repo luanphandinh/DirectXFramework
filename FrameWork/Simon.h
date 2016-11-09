@@ -6,6 +6,7 @@
 #include"IComponent.h"
 #include"CollisionBody.h"
 #include"Land.h"
+#include"Stair.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 125
 #define GRAVITY 800
@@ -85,6 +86,7 @@ private:
 	float _movingSpeed;
 
 	bool _canJumpDown;
+	bool _canOnStair;
 
 	eStatus _currentAnimationIndex;
 

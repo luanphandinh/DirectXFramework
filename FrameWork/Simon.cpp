@@ -252,9 +252,17 @@ void Simon::updateStatus(float deltatime)
 	{
 		this->sit();
 	}
+	else if ((this->getStatus() & eStatus::UPSTAIR) == eStatus::UPSTAIR)
+	{
+		this->upstair();
+	}
 	else if ((this->getStatus() & eStatus::FALLING) == eStatus::FALLING)
 	{
 		this->falling();
+	}
+	else if ((this->getStatus() & eStatus::DOWNSTAIR) == eStatus::DOWNSTAIR)
+	{
+		this->downstair();
 	}
 	else if ((this->getStatus() & eStatus::JUMPING) != eStatus::JUMPING)
 	{
@@ -386,13 +394,19 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			Nếu simon ko nằm trong cả 2 trang thái là nhảy vả rớt,đang nhảy hoặc rớt từ trên xuống
 			Thì kiểm tra va chạm
 		*/
-		if (!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) 
+		if (!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING))
 			&& collisionBody->checkCollision(otherObject, direction, dt, false))
 		{
 			if (otherObjectID == eID::LAND)
 			{
 				auto land = (Land*)otherObject;
 				_canJumpDown = land->canJump();
+			}
+
+			if (otherObjectID == eID::STAIR)
+			{
+				auto stair = (Stair*)otherObject;
+				_canOnStair = stair->canStandOnStair();
 			}
 
 			//Nếu chạm top mà trừ trường hợp nhảy lên với vận tốc lớn hơn 0
@@ -437,10 +451,6 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				this->addStatus(eStatus::FALLING);
 			}
 		}
-	}
-	else if (otherObjectID == eID::STAIR)
-	{
-
 	}
 	
 	return 0.0f;

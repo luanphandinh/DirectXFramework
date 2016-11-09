@@ -35,6 +35,11 @@ void CastlevaniaGame::update(float deltaTime)
 	_simon->checkCollision(_land, deltaTime);
 	_simon->checkCollision(_land2, deltaTime);
 	_simon->update(deltaTime);
+
+	for (int i = 0; i < 7; i++)
+	{
+		_simon->checkCollision(_stairs[i],deltaTime);
+	}
 	_spearKnight->update(deltaTime);
 	_spearKnight->checkCollision(_land, deltaTime);
 
@@ -71,12 +76,12 @@ void CastlevaniaGame::loadResource()
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
 	_land = new Land(0, 64, 400, 20, eDirection::TOP);
-	_land2 = new Land(100, 120, 200, 20, eDirection::TOP);
+	_land2 = new Land(200, 200, 200, 20, eDirection::TOP);
 
-	_stairs = new Stair*[7];
+	_stairs = new Land*[7];
 	for (int i = 0; i < 7; i++)
 	{
-		_stairs[i] = new Stair(192 - 16 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
+		_stairs[i] = new Land(192 - 16 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
 	}
 	//=====================TESTING==========================//
 }

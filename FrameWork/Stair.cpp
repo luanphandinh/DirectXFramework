@@ -2,9 +2,10 @@
 
 
 Stair::Stair(int x, int y, int width, int height, eDirection physicalBodyDirection):
-		Land(x,y,width,height,physicalBodyDirection)
+	Land(x, y, width, height, physicalBodyDirection)
 {
-
+	this->_canStandOnStair = true;
+	this->_id = eID::STAIR;
 }
 
 
