@@ -10,6 +10,7 @@ _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 125
 #define GRAVITY 800
 #define SIMON_JUMP_VELOCITY 450
+#define SIMON_UPSTAIR_VELOCITY 100
 
 [event_receiver(native)]
 class Simon : public BaseObject,public IControlable

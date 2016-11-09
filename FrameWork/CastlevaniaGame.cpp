@@ -50,7 +50,10 @@ void CastlevaniaGame::draw()
 	_land2->draw(_spriteHandler, _viewport);
 	_simon->draw(_spriteHandler, _viewport);
 
-
+	for (int i = 0; i < 7; i++)
+	{
+		_stairs[i]->draw(_spriteHandler,_viewport);
+	}
 	_spearKnight->draw(_spriteHandler, _viewport);
 	//=====================TESTING==========================//
 }
@@ -69,6 +72,12 @@ void CastlevaniaGame::loadResource()
 
 	_land = new Land(0, 64, 400, 20, eDirection::TOP);
 	_land2 = new Land(100, 120, 200, 20, eDirection::TOP);
+
+	_stairs = new Stair*[7];
+	for (int i = 0; i < 7; i++)
+	{
+		_stairs[i] = new Stair(192 - 16 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
+	}
 	//=====================TESTING==========================//
 }
 //=====================TESTING==========================//

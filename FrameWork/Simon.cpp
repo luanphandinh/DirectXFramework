@@ -313,11 +313,14 @@ void Simon::moveRight()
 void Simon::upstair()
 {
 	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(_movingSpeed, 100));
+	move->setVelocity(GVector2(_movingSpeed, SIMON_UPSTAIR_VELOCITY));
 }
 
 void Simon::downstair()
-{}
+{
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(-_movingSpeed, -SIMON_UPSTAIR_VELOCITY));
+}
 #pragma endregion
 
 GVector2 Simon::getVelocity()

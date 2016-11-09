@@ -9,6 +9,7 @@
 #include"Map.h"
 #include"Land.h"
 #include "SpearKnight.h"
+#include"Stair.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
@@ -32,6 +33,7 @@ public:
 	Viewport* _viewport;
 	Land* _land;
 	Land* _land2;
+	Stair** _stairs;
 };
 _NAMESPACE_FRAMEWORK_END
 
