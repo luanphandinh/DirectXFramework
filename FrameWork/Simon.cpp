@@ -62,9 +62,15 @@ void Simon::init()
 
 	_animations[eStatus::DOWNSTAIR] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::DOWNSTAIR]->addFrameRect(eID::SIMON, "down_stair_01", "down_stair_02", NULL);
-
+/*
 	_animations[eStatus::STANDINGONSTAIR] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::STANDINGONSTAIR]->addFrameRect(eID::SIMON, "up_stair_01", NULL);
+	_animations[eStatus::STANDINGONSTAIR]->addFrameRect(eID::SIMON, "up_stair_01", NULL);*/
+
+	_animations[eStatus::STANDINGONSTAIR_UP] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON, "up_stair_01", NULL);
+
+	_animations[eStatus::STANDINGONSTAIR_DOWN] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "down_stair_01", NULL);
 
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
 
@@ -275,7 +281,12 @@ void Simon::standing()
 	//ko thì bỏ nó ra
 	if (_canOnStair)
 		this->addStatus(eStatus::STANDINGONSTAIR);
-	else this->removeStatus(eStatus::STANDINGONSTAIR);
+	else
+	{
+		this->removeStatus(eStatus::STANDINGONSTAIR);
+		this->removeStatus(eStatus::STANDINGONSTAIR_UP);
+		this->removeStatus(eStatus::STANDINGONSTAIR_DOWN);
+	}
 }
 
 void Simon::jump()
@@ -298,6 +309,14 @@ void Simon::jump()
 
 void Simon::upstair()
 {
+	//Nếu ko có va chạm với cầu thang,hoặc đang đứng trên lane mà ko phải 
+	//là đứng trên cầu thang
+	if (!_canOnStair)
+	{
+		this->removeStatus(eStatus::UPSTAIR);
+		return;
+	}
+		
 	//Gán hướng cầu thang để lên và xuống
 	if (_stairDirection == eStairDirection::LEFTBOTTOM_TO_RIGHTTOP)
 	{
@@ -313,11 +332,19 @@ void Simon::upstair()
 		auto move = (Movement*)this->_componentList["Movement"];
 		move->setVelocity(GVector2(-_movingSpeed, SIMON_UPSTAIR_VELOCITY));
 	}
-
+	this->removeStatus(eStatus::STANDINGONSTAIR_DOWN);
+	this->addStatus(eStatus::STANDINGONSTAIR_UP);
 }
 
 void Simon::downstair()
 {
+	//Nếu ko có va chạm với cầu thang,hoặc đang đứng trên lane mà ko phải 
+	//là đứng trên cầu thang
+	if (!_canOnStair)
+	{
+		this->removeStatus(eStatus::DOWNSTAIR);
+		return;
+	}
 	//Gán hướng cầu thang để lên và xuống
 	if (_stairDirection == eStairDirection::LEFTBOTTOM_TO_RIGHTTOP)
 	{
@@ -333,6 +360,8 @@ void Simon::downstair()
 		auto move = (Movement*)this->_componentList["Movement"];
 		move->setVelocity(GVector2(_movingSpeed, -SIMON_UPSTAIR_VELOCITY));
 	}
+	this->removeStatus(eStatus::STANDINGONSTAIR_UP);
+	this->addStatus(eStatus::STANDINGONSTAIR_DOWN);
 }
 
 void Simon::falling()
@@ -423,11 +452,11 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	{
 		/* 
 			Với LAND : Nếu simon ko nằm trong cả 2 trang thái là nhảy vả rớt,đang nhảy hoặc rớt từ trên xuống
-			Với STAIR : Nếu simon ở trong trạng thái lên cầu thang thì check
-			Thì kiểm tra va chạm
+						Thì check
+			Với STAIR : Nếu simon ở trong trạng thái lên cầu thang thì check,check xong thì nếu
+						có  va chạm thì để trạng thái thành STANDINGONSTAIR(để lần sau còn check lại ở frame tiếp nếu người chơi ko nhấn nút lên) 
+						ko còn va chạm nữa thì remove đi
 		*/
-		//if (((!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
-		//	|| ((isInStatus(eStatus(eStatus::UPSTAIR | eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR))
 		if (((!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
 			|| (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR))
 			&& collisionBody->checkCollision(otherObject, direction, dt, false))
@@ -446,9 +475,6 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				_stairDirection = stair->getStairDirection();
 			}
 			else _canOnStair = false;
-
-			//if ((direction == eDirection::TOP && !(this->getVelocity().y > -200 && this->isInStatus(eStatus::JUMPING)))
-			//	|| (direction == eDirection::TOP && this->getVelocity().y > 0 == 100))
 			//Nếu như va chạm hướng top,và trừ cái trường hợp mà simon đang trong trạng thái nhảy mà rớt xuống 
 			//với vận tốc mà > -200
 			if (direction == eDirection::TOP && !(this->getVelocity().y > -200 && this->isInStatus(eStatus::JUMPING)))
@@ -500,6 +526,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 #pragma endregion 
 void  Simon::updateCurrentAnimateIndex()
 {
+	//Lấy trạng thái của nhân vật
 	_currentAnimationIndex = this->getStatus();
 
 	if (isInStatus(eStatus::HITTING) //nếu đang vung roi
@@ -541,7 +568,7 @@ void  Simon::updateCurrentAnimateIndex()
 		_currentAnimationIndex = eStatus::JUMPING;
 	}
 	//Đang lên cầu thang và xuống cầu thang
-	if ((_currentAnimationIndex & eStatus::UPSTAIR) == eStatus::UPSTAIR)
+	if ((_currentAnimationIndex & eStatus::UPSTAIR) == eStatus::UPSTAIR && _canOnStair)
 	{
 		_currentAnimationIndex = eStatus::UPSTAIR;
 	}
@@ -553,6 +580,9 @@ void  Simon::updateCurrentAnimateIndex()
 
 	if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR) == eStatus::STANDINGONSTAIR)
 	{
-		_currentAnimationIndex = eStatus::STANDINGONSTAIR;
+		if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR_UP) == eStatus::STANDINGONSTAIR_UP)
+			_currentAnimationIndex = eStatus::STANDINGONSTAIR_UP;
+		else
+			_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
 	}
 }
