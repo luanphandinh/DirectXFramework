@@ -88,6 +88,7 @@
     <ClInclude Include="InputController.h" />
     <ClInclude Include="Land.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="Sprite.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="Land.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="Sprite.cpp" />

@@ -6,11 +6,11 @@
 	Abstract Class cho một màn chơi của game.
 	Bao gồm các hàm giống như trong game.h
 */
-class Scence
+class Scene
 {
 public:
-	Scence();
-	~Scence();
+	Scene();
+	~Scene();
 
 	bool virtual init() = 0;
 	void virtual updateInput(float dt) = 0;
