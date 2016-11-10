@@ -1,4 +1,4 @@
-
+﻿
 #include "StopWatch.h"
 _USING_FRAMEWORK
 
@@ -15,7 +15,9 @@ bool StopWatch::isFinish() {
 }
 // milisecond
 bool StopWatch::isTimeLoop(float time) {
+	//Lấy tổng thời gian game đã trội qua
 	float _totalgametime = GameTime::getInstance()->getTotalGameTime();
+	//Nếu chưa start thì bắt đầu,gán thời gian _stopWatch 
 	if (_isStart == false) {
 		_stopwatch = time + _totalgametime;
 		_isStart = true;

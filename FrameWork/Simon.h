@@ -7,6 +7,8 @@
 #include"CollisionBody.h"
 #include"Land.h"
 #include"Stair.h"
+#include"StopWatch.h"
+
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 125
 #define GRAVITY 800
@@ -58,6 +60,8 @@ public:
 
 	/*
 		romve hết 2 trạng thái jump và falling của simon
+		Nếu đứng trên cầu thang thì cho đứng
+		ko thì remove luôn trạng thái đứng ở cầu thang
 	*/
 	void standing();
 	void moveRight();
@@ -89,6 +93,9 @@ private:
 	bool _canOnStair;
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
+
+	StopWatch* _stopWatch;
+	StopWatch* _reviveStopWatch;
 
 	eStatus _currentAnimationIndex;
 

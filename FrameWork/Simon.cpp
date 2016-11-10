@@ -84,6 +84,9 @@ void Simon::init()
 	this->setPosition(300, 100);
 	this->setStatus(eStatus::NORMAL);	
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+	//Tạo stopWatch
+	_stopWatch = new StopWatch();
 }
 
 void Simon::resetValues() {
