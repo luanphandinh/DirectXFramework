@@ -140,17 +140,23 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_RIGHT:
-		this->removeStatus(eStatus::MOVING_RIGHT);
-		this->removeStatus(eStatus::SITTING);
-		this->addStatus(eStatus::MOVING_RIGHT);
+		if (!_canOnStair)
+		{
+			this->removeStatus(eStatus::MOVING_RIGHT);
+			this->removeStatus(eStatus::SITTING);
+			this->addStatus(eStatus::MOVING_RIGHT);
+		}
 		break;
 	case DIK_LEFT:
-		this->removeStatus(eStatus::MOVING_LEFT);
-		this->removeStatus(eStatus::SITTING);
-		this->addStatus(eStatus::MOVING_LEFT);
+		if (!_canOnStair)
+		{
+			this->removeStatus(eStatus::MOVING_LEFT);
+			this->removeStatus(eStatus::SITTING);
+			this->addStatus(eStatus::MOVING_LEFT);
+		}
 		break;
 	case DIK_DOWN:
-		if (this->isInStatus(eStatus::UPSTAIR))
+		if (this->isInStatus(eStatus::STANDINGONSTAIR))
 		{
 			this->removeStatus(eStatus::UPSTAIR);
 			this->addStatus(eStatus::DOWNSTAIR);
@@ -189,6 +195,7 @@ void Simon::onKeyReleased(KeyEventArg* key_event)
 		break;
 	case DIK_DOWN:
 		this->removeStatus(eStatus::SITTING);
+		this->removeStatus(eStatus::DOWNSTAIR);
 		break;
 	case DIK_C:
 		//this->removeStatus(eStatus::HITTING);
@@ -260,9 +267,15 @@ void Simon::standing()
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(GVector2Zero);
 
+	//Nếu là với lane bình thường thì bỏ trạng thái rớt và nhảy
 	this->removeStatus(eStatus::FALLING);
 	this->removeStatus(eStatus::JUMPING);
 	//this->removeStatus(eStatus::UPSTAIR);
+	//Nếu đang đứng trên cầu thang thì add status STANDINGONSTAIR vào
+	//ko thì bỏ nó ra
+	if (_canOnStair)
+		this->addStatus(eStatus::STANDINGONSTAIR);
+	else this->removeStatus(eStatus::STANDINGONSTAIR);
 }
 
 void Simon::jump()
@@ -285,14 +298,41 @@ void Simon::jump()
 
 void Simon::upstair()
 {
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(_movingSpeed, SIMON_UPSTAIR_VELOCITY));
+	//Gán hướng cầu thang để lên và xuống
+	if (_stairDirection == eStairDirection::LEFTBOTTOM_TO_RIGHTTOP)
+	{
+		moveRight();
+		//Gán vector leo cầu thang
+		auto move = (Movement*)this->_componentList["Movement"];
+		move->setVelocity(GVector2(_movingSpeed, SIMON_UPSTAIR_VELOCITY));
+	}
+	else 
+	{
+		moveLeft();
+		//Gán vector leo cầu thang
+		auto move = (Movement*)this->_componentList["Movement"];
+		move->setVelocity(GVector2(-_movingSpeed, SIMON_UPSTAIR_VELOCITY));
+	}
+
 }
 
 void Simon::downstair()
 {
-	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(-_movingSpeed, -SIMON_UPSTAIR_VELOCITY));
+	//Gán hướng cầu thang để lên và xuống
+	if (_stairDirection == eStairDirection::LEFTBOTTOM_TO_RIGHTTOP)
+	{
+		moveLeft();
+		//Gán vector leo cầu thang
+		auto move = (Movement*)this->_componentList["Movement"];
+		move->setVelocity(GVector2(-_movingSpeed, -SIMON_UPSTAIR_VELOCITY));
+	}
+	else
+	{
+		moveRight();
+		//Gán vector leo cầu thang
+		auto move = (Movement*)this->_componentList["Movement"];
+		move->setVelocity(GVector2(_movingSpeed, -SIMON_UPSTAIR_VELOCITY));
+	}
 }
 
 void Simon::falling()
@@ -398,10 +438,12 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				_canJumpDown = land->canJump();
 			}
 
+			//Nếu va chạm với câu thang thì cho phép simon đứng trên cầu thang,nếu ko thì false
 			if (otherObjectID == eID::STAIR)
 			{
 				auto stair = (Stair*)otherObject;
 				_canOnStair = stair->canStandOnStair();
+				_stairDirection = stair->getStairDirection();
 			}
 			else _canOnStair = false;
 
@@ -424,13 +466,10 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				//chỉ di chuyển sang ngang hoặc nhảy lên
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
 				gravity->setStatus(eGravityStatus::SHALLOWED);
-				if (_canOnStair)
-					this->addStatus(eStatus::STANDINGONSTAIR);
-				else this->removeStatus(eStatus::STANDINGONSTAIR);
+	
 				//Nếu va chạm xong thì hàm standing sẽ bỏ hết 2 trạng thái jump và fall của đối tượng
 				//Để xét va chạm lần tiếp theo
 				this->standing();
-
 				_preObject = otherObject;
 			}
 		}
@@ -450,8 +489,6 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			if (!this->isInStatus(eStatus::JUMPING) && !this->isInStatus(eStatus::FALLING))
 			{
 				this->addStatus(eStatus::FALLING);
-				//Nếu ra khỏi bể mặt stair thì remove trạng thái standingonstari
-				//this->removeStatus(eStatus::STANDINGONSTAIR);
 			}
 
 		}

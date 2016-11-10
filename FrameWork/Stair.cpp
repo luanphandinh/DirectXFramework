@@ -1,11 +1,12 @@
 #include "Stair.h"
 
 
-Stair::Stair(int x, int y, int width, int height, eDirection physicalBodyDirection):
+Stair::Stair(int x, int y, int width, int height, eDirection physicalBodyDirection,eStairDirection direction):
 	Land(x, y, width, height, physicalBodyDirection)
 {
 	this->_canStandOnStair = true;
 	this->_id = eID::STAIR;
+	this->_stairDirection = direction;
 }
 
 
@@ -23,4 +24,15 @@ void Stair::enableStandOnStair(bool enable)
 bool Stair::canStandOnStair()
 {
 	return _canStandOnStair;
+}
+
+void Stair::setStairDirection(eStairDirection direction)
+{
+	if (this->_stairDirection != direction)
+		_stairDirection = direction;
+}
+
+eStairDirection Stair::getStairDirection()
+{
+	return _stairDirection;
 }

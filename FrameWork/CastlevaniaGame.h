@@ -34,7 +34,8 @@ public:
 	Land* _land;
 	Land* _land2;
 	Land* _land3;
-	Stair** _stairs;
+	Stair** _stairsRight;
+	Stair** _stairsLeft;
 };
 _NAMESPACE_FRAMEWORK_END
 

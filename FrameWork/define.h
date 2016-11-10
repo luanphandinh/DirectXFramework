@@ -64,6 +64,12 @@ enum eStatus
 	STANDINGONSTAIR = (1 << 13),
 };
 
+enum eStairDirection
+{
+	LEFTBOTTOM_TO_RIGHTTOP = 0,
+	RIGHTBOTTOM_TO_LEFTTOP = 1,
+};
+
 enum eDirection
 {
 	NONE	=		0,

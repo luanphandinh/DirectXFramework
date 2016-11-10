@@ -87,6 +87,8 @@ private:
 
 	bool _canJumpDown;
 	bool _canOnStair;
+	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
+	eStairDirection _stairDirection;
 
 	eStatus _currentAnimationIndex;
 

@@ -37,7 +37,11 @@ void CastlevaniaGame::update(float deltaTime)
 	_simon->checkCollision(_land3, deltaTime);
 	for (int i = 0; i < 7; i++)
 	{
-		_simon->checkCollision(_stairs[i],deltaTime);
+		_simon->checkCollision(_stairsRight[i], deltaTime);
+	}
+	for (int i = 0; i < 7; i++)
+	{
+		_simon->checkCollision(_stairsLeft[i], deltaTime);
 	}
 	_simon->update(deltaTime);
 	_spearKnight->update(deltaTime);
@@ -56,7 +60,11 @@ void CastlevaniaGame::draw()
 	_land3->draw(_spriteHandler, _viewport);
 	for (int i = 0; i < 7; i++)
 	{
-		_stairs[i]->draw(_spriteHandler, _viewport);
+		_stairsRight[i]->draw(_spriteHandler, _viewport);
+	}
+	for (int i = 0; i < 7; i++)
+	{
+		_stairsLeft[i]->draw(_spriteHandler, _viewport);
 	}
 	_simon->draw(_spriteHandler, _viewport);
 
@@ -79,11 +87,17 @@ void CastlevaniaGame::loadResource()
 
 	_land = new Land(0, 64, 400, 20, eDirection::TOP);
 	_land2 = new Land(290, 160, 200, 20, eDirection::TOP);
-	_land3 = new Land(450, 150, 200, 20, eDirection::TOP);
-	_stairs = new Stair*[7];
+	_land3 = new Land(550, 64, 200, 20, eDirection::TOP);
+	_stairsRight = new Stair*[7];
 	for (int i = 0; i < 7; i++)
 	{
-		_stairs[i] = new Stair(192 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
+		_stairsRight[i] = new Stair(192 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
+	}
+
+	_stairsLeft = new Stair*[7];
+	for (int i = 0; i < 7; i++)
+	{
+		_stairsLeft[i] = new Stair(490 + i * 16, 150 - i * 16, 16, 16, eDirection::TOP,eStairDirection::RIGHTBOTTOM_TO_LEFTTOP);
 	}
 	//=====================TESTING==========================//
 }
