@@ -61,6 +61,7 @@ enum eStatus
 
 	UPSTAIR = (1 << 11),
 	DOWNSTAIR = (1 << 12),
+	STANDINGONSTAIR = (1 << 13),
 };
 
 enum eDirection

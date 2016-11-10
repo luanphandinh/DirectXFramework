@@ -34,12 +34,12 @@ void CastlevaniaGame::update(float deltaTime)
 	updateViewport(_simon);
 	_simon->checkCollision(_land, deltaTime);
 	_simon->checkCollision(_land2, deltaTime);
-	_simon->update(deltaTime);
-
+	_simon->checkCollision(_land3, deltaTime);
 	for (int i = 0; i < 7; i++)
 	{
 		_simon->checkCollision(_stairs[i],deltaTime);
 	}
+	_simon->update(deltaTime);
 	_spearKnight->update(deltaTime);
 	_spearKnight->checkCollision(_land, deltaTime);
 
@@ -53,12 +53,14 @@ void CastlevaniaGame::draw()
 	_backGround->draw(_spriteHandler, _viewport);
 	_land->draw(_spriteHandler, _viewport);
 	_land2->draw(_spriteHandler, _viewport);
-	_simon->draw(_spriteHandler, _viewport);
-
+	_land3->draw(_spriteHandler, _viewport);
 	for (int i = 0; i < 7; i++)
 	{
-		_stairs[i]->draw(_spriteHandler,_viewport);
+		_stairs[i]->draw(_spriteHandler, _viewport);
 	}
+	_simon->draw(_spriteHandler, _viewport);
+
+
 	_spearKnight->draw(_spriteHandler, _viewport);
 	//=====================TESTING==========================//
 }
@@ -76,12 +78,12 @@ void CastlevaniaGame::loadResource()
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
 	_land = new Land(0, 64, 400, 20, eDirection::TOP);
-	_land2 = new Land(200, 200, 200, 20, eDirection::TOP);
-
-	_stairs = new Land*[7];
+	_land2 = new Land(290, 160, 200, 20, eDirection::TOP);
+	_land3 = new Land(450, 150, 200, 20, eDirection::TOP);
+	_stairs = new Stair*[7];
 	for (int i = 0; i < 7; i++)
 	{
-		_stairs[i] = new Land(192 - 16 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
+		_stairs[i] = new Stair(192 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
 	}
 	//=====================TESTING==========================//
 }

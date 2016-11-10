@@ -33,7 +33,8 @@ public:
 	Viewport* _viewport;
 	Land* _land;
 	Land* _land2;
-	Land** _stairs;
+	Land* _land3;
+	Stair** _stairs;
 };
 _NAMESPACE_FRAMEWORK_END
 
