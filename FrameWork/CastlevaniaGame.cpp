@@ -18,7 +18,6 @@ CastlevaniaGame::CastlevaniaGame(HINSTANCE hInstance, LPWSTR title) :Game(hInsta
 void CastlevaniaGame::init()
 {
 	Game::init();
-	
 }
 
 void CastlevaniaGame::release()

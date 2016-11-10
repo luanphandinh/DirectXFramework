@@ -24,7 +24,7 @@ public:
 	void update(float deltaTime);
 	void draw();		//draw your objects
 	void loadResource();//
-
+	
 	//==========================TEST=========================//
 	void updateViewport(BaseObject* objTracker);
 	Simon* _simon;
