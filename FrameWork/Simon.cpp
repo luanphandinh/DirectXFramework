@@ -179,6 +179,8 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		_animations[eStatus::HITTING]->canAnimate(true);
 		//_animations[eStatus::HITTING]->setIndex(0);
 	case DIK_UP:
+		this->removeStatus(eStatus::MOVING_LEFT);
+		this->removeStatus(eStatus::MOVING_RIGHT);
 		this->removeStatus(eStatus::DOWNSTAIR);
 		this->addStatus(eStatus::UPSTAIR);
 		break;
