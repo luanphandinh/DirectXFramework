@@ -110,6 +110,7 @@ private:
 
 	Sprite*			_spriteSheet;
 	vector<RECT>	_frameRectList;
+	vector<GVector2> _frameOriginList;
 	string			_nameAnimation;
 	RECT			_currentRect;
 

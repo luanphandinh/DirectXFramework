@@ -37,7 +37,7 @@ void Simon::init()
 	_componentList["CollisionBody"] = collisionBody;
 	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Simon::onCollisionBegin);
 	__hook(&CollisionBody::onCollisionEnd, collisionBody, &Simon::onCollisionEnd);
-	//_test_sprite->drawBounding(true);
+	//_sprite->drawBounding(true);
 	//_test_sprite->setPosition(50, 50, 1.0f);
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::NORMAL]->addFrameRect(eID::SIMON, "normal", NULL);
@@ -81,7 +81,7 @@ void Simon::init()
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
 	_animations[eStatus::HITTING]->setLoop(false);
 	this->resetValues();
-
+	_reviveStopWatch = nullptr;
 
 	this->_movingSpeed = SIMON_MOVING_SPEED;
 
@@ -140,6 +140,9 @@ Event for event_reciever
 */
 void Simon::onKeyPressed(KeyEventArg* key_event)
 {
+	if (this->isInStatus(eStatus::DYING))
+		return;
+
 	switch (key_event->_key)
 	{
 	case DIK_X:
@@ -181,9 +184,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_C:
-		this->addStatus(eStatus::HITTING);
-		_animations[eStatus::HITTING]->canAnimate(true);
-		//_animations[eStatus::HITTING]->setIndex(0);
+
 	case DIK_UP:
 		this->removeStatus(eStatus::MOVING_LEFT);
 		this->removeStatus(eStatus::MOVING_RIGHT);
@@ -199,6 +200,8 @@ Event for event_reciever
 */
 void Simon::onKeyReleased(KeyEventArg* key_event)
 {
+	if (this->isInStatus(eStatus::DYING))
+		return;
 	switch (key_event->_key)
 	{
 	case DIK_RIGHT:
@@ -247,7 +250,7 @@ void Simon::updateStatus(float deltatime)
 		if (_reviveStopWatch == nullptr)
 			_reviveStopWatch = new StopWatch();
 
-		if (!_animations[eStatus::DYING]->isAnimate() && _reviveStopWatch->isStopWatch(REVIVE_TIME))
+		if (_reviveStopWatch->isStopWatch(REVIVE_TIME))
 		{
 			this->revive();
 			SAFE_DELETE(_reviveStopWatch);
@@ -550,7 +553,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 						ko còn va chạm nữa thì remove đi
 		*/
 		if (((!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
-			|| (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR))
+			|| (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR ))
 			&& collisionBody->checkCollision(otherObject, direction, dt, false))
 		{
 			if (otherObjectID == eID::LAND)
@@ -591,7 +594,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				_preObject = otherObject;
 			}
 		}
-		else if (_preObject == otherObject)
+		else if (_preObject == otherObject && !this->isInStatus(eStatus::HITTING))
 		{
 			// kiểm tra coi nhảy hết qua cái land cũ chưa
 			// để gọi event end.
@@ -678,8 +681,7 @@ void  Simon::updateCurrentAnimateIndex()
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
 	}
 
-	if ((_currentAnimationIndex & eStatus::DYING) == eStatus::DYING)
-	{
+	if (this->isInStatus(eStatus::DYING)) {
 		_currentAnimationIndex = eStatus::DYING;
 	}
 }
