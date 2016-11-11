@@ -269,6 +269,7 @@ void Simon::updateStatus(float deltatime)
 			this->removeStatus(eStatus::HITTING);
 			_animations[eStatus::HITTING]->setIndex(0);
 			SAFE_DELETE(_hittingStopWatch);
+			this->removeStatus(eStatus::UPSTAIR);
 		}
 		return;
 	}
@@ -376,7 +377,9 @@ void Simon::standing()
 	//Nếu đang đứng trên cầu thang thì add status STANDINGONSTAIR vào
 	//ko thì bỏ nó ra
 	if (_canOnStair)
+	{
 		this->addStatus(eStatus::STANDINGONSTAIR);
+	}
 	else
 	{
 		this->removeStatus(eStatus::STANDINGONSTAIR);
@@ -562,7 +565,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	eDirection direction;
 
 	//Kiểm tra va chạm với land
-	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR)
+	if (otherObjectID == eID::LAND || (otherObjectID == eID::STAIR && !this->isInStatus(eStatus::HITTING)))
 	{
 		/* 
 			Với LAND : Nếu simon ko nằm trong cả 2 trang thái là nhảy vả rớt,đang nhảy hoặc rớt từ trên xuống
@@ -571,9 +574,10 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 						có  va chạm thì để trạng thái thành STANDINGONSTAIR(để lần sau còn check lại ở frame tiếp nếu người chơi ko nhấn nút lên) 
 						ko còn va chạm nữa thì remove đi
 		*/
-		if (((!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
-			|| (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR ))
 	
+
+		if (((!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
+			|| (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR && !this->isInStatus(eStatus::HITTING)))
 			&& collisionBody->checkCollision(otherObject, direction, dt, false))
 		{
 			if (otherObjectID == eID::LAND)
@@ -602,12 +606,10 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				{
 					collisionBody->updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
 				}
-				
 				//Gán trạng thái gravity thành shallow vector trọng lực bằng 0,vật ko rớt xuống mà 
 				//chỉ di chuyển sang ngang hoặc nhảy lên
 				auto gravity = (Gravity*)this->_componentList["Gravity"];
 				gravity->setStatus(eGravityStatus::SHALLOWED);
-	
 				//Nếu va chạm xong thì hàm standing sẽ bỏ hết 2 trạng thái jump và fall của đối tượng
 				//Để xét va chạm lần tiếp theo
 				this->standing();
@@ -703,11 +705,13 @@ void  Simon::updateCurrentAnimateIndex()
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
 	}
 
-	if (this->isInStatus(eStatus::HITTING)) {
+	if (this->isInStatus(eStatus::HITTING)) 
+	{
 		_currentAnimationIndex = eStatus::HITTING;
 	}
 
-	if (this->isInStatus(eStatus::DYING)) {
+	if (this->isInStatus(eStatus::DYING)) 
+	{
 		_currentAnimationIndex = eStatus::DYING;
 	}
 }
