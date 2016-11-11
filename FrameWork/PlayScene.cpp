@@ -96,6 +96,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 
 void PlayScene::release()
 {
+
 }
 
 void PlayScene::setViewport(Viewport* viewport)
