@@ -27,7 +27,7 @@ typedef D3DXVECTOR3 GVector3;
 #define C_WHITE D3DXCOLOR(1.0f,1.0f,1.0f,1.0f)	//màu trắng
 #define COLOR_KEY D3DXCOLOR(1.0f,0.0f,1.0f,1.0f)
 #define GVector2Zero D3DXVECTOR2(0,0)
-
+#define DEFAULT_ORIGIN   D3DXVECTOR2(0.5f,0.5f)
 #define SCALE_FACTOR 2.0f
 
 enum eID

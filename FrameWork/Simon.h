@@ -82,6 +82,7 @@ public:
 	void downstair();
 	void die();
 	void revive();
+	void hitting();
 
 	float getMovingSpeed();
 
@@ -101,6 +102,7 @@ private:
 
 	StopWatch* _stopWatch;
 	StopWatch* _reviveStopWatch;
+	StopWatch* _hittingStopWatch;
 
 	eStatus _currentAnimationIndex;
 

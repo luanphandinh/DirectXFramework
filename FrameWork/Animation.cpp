@@ -22,7 +22,7 @@ Animation::Animation(Sprite* spriteSheet, float timeAnimate, bool loop)
 	this->setIndex(0);
 	this->setLoop(loop);
 	_canFlash = false;
-	_useDefaultOrigin = true;
+	_useDefaultOrigin = false;
 	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
@@ -52,7 +52,7 @@ Animation::Animation(Sprite* spriteSheet, int totalFrames, int cols, float timeA
 	}
 
 	_currentRect = _frameRectList[_index];
-	_useDefaultOrigin = true;
+	_useDefaultOrigin = false;
 	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
@@ -75,6 +75,7 @@ void Animation::setIndex(int index)
 
 	if (!_useDefaultOrigin)
 		_currentOrigin = _frameOriginList[_index];
+	else _currentOrigin = DEFAULT_ORIGIN;
 
 	if (!_isLoop && _index == _endFrame)
 		this->stop();

@@ -76,9 +76,9 @@ void Simon::init()
 	_animations[eStatus::DYING]->addFrameRect(eID::SIMON,"dead" , NULL);
 
 
-	_animations[eStatus::HITTING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::HITTING] = new Animation(_sprite, 0.12f);
 
-	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
+	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "normal","whip_normal_01", "whip_normal_02", "whip_normal_03", NULL);
 	_animations[eStatus::HITTING]->setUseDefaultOrigin(false);
 	this->resetValues();
 	_reviveStopWatch = nullptr;
@@ -155,17 +155,17 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_RIGHT:
-		if (!_canOnStair)
+		if (!_canOnStair || !this->isInStatus(eStatus::HITTING))
 		{
-			this->removeStatus(eStatus::MOVING_RIGHT);
+			this->removeStatus(eStatus::MOVING_LEFT);
 			this->removeStatus(eStatus::SITTING);
 			this->addStatus(eStatus::MOVING_RIGHT);
 		}
 		break;
 	case DIK_LEFT:
-		if (!_canOnStair)
+		if (!_canOnStair || !this->isInStatus(eStatus::HITTING))
 		{
-			this->removeStatus(eStatus::MOVING_LEFT);
+			this->removeStatus(eStatus::MOVING_RIGHT);
 			this->removeStatus(eStatus::SITTING);
 			this->addStatus(eStatus::MOVING_LEFT);
 		}
@@ -184,8 +184,6 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_C:
-		this->removeStatus(eStatus::MOVING_RIGHT);
-		this->removeStatus(eStatus::MOVING_LEFT);
 		this->addStatus(HITTING);
 	case DIK_UP:
 		this->removeStatus(eStatus::MOVING_LEFT);
@@ -217,7 +215,8 @@ void Simon::onKeyReleased(KeyEventArg* key_event)
 		this->removeStatus(eStatus::DOWNSTAIR);
 		break;
 	case DIK_C:
-		this->removeStatus(eStatus::HITTING);
+
+		break;
 	case DIK_UP:
 		this->removeStatus(eStatus::UPSTAIR);
 		break;
@@ -258,6 +257,20 @@ void Simon::updateStatus(float deltatime)
 			SAFE_DELETE(_reviveStopWatch);
 		}
 		return; 
+	}
+	//Nếu nhân vật đang đánh
+	if (this->isInStatus(eStatus::HITTING))
+	{
+		if (_hittingStopWatch == nullptr)
+			_hittingStopWatch = new StopWatch();
+
+		if (_hittingStopWatch->isStopWatch(400))
+		{
+			this->removeStatus(eStatus::HITTING);
+			_animations[eStatus::HITTING]->setIndex(0);
+			SAFE_DELETE(_hittingStopWatch);
+		}
+		return;
 	}
 
 
@@ -484,6 +497,10 @@ void Simon::moveRight()
 	move->setVelocity(GVector2(_movingSpeed, move->getVelocity().y));
 }
 
+void Simon::hitting()
+{
+
+}
 
 #pragma endregion
 
@@ -556,6 +573,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 		*/
 		if (((!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
 			|| (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR ))
+	
 			&& collisionBody->checkCollision(otherObject, direction, dt, false))
 		{
 			if (otherObjectID == eID::LAND)
@@ -596,7 +614,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				_preObject = otherObject;
 			}
 		}
-		else if (_preObject == otherObject && !this->isInStatus(eStatus::HITTING))
+		else if (_preObject == otherObject)
 		{
 			// kiểm tra coi nhảy hết qua cái land cũ chưa
 			// để gọi event end.
@@ -628,8 +646,7 @@ void  Simon::updateCurrentAnimateIndex()
 
 	if (isInStatus(eStatus::HITTING) //nếu đang vung roi
 	//mà di chuyển
-	&& (isInStatus(eStatus::MOVING_LEFT) || isInStatus(eStatus::MOVING_RIGHT)
-	|| isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::DOWNSTAIR)))
+	&& (isInStatus(eStatus::MOVING_LEFT) || isInStatus(eStatus::MOVING_RIGHT)))
 	{
 		//bỏ animation vung roi đi ,chỉ di chuyển thôi
 		_currentAnimationIndex = (eStatus)(this->getStatus() & ~eStatus::HITTING);
@@ -678,9 +695,16 @@ void  Simon::updateCurrentAnimateIndex()
 	if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR) == eStatus::STANDINGONSTAIR)
 	{
 		if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR_UP) == eStatus::STANDINGONSTAIR_UP)
+		{
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_UP;
+		}
+			
 		else
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
+	}
+
+	if (this->isInStatus(eStatus::HITTING)) {
+		_currentAnimationIndex = eStatus::HITTING;
 	}
 
 	if (this->isInStatus(eStatus::DYING)) {
