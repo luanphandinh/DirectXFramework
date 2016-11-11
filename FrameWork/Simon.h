@@ -8,6 +8,7 @@
 #include"Land.h"
 #include"Stair.h"
 #include"StopWatch.h"
+#include"SceneManager.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 125

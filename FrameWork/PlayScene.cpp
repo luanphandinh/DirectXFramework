@@ -10,7 +10,7 @@ PlayScene::PlayScene()
 PlayScene::~PlayScene()
 {
 	delete _viewport;
-	_viewport = NULL;
+	_viewport = nullptr;
 }
 
 
@@ -25,9 +25,9 @@ bool PlayScene::init()
 
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
-	_land = new Land(0, 64, 400, 20, eDirection::TOP);
+	_land = new Land(-50, 64, 400, 20, eDirection::TOP);
 	_land2 = new Land(290, 160, 200, 20, eDirection::TOP);
-	_land3 = new Land(550, 64, 200, 20, eDirection::TOP);
+	_land3 = new Land(550, 64, 550, 20, eDirection::TOP);
 	_stairsRight = new Stair*[7];
 	for (int i = 0; i < 7; i++)
 	{

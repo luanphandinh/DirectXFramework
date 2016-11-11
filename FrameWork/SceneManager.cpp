@@ -88,9 +88,6 @@ void SceneManager::clearScenes()
 Scene* SceneManager::getCurrentScene()
 {
 	if (!_scenes.empty())
-	{
 		return _scenes.back();
-	}
-
 	return nullptr;
 }

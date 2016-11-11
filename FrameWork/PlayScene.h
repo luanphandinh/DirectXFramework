@@ -36,7 +36,6 @@ private:
 	Simon* _simon;
 	SpearKnight* _spearKnight;
 	Map* _backGround;
-	Viewport* _viewport;
 	Land* _land;
 	Land* _land2;
 	Land* _land3;

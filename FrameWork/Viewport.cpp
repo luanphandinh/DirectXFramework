@@ -30,6 +30,7 @@ void Viewport::setPositionWorld(GVector2 position)
 	if (_positionWorld != position)
 		_positionWorld = position;
 }
+
 GVector2 Viewport::getPositionWorld()
 {
 	return _positionWorld;

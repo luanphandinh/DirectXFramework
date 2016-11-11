@@ -377,15 +377,28 @@ void Simon::falling()
 
 void Simon::moveLeft()
 {
+	//Lấy viewport hiện tại
+	Viewport* viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+	GVector2 viewportPosition = viewport->getPositionWorld();
+	float simonPositionX = this->getPositionX();
+	auto halfWidth = this->getSprite()->getFrameWidth() * this->getOrigin().x;
+	//Không cho đi vượt quá cạnh trái
+	if (halfWidth + simonPositionX - _movingSpeed * 0.33 < viewportPosition.x)
+	{
+		this->setPositionX(simonPositionX + halfWidth);
+		return;
+	}
+	//Nếu animation đang hướng sang phải thì gán lại sang left
 	if (this->getScale().x > 0)
 		this->setScaleX(this->getScale().x * (-1));
-	
+	//gán vector move với move speed âm vì đi ngược trục x
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(GVector2(-_movingSpeed,move->getVelocity().y));
 }
 
 void Simon::moveRight()
 {
+	//Nếu animation đang hướng sang left thì gán lại sang right
 	if (this->getScale().x < 0)
 		this->setScaleX(this->getScale().x * (-1));
 
