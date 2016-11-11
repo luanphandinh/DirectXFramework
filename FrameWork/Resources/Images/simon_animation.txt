@@ -1,17 +1,17 @@
-frame_name	left	top	right	bottom
-normal		278	0	296	32
-run_01		252	0	265	32
-run_02		224	0	240	32
-run_03		278	0	296	32
-jump		195	8	213	32
-sit		195	8	213	32
-down_stair_01	152	0	168	32
-down_stair_02	252	0	265	32
-up_stair_01	126	0	144	32
-up_stair_02	252	0	265	32	
-hitted		2	92	20	122
-dead		56	16	88	32
-no_whip		44	200	68	230
-whip_normal_01	306	84	339	116
-whip_normal_02	259	85	291	115
-whip_normal_03	195	85	240	114				
+frame_name	left	top	right	bottom origin.x origin.y
+normal		278	0	296	32 	0.5 0.5
+run_01		252	0	265	32	0.5 0.5
+run_02		224	0	240	32	0.5 0.5
+run_03		278	0	296	32	0.5 0.5
+jump		195	8	213	32	0.5 0.5
+sit		195	8	213	32		0.5 0.5
+down_stair_01	152	0	168	32	0.5 0.5
+down_stair_02	252	0	265	32	0.5 0.5
+up_stair_01	126	0	144	32	0.5 0.5
+up_stair_02	252	0	265	32		0.5 0.5
+hitted		2	92	20	122	0.5 0.5
+dead		56	16	88	32	0.5 0.5
+no_whip		44	200	68	230	0.5 0.5
+whip_normal_01	306	84	339	116	0.64 0.5
+whip_normal_02	259	85	291	115	0.73 0.5
+whip_normal_03	195	85	240	114	0.24 0.5		

@@ -70,6 +70,11 @@ RECT  SpriteManager::getSourceRect(eID id, string name)
 	return _sourceRectList[id][name];
 }
 
+GVector2 SpriteManager::getSourceOrigin(eID id, string name)
+{
+	return _sourceOriginList[id][name];
+}
+
 void  SpriteManager::loadSpriteInfo(eID id, const char* fileInfoPath)
 {
 	FILE* file;
@@ -80,12 +85,14 @@ void  SpriteManager::loadSpriteInfo(eID id, const char* fileInfoPath)
 		while (!feof(file))
 		{
 			RECT rect;
+			GVector2 origin;
 			char name[100];
 			fgets(name, 100, file);
 
-			fscanf(file, "%s %d %d %d %d", &name, &rect.left, &rect.top, &rect.right, &rect.bottom);
+			fscanf(file, "%s %d %d %d %d %f %f", &name, &rect.left, &rect.top, &rect.right, &rect.bottom,&origin.x,&origin.y);
 
 			_sourceRectList[id][string(name)] = rect;
+			_sourceOriginList[id][string(name)] = origin;
 		}
 	}
 

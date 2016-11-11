@@ -32,7 +32,7 @@ public:
 
 	RECT getSourceRect(eID, string name);
 	void loadSpriteInfo(eID id, const char* fileInfoPath);
-
+	GVector2 getSourceOrigin(eID, string);
 	//release the sprite,ko release texture
 	void releaseSprite(eID id);
 	void releaseTexture(eID id);
@@ -50,6 +50,7 @@ private:
 			và lấy các rect với string cho các animate cụ thể
 	*/
 	map<eID, map<string, RECT>> _sourceRectList;
+	map<eID, map<string, GVector2>> _sourceOriginList;
 
 	Sprite* loadXMLDoc(LPD3DXSPRITE spriteHandler, LPWSTR path);
 };

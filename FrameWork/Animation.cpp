@@ -22,6 +22,7 @@ Animation::Animation(Sprite* spriteSheet, float timeAnimate, bool loop)
 	this->setIndex(0);
 	this->setLoop(loop);
 	_canFlash = false;
+	_useDefaultOrigin = true;
 	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
@@ -51,7 +52,7 @@ Animation::Animation(Sprite* spriteSheet, int totalFrames, int cols, float timeA
 	}
 
 	_currentRect = _frameRectList[_index];
-	
+	_useDefaultOrigin = true;
 	_flashColor = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
@@ -71,6 +72,9 @@ void Animation::setIndex(int index)
 		_index = _startFrame;
 
 	_currentRect = _frameRectList[_index];
+
+	if (!_useDefaultOrigin)
+		_currentOrigin = _frameOriginList[_index];
 
 	if (!_isLoop && _index == _endFrame)
 		this->stop();
@@ -110,6 +114,12 @@ void Animation::update(float dt)
 	}
 }
 
+void Animation::setUseDefaultOrigin(bool use)
+{
+	if (_useDefaultOrigin != use)
+		_useDefaultOrigin = use;
+}
+
 void Animation::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	/*
@@ -118,6 +128,8 @@ void Animation::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		Rồi dùng sprite để vẽ
 	*/
 	_spriteSheet->setFrameRect(_currentRect);
+	if (!_useDefaultOrigin)
+		_spriteSheet->setOrigin(_currentOrigin);
 	_spriteSheet->render(spriteHandle, viewport);
 }
 
@@ -170,6 +182,16 @@ void Animation::addFrameRect(RECT rect)
 	_endFrame = _totalFrames - 1;
 }
 
+void Animation::addOriginFrame(GVector2 origin)
+{
+	if (_frameOriginList.empty())
+	{
+		_currentOrigin = origin;
+	}
+
+	_frameOriginList.push_back(origin);
+}
+
 void Animation::addFrameRect(float left, float top, int width, int height)
 {
 	RECT rect;
@@ -188,7 +210,6 @@ void Animation::addFrameRect(float left, float top, float right, float bottom)
 	rect.right = right;
 	rect.bottom = bottom;
 	this->addFrameRect(rect);
-
 }
 
 void Animation::addFrameRect(eID id, char* firstRectName, ...)
@@ -204,6 +225,7 @@ void Animation::addFrameRect(eID id, char* firstRectName, ...)
 	while (name != NULL)
 	{
 		this->addFrameRect(SpriteManager::getInstance()->getSourceRect(id, name));
+		this->addOriginFrame(SpriteManager::getInstance()->getSourceOrigin(id, name));
 		name = va_arg(vl, char*);
 	}
 

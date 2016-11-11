@@ -58,6 +58,10 @@ public:
 	void addFrameRect(float top, float left, float right, float bottom);
 	void setLoop(bool isLoop);
 	bool isLoop();
+	/*
+		Add origin
+	*/
+	void addOriginFrame(GVector2 origin);
 
 	/*
 	Tạo nhiều framerect liên tiếp nhau, không giới hạn tham số
@@ -66,6 +70,8 @@ public:
 		Sau khi truyền xong các tên, kết thúc PHẢI bằng NULL để xác định được kết thúc.
 	*/
 	void addFrameRect(eID id, char* firstRectName, ...);
+
+	void setUseDefaultOrigin(bool use);
 
 	/*
 		Chạy lại animate
@@ -113,6 +119,12 @@ private:
 	vector<GVector2> _frameOriginList;
 	string			_nameAnimation;
 	RECT			_currentRect;
+	/*
+		Dùng để vẽ với nhiều origin khác nhau cho từng
+		frame khác nhau
+	*/
+	GVector2		_currentOrigin;
+	bool			_useDefaultOrigin;
 
 	bool			_canFlash;
 	float			_valueFlash;

@@ -76,10 +76,10 @@ void Simon::init()
 	_animations[eStatus::DYING]->addFrameRect(eID::SIMON,"dead" , NULL);
 
 
-	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
+	_animations[eStatus::HITTING] = new Animation(_sprite, 0.1f);
 
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
-	_animations[eStatus::HITTING]->setLoop(false);
+	_animations[eStatus::HITTING]->setUseDefaultOrigin(false);
 	this->resetValues();
 	_reviveStopWatch = nullptr;
 
@@ -184,7 +184,9 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_C:
-
+		this->removeStatus(eStatus::MOVING_RIGHT);
+		this->removeStatus(eStatus::MOVING_LEFT);
+		this->addStatus(HITTING);
 	case DIK_UP:
 		this->removeStatus(eStatus::MOVING_LEFT);
 		this->removeStatus(eStatus::MOVING_RIGHT);
@@ -215,7 +217,7 @@ void Simon::onKeyReleased(KeyEventArg* key_event)
 		this->removeStatus(eStatus::DOWNSTAIR);
 		break;
 	case DIK_C:
-		//this->removeStatus(eStatus::HITTING);
+		this->removeStatus(eStatus::HITTING);
 	case DIK_UP:
 		this->removeStatus(eStatus::UPSTAIR);
 		break;
