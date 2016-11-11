@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include"define.h"
 #include "Scene.h"
-
 #include "Game.h"
 #include"Texture.h"
 #include"Sprite.h"
@@ -12,7 +11,7 @@
 #include"Land.h"
 #include "SpearKnight.h"
 #include"Stair.h"
-
+using namespace std;
 _USING_FRAMEWORK
 
 class PlayScene :
@@ -41,6 +40,7 @@ private:
 	Land* _land3;
 	Stair** _stairsRight;
 	Stair** _stairsLeft;
+	
 	//==========================TEST=========================//
 };
 

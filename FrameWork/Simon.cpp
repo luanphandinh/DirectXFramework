@@ -72,6 +72,10 @@ void Simon::init()
 	_animations[eStatus::STANDINGONSTAIR_DOWN] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "down_stair_01", NULL);
 
+	_animations[eStatus::DYING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::DYING]->addFrameRect(eID::SIMON,"dead" , NULL);
+
+
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.2f);
 
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
@@ -104,7 +108,7 @@ void Simon::resetValues() {
 
 void Simon::update(float deltatime)
 {
-	//this->checkPosition();
+	this->checkPosition();
 
 	this->updateStatus(deltatime);
 
@@ -118,7 +122,6 @@ void Simon::update(float deltatime)
 	{
 		it->second->update(deltatime);
 	}
-
 }
 
 void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
@@ -220,6 +223,9 @@ void Simon::onKeyReleased(KeyEventArg* key_event)
 
 void Simon::setStatus(eStatus status) 
 {
+	if ((status & eStatus::DYING) == eStatus::DYING)
+		return;
+
 	_status = status;
 }
 
@@ -235,6 +241,21 @@ RECT Simon::getBounding()
 
 void Simon::updateStatus(float deltatime)
 {
+	//Nếu nhân vật chết
+	if (this->isInStatus(eStatus::DYING))
+	{
+		if (_reviveStopWatch == nullptr)
+			_reviveStopWatch = new StopWatch();
+
+		if (!_animations[eStatus::DYING]->isAnimate() && _reviveStopWatch->isStopWatch(REVIVE_TIME))
+		{
+			this->revive();
+			SAFE_DELETE(_reviveStopWatch);
+		}
+		return; 
+	}
+
+
 	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT) 
 	{
 		this->moveLeft();
@@ -273,6 +294,58 @@ void Simon::sit()
 	move->setVelocity(GVector2(0, move->getVelocity().y));
 }
 #pragma region actions
+void Simon::checkPosition()
+{
+	if (this->isInStatus(eStatus::DYING))
+		return;
+
+	auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+	auto viewportPosition = viewport->getPositionWorld();
+
+	if (this->getPositionY() < viewportPosition.y - WINDOW_HEIGHT)
+	{
+		if (_status != eStatus::DYING)
+			_status = eStatus::DYING;
+		this->die();
+	}
+}
+
+void Simon::die()
+{
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(-SIMON_MOVING_SPEED * (this->getScale().x / SCALE_FACTOR), SIMON_JUMP_VELOCITY));
+
+	auto g = (Gravity*)this->_componentList["Gravity"];
+	g->setStatus(eGravityStatus::FALLING_DOWN);
+}
+
+void Simon::revive()
+{
+	//auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+	//auto viewportPosition = viewport->getPositionWorld();
+
+	//if (auto scene = dynamic_cast<Scene*>(SceneManager::getInstance()->getCurrentScene())) {
+		//this->setPosition(viewportPos.x, WINDOW_HEIGHT);
+	this->setPosition(100, 150);
+
+	//}
+	//else {
+	//	this->setPosition(viewportPosition.x + WINDOW_WIDTH / 2, viewportPosition.y - WINDOW_HEIGHT / 2);
+	//}
+
+	//reset value
+	this->setStatus(eStatus::JUMPING);
+	this->resetValues();
+	
+	//gán lại moveing speed
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(SIMON_MOVING_SPEED, 0));
+	//cho nhân vật rớt xuống
+	auto gravity = (Gravity*)this->_componentList["Gravity"];
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+}
+
 void Simon::standing()
 {
 	auto move = (Movement*)this->_componentList["Movement"];
@@ -455,7 +528,8 @@ void Simon::onCollisionEnd(CollisionEventArg* collision_arg)
 float Simon::checkCollision(BaseObject* otherObject, float dt)
 {
 	//Sau này implent kiểm tra nhân vật đã chết hay bị hủy tại đây
-
+	if (this->isInStatus(eStatus::DYING))
+		return 0.0f;
 	//Nếu object cần kiểm tra bị trùng thì trả về 0
 	if (this == otherObject)
 		return 0.0f;
@@ -602,5 +676,10 @@ void  Simon::updateCurrentAnimateIndex()
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_UP;
 		else
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
+	}
+
+	if ((_currentAnimationIndex & eStatus::DYING) == eStatus::DYING)
+	{
+		_currentAnimationIndex = eStatus::DYING;
 	}
 }

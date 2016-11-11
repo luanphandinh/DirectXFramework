@@ -15,6 +15,7 @@ _NAMESPACE_FRAMEWORK_BEGIN
 #define GRAVITY 800
 #define SIMON_JUMP_VELOCITY 450
 #define SIMON_UPSTAIR_VELOCITY 100
+#define REVIVE_TIME 2000
 
 [event_receiver(native)]
 class Simon : public BaseObject,public IControlable
@@ -44,6 +45,7 @@ public:
 	/*
 		Cập nhật lại trạng thái cho nhân vật
 	*/
+	void checkPosition();
 	void updateStatus(float deltatime);
 	/*
 		CheckCollision
@@ -78,6 +80,8 @@ public:
 	void sit();
 	void upstair();
 	void downstair();
+	void die();
+	void revive();
 
 	float getMovingSpeed();
 
