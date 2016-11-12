@@ -97,6 +97,8 @@ private:
 
 	bool _canJumpDown;
 	bool _canOnStair;
+	int _whipLevel;
+	bool _isHitting;
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
 

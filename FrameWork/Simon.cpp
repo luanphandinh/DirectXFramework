@@ -77,7 +77,7 @@ void Simon::init()
 
 
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "normal","whip_normal_01", "whip_normal_02", "whip_normal_03", NULL);
+	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
 
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON, "whip_stair_up_01", "whip_stair_up_02", "whip_stair_up_03", "up_stair_01", NULL);
@@ -87,6 +87,20 @@ void Simon::init()
 
 	_animations[eStatus::HITTING | eStatus::SITTING] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON, "whip_sit_01", "whip_sit_02", "whip_sit_03", "sit", NULL);
+
+	_whipLevel = 1;
+
+	_animations[eStatus::HITTING | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::HITTING | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_normal_lv1_01", "whip_normal_lv1_02", "whip_normal_lv1_03", "normal", NULL);
+
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_stair_up_lv1_01", "whip_stair_up_lv1_02", "whip_stair_up_lv1_03", "up_stair_01", NULL);
+
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_stair_down_lv1_01", "whip_stair_down_lv1_02", "whip_stair_down_lv1_03", "down_stair_01", NULL);
+
+	_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_sit_lv1_01", "whip_sit_lv1_02", "whip_sit_lv1_03", "sit", NULL);
 	
 	this->resetValues();
 	_reviveStopWatch = nullptr;
@@ -99,6 +113,8 @@ void Simon::init()
 
 	//Tạo stopWatch
 	_stopWatch = new StopWatch();
+	//Có đang đánh hay không
+	_isHitting = false;
 }
 
 void Simon::resetValues() {
@@ -193,6 +209,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		break;
 	case DIK_C:
 		this->addStatus(HITTING);
+		_isHitting = false;
 	case DIK_UP:
 		this->removeStatus(eStatus::MOVING_LEFT);
 		this->removeStatus(eStatus::MOVING_RIGHT);
@@ -270,12 +287,13 @@ void Simon::updateStatus(float deltatime)
 	if (this->isInStatus(eStatus::HITTING))
 	{
 		if (_hittingStopWatch == nullptr)
+		{
 			_hittingStopWatch = new StopWatch();
+		}
 
-		if (_hittingStopWatch->isStopWatch(400))
+		if (_hittingStopWatch->isStopWatch(280))
 		{
 			this->removeStatus(eStatus::HITTING);
-			_animations[eStatus::HITTING]->setIndex(0);
 			SAFE_DELETE(_hittingStopWatch);
 			this->removeStatus(eStatus::UPSTAIR);
 		}
@@ -714,6 +732,17 @@ void  Simon::updateCurrentAnimateIndex()
 	else if (this->isInStatus(eStatus::HITTING))
 	{
 		_currentAnimationIndex = eStatus::HITTING;
+	}
+
+	if (this->isInStatus(eStatus::HITTING) && _whipLevel == 1)
+	{
+		_currentAnimationIndex = eStatus(_currentAnimationIndex | eStatus::LEVEL1);
+	}
+
+	if (this->isInStatus(eStatus::HITTING) && !_isHitting)
+	{
+		_animations[_currentAnimationIndex]->setIndex(0);
+		_isHitting = true;
 	}
 
 	if (this->isInStatus(eStatus::DYING)) 
