@@ -42,12 +42,12 @@ whip_normal_lv1_03		196		168		256		197		0.1333	0.5
 
 whip_stair_up_lv1_01	126		167		158		198		0.75 	0.5
 whip_stair_up_lv1_02	82		168		114		199		0.75 	0.5
-whip_stair_up_lv1_03 	6 		168  	66 		198	 	0.1818 	0.5	
+whip_stair_up_lv1_03 	6 		168  	66 		198	 	0.1333 	0.5	
 
 whip_stair_down_lv1_01	126		448		158		480		0.75 	0.5
 whip_stair_down_lv1_02	82		449		114		481		0.75 	0.5
-whip_stair_down_lv1_03 	6 		449  	66 		479	 	0.1818 	0.5	
+whip_stair_down_lv1_03 	6 		449  	66 		479	 	0.1333 	0.5	
 
 whip_sit_lv1_01			324		399		356		422		0.75 	0.5
 whip_sit_lv1_02			280		403		312		426		0.75 	0.5
-whip_sit_lv1_03			202		404		262		426		0.1818 	0.5	
+whip_sit_lv1_03			202		404		262		426		0.1333 	0.5	
