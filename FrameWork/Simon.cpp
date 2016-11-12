@@ -80,13 +80,13 @@ void Simon::init()
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "normal","whip_normal_01", "whip_normal_02", "whip_normal_03", NULL);
 
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON,"up_stair_01", "whip_stair_up_01", "whip_stair_up_02", "whip_stair_up_03", NULL);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON, "whip_stair_up_01", "whip_stair_up_02", "whip_stair_up_03", "up_stair_01", NULL);
 
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "down_stair_01", "whip_stair_down_01", "whip_stair_down_02", "whip_stair_down_03", NULL);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "whip_stair_down_01", "whip_stair_down_02", "whip_stair_down_03", "down_stair_01", NULL);
 
 	_animations[eStatus::HITTING | eStatus::SITTING] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON,"sit","whip_sit_01", "whip_sit_02", "whip_sit_03", NULL);
+	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON, "whip_sit_01", "whip_sit_02", "whip_sit_03", "sit", NULL);
 	
 	this->resetValues();
 	_reviveStopWatch = nullptr;
