@@ -86,7 +86,7 @@ void Simon::init()
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "down_stair_01", "whip_stair_down_01", "whip_stair_down_02", "whip_stair_down_03", NULL);
 
 	_animations[eStatus::HITTING | eStatus::SITTING] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON,"whip_sit_01", "whip_sit_02", "whip_sit_03", NULL);
+	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON,"sit","whip_sit_01", "whip_sit_02", "whip_sit_03", NULL);
 	
 	this->resetValues();
 	_reviveStopWatch = nullptr;
@@ -582,8 +582,6 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 						có  va chạm thì để trạng thái thành STANDINGONSTAIR(để lần sau còn check lại ở frame tiếp nếu người chơi ko nhấn nút lên) 
 						ko còn va chạm nữa thì remove đi
 		*/
-	
-
 		if (((!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
 			|| (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::STANDINGONSTAIR))) && otherObjectID == eID::STAIR && !this->isInStatus(eStatus::HITTING)))
 			&& collisionBody->checkCollision(otherObject, direction, dt, false))
@@ -653,18 +651,6 @@ void  Simon::updateCurrentAnimateIndex()
 {
 	//Lấy trạng thái của nhân vật
 	_currentAnimationIndex = this->getStatus();
-
-	//if (isInStatus(eStatus::HITTING) //nếu đang vung roi
-	////mà di chuyển
-	//&& (isInStatus(eStatus::MOVING_LEFT) || isInStatus(eStatus::MOVING_RIGHT)))
-	//{
-	//	//bỏ animation vung roi đi ,chỉ di chuyển thôi
-	//	_currentAnimationIndex = (eStatus)(this->getStatus() & ~eStatus::HITTING);
-	//}
-	//else if ((_currentAnimationIndex & eStatus::HITTING) == eStatus::HITTING)
-	//{
-	//	_currentAnimationIndex = this->getStatus();
-	//}
 
 	//Đang di chuyển
 	if ((_currentAnimationIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT 
