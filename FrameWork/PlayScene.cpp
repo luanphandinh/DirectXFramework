@@ -20,8 +20,8 @@ bool PlayScene::init()
 	_simon = new Simon();
 	_simon->init();
 
-	//_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
-	//_spearKnight->init();
+	_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
+	_spearKnight->init();
 
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
@@ -68,10 +68,10 @@ void PlayScene::update(float deltaTime)
 		_simon->checkCollision(_stairsLeft[i], deltaTime);
 	}
 	_simon->update(deltaTime);
-	//_spearKnight->update(deltaTime);
-	//_spearKnight->checkCollision(_land, deltaTime);
+	_spearKnight->update(deltaTime);
+	_spearKnight->checkCollision(_land, deltaTime);
 
-	//_spearKnight->checkCollision(_simon, deltaTime);
+	_spearKnight->checkCollision(_simon, deltaTime);
 	//=====================TESTING==========================//
 }
 
@@ -93,7 +93,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	_simon->draw(spriteHandle, _viewport);
 
 
-	//_spearKnight->draw(spriteHandle, _viewport);
+	_spearKnight->draw(spriteHandle, _viewport);
 	//=====================TESTING==========================//
 }
 

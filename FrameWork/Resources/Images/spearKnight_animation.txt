@@ -1,5 +1,5 @@
 frame_name	left	top	right	bottom
-normal		0	0	17	32
-walk_01		0	0	17	32
-walk_02		80	0	96	32
-walk_03		40	0	56	32
+normal		0	0	17	32 	0.5 0.5
+walk_01		0	0	17	32	0.5 0.5
+walk_02		80	0	96	32	0.5 0.5
+walk_03		40	0	56	32	0.5 0.5

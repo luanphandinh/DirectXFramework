@@ -6,6 +6,7 @@ Simon::Simon() :BaseObject(eID::SIMON)
 	_canJumpDown = true;//cho phép nhảy từ trên xuống
 }
 
+//overiride BaseObject methods
 
 Simon::~Simon()
 {
@@ -15,7 +16,6 @@ void Simon::updateInput(float dt)
 {
 
 }
-//overiride BaseObject methods
 void Simon::init()
 {
 	//Hook event for key press handlers.....
@@ -77,9 +77,17 @@ void Simon::init()
 
 
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.12f);
-
 	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "normal","whip_normal_01", "whip_normal_02", "whip_normal_03", NULL);
-	_animations[eStatus::HITTING]->setUseDefaultOrigin(false);
+
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON,"up_stair_01", "whip_stair_up_01", "whip_stair_up_02", "whip_stair_up_03", NULL);
+
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "down_stair_01", "whip_stair_down_01", "whip_stair_down_02", "whip_stair_down_03", NULL);
+
+	_animations[eStatus::HITTING | eStatus::SITTING] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON,"whip_sit_01", "whip_sit_02", "whip_sit_03", NULL);
+	
 	this->resetValues();
 	_reviveStopWatch = nullptr;
 
@@ -646,17 +654,17 @@ void  Simon::updateCurrentAnimateIndex()
 	//Lấy trạng thái của nhân vật
 	_currentAnimationIndex = this->getStatus();
 
-	if (isInStatus(eStatus::HITTING) //nếu đang vung roi
-	//mà di chuyển
-	&& (isInStatus(eStatus::MOVING_LEFT) || isInStatus(eStatus::MOVING_RIGHT)))
-	{
-		//bỏ animation vung roi đi ,chỉ di chuyển thôi
-		_currentAnimationIndex = (eStatus)(this->getStatus() & ~eStatus::HITTING);
-	}
-	else if ((_currentAnimationIndex & eStatus::HITTING) == eStatus::HITTING)
-	{
-		_currentAnimationIndex = this->getStatus();
-	}
+	//if (isInStatus(eStatus::HITTING) //nếu đang vung roi
+	////mà di chuyển
+	//&& (isInStatus(eStatus::MOVING_LEFT) || isInStatus(eStatus::MOVING_RIGHT)))
+	//{
+	//	//bỏ animation vung roi đi ,chỉ di chuyển thôi
+	//	_currentAnimationIndex = (eStatus)(this->getStatus() & ~eStatus::HITTING);
+	//}
+	//else if ((_currentAnimationIndex & eStatus::HITTING) == eStatus::HITTING)
+	//{
+	//	_currentAnimationIndex = this->getStatus();
+	//}
 
 	//Đang di chuyển
 	if ((_currentAnimationIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT 
@@ -694,18 +702,30 @@ void  Simon::updateCurrentAnimateIndex()
 		_currentAnimationIndex = eStatus::DOWNSTAIR;
 	}
 
-	if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR) == eStatus::STANDINGONSTAIR)
+	if (this->isInStatus(eStatus::HITTING) && this->isInStatus(eStatus::STANDINGONSTAIR_UP))
+	{
+		_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::STANDINGONSTAIR_UP);
+	}
+	else if (this->isInStatus(eStatus::HITTING) && this->isInStatus(eStatus::STANDINGONSTAIR_DOWN))
+	{
+		_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN);
+	}
+	else if (this->isInStatus(eStatus::HITTING) && this->isInStatus(eStatus::SITTING))
+	{
+		_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::SITTING);
+	}
+	else 
+	if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR) == eStatus::STANDINGONSTAIR && (_currentAnimationIndex & eStatus::HITTING) != eStatus::HITTING)
 	{
 		if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR_UP) == eStatus::STANDINGONSTAIR_UP)
 		{
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_UP;
 		}
-			
+
 		else
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
 	}
-
-	if (this->isInStatus(eStatus::HITTING)) 
+	else if (this->isInStatus(eStatus::HITTING))
 	{
 		_currentAnimationIndex = eStatus::HITTING;
 	}
