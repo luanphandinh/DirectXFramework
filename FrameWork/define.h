@@ -58,13 +58,13 @@ enum eStatus
 	DESTROY = (1 << 9),
 	WAITING = (1 << 10),
 
-
 	UPSTAIR = (1 << 11),
 	DOWNSTAIR = (1 << 12),
 	STANDINGONSTAIR = (1 << 13),
 	STANDINGONSTAIR_UP = (1 << 14),
 	STANDINGONSTAIR_DOWN = (1 << 15),
-	LEVEL1 = (1 << 16),
+	THROWING_ITEM = (1 << 16),
+	LEVEL1 = (1 << 18),
 };
 
 enum eStairDirection

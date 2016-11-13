@@ -101,6 +101,15 @@ void Simon::init()
 
 	_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_sit_lv1_01", "whip_sit_lv1_02", "whip_sit_lv1_03", "sit", NULL);
+
+	_animations[eStatus::THROWING_ITEM] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::THROWING_ITEM]->addFrameRect(eID::SIMON, "throw_item_01", "throw_item_02", "throw_item_03", "normal", NULL);
+
+	_animations[eStatus::THROWING_ITEM | eStatus::STANDINGONSTAIR_UP] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::THROWING_ITEM | eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON, "throw_item_stair_up_01", "throw_item_stair_up_02", "throw_item_stair_up_03", "up_stair_01", NULL);
+
+	_animations[eStatus::THROWING_ITEM | eStatus::STANDINGONSTAIR_DOWN] = new Animation(_sprite, 0.12f);
+	_animations[eStatus::THROWING_ITEM | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "throw_item_stair_down_01", "throw_item_stair_down_02", "throw_item_stair_down_03", "down_stair_01", NULL);
 	
 	this->resetValues();
 	_reviveStopWatch = nullptr;
@@ -115,6 +124,7 @@ void Simon::init()
 	_stopWatch = new StopWatch();
 	//Có đang đánh hay không
 	_isHitting = false;
+	_isThrowing = false;
 }
 
 void Simon::resetValues() {
@@ -179,7 +189,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_RIGHT:
-		if (!_canOnStair || !this->isInStatus(eStatus::HITTING))
+		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING))
 		{
 			this->removeStatus(eStatus::MOVING_LEFT);
 			this->removeStatus(eStatus::SITTING);
@@ -187,7 +197,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_LEFT:
-		if (!_canOnStair || !this->isInStatus(eStatus::HITTING))
+		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING))
 		{
 			this->removeStatus(eStatus::MOVING_RIGHT);
 			this->removeStatus(eStatus::SITTING);
@@ -208,8 +218,15 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_C:
-		this->addStatus(HITTING);
+		this->removeStatus(eStatus::THROWING_ITEM);
+		this->addStatus(eStatus::HITTING);
 		_isHitting = false;
+		break;
+	case DIK_Z:
+		this->removeStatus(eStatus::HITTING);
+		this->addStatus(eStatus::THROWING_ITEM);
+		_isThrowing = false;
+		break;
 	case DIK_UP:
 		this->removeStatus(eStatus::MOVING_LEFT);
 		this->removeStatus(eStatus::MOVING_RIGHT);
@@ -295,6 +312,21 @@ void Simon::updateStatus(float deltatime)
 		{
 			this->removeStatus(eStatus::HITTING);
 			SAFE_DELETE(_hittingStopWatch);
+			this->removeStatus(eStatus::UPSTAIR);
+		}
+		return;
+	}else
+	if (this->isInStatus(eStatus::THROWING_ITEM))
+	{
+		if (_throwItemStopWatch == nullptr)
+		{
+			_throwItemStopWatch = new StopWatch();
+		}
+
+		if (_throwItemStopWatch->isStopWatch(280))
+		{
+			this->removeStatus(eStatus::THROWING_ITEM);
+			SAFE_DELETE(_throwItemStopWatch);
 			this->removeStatus(eStatus::UPSTAIR);
 		}
 		return;
@@ -706,44 +738,75 @@ void  Simon::updateCurrentAnimateIndex()
 		_currentAnimationIndex = eStatus::DOWNSTAIR;
 	}
 
-	if (this->isInStatus(eStatus::HITTING) && this->isInStatus(eStatus::STANDINGONSTAIR_UP))
+	//Phần animation cho hitting
+	if (this->isInStatus(eStatus::HITTING))
 	{
-		_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::STANDINGONSTAIR_UP);
+		if (this->isInStatus(eStatus::STANDINGONSTAIR_UP))
+		{
+			_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::STANDINGONSTAIR_UP);
+		}
+		else if (this->isInStatus(eStatus::STANDINGONSTAIR_DOWN))
+		{
+			_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN);
+		}
+		else if (this->isInStatus(eStatus::SITTING))
+		{
+			_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::SITTING);
+		}
+		else 
+		{
+			_currentAnimationIndex = eStatus::HITTING;
+		}
+
+		if (_whipLevel == 1)
+		{
+			_currentAnimationIndex = eStatus(_currentAnimationIndex | eStatus::LEVEL1);
+		}
+
+		if (!_isHitting)
+		{
+			_animations[_currentAnimationIndex]->setIndex(0);
+			_isHitting = true;
+		}
 	}
-	else if (this->isInStatus(eStatus::HITTING) && this->isInStatus(eStatus::STANDINGONSTAIR_DOWN))
+	//////////////////////////////////////////////////
+	//Phần animation cho throwing
+	if (this->isInStatus(eStatus::THROWING_ITEM))
 	{
-		_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN);
+		if (this->isInStatus(eStatus::STANDINGONSTAIR_UP))
+		{
+			_currentAnimationIndex = eStatus(eStatus::THROWING_ITEM | eStatus::STANDINGONSTAIR_UP);
+		}
+		else if (this->isInStatus(eStatus::STANDINGONSTAIR_DOWN))
+		{
+			_currentAnimationIndex = eStatus(eStatus::THROWING_ITEM | eStatus::STANDINGONSTAIR_DOWN);
+		}
+		else
+		{
+			_currentAnimationIndex = eStatus::THROWING_ITEM;
+		}
+
+		if (!_isThrowing)
+		{
+			_animations[_currentAnimationIndex]->setIndex(0);
+			_isThrowing = true;
+		}
 	}
-	else if (this->isInStatus(eStatus::HITTING) && this->isInStatus(eStatus::SITTING))
-	{
-		_currentAnimationIndex = eStatus(eStatus::HITTING | eStatus::SITTING);
-	}
-	else 
-	if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR) == eStatus::STANDINGONSTAIR && (_currentAnimationIndex & eStatus::HITTING) != eStatus::HITTING)
+
+	//=====================================================================================//
+	//Chỉ animation cho trạng thái đứng yên trên cầu thang
+	if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR) == eStatus::STANDINGONSTAIR 
+		&& (_currentAnimationIndex & eStatus::THROWING_ITEM) != eStatus::THROWING_ITEM
+		&& (_currentAnimationIndex & eStatus::HITTING) != eStatus::HITTING)
 	{
 		if ((_currentAnimationIndex & eStatus::STANDINGONSTAIR_UP) == eStatus::STANDINGONSTAIR_UP)
 		{
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_UP;
 		}
-
 		else
 			_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
 	}
-	else if (this->isInStatus(eStatus::HITTING))
-	{
-		_currentAnimationIndex = eStatus::HITTING;
-	}
 
-	if (this->isInStatus(eStatus::HITTING) && _whipLevel == 1)
-	{
-		_currentAnimationIndex = eStatus(_currentAnimationIndex | eStatus::LEVEL1);
-	}
-
-	if (this->isInStatus(eStatus::HITTING) && !_isHitting)
-	{
-		_animations[_currentAnimationIndex]->setIndex(0);
-		_isHitting = true;
-	}
 
 	if (this->isInStatus(eStatus::DYING)) 
 	{

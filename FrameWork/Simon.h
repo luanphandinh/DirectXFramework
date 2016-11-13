@@ -98,13 +98,17 @@ private:
 	bool _canJumpDown;
 	bool _canOnStair;
 	int _whipLevel;
+	//Sử dụng để animation hitting khi có stopwatch
 	bool _isHitting;
+	//Sử dụng để animation throwing khi có stopwatch
+	bool _isThrowing;
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
 
 	StopWatch* _stopWatch;
 	StopWatch* _reviveStopWatch;
 	StopWatch* _hittingStopWatch;
+	StopWatch* _throwItemStopWatch;
 
 	eStatus _currentAnimationIndex;
 
