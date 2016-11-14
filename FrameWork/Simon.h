@@ -11,13 +11,13 @@
 #include"SceneManager.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
-#define SIMON_MOVING_SPEED 128
+#define SIMON_MOVING_SPEED 126
 
 #define GRAVITY 800
 #define SIMON_JUMP_VELOCITY 450
 // Sửa phần lên cầu thang cho hết sida
-#define SIMON_UPSTAIR_VELOCITY_X 80
-#define SIMON_UPSTAIR_VELOCITY_Y 120
+#define SIMON_UPSTAIR_VELOCITY_X 82
+#define SIMON_UPSTAIR_VELOCITY_Y 136
 #define REVIVE_TIME 2000
 
 [event_receiver(native)]

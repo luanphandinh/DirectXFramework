@@ -28,15 +28,15 @@ void CollisionBody::checkCollision(BaseObject* otherObject, float dt, bool updat
 		{
 			updateTargetPosition(otherObject, direction, true);
 		}
-		/*CollisionEventArg* e = new CollisionEventArg(otherObject);
+		CollisionEventArg* e = new CollisionEventArg(otherObject);
 		e->_sideCollision = direction;
 
 		__raise onCollisionBegin(e);
-		_listColliding[otherObject] = true;*/
+		_listColliding[otherObject] = true;
 	}
 	else if (_listColliding.find(otherObject) == _listColliding.end())	// ko có trong list đã va chạm
 	{
-	/*	if (isAABB(_target->getBounding(), otherObject->getBounding()))
+		if (isAABB(_target->getBounding(), otherObject->getBounding()))
 		{
 			CollisionEventArg* e = new CollisionEventArg(otherObject);
 			e->_sideCollision = this->getSide(otherObject);
@@ -44,30 +44,30 @@ void CollisionBody::checkCollision(BaseObject* otherObject, float dt, bool updat
 			__raise onCollisionBegin(e);
 
 			_listColliding[otherObject] = true;
-		}*/
+		}
 	}
 	else	// có trong list đã va chạm
 	{
-		//float moveX, moveY;
-		//if (isCollidingIntersected(otherObject, moveX, moveY, dt))		// kt va trạm lấy khoảng chồng lấp của 2 object
-		//{
-		//	auto side = this->getSide(otherObject);
+		float moveX, moveY;
+		if (isCollidingIntersected(otherObject, moveX, moveY, dt))		// kt va trạm lấy khoảng chồng lấp của 2 object
+		{
+			auto side = this->getSide(otherObject);
 
-		//	if (otherObject->getPhysicBodySide() == eDirection::NONE || (side & otherObject->getPhysicBodySide()) != side)
-		//		return;
+			if (otherObject->getPhysicBodySide() == eDirection::NONE || (side & otherObject->getPhysicBodySide()) != side)
+				return;
 
-		//	// cập nhật tọa độ
-		//	if (updatePosition)
-		//		updateTargetPosition(otherObject, side, false, GVector2(moveX, moveY));
-		//}
-		//else // nếu ko va chạm nữa là kết thúc va chạm
-		//{
+			// cập nhật tọa độ
+			if (updatePosition)
+				updateTargetPosition(otherObject, side, false, GVector2(moveX, moveY));
+		}
+		else // nếu ko va chạm nữa là kết thúc va chạm
+		{
 			CollisionEventArg* e = new CollisionEventArg(otherObject);
 			e->_sideCollision = eDirection::NONE;
 
 			__raise onCollisionEnd(e);
 			_listColliding.erase(otherObject);
-		//}
+		}
 	}
 }
 
