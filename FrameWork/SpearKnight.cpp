@@ -37,9 +37,9 @@ SpearKnight::SpearKnight(eStatus status, float x, float y, int direction) :
 SpearKnight::~SpearKnight() {}
 
 void SpearKnight::init() {
-	srand(599999);
 	this->setHitpoint(SPEARKNIGHT_HITPOINT);
 	this->setScore(SPEARKNIGHT_SCORE);
+
 	this->_listComponent.insert(pair<string, IComponent*>("Gravity", 
 		new Gravity(GVector2(0, -ENEMY_GRAVITY), (Movement*)(this->getComponent("Movement")))));
 
@@ -88,7 +88,7 @@ IComponent* SpearKnight::getComponent(string componentName) {
 
 void SpearKnight::update(float deltatime) {
 
-	if (this->getStatus() == DESTROY || this->getStatus() == WAITING)
+	if (this->getStatus() == DESTROY )
 		return;
 
 	Gravity *gravity = (Gravity*)this->getComponent("Gravity");
