@@ -1,0 +1,6 @@
+frame_name	left	top	right	bottom
+normal		0	40	12	56	0.5 0.5
+fly_01		0	40	12	56	0.5 0.5
+fly_02		38	40	54	56	0.5 0.5
+fly_03		77	43	93	53	0.5 0.5
+fly_04		118	41	134	56	0.5 0.5
