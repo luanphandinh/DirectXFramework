@@ -221,6 +221,8 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		break;
 	case DIK_C:
 		this->removeStatus(eStatus::THROWING_ITEM);
+		this->removeStatus(eStatus::UPSTAIR);
+		this->removeStatus(eStatus::DOWNSTAIR);
 		this->addStatus(eStatus::HITTING);
 		_isHitting = false;
 		break;
@@ -625,6 +627,8 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	//Kiểm tra va chạm với land
 	if (otherObjectID == eID::LAND || (otherObjectID == eID::STAIR && !this->isInStatus(eStatus::HITTING)))
 	{
+		//if (otherObjectID == eID::LAND && this->isInStatus(eStatus::STANDINGONSTAIR) && this->isInStatus(eStatus::HITTING))
+		//	return 0.0f;
 		/* 
 			Với LAND : Nếu simon ko nằm trong cả 2 trang thái là nhảy vả rớt,đang nhảy hoặc rớt từ trên xuống
 						Thì check
