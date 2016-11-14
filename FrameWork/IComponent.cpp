@@ -1,4 +1,4 @@
-#include"IComponent.h"
+﻿#include"IComponent.h"
 #pragma region Movement
 Movement::Movement(GVector2 accel, GVector2 veloc, Sprite* refSprite)
 {
@@ -73,5 +73,42 @@ void Gravity::setGravity(GVector2 gravity)
 {
 	if (this->_gravity != gravity)
 		_gravity = gravity;
+}
+#pragma endregion
+
+#pragma region SinMovement
+SinMovement::SinMovement(GVector2 amplitude, float frequency, Sprite* refsprite) {
+	this->_amplitude = amplitude;
+	this->_refSprite = refsprite;
+	_radianVeloc = frequency * 2 * M_PI;
+	_radian = 0.0f;
+	this->_linearVeloc = _amplitude * _radianVeloc; //( A * ω)
+}
+void SinMovement::update(float deltatime) {
+	/*
+	góc xoay được tính theo công thức
+	φ = ω * t
+	*/
+	_radian += _radianVeloc * deltatime / 1000;
+
+	/*
+	vận tốc tuyến tính được tính theo công thức
+	v = -A * ω * sin(φ)
+	(_linearVeloc = A * ω)
+	*/
+	auto veloc = -_linearVeloc * sin(_radian);
+
+	auto pos = this->_refSprite->getPosition();
+	pos += veloc * deltatime / 1000;
+	this->_refSprite->setPosition(pos);
+}
+
+void SinMovement::setAmplitude(GVector2 amplitude) {
+	this->_amplitude = amplitude;
+	this->_linearVeloc = _amplitude * _radianVeloc;
+}
+void SinMovement::setFrequency(float freq) {
+	_radianVeloc = freq;
+	this->_linearVeloc = _amplitude * _radianVeloc;
 }
 #pragma endregion
