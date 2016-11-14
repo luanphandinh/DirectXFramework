@@ -42,8 +42,9 @@ void Simon::init()
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::NORMAL]->addFrameRect(eID::SIMON, "normal", NULL);
 
+	// sửa lại thứ tự chút 
 	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::RUNNING]->addFrameRect(eID::SIMON, "run_01", "run_02", "run_03", NULL);
+	_animations[eStatus::RUNNING]->addFrameRect(eID::SIMON, "run_02", "run_01", "run_03", NULL);
 	
 	_animations[eStatus::JUMPING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::JUMPING]->addFrameRect(eID::SIMON, "jump", NULL);

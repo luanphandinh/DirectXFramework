@@ -11,10 +11,11 @@
 #include"SceneManager.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
-#define SIMON_MOVING_SPEED 128
+#define SIMON_MOVING_SPEED 90
 #define GRAVITY 800
 #define SIMON_JUMP_VELOCITY 450
-#define SIMON_UPSTAIR_VELOCITY 128
+// lên cầu thang v chậm hơn đi bộ, set chậm lại là thấy sự sida :v
+#define SIMON_UPSTAIR_VELOCITY 30
 #define REVIVE_TIME 2000
 
 [event_receiver(native)]
