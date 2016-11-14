@@ -11,6 +11,8 @@
 #include"Land.h"
 #include "SpearKnight.h"
 #include"Stair.h"
+#include "Bat.h"
+#include "MedusaHead.h"
 using namespace std;
 _USING_FRAMEWORK
 
@@ -34,6 +36,8 @@ private:
 	void updateViewport(BaseObject* objTracker);
 	Simon* _simon;
 	SpearKnight* _spearKnight;
+	Bat* _bat;
+	MedusaHead* _medusaHead;
 	Map* _backGround;
 	Land* _land;
 	Land* _land2;
