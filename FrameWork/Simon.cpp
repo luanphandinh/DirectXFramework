@@ -49,6 +49,7 @@ void Simon::init()
 	_animations[eStatus::JUMPING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::JUMPING]->addFrameRect(eID::SIMON, "jump", NULL);
 
+	//Hầu hết mỗi frame thì thằng falling nó đều có vì được check liên tục
 	_animations[eStatus::FALLING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::FALLING]->addFrameRect(eID::SIMON, "run_03", NULL);
 
@@ -229,9 +230,8 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		_isThrowing = false;
 		break;
 	case DIK_UP:
-		this->removeStatus(eStatus::MOVING_LEFT);
-		this->removeStatus(eStatus::MOVING_RIGHT);
 		this->removeStatus(eStatus::DOWNSTAIR);
+		this->removeStatus(eStatus::FALLING);
 		this->addStatus(eStatus::UPSTAIR);
 		break;
 	default:
@@ -258,7 +258,6 @@ void Simon::onKeyReleased(KeyEventArg* key_event)
 		this->removeStatus(eStatus::DOWNSTAIR);
 		break;
 	case DIK_C:
-
 		break;
 	case DIK_UP:
 		this->removeStatus(eStatus::UPSTAIR);
@@ -334,12 +333,12 @@ void Simon::updateStatus(float deltatime)
 	}
 
 
-	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT) 
+	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT && (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR)
 	{
 		this->moveLeft();
 	}
 	else
-	if ((this->getStatus() & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT) 
+	if ((this->getStatus() & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT && (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR)
 	{
 		this->moveRight();
 	}
@@ -481,14 +480,14 @@ void Simon::upstair()
 		moveRight();
 		//Gán vector leo cầu thang
 		auto move = (Movement*)this->_componentList["Movement"];
-		move->setVelocity(GVector2(_movingSpeed, SIMON_UPSTAIR_VELOCITY));
+		move->setVelocity(GVector2(SIMON_UPSTAIR_VELOCITY_X, SIMON_UPSTAIR_VELOCITY_Y));
 	}
 	else 
 	{
 		moveLeft();
 		//Gán vector leo cầu thang
 		auto move = (Movement*)this->_componentList["Movement"];
-		move->setVelocity(GVector2(-_movingSpeed, SIMON_UPSTAIR_VELOCITY));
+		move->setVelocity(GVector2(-SIMON_UPSTAIR_VELOCITY_X, SIMON_UPSTAIR_VELOCITY_Y));
 	}
 	this->removeStatus(eStatus::STANDINGONSTAIR_DOWN);
 	this->addStatus(eStatus::STANDINGONSTAIR_UP);
@@ -509,14 +508,14 @@ void Simon::downstair()
 		moveLeft();
 		//Gán vector leo cầu thang
 		auto move = (Movement*)this->_componentList["Movement"];
-		move->setVelocity(GVector2(-_movingSpeed, -SIMON_UPSTAIR_VELOCITY));
+		move->setVelocity(GVector2(-SIMON_UPSTAIR_VELOCITY_X, -SIMON_UPSTAIR_VELOCITY_Y));
 	}
 	else
 	{
 		moveRight();
 		//Gán vector leo cầu thang
 		auto move = (Movement*)this->_componentList["Movement"];
-		move->setVelocity(GVector2(_movingSpeed, -SIMON_UPSTAIR_VELOCITY));
+		move->setVelocity(GVector2(SIMON_UPSTAIR_VELOCITY_X, -SIMON_UPSTAIR_VELOCITY_Y));
 	}
 	this->removeStatus(eStatus::STANDINGONSTAIR_UP);
 	this->addStatus(eStatus::STANDINGONSTAIR_DOWN);
@@ -718,6 +717,19 @@ void  Simon::updateCurrentAnimateIndex()
 		_currentAnimationIndex = eStatus::SITTING;
 	}
 
+
+	//Đang lên cầu thang và xuống cầu thang
+	if ((_currentAnimationIndex & eStatus::UPSTAIR) == eStatus::UPSTAIR/* && _canOnStair*/)
+	{
+		_currentAnimationIndex = eStatus::UPSTAIR;
+		return;
+	}
+	if ((_currentAnimationIndex & eStatus::DOWNSTAIR) == eStatus::DOWNSTAIR)
+	{
+		_currentAnimationIndex = eStatus::DOWNSTAIR;
+		return;
+	}
+
 	//Nếu đang nhảy hoặc rớt thì animate duy nhất nhảy
 	if ((_currentAnimationIndex & eStatus::FALLING) == eStatus::FALLING)
 	{
@@ -728,17 +740,6 @@ void  Simon::updateCurrentAnimateIndex()
 	{
 		_currentAnimationIndex = eStatus::JUMPING;
 	}
-	//Đang lên cầu thang và xuống cầu thang
-	if ((_currentAnimationIndex & eStatus::UPSTAIR) == eStatus::UPSTAIR && _canOnStair)
-	{
-		_currentAnimationIndex = eStatus::UPSTAIR;
-	}
-
-	if ((_currentAnimationIndex & eStatus::DOWNSTAIR) == eStatus::DOWNSTAIR)
-	{
-		_currentAnimationIndex = eStatus::DOWNSTAIR;
-	}
-
 	//Phần animation cho hitting
 	if (this->isInStatus(eStatus::HITTING))
 	{
@@ -813,4 +814,5 @@ void  Simon::updateCurrentAnimateIndex()
 	{
 		_currentAnimationIndex = eStatus::DYING;
 	}
+	
 }

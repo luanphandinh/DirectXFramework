@@ -23,12 +23,12 @@ bool PlayScene::init()
 	_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
 	_spearKnight->init();
 
-	_bat = new Bat(NORMAL, 600, 200, -1);
-	_bat->init();
+	//_bat = new Bat(NORMAL, 600, 200, -1);
+	//_bat->init();
 
-	_medusaHead = new MedusaHead(HIDING, -1, START_POSITION,
-		MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
-	_medusaHead->init();
+	//_medusaHead = new MedusaHead(HIDING, -1, START_POSITION,
+	//	MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
+	//_medusaHead->init();
 
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
@@ -80,8 +80,8 @@ void PlayScene::update(float deltaTime)
 
 	_spearKnight->checkCollision(_simon, deltaTime);
 
-	_bat->update(deltaTime);
-	_medusaHead->update(deltaTime);
+	//_bat->update(deltaTime);
+	//_medusaHead->update(deltaTime);
 	//=====================TESTING==========================//
 }
 
@@ -105,9 +105,9 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 
 	_spearKnight->draw(spriteHandle, _viewport);
 
-	_bat->draw(spriteHandle, _viewport);
+	//_bat->draw(spriteHandle, _viewport);
 
-	_medusaHead->draw(spriteHandle, _viewport);
+	//_medusaHead->draw(spriteHandle, _viewport);
 	//=====================TESTING==========================//
 }
 
