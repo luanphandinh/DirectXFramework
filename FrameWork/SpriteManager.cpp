@@ -25,6 +25,14 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::SPEARKNIGHT, sp));
 	this->loadSpriteInfo(eID::SPEARKNIGHT, "Resources//Images//spearKnight_animation.txt");
 
+	sp = new Sprite(spriteHandler, L"Resources//Images//bat.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::BAT, sp));
+	this->loadSpriteInfo(eID::BAT, "Resources//Images//bat_animation.txt");
+
+	sp = new Sprite(spriteHandler, L"Resources//Images//medusaHead.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::MEDUSAHEAD, sp));
+	this->loadSpriteInfo(eID::MEDUSAHEAD, "Resources//Images//medusaHead_animation.txt");
+
 	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	sp->setOrigin(GVector2(0.0f, 0.0f));
 	this->_listSprite[eID::MAPSTAGE1] = sp;
