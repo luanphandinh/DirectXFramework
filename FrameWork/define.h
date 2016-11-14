@@ -2,7 +2,7 @@
 #define _FRAMEWORK_
 
 #define _NAMESPACE_FRAMEWORK_BEGIN namespace FrameWork {
-
+#define _USE_MATH_DEFINES
 #include<d3d9.h>
 #include<d3dx9.h>
 #include<dinput.h>
@@ -35,7 +35,9 @@ enum eID
 	SIMON = 0, // Main character.
 	LAND = 1,
 	SPEARKNIGHT =2,
-	STAIR = 3,
+	BAT = 3,
+	MEDUSAHEAD = 4,
+	STAIR = 5,
 	MAPSTAGE1 = 10,
 };
 
@@ -65,6 +67,10 @@ enum eStatus
 	STANDINGONSTAIR_DOWN = (1 << 15),
 	THROWING_ITEM = (1 << 16),
 	LEVEL1 = (1 << 18),
+
+	FLYING = (1 << 19),
+	HANGING = (1 << 20),
+	HIDING = (1 << 21)
 };
 
 enum eStairDirection
