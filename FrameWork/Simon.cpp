@@ -544,6 +544,14 @@ void Simon::downstair()
 
 void Simon::falling()
 {
+	//Ko đứng trên cầu thang thì falling thành rơi thẳng xuống dưới
+	if (!isInStatus(eStatus::STANDINGONSTAIR))
+	{
+		auto move = (Movement*)this->_componentList["Movement"];
+		move->setVelocity(GVector2(0, -200));
+	}
+
+	//không thì nhảy bình thường sẽ có thêm hướng x
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 }
