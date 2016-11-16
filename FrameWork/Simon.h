@@ -87,6 +87,8 @@ public:
 	void revive();
 	void hitting();
 
+	void enableGravity(bool);
+
 	float getMovingSpeed();
 
 	RECT getBounding() override;
