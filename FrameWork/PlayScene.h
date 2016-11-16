@@ -30,7 +30,7 @@ public:
 	void release() override;
 
 	void setViewport(Viewport* viewport);
-
+	Simon* getSimon();
 private:
 	//==========================TEST=========================//
 	void updateViewport(BaseObject* objTracker);
