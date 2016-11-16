@@ -133,5 +133,6 @@ void MedusaHead::updateHiding() {
 			this->setStatus(eStatus::FLYING);
 		}
 	}
+
 }
 
