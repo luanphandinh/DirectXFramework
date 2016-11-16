@@ -1,5 +1,5 @@
 ﻿#include "Bat.h"
-
+#include "PlayScene.h"
 Bat::Bat(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::BAT) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::BAT);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
@@ -62,8 +62,8 @@ void Bat::init() {
 	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Bat::onCollisionBegin);
 	__hook(&CollisionBody::onCollisionEnd, collisionBody, &Bat::onCollisionEnd);
 
-	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::NORMAL]->addFrameRect(eID::BAT, "normal", NULL);
+	_animations[eStatus::HANGING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::HANGING]->addFrameRect(eID::BAT, "normal", NULL);
 
 	_animations[FLYING] = new Animation(_sprite, 0.15f);
 	_animations[FLYING]->addFrameRect(eID::BAT,  "fly_02", "fly_03", "fly_04", NULL);
@@ -74,7 +74,7 @@ void Bat::init() {
 
 	//*Test
 	//this->setPosition(GVector2(300, 200));
-	this->setStatus(eStatus::FLYING);
+	this->setStatus(eStatus::HANGING);
 	_sprite->drawBounding(false);
 }
 
@@ -98,18 +98,24 @@ IComponent* Bat::getComponent(string componentName) {
 	return _listComponent.find(componentName)->second;
 }
 
-void Bat::update(float deltatime) {
+void Bat::update(float deltaTime) {
 
-	if (this->getStatus() == DESTROY)
+	if (this->getStatus() == eStatus::DESTROY)
 		return;
-
-	Gravity *gravity = (Gravity*)this->getComponent("Gravity");
-	Movement *movement = (Movement*)this->getComponent("Movement");
-
-	for (auto it : _listComponent) {
-		it.second->update(deltatime);
+	if (this->getStatus() == eStatus::HANGING) {
+		this->updateHanging();
+		return;
 	}
-	_animations[this->getStatus()]->update(deltatime);
+	else {
+
+		/*this->checkIfOutOfScreen();*/
+		for (auto component : _listComponent) {
+
+			component.second->update(deltaTime);
+		}
+		_animations[this->getStatus()]->update(deltaTime);
+
+	}
 
 }
 
@@ -120,6 +126,19 @@ void Bat::changeDirection() {
 	_sprite->setScaleX(-this->getScale().x);
 	Movement *movement = (Movement*)this->getComponent("Movement");
 	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
+}
+
+void Bat::updateHanging() {
+	// track theo simon
+	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	RECT objectBound = objectTracker->getBounding();
+
+	if (objectBound.right < this->getBounding().left-150) {
+		this->setStatus(eStatus::HANGING);
+	}
+	else {
+		this->setStatus(eStatus::FLYING);
+	}
 }
 
 void Bat::onCollisionBegin(CollisionEventArg* collision_event) {
