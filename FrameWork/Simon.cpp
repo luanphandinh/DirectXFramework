@@ -118,7 +118,7 @@ void Simon::init()
 
 	this->_movingSpeed = SIMON_MOVING_SPEED;
 
-	this->setPosition(300, 100);
+	this->setPosition(50, 100);
 	this->setStatus(eStatus::NORMAL);	
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 
