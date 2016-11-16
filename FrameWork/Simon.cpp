@@ -129,6 +129,7 @@ void Simon::init()
 	_isThrowing = false;
 	//Tạo lifeUI
 	_lifeUI = new LifeUI(GVector2(20, 30), 3);
+	_lifeUI->setHPNumber(14);
 }
 
 void Simon::resetValues() {

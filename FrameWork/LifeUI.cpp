@@ -5,7 +5,7 @@ LifeUI::LifeUI(GVector2 position, int number,int HP) :EmptyObject(eID::LIFE_ICON
 {
 	_hp = HP;
 	_life = number;
-	for (int i = 0; i < _hp; i++)
+	for (int i = 0; i < MAX_HP_NUMBER; i++)
 	{
 		auto sprite = SpriteManager::getInstance()->getSprite(eID::LIFE_ICON);
 		sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::LIFE_ICON, "red_life_icon"));
@@ -48,16 +48,33 @@ void LifeUI::release()
 
 void LifeUI::setHPNumber(int number)
 {
-	if (_listIcons.size() == number || number < 0)
+	if (_hp == number || number < 0 || number > MAX_HP_NUMBER)
 		return;
 
-	//if (_listIcons.size() < HP)
-	//{
+	_hp = number;
+	
+	for (int i = 0; i < _hp; i++)
+	{
+		_listIcons[i]->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::LIFE_ICON, "red_life_icon"));
+	}
 
-	//}
+	for (int i = _hp; i < MAX_HP_NUMBER;i++)
+	{
+		_listIcons[i]->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::LIFE_ICON, "white_life_icon"));
+	}
 }
 
 int LifeUI::getHPNumber()
 {
 	return _hp;
+}
+
+void LifeUI::setLifeNumber(int number)
+{
+	_life = number;
+}
+
+int LifeUI::getLifeNumber()
+{
+	return _life;
 }
