@@ -128,7 +128,7 @@ void Simon::init()
 	_isHitting = false;
 	_isThrowing = false;
 	//Tạo lifeUI
-	_lifeUI = new LifeUI(GVector2(20, 30), 3);
+	_lifeUI = new LifeUI(GVector2(20, 30),"PLAYER", 3);
 	_lifeUI->setHPNumber(14);
 }
 
@@ -828,7 +828,7 @@ void  Simon::updateCurrentAnimateIndex()
 
 		if (!_isHitting)
 		{
-			_animations[_currentAnimationIndex]->setIndex(0);
+			_animations[_currentAnimationIndex]->restart();
 			_isHitting = true;
 		}
 	}
@@ -851,7 +851,7 @@ void  Simon::updateCurrentAnimateIndex()
 
 		if (!_isThrowing)
 		{
-			_animations[_currentAnimationIndex]->setIndex(0);
+			_animations[_currentAnimationIndex]->restart();
 			_isThrowing = true;
 		}
 	}

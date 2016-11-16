@@ -1,7 +1,7 @@
 #include "LifeUI.h"
 
 
-LifeUI::LifeUI(GVector2 position, int number,int HP) :EmptyObject(eID::LIFE_ICON,position,0,0)
+LifeUI::LifeUI(GVector2 position,string text, int number,int HP) :EmptyObject(eID::LIFE_ICON,position,0,0)
 {
 	_hp = HP;
 	_life = number;
@@ -11,8 +11,10 @@ LifeUI::LifeUI(GVector2 position, int number,int HP) :EmptyObject(eID::LIFE_ICON
 		sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::LIFE_ICON, "red_life_icon"));
 		sprite->setScale(SCALE_FACTOR);
 		_listIcons.push_back(sprite);
-		_listIcons.back()->setPosition(position.x + (_listIcons.back()->getFrameWidth() + GAP) * i, position.y);
+		_listIcons.back()->setPosition(position.x + (_listIcons.back()->getFrameWidth() + GAP) * i + 80, position.y);
 	}
+
+	_text = new Text(L"Arial",text, 20, 20,21);
 }
 
 
@@ -33,6 +35,7 @@ void LifeUI::update(float deltatime)
 
 void LifeUI::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
+	_text->draw();
 	for (auto icon : _listIcons)
 		icon->render(spriteHandler);
 }

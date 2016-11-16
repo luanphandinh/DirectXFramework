@@ -101,6 +101,7 @@
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="Stair.h" />
     <ClInclude Include="StopWatch.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
@@ -138,6 +139,7 @@
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="Stair.cpp" />
     <ClCompile Include="StopWatch.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
