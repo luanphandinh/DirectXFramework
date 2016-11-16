@@ -127,6 +127,8 @@ void Simon::init()
 	//Có đang đánh hay không
 	_isHitting = false;
 	_isThrowing = false;
+	//Tạo lifeUI
+	_lifeUI = new LifeUI(GVector2(20, 30), 3);
 }
 
 void Simon::resetValues() {
@@ -163,6 +165,8 @@ void Simon::update(float deltatime)
 void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
+
+	_lifeUI->draw(spriteHandle,viewport);
 }
 
 void Simon::release()

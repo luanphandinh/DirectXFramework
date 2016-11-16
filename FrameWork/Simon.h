@@ -9,6 +9,7 @@
 #include"Stair.h"
 #include"StopWatch.h"
 #include"SceneManager.h"
+#include"LifeUI.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
@@ -109,6 +110,8 @@ private:
 	bool _isThrowing;
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
+	LifeUI* _lifeUI;
+	
 
 	StopWatch* _stopWatch;
 	StopWatch* _reviveStopWatch;

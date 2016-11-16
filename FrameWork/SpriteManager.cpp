@@ -33,6 +33,10 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::MEDUSAHEAD, sp));
 	this->loadSpriteInfo(eID::MEDUSAHEAD, "Resources//Images//medusaHead_animation.txt");
 
+	sp = new Sprite(spriteHandler, L"Resources//Images//Life.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::LIFE_ICON, sp));
+	this->loadSpriteInfo(eID::LIFE_ICON, "Resources//Images//life_info.txt");
+
 	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	sp->setOrigin(GVector2(0.0f, 0.0f));
 	this->_listSprite[eID::MAPSTAGE1] = sp;

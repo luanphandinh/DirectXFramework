@@ -39,6 +39,7 @@ enum eID
 	MEDUSAHEAD = 4,
 	STAIR = 5,
 	MAPSTAGE1 = 10,
+	LIFE_ICON = 11,
 };
 
 //status cho nhân vật
