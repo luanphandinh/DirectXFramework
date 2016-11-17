@@ -30,6 +30,12 @@ typedef D3DXVECTOR3 GVector3;
 #define DEFAULT_ORIGIN   D3DXVECTOR2(0.5f,0.5f)
 #define SCALE_FACTOR 2.0f
 
+/*
+	17/11 L : t sửa lại cái id nha,land gì đồ vật thể thì để có số 1 ở trước,
+				chừng m thêm cái chông và thì để 15 cửa 16 gì đó
+			từ vũ khí thì có số 2,tương tự tăng số đầu lên để chừng sữa cho dễ
+*/
+
 enum eID
 {
 	SIMON = 0, // Main character.

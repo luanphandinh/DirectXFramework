@@ -61,6 +61,12 @@
     <Filter Include="Header Files\Objects\GameStatusBoard">
       <UniqueIdentifier>{3086576a-773d-4520-ab6d-7a21560ef9b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects\Items">
+      <UniqueIdentifier>{77300470-b993-46c2-8943-3a4fcdd06b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Items">
+      <UniqueIdentifier>{728cb6de-6808-4c2e-8b98-913bc2d39acc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h">
