@@ -96,6 +96,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="Sprite.h" />
@@ -135,6 +136,7 @@
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="Sprite.cpp" />

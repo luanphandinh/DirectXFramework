@@ -177,6 +177,9 @@
     <ClInclude Include="GameStatusBoard.h">
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -288,6 +291,9 @@
       <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
     <ClCompile Include="GameStatusBoard.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
       <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
   </ItemGroup>
