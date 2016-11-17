@@ -89,6 +89,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Land.h" />
     <ClInclude Include="LifeUI.h" />
     <ClInclude Include="Map.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Land.cpp" />
     <ClCompile Include="LifeUI.cpp" />
     <ClCompile Include="main.cpp" />

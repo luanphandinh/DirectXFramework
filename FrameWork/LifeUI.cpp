@@ -13,8 +13,8 @@ LifeUI::LifeUI(GVector2 position,string text,string spritePath, int number,int H
 
 	for (int i = 0; i < MAX_HP_NUMBER; i++)
 	{
-		auto sprite = SpriteManager::getInstance()->getSprite(eID::LIFE_ICON);
-		sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::LIFE_ICON, spritePath));
+		auto sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
+		sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, spritePath));
 		sprite->setScale(SCALE_FACTOR);
 		_listIcons.push_back(sprite);
 		_listIcons.back()->setPosition(position.x + (_listIcons.back()->getFrameWidth() + GAP) * i, position.y + _text->getFontHeight()/2);
@@ -68,12 +68,12 @@ void LifeUI::setHPNumber(int number)
 	
 	for (int i = 0; i < _hp; i++)
 	{
-		_listIcons[i]->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::LIFE_ICON, _spritePath));
+		_listIcons[i]->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, _spritePath));
 	}
 
 	for (int i = _hp; i < MAX_HP_NUMBER;i++)
 	{
-		_listIcons[i]->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::LIFE_ICON, "white_life_icon"));
+		_listIcons[i]->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "white_life_icon"));
 	}
 }
 

@@ -11,6 +11,7 @@
 #include"SceneManager.h"
 #include"LifeUI.h"
 #include"GameStatusBoard.h"
+#include"Item.h"
 
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
@@ -127,6 +128,10 @@ private:
 	BaseObject* _preObject;
 	// reset các thuộc tính lại giá trị ban đầu.
 	void resetValues();
+
+	//========================TESTING===========================//
+	Item* _testItem;
+	//========================TESTING===========================//
 };
 _NAMESPACE_FRAMEWORK_END
 

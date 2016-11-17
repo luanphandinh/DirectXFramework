@@ -45,6 +45,7 @@ enum eID
 	STAIR_LEFTBOTTOM_RIGHTTOP = 13,
 	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
 	//Throwable weapon
+	ITEM = 20,
 	CROSS = 21,
 	SWORD = 22,
 	AXE = 23,
@@ -96,6 +97,12 @@ enum eStairDirection
 {
 	LEFTBOTTOM_TO_RIGHTTOP = 0,
 	RIGHTBOTTOM_TO_LEFTTOP = 1,
+};
+
+enum eItemType
+{
+	PICKED_UP = 1,
+	DROP = 2,
 };
 
 enum eDirection

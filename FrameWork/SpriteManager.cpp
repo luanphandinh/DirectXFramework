@@ -17,25 +17,27 @@ SpriteManager::~SpriteManager()
 
 void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 {
+	//SIMON
 	Sprite* sp = new Sprite(spriteHandler, L"Resources//Images//simon_animation.png");
 	this->_listSprite[eID::SIMON] = sp;
 	this->loadSpriteInfo(eID::SIMON, "Resources//Images//simon_animation.txt");
-
+	//SPEARKNGIHT
 	sp = new Sprite(spriteHandler, L"Resources//Images//spearKnight.png");
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::SPEARKNIGHT, sp));
 	this->loadSpriteInfo(eID::SPEARKNIGHT, "Resources//Images//spearKnight_animation.txt");
-
+	//BAT
 	sp = new Sprite(spriteHandler, L"Resources//Images//bat.png");
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::BAT, sp));
 	this->loadSpriteInfo(eID::BAT, "Resources//Images//bat_animation.txt");
-
+	//MEDUSA
 	sp = new Sprite(spriteHandler, L"Resources//Images//medusaHead.png");
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::MEDUSAHEAD, sp));
 	this->loadSpriteInfo(eID::MEDUSAHEAD, "Resources//Images//medusaHead_animation.txt");
+	//ITEM
+	sp = new Sprite(spriteHandler, L"Resources//Images//item.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::ITEM, sp));
+	this->loadSpriteInfo(eID::ITEM, "Resources//Images//item_info.txt");
 
-	sp = new Sprite(spriteHandler, L"Resources//Images//Life.png");
-	this->_listSprite.insert(pair<eID, Sprite*>(eID::LIFE_ICON, sp));
-	this->loadSpriteInfo(eID::LIFE_ICON, "Resources//Images//life_info.txt");
 
 	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	sp->setOrigin(GVector2(0.0f, 0.0f));
