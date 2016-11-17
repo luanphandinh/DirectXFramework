@@ -4,10 +4,11 @@
 #define GAP 3
 #define MAX_LIFE_NUMBER 3
 #define MAX_HP_NUMBER 16
+#define TEXT_TAB 86
 class LifeUI : public EmptyObject
 {
 public:
-	LifeUI(GVector2 position,string text,int lifeNumber,int HP = MAX_HP_NUMBER);
+	LifeUI(GVector2 position,string text,string spritePath,int lifeNumber,int HP = MAX_HP_NUMBER);
 	~LifeUI();
 
 	virtual void init();
@@ -22,6 +23,7 @@ public:
 	int getHPNumber();
 private:
 	Text* _text;
+	string _spritePath;
 	vector<Sprite*> _listIcons;
 	int _hp;
 	int _life;

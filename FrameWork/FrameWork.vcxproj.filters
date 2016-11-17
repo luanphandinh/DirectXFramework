@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{6f154ae1-bbec-4c91-9e5d-e0233404a0b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects\GameStatusBoard">
+      <UniqueIdentifier>{cb6cfc2b-2983-411c-a38f-86801006644c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\GameStatusBoard">
+      <UniqueIdentifier>{3086576a-773d-4520-ab6d-7a21560ef9b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h">
@@ -159,14 +165,17 @@
     <ClInclude Include="MedusaHead.h">
       <Filter>Header Files\Objects\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="LifeUI.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="EmptyObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeUI.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStatusBoard.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,14 +278,17 @@
     <ClCompile Include="MedusaHead.cpp">
       <Filter>Source Files\Objects\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="LifeUI.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="EmptyObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeUI.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStatusBoard.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

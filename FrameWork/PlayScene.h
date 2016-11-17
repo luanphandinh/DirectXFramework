@@ -42,6 +42,7 @@ private:
 	Land* _land;
 	Land* _land2;
 	Land* _land3;
+	Land* _land4;
 	Stair** _stairsRight;
 	Stair** _stairsLeft;
 	

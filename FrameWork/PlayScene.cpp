@@ -42,9 +42,9 @@ bool PlayScene::init()
 	}
 
 	_stairsLeft = new Stair*[7];
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 6; i++)
 	{
-		_stairsLeft[i] = new Stair(490 + i * 16, 150 - i * 16, 16, 16, eDirection::TOP, eStairDirection::RIGHTBOTTOM_TO_LEFTTOP);
+		_stairsLeft[i] = new Stair(490 + i * 16, 160 - i * 16, 16, 16, eDirection::TOP, eStairDirection::RIGHTBOTTOM_TO_LEFTTOP);
 	}
 	
 	//=====================TESTING==========================//
@@ -70,7 +70,7 @@ void PlayScene::update(float deltaTime)
 	{
 		_simon->checkCollision(_stairsRight[i], deltaTime);
 	}
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		_simon->checkCollision(_stairsLeft[i], deltaTime);
 	}
@@ -96,7 +96,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	{
 		_stairsRight[i]->draw(spriteHandle, _viewport);
 	}
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		_stairsLeft[i]->draw(spriteHandle, _viewport);
 	}

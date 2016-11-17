@@ -128,8 +128,8 @@ void Simon::init()
 	_isHitting = false;
 	_isThrowing = false;
 	//Tạo lifeUI
-	_lifeUI = new LifeUI(GVector2(20, 30),"PLAYER", 3);
-	_lifeUI->setHPNumber(14);
+	_gameStatusBoard = GameStatusBoard::getInstance();
+	_gameStatusBoard->init();
 }
 
 void Simon::resetValues() {
@@ -167,7 +167,7 @@ void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
 
-	_lifeUI->draw(spriteHandle,viewport);
+	_gameStatusBoard->draw(spriteHandle);
 }
 
 void Simon::release()
@@ -186,7 +186,8 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 
 	switch (key_event->_key)
 	{
-	case DIK_X:
+	case DIK_W:
+	case DIK_S:
 		if (!this->isInStatus(eStatus::SITTING) || this->isInStatus(eStatus::MOVING_LEFT)
 			|| this->isInStatus(eStatus::MOVING_RIGHT))
 		{
@@ -224,7 +225,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 			this->addStatus(eStatus::SITTING);
 		}
 		break;
-	case DIK_C:
+	case DIK_A:
 		this->removeStatus(eStatus::THROWING_ITEM);
 		this->removeStatus(eStatus::UPSTAIR);
 		this->removeStatus(eStatus::DOWNSTAIR);
