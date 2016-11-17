@@ -7,6 +7,7 @@
 #define TIME_POSITION GVector2(180, 0)
 #define SIMONLIFEUI_POSITION GVector2(20, 23)
 #define ENEMYLIFEUI_POSITION GVector2(20, 46)
+
 class GameStatusBoard
 {
 public:

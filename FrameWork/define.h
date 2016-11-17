@@ -33,13 +33,25 @@ typedef D3DXVECTOR3 GVector3;
 enum eID
 {
 	SIMON = 0, // Main character.
-	LAND = 1,
-	SPEARKNIGHT =2,
-	BAT = 3,
-	MEDUSAHEAD = 4,
-	STAIR = 5,
-	MAPSTAGE1 = 10,
-	LIFE_ICON = 11,
+	//Land and stairs with direction
+	LAND = 11,
+	STAIR = 12,
+	STAIR_LEFTBOTTOM_RIGHTTOP = 13,
+	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
+	//Throwable weapon
+	CROSS = 21,
+	SWORD = 22,
+	AXE = 23,
+	//Enemies
+	SPEARKNIGHT = 35,
+	BAT = 36,
+	MEDUSAHEAD = 37,
+
+	//stage
+	MAPSTAGE1 = 40,
+
+	//icon in gamestatusboard
+	LIFE_ICON = 51,
 };
 
 //status cho nhân vật
