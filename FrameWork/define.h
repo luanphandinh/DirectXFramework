@@ -32,9 +32,9 @@ typedef D3DXVECTOR3 GVector3;
 
 /*
 	17/11 L : t sửa lại cái id nha,land gì đồ vật thể thì để có số 1 ở trước,
-				chừng m thêm cái chông và thì để 15 cửa 16 gì đó
-			từ vũ khí thì có số 2,tương tự tăng số đầu lên để chừng sữa cho dễ
-*/
+	chừng m thêm cái chông và thì để 15 cửa 16 gì đó
+	từ vũ khí thì có số 2,tương tự tăng số đầu lên để chừng sữa cho dễ
+	*/
 
 enum eID
 {
@@ -46,9 +46,8 @@ enum eID
 	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
 	//Throwable weapon
 	ITEM = 20,
-	CROSS = 21,
-	SWORD = 22,
-	AXE = 23,
+	WEAPON = 21,
+	SPECIALITEM = 22,
 	//Enemies
 	SPEARKNIGHT = 35,
 	BAT = 36,
@@ -73,8 +72,8 @@ enum eStatus
 	SITTING = (1 << 5),
 	FALLING = (1 << 6),
 
-	DYING= (1 << 7),
-	WALKING=(1<<8),
+	DYING = (1 << 7),
+	WALKING = (1 << 8),
 	// Trạng thái huỷ, lúc này, đối tượng không update, không draw, 
 	// ở scene kiểm tra nếu phát hiện trạng thái này thì huỷ đối tượng.
 	DESTROY = (1 << 9),
@@ -103,6 +102,13 @@ enum eItemType
 {
 	PICKED_UP = 1,
 	DROP = 2,
+};
+
+enum eItemID
+{
+	CROSS = 1,
+	SWORD = 2,
+	AXE = 3,
 };
 
 enum eDirection

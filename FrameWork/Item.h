@@ -14,7 +14,7 @@ public:
 			@type: Loại item,rớt ra hoặc bị lượm lên
 			@dir : Hướng của item khi bị ném ra
 	*/
-	Item(GVector2 startPosition,eItemType type,eDirection dir);
+	Item(GVector2 startPosition, eItemType type, eItemID itemID, eDirection dir);
 	~Item();
 
 
@@ -37,6 +37,7 @@ protected:
 
 	eDirection _direction;
 	eItemType _type;
+	eItemID	_itemID;
 
 	map<string, IComponent*> _componentList;
 };

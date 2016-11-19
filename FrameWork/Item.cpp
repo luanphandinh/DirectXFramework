@@ -1,11 +1,12 @@
 ﻿#include "Item.h"
 
 
-Item::Item(GVector2 startPosition, eItemType type, eDirection dir) :BaseObject(eID::ITEM)
+Item::Item(GVector2 startPosition, eItemType type,eItemID itemID, eDirection dir) :BaseObject(eID::ITEM)
 {
 	_startPosition = startPosition;
 	_type = type;
 	_direction = dir;
+	_itemID = itemID;
 }
 
 

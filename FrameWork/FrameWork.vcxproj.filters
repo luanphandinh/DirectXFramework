@@ -67,6 +67,24 @@
     <Filter Include="Header Files\Objects\Items">
       <UniqueIdentifier>{728cb6de-6808-4c2e-8b98-913bc2d39acc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Objects\Items\Weapons">
+      <UniqueIdentifier>{7e149f65-e0b8-4428-918c-55d9cd5020a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items\Weapons">
+      <UniqueIdentifier>{41bca48b-9173-409b-b0ad-0fb29e3b3dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items\Special">
+      <UniqueIdentifier>{f2f784b1-8125-4902-90b2-635bdd972a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items\Standard">
+      <UniqueIdentifier>{7c0b1f75-2a4d-45dc-b466-e3a12f013d95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Items\Standard">
+      <UniqueIdentifier>{f0b149dd-43b8-4f68-8a03-2de0aa73ec5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Items\Special">
+      <UniqueIdentifier>{6c778e44-be53-45d6-99bd-abe45ccff977}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DeviceManager.h">
@@ -187,7 +205,10 @@
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Header Files\Objects\Items</Filter>
+      <Filter>Header Files\Objects\Items\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Header Files\Objects\Items\Standard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -306,7 +327,10 @@
       <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Objects\Items</Filter>
+      <Filter>Source Files\Objects\Items\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files\Objects\Items\Standard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
