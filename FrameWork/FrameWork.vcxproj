@@ -114,6 +114,7 @@
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Viewport.h" />
+    <ClInclude Include="WhipUpgrade.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Viewport.cpp" />
+    <ClCompile Include="WhipUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="pugixml-1.7\scripts\pugixml_vs2010.vcxproj">

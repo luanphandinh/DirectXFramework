@@ -15,7 +15,24 @@ Item::~Item()
 
 void Item::init()
 {
-	
+}
+
+void Item::initCommonComponent()
+{
+	this->setPosition(_startPosition);
+	this->setScale(SCALE_FACTOR);
+
+	GVector2 veloc = this->initVeloc(NORMAL_ITEM_SPEED);
+
+	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
+	_componentList.insert(pair<string, IComponent*>("Movement", movement));
+
+	Gravity* gravity = new Gravity(GVector2(0, -NORMAL_ITEM_SPEED), movement);
+	_componentList["Gravity"] = gravity;
+
+
+	auto collisionBody = new CollisionBody(this);
+	_componentList.insert(pair<string, IComponent*>("CollisionBody", collisionBody));
 }
 
 GVector2 Item::initVeloc(float speed)

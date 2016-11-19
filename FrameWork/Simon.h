@@ -15,6 +15,7 @@
 #include"Item.h"
 #include"ItemManager.h"
 #include"HeartItem.h"
+#include"WhipUpgrade.h"
 //========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
@@ -133,7 +134,7 @@ private:
 	void resetValues();
 
 	//========================TESTING===========================//
-	Item* _testItem;
+	Item** _testItem;
 	//========================TESTING===========================//
 };
 _NAMESPACE_FRAMEWORK_END

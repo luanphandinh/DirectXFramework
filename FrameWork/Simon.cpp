@@ -131,8 +131,11 @@ void Simon::init()
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
 	//========================TESTING===========================//
-	_testItem = new HeartItem(GVector2(50, 200));
-	ItemManager::insertItem(_testItem);
+	_testItem = new Item*[10];
+	_testItem[0] = new HeartItem(GVector2(50, 200));
+	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
+	ItemManager::insertItem(_testItem[0]);
+	ItemManager::insertItem(_testItem[1]);
 	//========================TESTING===========================//
 }
 
@@ -756,7 +759,6 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 
 		}
 	}
-	_testItem->checkCollision(otherObject, dt);
 	return 0.0f;
 }
 

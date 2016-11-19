@@ -22,8 +22,9 @@ public:
 	virtual void update(float deltatime) = 0;
 	virtual void draw(LPD3DXSPRITE, Viewport*) = 0;
 	virtual void release() = 0;
-
+	
 	virtual GVector2 initVeloc(float speed);
+	virtual void initCommonComponent();
 
 	GVector2 getVelocity();
 	eItemType getItemType();

@@ -8,3 +8,7 @@ axe						96		2		111		16		0.5			0.5
 sword					115		4		131		13		0.5			0.5
 heart_small				100		88		108		96		0.5			0.5
 heart_large				100		87		112		97		0.5			0.5
+red_money_bag			46 		84		61		99		0.5			0.5
+purple_money_bag		64		84		79		99		0.5			0.5
+white_money_bag			83		84		98		99		0.5			0.5
+whip_upgrade			74		22		90		38		0.5			0.5
