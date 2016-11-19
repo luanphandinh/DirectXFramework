@@ -20,6 +20,8 @@ bool PlayScene::init()
 	_simon = new Simon();
 	_simon->init();
 
+	_itemManager = new ItemManager();
+
 	_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
 	_spearKnight->init();
 
@@ -66,6 +68,10 @@ void PlayScene::update(float deltaTime)
 	_simon->checkCollision(_land, deltaTime);
 	_simon->checkCollision(_land2, deltaTime);
 	_simon->checkCollision(_land3, deltaTime);
+	//_itemManager->checkCollision(_simon, deltaTime);
+	_itemManager->checkCollision(_land, deltaTime);
+	_itemManager->checkCollision(_land2, deltaTime);
+	_itemManager->checkCollision(_land3, deltaTime);
 	for (int i = 0; i < 7; i++)
 	{
 		_simon->checkCollision(_stairsRight[i], deltaTime);
@@ -75,6 +81,7 @@ void PlayScene::update(float deltaTime)
 		_simon->checkCollision(_stairsLeft[i], deltaTime);
 	}
 	_simon->update(deltaTime);
+	_itemManager->update(deltaTime);
 	_spearKnight->update(deltaTime);
 	_spearKnight->checkCollision(_land, deltaTime);
 
@@ -82,6 +89,8 @@ void PlayScene::update(float deltaTime)
 
 	_bat->update(deltaTime);
 	_medusaHead->update(deltaTime);
+
+
 	//=====================TESTING==========================//
 }
 
@@ -100,14 +109,16 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	{
 		_stairsLeft[i]->draw(spriteHandle, _viewport);
 	}
-	_simon->draw(spriteHandle, _viewport);
-
-
+	
 	_spearKnight->draw(spriteHandle, _viewport);
 
 	_bat->draw(spriteHandle, _viewport);
 
 	_medusaHead->draw(spriteHandle, _viewport);
+
+	_itemManager->draw(spriteHandle, _viewport);
+
+	_simon->draw(spriteHandle, _viewport);
 	//=====================TESTING==========================//
 }
 
@@ -123,7 +134,7 @@ void PlayScene::setViewport(Viewport* viewport)
 }
 
 Simon * PlayScene::getSimon() {
-	return this->_simon;
+	return (Simon*)this->_simon;
 }
 
 //=====================TESTING==========================//

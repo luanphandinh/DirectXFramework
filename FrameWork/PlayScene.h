@@ -13,6 +13,7 @@
 #include"Stair.h"
 #include "Bat.h"
 #include "MedusaHead.h"
+#include "ItemManager.h"
 using namespace std;
 _USING_FRAMEWORK
 
@@ -34,7 +35,8 @@ public:
 private:
 	//==========================TEST=========================//
 	void updateViewport(BaseObject* objTracker);
-	Simon* _simon;
+	BaseObject* _simon;
+	BaseObject* _itemManager;
 	SpearKnight* _spearKnight;
 	Bat* _bat;
 	MedusaHead* _medusaHead;

@@ -11,8 +11,10 @@
 #include"SceneManager.h"
 #include"LifeUI.h"
 #include"GameStatusBoard.h"
+//========================TESTING===========================//
 #include"Item.h"
-
+#include"ItemManager.h"
+//========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
 

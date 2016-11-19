@@ -132,7 +132,7 @@ void Simon::init()
 	_gameStatusBoard->init();
 	//========================TESTING===========================//
 	_testItem = new Item(GVector2(50, 200), eItemType::DROP, eDirection::ALL);
-	_testItem->init();
+	ItemManager::insertItem(_testItem);
 	//========================TESTING===========================//
 }
 
@@ -165,18 +165,11 @@ void Simon::update(float deltatime)
 	{
 		it->second->update(deltatime);
 	}
-
-	//========================TESTING===========================//
-	_testItem->update(deltatime);
-	//========================TESTING===========================//
 }
 
 void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
-	//========================TESTING===========================//
-	_testItem->draw(spriteHandle, viewport);
-	//========================TESTING===========================//
 
 	_gameStatusBoard->draw(spriteHandle);
 }

@@ -27,11 +27,13 @@ class ItemManager : public BaseObject
 public:
 	ItemManager();
 	~ItemManager();
+	static void insertItem(Item* item);
 
 
 	void init();
 	void update(float deltatime);
 	void draw(LPD3DXSPRITE spriteHandle, Viewport* viewport);
+	void release();
 	RECT getBounding();
 	float checkCollision(BaseObject * object, float dt);
 
