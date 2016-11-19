@@ -14,6 +14,7 @@
 //========================TESTING===========================//
 #include"Item.h"
 #include"ItemManager.h"
+#include"HeartItem.h"
 //========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126

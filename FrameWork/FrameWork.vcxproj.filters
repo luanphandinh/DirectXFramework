@@ -210,6 +210,9 @@
     <ClInclude Include="ItemManager.h">
       <Filter>Header Files\Objects\Items\Standard</Filter>
     </ClInclude>
+    <ClInclude Include="HeartItem.h">
+      <Filter>Header Files\Objects\Items\Standard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -330,6 +333,9 @@
       <Filter>Source Files\Objects\Items\Standard</Filter>
     </ClCompile>
     <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files\Objects\Items\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartItem.cpp">
       <Filter>Source Files\Objects\Items\Standard</Filter>
     </ClCompile>
   </ItemGroup>

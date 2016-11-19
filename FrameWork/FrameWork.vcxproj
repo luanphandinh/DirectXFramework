@@ -87,6 +87,7 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="HeartItem.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="Item.h" />
@@ -128,6 +129,7 @@
     <ClCompile Include="GameStatusBoard.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="HeartItem.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Item.cpp" />

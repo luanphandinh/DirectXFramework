@@ -131,7 +131,7 @@ void Simon::init()
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
 	//========================TESTING===========================//
-	_testItem = new Item(GVector2(50, 200), eItemType::DROP, eDirection::ALL);
+	_testItem = new HeartItem(GVector2(50, 200));
 	ItemManager::insertItem(_testItem);
 	//========================TESTING===========================//
 }
