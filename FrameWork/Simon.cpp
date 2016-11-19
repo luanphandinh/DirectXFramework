@@ -134,8 +134,18 @@ void Simon::init()
 	_testItem = new Item*[10];
 	_testItem[0] = new HeartItem(GVector2(50, 200));
 	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
-	ItemManager::insertItem(_testItem[0]);
-	ItemManager::insertItem(_testItem[1]);
+	for (int i = 2; i < 7; i++)
+	{
+		_testItem[i] = new MoneyBag(GVector2(230 + i * 20,300));
+	}
+	for (int i = 7; i < 10; i++)
+	{
+		_testItem[i] = new HeartItem(GVector2(230 + i * 20, 300));
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		ItemManager::insertItem(_testItem[i]);
+	}
 	//========================TESTING===========================//
 }
 

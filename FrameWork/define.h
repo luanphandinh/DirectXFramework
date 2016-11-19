@@ -17,6 +17,8 @@
 #include<map>
 #include <stdio.h>
 #include"utils.h"
+#include <time.h>       /* time */
+#include<stdlib.h>/* for random srand, rand */
 using namespace std;
 
 #define WINDOW_WIDTH 512
@@ -104,11 +106,17 @@ enum eItemType
 	DROP = 2,
 };
 
-enum eItemID
+enum eHeartItemType
 {
-	CROSS = 1,
-	SWORD = 2,
-	AXE = 3,
+	SMALL = 1,
+	LARGE = 2,
+};
+
+enum eMoneyBagItemType
+{
+	RED = 1,
+	PURPLE = 2,
+	WHITE = 3,
 };
 
 enum eDirection

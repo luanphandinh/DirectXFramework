@@ -1,17 +1,16 @@
 #pragma once
 #include"Item.h"
-class HeartItem :
-	public Item
+class MoneyBag : public Item
 {
 public:
-	HeartItem(GVector2 startPosition);
-	~HeartItem();
+	MoneyBag(GVector2 startPosition);
+	~MoneyBag();
 
 	void init() override;
 	void update(float deltatime) override;
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
 private:
-	eHeartItemType _heartType;
+	eMoneyBagItemType _moneyBagType;
 };
 

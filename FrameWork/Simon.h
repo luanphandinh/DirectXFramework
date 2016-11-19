@@ -16,6 +16,7 @@
 #include"ItemManager.h"
 #include"HeartItem.h"
 #include"WhipUpgrade.h"
+#include"MoneyBag.h"
 //========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126

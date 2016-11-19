@@ -13,8 +13,23 @@ HeartItem::~HeartItem()
 
 void HeartItem::init() 
 {
+	/*between 1 and 3: */
+	int type = rand() % 2 + 1;
+	_heartType = (eHeartItemType)type;
+
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "heart_small"));
+
+	switch (_heartType)
+	{
+	case eHeartItemType::SMALL:
+		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "heart_small"));
+		break;
+	case eHeartItemType::LARGE:
+		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "heart_large"));
+		break;
+	default:
+		break;
+	}
 	Item::initCommonComponent();
 }
 
