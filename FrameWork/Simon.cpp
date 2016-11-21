@@ -63,7 +63,7 @@ void Simon::init()
 	/*_animations[eStatus::UPSTAIR] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::UPSTAIR]->addFrameRect(eID::SIMON, "normal", "up_stair", NULL);*/
 
-	_animations[eStatus::DOWNSTAIR] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::DOWNSTAIR] = new Animation(_sprite, 0.2f);
 	_animations[eStatus::DOWNSTAIR]->addFrameRect(eID::SIMON, "down_stair_01", "down_stair_02", NULL);
 /*
 	_animations[eStatus::STANDINGONSTAIR] = new Animation(_sprite, 0.1f);
@@ -738,8 +738,8 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 		{
 			// kiểm tra coi nhảy hết qua cái land cũ chưa
 			// để gọi event end.
-			collisionBody->checkCollision(otherObject, dt, false);
-
+			//collisionBody->checkCollision(otherObject, dt, false);
+			_preObject = nullptr;
 			//Nếu vật đi hết land cũ
 			//thì gán gravity lại thành falling
 			//Vì simon chỉ check collion kkhi nằm trong 1 trong 2 trạng thái,nên ra khỏi lane sẽ falling
