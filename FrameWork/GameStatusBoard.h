@@ -25,10 +25,14 @@ public:
 	void setEnemyLifeUI(LifeUI* _lifeUI);
 	LifeUI* getEnemyLifeUI(LifeUI* _lifeUI);
 
+	void setTimeScene(int time);
+	int getTimeScene();
+
 private:
-	LifeUI* _simonLifeUI;
-	LifeUI* _enemyLifeUI;
-	Text*	_scoreText;
-	Text*	_timeText;
+	LifeUI*		_simonLifeUI;
+	LifeUI*		_enemyLifeUI;
+	Text*		_scoreText;
+	Text*		_timeText;
+	int			_timeScene;
 };
 

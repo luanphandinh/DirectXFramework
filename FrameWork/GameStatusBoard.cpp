@@ -27,6 +27,7 @@ void GameStatusBoard::init()
 	_enemyLifeUI->setHPNumber(3);
 	_scoreText = new Text(L"Arial", "SCORE-", SCORE_POSITION.x, SCORE_POSITION.y, 21);
 	_timeText = new Text(L"Arial", "TIME", TIME_POSITION.x, TIME_POSITION.y, 21);
+	_timeScene = 300;
 }
 
 void GameStatusBoard::setSimonLifeUI(LifeUI* _lifeUI)
@@ -55,8 +56,20 @@ void GameStatusBoard::draw(LPD3DXSPRITE spriteHandle)
 {
 	_simonLifeUI->draw(spriteHandle, nullptr);
 	_enemyLifeUI->draw(spriteHandle, nullptr);
-	_scoreText->setText("SCORE-" + to_string(Score::getScore()));
+	_scoreText->setText("SCORE-" + formatScoreString(6,to_string(Score::getScore())));
 	_scoreText->draw();
-	_timeText->setText("TIME  " + to_string((int)(GameTime::getInstance()->getTotalGameTime()/1000)));
+	_timeText->setText("TIME  " + formatScoreString(4,to_string(_timeScene - (int)(GameTime::getInstance()->getTotalGameTime() / 1000))));
 	_timeText->draw();
+}
+
+
+void GameStatusBoard::setTimeScene(int time)
+{
+	if (this->_timeScene != time)
+		_timeScene = time;
+}
+
+int GameStatusBoard::getTimeScene()
+{
+	return _timeScene;
 }

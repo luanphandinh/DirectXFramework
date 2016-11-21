@@ -357,14 +357,14 @@
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
-    <Item Id="3" Name="object9" X="291" Y="156" Width="14" Height="11">
-      <ActiveBound X="291" Y="156" Width="14" Height="11" />
+    <Item Id="2" Name="land4" X="290" Y="154" Width="375" Height="4">
+      <ActiveBound X="260" Y="156" Width="375" Height="4" />
+    </Item>
+    <Item Id="3" Name="object10" X="288" Y="157" Width="18" Height="15">
+      <ActiveBound X="288" Y="157" Width="18" Height="15" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
-    </Item>
-    <Item Id="2" Name="land4" X="303" Y="156" Width="375" Height="4">
-      <ActiveBound X="303" Y="156" Width="375" Height="4" />
     </Item>
   </Objects>
 </Tilesmap>
