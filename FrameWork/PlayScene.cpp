@@ -23,6 +23,9 @@ bool PlayScene::init()
 	this->_simon->setPosition(2580, 63);
 
 	_itemManager = new ItemManager();
+	_gameStatusBoard = GameStatusBoard::getInstance();
+	_gameStatusBoard->init();
+	ActiveWeapon::setItemID(eItemID::SWORD);
 
 	_spearKnight = new SpearKnight(NORMAL, 2700, 320, 1);
 	_spearKnight->init();
@@ -41,7 +44,7 @@ bool PlayScene::init()
 	_mapObject = ObjectFactory::getListObjectFromFile("Resources//Maps//level2.xml");
 
 	//========================TESTING===========================//
-	_testItem = new BaseObject*[10];
+	_testItem = new BaseObject*[15];
 	_testItem[0] = new HeartItem(GVector2(50, 200));
 	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
 	for (int i = 2; i < 4; i++)
@@ -56,10 +59,15 @@ bool PlayScene::init()
 	{
 		_testItem[i] = new HeartItem(GVector2(230 + i * 20, 300));
 	}
-	for (int i = 0; i < 10; i++)
+	_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
+	_testItem[11] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::LEFT);
+	_testItem[12] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::RIGHT);
+	for (int i = 0; i < 13; i++)
 	{
 		ItemManager::insertItem((Item*)_testItem[i]);
 	}
+	
+
 	//========================TESTING===========================//
 	
 	//=====================TESTING==========================//
@@ -113,9 +121,12 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	{
 		obj->draw(spriteHandle, _viewport);
 	}
+	
+	_simon->draw(spriteHandle, _viewport);
+
 	_itemManager->draw(spriteHandle, _viewport);
 
-	_simon->draw(spriteHandle, _viewport);
+	_gameStatusBoard->draw(spriteHandle);
 	//=====================TESTING==========================//
 }
 

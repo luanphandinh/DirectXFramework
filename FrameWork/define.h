@@ -65,6 +65,16 @@ enum eID
 	BLANK = 52,
 };
 
+enum eItemID
+{
+	NOITEM = 0,
+	SWORD = 1,
+	AXE = 2,
+	BOORMERANG = 3,
+	HOLYWATER = 4,
+	STOPWATCH = 5,
+};
+
 //status cho nhân vật
 enum eStatus
 {

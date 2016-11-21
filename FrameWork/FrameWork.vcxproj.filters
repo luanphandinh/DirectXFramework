@@ -225,6 +225,24 @@
     <ClInclude Include="Door.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="SceneTime.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeCounter.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartCounter.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveWeapon.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -361,6 +379,24 @@
     </ClCompile>
     <ClCompile Include="Door.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTime.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeCounter.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartCounter.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Objects\Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>Source Files\Objects\Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveWeapon.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

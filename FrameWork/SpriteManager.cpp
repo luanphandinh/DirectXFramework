@@ -45,10 +45,6 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//level2.xml");
 	sp->setOrigin(GVector2(0.0f, 0.0f));
 	this->_listSprite[eID::LEVEL2] = sp;
-
-	//STATUSBOARD
-	sp = new Sprite(spriteHandler, L"Resources//Images//blank.png");
-	this->_listSprite.insert(pair<eID, Sprite*>(eID::BLANK, sp));
 }
 
 //Dùng để load sprite từ file map

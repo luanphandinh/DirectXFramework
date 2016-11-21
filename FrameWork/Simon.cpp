@@ -129,8 +129,7 @@ void Simon::init()
 	_isHitting = false;
 	_isThrowing = false;
 	//Tạo lifeUI
-	_gameStatusBoard = GameStatusBoard::getInstance();
-	_gameStatusBoard->init();
+	
 }
 
 void Simon::resetValues() {
@@ -167,8 +166,6 @@ void Simon::update(float deltatime)
 void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
-
-	_gameStatusBoard->draw(spriteHandle);
 }
 
 void Simon::release()
@@ -242,6 +239,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		this->removeStatus(eStatus::HITTING);
 		this->addStatus(eStatus::THROWING_ITEM);
 		_isThrowing = false;
+		
 		break;
 	case DIK_UP:
 		this->removeStatus(eStatus::DOWNSTAIR);
@@ -342,6 +340,7 @@ void Simon::updateStatus(float deltatime)
 			this->removeStatus(eStatus::THROWING_ITEM);
 			SAFE_DELETE(_throwItemStopWatch);
 			this->removeStatus(eStatus::UPSTAIR);
+			this->getWeapon();
 		}
 		return;
 	}
@@ -705,7 +704,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				_canOnStair = stair->canStandOnStair();
 				_stairDirection = stair->getStairDirection();
 
-				if (this->isInStatus(eStatus::SITTING))
+				if (this->isInStatus(eStatus::SITTING) && _preObject != nullptr && _preObject->getId() != eID::LAND)
 				{
 					this->removeStatus(eStatus::SITTING);
 					this->addStatus(eStatus::DOWNSTAIR);
@@ -876,4 +875,37 @@ void  Simon::updateCurrentAnimateIndex()
 		_currentAnimationIndex = eStatus::DYING;
 	}
 	
+}
+
+eDirection Simon::getDirection()
+{
+	if (this->getScale().x > 0)
+		return eDirection::RIGHT;
+	else return eDirection::LEFT;
+}
+
+void Simon::getWeapon()
+{
+	eItemID _itemID = ActiveWeapon::getItemID();
+
+	if (ActiveWeapon::getItemID() == eItemID::NOITEM) return;
+
+	Item* item = nullptr;
+
+	//Simon* simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+
+	GVector2 startPos = this->getPosition();
+
+	eDirection dir = this->getDirection();
+
+	switch (_itemID)
+	{
+	case eItemID::SWORD:
+		item = new Sword(startPos, eItemType::PICKED_UP, dir);
+		break;
+	default:
+		break;
+	}
+
+	ItemManager::insertItem((Item*)item);
 }
