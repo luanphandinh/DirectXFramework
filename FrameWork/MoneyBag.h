@@ -1,5 +1,6 @@
 #pragma once
 #include"Item.h"
+#include"Score.h"
 class MoneyBag : public Item
 {
 public:
@@ -10,6 +11,8 @@ public:
 	void update(float deltatime) override;
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
+
+	virtual float checkCollision(BaseObject* object, float dt) override;
 private:
 	eMoneyBagItemType _moneyBagType;
 };

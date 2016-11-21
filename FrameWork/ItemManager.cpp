@@ -56,6 +56,7 @@ void ItemManager::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 		}
 		else
 		{
+			//item->getSprite()->drawBounding(true);
 			item->draw(spriteHandle,viewport);
 		}
 	}
@@ -89,7 +90,7 @@ RECT ItemManager::getBounding()
 float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 {
 	eID otherObjectID = otherObject->getId();
-	//Chỉ kiểm tra va chạm cho simon
+	//Chỉ kiểm tra va chạm cho simon và land
 	if (otherObjectID != eID::SIMON && otherObjectID != eID::LAND)
 		return 0.0f;
 

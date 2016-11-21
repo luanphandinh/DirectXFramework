@@ -22,15 +22,15 @@ bool PlayScene::init()
 
 	_itemManager = new ItemManager();
 
-	_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
-	_spearKnight->init();
+	//_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
+	//_spearKnight->init();
 
-	_bat = new Bat(HANGING, 340, 100, -1);
+	/*_bat = new Bat(HANGING, 340, 100, -1);
 	_bat->init();
 
 	_medusaHead = new MedusaHead(HIDING, -1, START_POSITION,
 		MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
-	_medusaHead->init();
+	_medusaHead->init();*/
 
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 
@@ -48,6 +48,28 @@ bool PlayScene::init()
 	{
 		_stairsLeft[i] = new Stair(490 + i * 16, 160 - i * 16, 16, 16, eDirection::TOP, eStairDirection::RIGHTBOTTOM_TO_LEFTTOP);
 	}
+
+	//========================TESTING===========================//
+	_testItem = new Item*[10];
+	_testItem[0] = new HeartItem(GVector2(50, 200));
+	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
+	for (int i = 2; i < 4; i++)
+	{
+		_testItem[i] = new MoneyBag(GVector2(250 + i * 20, 300));		
+	}
+	for (int i = 4; i < 7; i++)
+	{
+		_testItem[i] = new MoneyBag(GVector2(50 + i * 20, 150));
+	}
+	for (int i = 7; i < 10; i++)
+	{
+		_testItem[i] = new HeartItem(GVector2(230 + i * 20, 300));
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		ItemManager::insertItem(_testItem[i]);
+	}
+	//========================TESTING===========================//
 	
 	//=====================TESTING==========================//
 	return true;
@@ -68,7 +90,7 @@ void PlayScene::update(float deltaTime)
 	_simon->checkCollision(_land, deltaTime);
 	_simon->checkCollision(_land2, deltaTime);
 	_simon->checkCollision(_land3, deltaTime);
-	//_itemManager->checkCollision(_simon, deltaTime);
+
 	_itemManager->checkCollision(_land, deltaTime);
 	_itemManager->checkCollision(_land2, deltaTime);
 	_itemManager->checkCollision(_land3, deltaTime);
@@ -80,15 +102,14 @@ void PlayScene::update(float deltaTime)
 	{
 		_simon->checkCollision(_stairsLeft[i], deltaTime);
 	}
+	//_spearKnight->checkCollision(_land, deltaTime);
+	//_spearKnight->checkCollision(_simon, deltaTime);
+	_itemManager->checkCollision(_simon, deltaTime);
 	_simon->update(deltaTime);
 	_itemManager->update(deltaTime);
-	_spearKnight->update(deltaTime);
-	_spearKnight->checkCollision(_land, deltaTime);
-
-	_spearKnight->checkCollision(_simon, deltaTime);
-
-	_bat->update(deltaTime);
-	_medusaHead->update(deltaTime);
+	//_spearKnight->update(deltaTime);
+	//_bat->update(deltaTime);
+	//_medusaHead->update(deltaTime);
 
 
 	//=====================TESTING==========================//
@@ -110,11 +131,11 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 		_stairsLeft[i]->draw(spriteHandle, _viewport);
 	}
 	
-	_spearKnight->draw(spriteHandle, _viewport);
+	/*_spearKnight->draw(spriteHandle, _viewport);
 
 	_bat->draw(spriteHandle, _viewport);
 
-	_medusaHead->draw(spriteHandle, _viewport);
+	_medusaHead->draw(spriteHandle, _viewport);*/
 
 	_itemManager->draw(spriteHandle, _viewport);
 

@@ -378,9 +378,10 @@ void Sprite::updateBounding()
 {
 	float scaleW = _frameWidth * abs(_scale.x);
 	float scaleH = _frameHeight * abs(_scale.y);
-
 	//left và right vẫn giữ nguyên theo trục x
-	this->_bound.left = _position.x - scaleW * _origin.x;
+	if (_scale.x > 0)
+		this->_bound.left = _position.x - scaleW * _origin.x;
+	else this->_bound.left = _position.x - scaleW * (1 - _origin.x);
 	//vì sẽ lấy position là tâm nếu có origin
 	//nên top và bottom sẽ dịch lên trên
 	//left và right dịch sang bên phải

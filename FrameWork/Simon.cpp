@@ -37,6 +37,7 @@ void Simon::init()
 	_componentList["CollisionBody"] = collisionBody;
 	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Simon::onCollisionBegin);
 	__hook(&CollisionBody::onCollisionEnd, collisionBody, &Simon::onCollisionEnd);
+	this->setPhysicBodySide(eDirection::ALL);
 	//_sprite->drawBounding(true);
 	//_test_sprite->setPosition(50, 50, 1.0f);
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
@@ -130,23 +131,6 @@ void Simon::init()
 	//Tạo lifeUI
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
-	//========================TESTING===========================//
-	_testItem = new Item*[10];
-	_testItem[0] = new HeartItem(GVector2(50, 200));
-	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
-	for (int i = 2; i < 7; i++)
-	{
-		_testItem[i] = new MoneyBag(GVector2(230 + i * 20,300));
-	}
-	for (int i = 7; i < 10; i++)
-	{
-		_testItem[i] = new HeartItem(GVector2(230 + i * 20, 300));
-	}
-	for (int i = 0; i < 10; i++)
-	{
-		ItemManager::insertItem(_testItem[i]);
-	}
-	//========================TESTING===========================//
 }
 
 void Simon::resetValues() {
@@ -766,7 +750,6 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			{
 				this->addStatus(eStatus::FALLING);
 			}
-
 		}
 	}
 	return 0.0f;

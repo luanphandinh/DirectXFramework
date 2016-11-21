@@ -33,6 +33,8 @@ void Item::initCommonComponent()
 
 	auto collisionBody = new CollisionBody(this);
 	_componentList.insert(pair<string, IComponent*>("CollisionBody", collisionBody));
+
+	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Item::onCollisionBegin);
 }
 
 GVector2 Item::initVeloc(float speed)
@@ -80,24 +82,26 @@ void Item::onCollisionBegin(CollisionEventArg* collision_arg)
 
 }
 
+void Item::stop()
+{
+	auto gravity = (Gravity*)this->_componentList["Gravity"];
+	gravity->setStatus(eGravityStatus::SHALLOWED);
+	auto movement = (Movement*)this->_componentList["Movement"];
+	movement->setVelocity(GVector2(0, 0));
+}
+
 float Item::checkCollision(BaseObject* otherObject, float dt)
 {
 	//Lấy collision body của item ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
 	eDirection direction;
-
+	if (otherObjectID != eID::LAND && otherObjectID != eID::SIMON) return 0.0f;
+	//if ((otherObjectID == eID::LAND)
+	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
 	if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
 	{
-		float moveX, moveY;
-		if (collisionBody->isCollidingIntersected(otherObject, moveX, moveY, dt))
-		{
-			collisionBody->updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
-		}
-		auto gravity = (Gravity*)this->_componentList["Gravity"];
-		gravity->setStatus(eGravityStatus::SHALLOWED);
-		auto movement = (Movement*)this->_componentList["Movement"];
-		movement->setVelocity(GVector2(0, 0));
+		this->stop();
 	}
 	return 0.0f;
 }

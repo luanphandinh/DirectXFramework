@@ -35,8 +35,8 @@ public:
 private:
 	//==========================TEST=========================//
 	void updateViewport(BaseObject* objTracker);
-	BaseObject* _simon;
-	BaseObject* _itemManager;
+	Simon* _simon;
+	ItemManager* _itemManager;
 	SpearKnight* _spearKnight;
 	Bat* _bat;
 	MedusaHead* _medusaHead;
@@ -47,7 +47,7 @@ private:
 	Land* _land4;
 	Stair** _stairsRight;
 	Stair** _stairsLeft;
-	
+	Item** _testItem;
 	//==========================TEST=========================//
 };
 

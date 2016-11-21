@@ -2,7 +2,7 @@
 #include"define.h"
 #include"BaseObject.h"
 #include"CollisionBody.h"
-#define NORMAL_ITEM_SPEED 400
+#define NORMAL_ITEM_SPEED 1000
 _USING_FRAMEWORK
 
 class Item : public BaseObject
@@ -29,9 +29,11 @@ public:
 	GVector2 getVelocity();
 	eItemType getItemType();
 
-	void onCollisionBegin(CollisionEventArg* collision_arg);
+	virtual void onCollisionBegin(CollisionEventArg* collision_arg);
 
 	virtual float checkCollision(BaseObject* object, float dt);
+
+	void stop();
 protected:
 	GVector2	_startPosition;
 	eItemType _type;
