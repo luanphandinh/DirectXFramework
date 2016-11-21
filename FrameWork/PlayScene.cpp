@@ -24,15 +24,15 @@ bool PlayScene::init()
 
 	_itemManager = new ItemManager();
 
-	//_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
-	//_spearKnight->init();
+	_spearKnight = new SpearKnight(NORMAL, 2700, 320, 1);
+	_spearKnight->init();
 
-	/*_bat = new Bat(HANGING, 340, 100, -1);
+	_bat = new Bat(HANGING, 2580, 320, -1);
 	_bat->init();
 
-	_medusaHead = new MedusaHead(HIDING, -1, START_POSITION,
+	_medusaHead = new MedusaHead(HIDING, -1, GVector2(2560,263),
 		MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
-	_medusaHead->init();*/
+	_medusaHead->init();
 
 	/*_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 	_mapObject = ObjectFactory::getListObjectFromFile("Resources//Maps//test.xml");*/
@@ -82,15 +82,17 @@ void PlayScene::update(float deltaTime)
 	{
 		_simon->checkCollision(obj, deltaTime);
 		_itemManager->checkCollision(obj, deltaTime);
+		_spearKnight->checkCollision(obj, deltaTime);
 	}
 	//_spearKnight->checkCollision(_land, deltaTime);
 	//_spearKnight->checkCollision(_simon, deltaTime);
 	_itemManager->checkCollision(_simon, deltaTime);
 	_simon->update(deltaTime);
 	_itemManager->update(deltaTime);
-	//_spearKnight->update(deltaTime);
-	//_bat->update(deltaTime);
-	//_medusaHead->update(deltaTime);
+
+	_spearKnight->update(deltaTime);
+	_bat->update(deltaTime);
+	_medusaHead->update(deltaTime);
 
 
 	//=====================TESTING==========================//
@@ -100,11 +102,13 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 {
 	//=====================TESTING==========================//
 	_backGround->draw(spriteHandle, _viewport);
-	/*_spearKnight->draw(spriteHandle, _viewport);
+
+	_spearKnight->draw(spriteHandle, _viewport);
 
 	_bat->draw(spriteHandle, _viewport);
 
-	_medusaHead->draw(spriteHandle, _viewport);*/
+	_medusaHead->draw(spriteHandle, _viewport);
+
 	for (BaseObject* obj : (*_mapObject))
 	{
 		obj->draw(spriteHandle, _viewport);

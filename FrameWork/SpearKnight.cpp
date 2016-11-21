@@ -61,7 +61,7 @@ void SpearKnight::init() {
 	_loopwatch = new StopWatch();
 
 	//*Test
-	this->setPosition(GVector2(100,100));
+	//this->setPosition(GVector2(100,100));
 	this->setStatus(eStatus::WALKING);
 	_sprite->drawBounding(false);
 }
@@ -169,6 +169,7 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	if (objectId == eID::LAND) {
 		if (collisionBody->checkCollision(object, direction, dt)) {
 				if (direction == eDirection::TOP && this->getVelocity().y < 0) {
+
 					auto gravity = (Gravity*)this->_listComponent["Gravity"];
 					auto movement = (Movement*)this->_listComponent["Movement"];
 					movement->setVelocity(GVector2(movement->getVelocity().x, 0));
