@@ -42,8 +42,8 @@ enum eID
 {
 	SIMON = 0, // Main character.
 	//Land and stairs with direction
-	LAND = 11,
-	STAIR = 12,
+	LAND = 2,
+	STAIR = 3,
 	STAIR_LEFTBOTTOM_RIGHTTOP = 13,
 	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
 	//Throwable weapon
