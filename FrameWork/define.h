@@ -44,6 +44,7 @@ enum eID
 	//Land and stairs with direction
 	LAND = 2,
 	STAIR = 3,
+	DOOR = 4,
 	STAIR_LEFTBOTTOM_RIGHTTOP = 13,
 	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
 	//Throwable weapon
@@ -57,9 +58,11 @@ enum eID
 
 	//stage
 	MAPSTAGE1 = 40,
+	LEVEL2 = 41,
 
 	//icon in gamestatusboard
 	LIFE_ICON = 51,
+	BLANK = 52,
 };
 
 //status cho nhân vật

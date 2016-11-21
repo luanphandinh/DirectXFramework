@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tilesmap columns="96" rows="48">
+  <MatrixIndex>
+    <Row id="0">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="1">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="2">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="3">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="4">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="5">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="6">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="7">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="8">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="9">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="10">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="11">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="12">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="13">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="14">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="15">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="16">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="17">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="18">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="19">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="20">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="21">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="22">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="23">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="24">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	4	1	2	22	23	13	14	3	4	2	2	13	14	22	23	2	2	3	4	2	2	22	23	3	4	2	2	2	2	22	23	1	1</Row>
+    <Row id="25">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	4	0	15	11	12	2	2	3	4	9	15	20	21	2	2	2	2	3	4	20	21	2	2	3	4	9	15	20	21	2	2	1	1</Row>
+    <Row id="26">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	4	0	16	13	14	2	2	3	4	7	8	22	23	2	2	2	2	3	4	22	23	2	2	3	4	7	8	22	23	2	2	1	1</Row>
+    <Row id="27">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	4	0	17	2	2	20	21	3	4	7	8	2	2	9	10	9	10	3	4	11	12	2	2	3	4	7	8	9	10	2	2	1	1</Row>
+    <Row id="28">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	1	2	2	22	23	1	1	1	1	2	2	1	1	1	1	1	1	13	14	2	2	1	1	1	1	1	1	2	2	1	1</Row>
+    <Row id="29">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	2	2	2	7	8	3	4	1	1	2	2	2	2	1	1	1	2	9	10	9	15	1	1	11	12	9	15	2	2	1	1</Row>
+    <Row id="30">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	2	2	2	1	1	3	4	1	1	2	2	2	2	1	1	1	2	1	1	7	8	1	1	13	14	7	8	18	1	1	1</Row>
+    <Row id="31">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	2	20	21	11	12	3	4	1	1	2	2	20	21	1	1	1	2	2	2	7	8	1	1	2	2	5	6	3	4	1	1</Row>
+    <Row id="32">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	2	22	23	13	14	3	4	1	1	2	2	22	23	1	1	1	2	2	2	1	1	1	1	2	2	6	2	3	4	1	1</Row>
+    <Row id="33">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	2	9	15	2	2	3	4	1	1	2	2	2	2	1	1	1	2	2	2	2	2	2	2	5	6	2	2	3	4	1	1</Row>
+    <Row id="34">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	2	7	8	2	2	3	4	1	1	2	2	2	2	1	1	1	2	2	2	2	2	2	2	6	2	2	2	3	4	1	1</Row>
+    <Row id="35">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+    <Row id="36">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	2	3	4	2	2	2	2	6	2	7	8	3	4	1	1</Row>
+    <Row id="37">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	2	3	4	2	2	2	6	2	2	11	12	3	4	1	1</Row>
+    <Row id="38">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	2	3	4	2	2	6	2	2	2	13	14	3	4	1	1</Row>
+    <Row id="39">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	3	4	5	6	7	8	9	10	2	2	3	4	1	1</Row>
+    <Row id="40">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	1	1	1	1	1	1	1	2	2	3	4	1	1</Row>
+    <Row id="41">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	3	4	11	12	2	2	2	2	2	2	3	4	1	1</Row>
+    <Row id="42">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	3	4	13	14	2	2	2	2	18	1	1	1	1	1</Row>
+    <Row id="43">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	15	3	4	2	2	2	2	5	6	2	2	9	15	1	1</Row>
+    <Row id="44">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	16	3	4	2	2	2	2	6	2	2	2	7	8	1	1</Row>
+    <Row id="45">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	17	3	4	7	8	5	6	9	10	9	10	7	8	1	1</Row>
+    <Row id="46">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1	1</Row>
+    <Row id="47">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0</Row>
+  </MatrixIndex>
+  <TileSet Columns="10" Rows="10" Widthtile="32" Heighttile="32" FileName="level2.png">
+    <Tiles>
+      <Tile Id="1" Name="tile_1">
+        <Rect X="0" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="2" Name="tile_2">
+        <Rect X="32" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="3" Name="tile_3">
+        <Rect X="64" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="4" Name="tile_4">
+        <Rect X="96" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="5" Name="tile_5">
+        <Rect X="128" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="6" Name="tile_6">
+        <Rect X="160" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="7" Name="tile_7">
+        <Rect X="192" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="8" Name="tile_8">
+        <Rect X="224" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="9" Name="tile_9">
+        <Rect X="256" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="10" Name="tile_10">
+        <Rect X="288" Y="0" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="11" Name="tile_11">
+        <Rect X="0" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="12" Name="tile_12">
+        <Rect X="32" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="13" Name="tile_13">
+        <Rect X="64" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="14" Name="tile_14">
+        <Rect X="96" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="15" Name="tile_15">
+        <Rect X="128" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="16" Name="tile_16">
+        <Rect X="160" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="17" Name="tile_17">
+        <Rect X="192" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="18" Name="tile_18">
+        <Rect X="224" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="19" Name="tile_19">
+        <Rect X="256" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="20" Name="tile_20">
+        <Rect X="288" Y="32" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="21" Name="tile_21">
+        <Rect X="0" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="22" Name="tile_22">
+        <Rect X="32" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="23" Name="tile_23">
+        <Rect X="64" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="24" Name="tile_24">
+        <Rect X="96" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="25" Name="tile_25">
+        <Rect X="128" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="26" Name="tile_26">
+        <Rect X="160" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="27" Name="tile_27">
+        <Rect X="192" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="28" Name="tile_28">
+        <Rect X="224" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="29" Name="tile_29">
+        <Rect X="256" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="30" Name="tile_30">
+        <Rect X="288" Y="64" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="31" Name="tile_31">
+        <Rect X="0" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="32" Name="tile_32">
+        <Rect X="32" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="33" Name="tile_33">
+        <Rect X="64" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="34" Name="tile_34">
+        <Rect X="96" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="35" Name="tile_35">
+        <Rect X="128" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="36" Name="tile_36">
+        <Rect X="160" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="37" Name="tile_37">
+        <Rect X="192" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="38" Name="tile_38">
+        <Rect X="224" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="39" Name="tile_39">
+        <Rect X="256" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="40" Name="tile_40">
+        <Rect X="288" Y="96" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="41" Name="tile_41">
+        <Rect X="0" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="42" Name="tile_42">
+        <Rect X="32" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="43" Name="tile_43">
+        <Rect X="64" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="44" Name="tile_44">
+        <Rect X="96" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="45" Name="tile_45">
+        <Rect X="128" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="46" Name="tile_46">
+        <Rect X="160" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="47" Name="tile_47">
+        <Rect X="192" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="48" Name="tile_48">
+        <Rect X="224" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="49" Name="tile_49">
+        <Rect X="256" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="50" Name="tile_50">
+        <Rect X="288" Y="128" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="51" Name="tile_51">
+        <Rect X="0" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="52" Name="tile_52">
+        <Rect X="32" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="53" Name="tile_53">
+        <Rect X="64" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="54" Name="tile_54">
+        <Rect X="96" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="55" Name="tile_55">
+        <Rect X="128" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="56" Name="tile_56">
+        <Rect X="160" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="57" Name="tile_57">
+        <Rect X="192" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="58" Name="tile_58">
+        <Rect X="224" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="59" Name="tile_59">
+        <Rect X="256" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="60" Name="tile_60">
+        <Rect X="288" Y="160" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="61" Name="tile_61">
+        <Rect X="0" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="62" Name="tile_62">
+        <Rect X="32" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="63" Name="tile_63">
+        <Rect X="64" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="64" Name="tile_64">
+        <Rect X="96" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="65" Name="tile_65">
+        <Rect X="128" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="66" Name="tile_66">
+        <Rect X="160" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="67" Name="tile_67">
+        <Rect X="192" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="68" Name="tile_68">
+        <Rect X="224" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="69" Name="tile_69">
+        <Rect X="256" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="70" Name="tile_70">
+        <Rect X="288" Y="192" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="71" Name="tile_71">
+        <Rect X="0" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="72" Name="tile_72">
+        <Rect X="32" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="73" Name="tile_73">
+        <Rect X="64" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="74" Name="tile_74">
+        <Rect X="96" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="75" Name="tile_75">
+        <Rect X="128" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="76" Name="tile_76">
+        <Rect X="160" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="77" Name="tile_77">
+        <Rect X="192" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="78" Name="tile_78">
+        <Rect X="224" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="79" Name="tile_79">
+        <Rect X="256" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="80" Name="tile_80">
+        <Rect X="288" Y="224" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="81" Name="tile_81">
+        <Rect X="0" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="82" Name="tile_82">
+        <Rect X="32" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="83" Name="tile_83">
+        <Rect X="64" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="84" Name="tile_84">
+        <Rect X="96" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="85" Name="tile_85">
+        <Rect X="128" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="86" Name="tile_86">
+        <Rect X="160" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="87" Name="tile_87">
+        <Rect X="192" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="88" Name="tile_88">
+        <Rect X="224" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="89" Name="tile_89">
+        <Rect X="256" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="90" Name="tile_90">
+        <Rect X="288" Y="256" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="91" Name="tile_91">
+        <Rect X="0" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="92" Name="tile_92">
+        <Rect X="32" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="93" Name="tile_93">
+        <Rect X="64" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="94" Name="tile_94">
+        <Rect X="96" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="95" Name="tile_95">
+        <Rect X="128" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="96" Name="tile_96">
+        <Rect X="160" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="97" Name="tile_97">
+        <Rect X="192" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="98" Name="tile_98">
+        <Rect X="224" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="99" Name="tile_99">
+        <Rect X="256" Y="288" Width="31" Height="31" />
+      </Tile>
+      <Tile Id="100" Name="tile_100">
+        <Rect X="288" Y="288" Width="31" Height="31" />
+      </Tile>
+    </Tiles>
+  </TileSet>
+  <Objects>
+    <Item Id="2" Name="land0" X="2563" Y="61" Width="440" Height="2">
+      <ActiveBound X="2563" Y="61" Width="440" Height="2" />
+    </Item>
+    <Item Id="2" Name="wall0" X="3009" Y="158" Width="1" Height="91">
+      <ActiveBound X="3009" Y="158" Width="1" Height="91" />
+    </Item>
+    <Item Id="3" Name="stair0" X="2784" Y="69" Width="15" Height="5">
+      <ActiveBound X="2784" Y="69" Width="15" Height="5" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object3" X="2800" Y="78" Width="12" Height="7">
+      <ActiveBound X="2800" Y="78" Width="12" Height="7" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object4" X="2817" Y="95" Width="11" Height="10">
+      <ActiveBound X="2817" Y="95" Width="11" Height="10" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object5" X="2834" Y="109" Width="10" Height="10">
+      <ActiveBound X="2834" Y="109" Width="10" Height="10" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object6" X="2850" Y="123" Width="10" Height="12">
+      <ActiveBound X="2850" Y="123" Width="10" Height="12" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object7" X="2867" Y="139" Width="10" Height="12">
+      <ActiveBound X="2867" Y="139" Width="10" Height="12" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object8" X="2883" Y="156" Width="9" Height="9">
+      <ActiveBound X="2883" Y="156" Width="9" Height="9" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object9" X="2898" Y="170" Width="12" Height="10">
+      <ActiveBound X="2898" Y="170" Width="12" Height="10" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="object10" X="2920" Y="188" Width="12" Height="13">
+      <ActiveBound X="2914" Y="187" Width="12" Height="13" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="object11" X="2923" Y="187" Width="75" Height="1">
+      <ActiveBound X="2927" Y="187" Width="75" Height="1" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="object12" X="3010" Y="315" Width="1" Height="122">
+      <ActiveBound X="3010" Y="315" Width="1" Height="122" />
+    </Item>
+    <Item Id="2" Name="object13" X="2878" Y="251" Width="0" Height="19">
+      <ActiveBound X="2878" Y="251" Width="0" Height="19" />
+    </Item>
+    <Item Id="2" Name="object14" X="2628" Y="255" Width="248" Height="1">
+      <ActiveBound X="2628" Y="255" Width="248" Height="1" />
+    </Item>
+    <Item Id="2" Name="object15" X="2622" Y="284" Width="4" Height="22">
+      <ActiveBound X="2622" Y="284" Width="4" Height="22" />
+    </Item>
+    <Item Id="2" Name="object16" X="2595" Y="286" Width="26" Height="2">
+      <ActiveBound X="2595" Y="286" Width="26" Height="2" />
+    </Item>
+    <Item Id="2" Name="object17" X="2589" Y="379" Width="0" Height="88">
+      <ActiveBound X="2589" Y="379" Width="0" Height="88" />
+    </Item>
+  </Objects>
+</Tilesmap>

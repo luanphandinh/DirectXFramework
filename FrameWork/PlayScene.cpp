@@ -19,6 +19,8 @@ bool PlayScene::init()
 	//=====================TESTING==========================//
 	_simon = new Simon();
 	_simon->init();
+	// set pos ở đây, đừng đặt trong class
+	this->_simon->setPosition(2580, 63);
 
 	_itemManager = new ItemManager();
 
@@ -32,8 +34,11 @@ bool PlayScene::init()
 		MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
 	_medusaHead->init();*/
 
-	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
-	_mapObject = ObjectFactory::getListObjectFromFile("Resources//Maps//test.xml");
+	/*_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
+	_mapObject = ObjectFactory::getListObjectFromFile("Resources//Maps//test.xml");*/
+
+	_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
+	_mapObject = ObjectFactory::getListObjectFromFile("Resources//Maps//level2.xml");
 
 	//========================TESTING===========================//
 	_testItem = new BaseObject*[10];
@@ -41,11 +46,11 @@ bool PlayScene::init()
 	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
 	for (int i = 2; i < 4; i++)
 	{
-		_testItem[i] = new MoneyBag(GVector2(250 + i * 20, 300));		
+		_testItem[i] = new MoneyBag(GVector2(2700 + i * 20, 300));
 	}
 	for (int i = 4; i < 7; i++)
 	{
-		_testItem[i] = new MoneyBag(GVector2(50 + i * 20, 150));
+		_testItem[i] = new MoneyBag(GVector2(2750 + i * 20, 200));
 	}
 	for (int i = 7; i < 10; i++)
 	{

@@ -222,6 +222,9 @@
     <ClInclude Include="ObjectFactory.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -354,6 +357,9 @@
       <Filter>Source Files\Objects\Items\Standard</Filter>
     </ClCompile>
     <ClCompile Include="ObjectFactory.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>

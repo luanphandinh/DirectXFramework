@@ -1,4 +1,4 @@
-#include "GameStatusBoard.h"
+﻿#include "GameStatusBoard.h"
 
 
 GameStatusBoard* GameStatusBoard::_instance = nullptr;
@@ -28,6 +28,16 @@ void GameStatusBoard::init()
 	_scoreText = new Text(L"Arial", "SCORE-", SCORE_POSITION.x, SCORE_POSITION.y, 21);
 	_timeText = new Text(L"Arial", "TIME", TIME_POSITION.x, TIME_POSITION.y, 21);
 	_timeScene = 300;
+
+	//tạo surface để vẽ background cho bảng
+	DeviceManager::getInstance()->getDevice()->CreateOffscreenPlainSurface(
+		WINDOW_WIDTH,
+		WINDOW_HEIGHT,
+		D3DFMT_X8R8G8B8,
+		D3DPOOL_DEFAULT,
+		&_surface,
+		NULL
+	);
 }
 
 void GameStatusBoard::setSimonLifeUI(LifeUI* _lifeUI)
@@ -54,6 +64,7 @@ LifeUI* GameStatusBoard::getEnemyLifeUI(LifeUI* _lifeUI)
 
 void GameStatusBoard::draw(LPD3DXSPRITE spriteHandle)
 {
+	drawBlankBackground(spriteHandle);
 	_simonLifeUI->draw(spriteHandle, nullptr);
 	_enemyLifeUI->draw(spriteHandle, nullptr);
 	_scoreText->setText("SCORE-" + formatScoreString(6,to_string(Score::getScore())));
@@ -61,6 +72,7 @@ void GameStatusBoard::draw(LPD3DXSPRITE spriteHandle)
 	_timeText->setText("TIME  " + formatScoreString(4,to_string(_timeScene - (int)(GameTime::getInstance()->getTotalGameTime() / 1000))));
 	_timeText->draw();
 }
+
 
 
 void GameStatusBoard::setTimeScene(int time)
@@ -72,4 +84,23 @@ void GameStatusBoard::setTimeScene(int time)
 int GameStatusBoard::getTimeScene()
 {
 	return _timeScene;
+}
+
+void GameStatusBoard::drawBlankBackground(LPD3DXSPRITE spriteHandler) 
+{
+	RECT r;
+	r.top = 0;
+	r.left = 0;
+	r.bottom = 70;
+	r.right = WINDOW_WIDTH;
+	DeviceManager::getInstance()->getDevice()->ColorFill(_surface, NULL, D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
+
+	DeviceManager::getInstance()->getDevice()->StretchRect(
+		_surface,
+		NULL,
+		DeviceManager::getInstance()->getSurface(),
+		&r,
+		D3DTEXF_NONE
+	);
+	//_background->render(spriteHandler);
 }

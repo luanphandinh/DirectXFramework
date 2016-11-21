@@ -65,11 +65,13 @@ float MoneyBag::checkCollision(BaseObject* otherObject, float dt)
 	{
 		if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
 		{
-			this->stop();
+				this->stop();
 		}
-		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING) && collisionBody->checkCollision(otherObject, direction, dt, false))
+		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING)
+			&& collisionBody->checkCollision(otherObject, direction, dt, false)) 
 		{
-			switch (_moneyBagType)
+			if (this->getVelocity().y != 0) return 0.0f;
+			switch (_moneyBagType) 
 			{
 			case eMoneyBagItemType::RED:
 				Score::plusScore(100);

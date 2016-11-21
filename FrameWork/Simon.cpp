@@ -119,7 +119,7 @@ void Simon::init()
 
 	this->_movingSpeed = SIMON_MOVING_SPEED;
 
-	this->setPosition(50, 100);
+	//this->setPosition(50, 100);
 	this->setStatus(eStatus::NORMAL);	
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 
@@ -536,14 +536,14 @@ void Simon::downstair()
 		moveLeft();
 		//Gán vector leo cầu thang
 		auto move = (Movement*)this->_componentList["Movement"];
-		move->setVelocity(GVector2(-SIMON_UPSTAIR_VELOCITY_X, -SIMON_UPSTAIR_VELOCITY_Y));
+		move->setVelocity(GVector2(-SIMON_UPSTAIR_VELOCITY_X, -SIMON_UPSTAIR_VELOCITY_Y/2));
 	}
 	else
 	{
 		moveRight();
 		//Gán vector leo cầu thang
 		auto move = (Movement*)this->_componentList["Movement"];
-		move->setVelocity(GVector2(SIMON_UPSTAIR_VELOCITY_X, -SIMON_UPSTAIR_VELOCITY_Y));
+		move->setVelocity(GVector2(SIMON_UPSTAIR_VELOCITY_X, -SIMON_UPSTAIR_VELOCITY_Y/2));
 	}
 	this->removeStatus(eStatus::STANDINGONSTAIR_UP);
 	this->addStatus(eStatus::STANDINGONSTAIR_DOWN);

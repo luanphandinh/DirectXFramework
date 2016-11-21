@@ -1,4 +1,4 @@
-#pragma 
+﻿#pragma 
 #include"LifeUI.h"
 #include"define.h"
 #include"Score.h"
@@ -34,5 +34,10 @@ private:
 	Text*		_scoreText;
 	Text*		_timeText;
 	int			_timeScene;
+
+	//Dùng để hiển thị nền màu đen cho bảng
+	Sprite* _background;
+	LPDIRECT3DSURFACE9 _surface;
+	void drawBlankBackground(LPD3DXSPRITE);
 };
 
