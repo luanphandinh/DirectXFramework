@@ -33,24 +33,10 @@ bool PlayScene::init()
 	_medusaHead->init();*/
 
 	_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
-
-	_land = new Land(-50, 64, 400, 20, eDirection::TOP);
-	_land2 = new Land(290, 160, 200, 20, eDirection::TOP);
-	_land3 = new Land(550, 64, 550, 20, eDirection::TOP);
-	_stairsRight = new Stair*[7];
-	for (int i = 0; i < 7; i++)
-	{
-		_stairsRight[i] = new Stair(192 + i * 16, 64 + i * 16, 16, 16, eDirection::TOP);
-	}
-
-	_stairsLeft = new Stair*[7];
-	for (int i = 0; i < 6; i++)
-	{
-		_stairsLeft[i] = new Stair(490 + i * 16, 160 - i * 16, 16, 16, eDirection::TOP, eStairDirection::RIGHTBOTTOM_TO_LEFTTOP);
-	}
+	_mapObject = ObjectFactory::getListObjectFromFile("Resources//Maps//test.xml");
 
 	//========================TESTING===========================//
-	_testItem = new Item*[10];
+	_testItem = new BaseObject*[10];
 	_testItem[0] = new HeartItem(GVector2(50, 200));
 	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
 	for (int i = 2; i < 4; i++)
@@ -67,7 +53,7 @@ bool PlayScene::init()
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		ItemManager::insertItem(_testItem[i]);
+		ItemManager::insertItem((Item*)_testItem[i]);
 	}
 	//========================TESTING===========================//
 	
@@ -87,20 +73,10 @@ void PlayScene::update(float deltaTime)
 	{
 		this->updateViewport(_simon);
 	}
-	_simon->checkCollision(_land, deltaTime);
-	_simon->checkCollision(_land2, deltaTime);
-	_simon->checkCollision(_land3, deltaTime);
-
-	_itemManager->checkCollision(_land, deltaTime);
-	_itemManager->checkCollision(_land2, deltaTime);
-	_itemManager->checkCollision(_land3, deltaTime);
-	for (int i = 0; i < 7; i++)
+	for (BaseObject* obj : (*_mapObject))
 	{
-		_simon->checkCollision(_stairsRight[i], deltaTime);
-	}
-	for (int i = 0; i < 6; i++)
-	{
-		_simon->checkCollision(_stairsLeft[i], deltaTime);
+		_simon->checkCollision(obj, deltaTime);
+		_itemManager->checkCollision(obj, deltaTime);
 	}
 	//_spearKnight->checkCollision(_land, deltaTime);
 	//_spearKnight->checkCollision(_simon, deltaTime);
@@ -119,24 +95,15 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 {
 	//=====================TESTING==========================//
 	_backGround->draw(spriteHandle, _viewport);
-	_land->draw(spriteHandle, _viewport);
-	_land2->draw(spriteHandle, _viewport);
-	_land3->draw(spriteHandle, _viewport);
-	for (int i = 0; i < 7; i++)
-	{
-		_stairsRight[i]->draw(spriteHandle, _viewport);
-	}
-	for (int i = 0; i < 6; i++)
-	{
-		_stairsLeft[i]->draw(spriteHandle, _viewport);
-	}
-	
 	/*_spearKnight->draw(spriteHandle, _viewport);
 
 	_bat->draw(spriteHandle, _viewport);
 
 	_medusaHead->draw(spriteHandle, _viewport);*/
-
+	for (BaseObject* obj : (*_mapObject))
+	{
+		obj->draw(spriteHandle, _viewport);
+	}
 	_itemManager->draw(spriteHandle, _viewport);
 
 	_simon->draw(spriteHandle, _viewport);

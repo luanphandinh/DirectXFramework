@@ -47,7 +47,7 @@ vector<BaseObject*>* ObjectFactory::getListObjectFromFile(const string path)
 			continue;
 		}
 		BaseObject* obj = getObjectById(item, enumID);
-		obj->setZIndex(0.5f);
+//		obj->setZIndex(0.5f);
 		if (obj != NULL)
 			listobject->push_back(obj);
 	}
@@ -111,6 +111,7 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 		return getLand(node);
 		break;
 	case STAIR:
+		return getStair(node);
 		break;
 	case STAIR_LEFTBOTTOM_RIGHTTOP:
 		break;

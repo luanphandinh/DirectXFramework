@@ -14,6 +14,7 @@
 #include "Bat.h"
 #include "MedusaHead.h"
 #include "ItemManager.h"
+#include "ObjectFactory.h"
 using namespace std;
 _USING_FRAMEWORK
 
@@ -35,19 +36,20 @@ public:
 private:
 	//==========================TEST=========================//
 	void updateViewport(BaseObject* objTracker);
-	Simon* _simon;
-	ItemManager* _itemManager;
-	SpearKnight* _spearKnight;
-	Bat* _bat;
-	MedusaHead* _medusaHead;
+	BaseObject* _simon;
+	BaseObject* _itemManager;
+	BaseObject* _spearKnight;
+	BaseObject* _bat;
+	BaseObject* _medusaHead;
 	Map* _backGround;
-	Land* _land;
-	Land* _land2;
-	Land* _land3;
-	Land* _land4;
-	Stair** _stairsRight;
-	Stair** _stairsLeft;
-	Item** _testItem;
+	//BaseObject* _land;
+	//BaseObject* _land2;
+	//BaseObject* _land3;
+	//BaseObject* _land4;
+	//BaseObject** _stairsRight;
+	//BaseObject** _stairsLeft;
+	vector<BaseObject*>* _mapObject;
+	BaseObject** _testItem;
 	//==========================TEST=========================//
 };
 

@@ -96,8 +96,8 @@ enum eStatus
 
 enum eStairDirection
 {
-	LEFTBOTTOM_TO_RIGHTTOP = 0,
-	RIGHTBOTTOM_TO_LEFTTOP = 1,
+	LEFTBOTTOM_TO_RIGHTTOP = 1,
+	RIGHTBOTTOM_TO_LEFTTOP = 2,
 };
 
 enum eItemType
