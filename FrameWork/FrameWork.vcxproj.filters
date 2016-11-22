@@ -225,6 +225,12 @@
     <ClInclude Include="Door.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Heart.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTime.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -361,6 +367,12 @@
     </ClCompile>
     <ClCompile Include="Door.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Heart.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTime.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

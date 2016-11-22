@@ -88,6 +88,7 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Heart.h" />
     <ClInclude Include="HeartItem.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneTime.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Simon.h" />
     <ClInclude Include="SpearKnight.h" />
@@ -134,6 +136,7 @@
     <ClCompile Include="GameStatusBoard.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Heart.cpp" />
     <ClCompile Include="HeartItem.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
@@ -149,6 +152,7 @@
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneTime.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Simon.cpp" />
     <ClCompile Include="SpearKnight.cpp" />

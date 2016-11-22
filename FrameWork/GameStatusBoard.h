@@ -3,11 +3,10 @@
 #include"define.h"
 #include"Score.h"
 #include"GameTime.h"
-#define SCORE_POSITION GVector2(20, 0)
-#define TIME_POSITION GVector2(180, 0)
+#include"Heart.h"
+#include"SceneTime.h"
 #define SIMONLIFEUI_POSITION GVector2(20, 23)
 #define ENEMYLIFEUI_POSITION GVector2(20, 46)
-
 class GameStatusBoard
 {
 public:
@@ -25,15 +24,10 @@ public:
 	void setEnemyLifeUI(LifeUI* _lifeUI);
 	LifeUI* getEnemyLifeUI(LifeUI* _lifeUI);
 
-	void setTimeScene(int time);
-	int getTimeScene();
-
 private:
 	LifeUI*		_simonLifeUI;
 	LifeUI*		_enemyLifeUI;
-	Text*		_scoreText;
-	Text*		_timeText;
-	int			_timeScene;
+	Text*		_life;
 
 	//Dùng để hiển thị nền màu đen cho bảng
 	Sprite* _background;
