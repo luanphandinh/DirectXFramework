@@ -225,10 +225,13 @@
     <ClInclude Include="Door.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Heart.h">
+    <ClInclude Include="SceneTime.h">
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
-    <ClInclude Include="SceneTime.h">
+    <ClInclude Include="LifeCounter.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartCounter.h">
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
   </ItemGroup>
@@ -368,10 +371,13 @@
     <ClCompile Include="Door.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Heart.cpp">
+    <ClCompile Include="SceneTime.cpp">
       <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
-    <ClCompile Include="SceneTime.cpp">
+    <ClCompile Include="LifeCounter.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartCounter.cpp">
       <Filter>Source Files\Objects\GameStatusBoard</Filter>
     </ClCompile>
   </ItemGroup>

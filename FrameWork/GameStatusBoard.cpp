@@ -67,8 +67,9 @@ void GameStatusBoard::draw(LPD3DXSPRITE spriteHandle)
 	_enemyLifeUI->draw(spriteHandle, nullptr);
 
 	Score::draw(spriteHandle);
-	Heart::draw(spriteHandle);
+	HeartCounter::draw(spriteHandle);
 	SceneTime::draw(spriteHandle);
+	LifeCounter::draw(spriteHandle);
 }
 
 void GameStatusBoard::drawBlankBackground(LPD3DXSPRITE spriteHandler) 

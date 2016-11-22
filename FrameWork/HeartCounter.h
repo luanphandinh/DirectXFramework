@@ -2,11 +2,11 @@
 #include"Text.h"
 #include"SpriteManager.h"
 #define HEARTTEXT_POSITION GVector2(320,23)
-class Heart
+class HeartCounter
 {
 public:
-	Heart();
-	~Heart();
+	HeartCounter();
+	~HeartCounter();
 
 	static void plusHeart(int value);
 	static int getHeart();

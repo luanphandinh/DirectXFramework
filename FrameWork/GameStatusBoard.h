@@ -3,8 +3,9 @@
 #include"define.h"
 #include"Score.h"
 #include"GameTime.h"
-#include"Heart.h"
+#include"HeartCounter.h"
 #include"SceneTime.h"
+#include"LifeCounter.h"
 #define SIMONLIFEUI_POSITION GVector2(20, 23)
 #define ENEMYLIFEUI_POSITION GVector2(20, 46)
 class GameStatusBoard

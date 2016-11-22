@@ -1,32 +1,32 @@
-#include "Heart.h"
+#include "HeartCounter.h"
 
 
-Heart::Heart()
+HeartCounter::HeartCounter()
 {
 }
 
 
-Heart::~Heart()
+HeartCounter::~HeartCounter()
 {
 }
 
-int Heart::_heart = 0;
+int HeartCounter::_heart = 0;
 
-Text* Heart::_heartText = nullptr;
+Text* HeartCounter::_heartText = nullptr;
 
-Sprite* Heart::_heartSprite = nullptr;
+Sprite* HeartCounter::_heartSprite = nullptr;
 
-void Heart::plusHeart(int value)
+void HeartCounter::plusHeart(int value)
 {
 	_heart += value;
 }
 
-int Heart::getHeart()
+int HeartCounter::getHeart()
 {
 	return _heart;
 }
 
-void Heart::draw(LPD3DXSPRITE spriteHandler)
+void HeartCounter::draw(LPD3DXSPRITE spriteHandler)
 {
 	if (_heartSprite == nullptr)
 	{
@@ -43,6 +43,6 @@ void Heart::draw(LPD3DXSPRITE spriteHandler)
 	
 	_heartText->draw();
 	
-	_heartText->setText(formatScoreString(2, to_string(Heart::getHeart())));
+	_heartText->setText("-" + formatScoreString(2, to_string(HeartCounter::getHeart())));
 	_heartSprite->render(spriteHandler);
 }
