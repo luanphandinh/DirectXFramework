@@ -705,7 +705,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				_canOnStair = stair->canStandOnStair();
 				_stairDirection = stair->getStairDirection();
 
-				if (this->isInStatus(eStatus::SITTING))
+				if (this->isInStatus(eStatus::SITTING) && _preObject != nullptr && _preObject->getId() != eID::LAND)
 				{
 					this->removeStatus(eStatus::SITTING);
 					this->addStatus(eStatus::DOWNSTAIR);
@@ -738,7 +738,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 		{
 			// kiểm tra coi nhảy hết qua cái land cũ chưa
 			// để gọi event end.
-			//collisionBody->checkCollision(otherObject, dt, false);
+			/*collisionBody->checkCollision(otherObject, dt, false);*/
 			_preObject = nullptr;
 
 			//Nếu vật đi hết land cũ
