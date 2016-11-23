@@ -117,9 +117,10 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	{
 		obj->draw(spriteHandle, _viewport);
 	}
-	_itemManager->draw(spriteHandle, _viewport);
-
+	
 	_simon->draw(spriteHandle, _viewport);
+
+	_itemManager->draw(spriteHandle, _viewport);
 
 	_gameStatusBoard->draw(spriteHandle);
 	//=====================TESTING==========================//

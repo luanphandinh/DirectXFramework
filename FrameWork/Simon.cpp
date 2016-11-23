@@ -239,7 +239,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		this->removeStatus(eStatus::HITTING);
 		this->addStatus(eStatus::THROWING_ITEM);
 		_isThrowing = false;
-		this->getWeapon();
+		
 		break;
 	case DIK_UP:
 		this->removeStatus(eStatus::DOWNSTAIR);
@@ -340,6 +340,7 @@ void Simon::updateStatus(float deltatime)
 			this->removeStatus(eStatus::THROWING_ITEM);
 			SAFE_DELETE(_throwItemStopWatch);
 			this->removeStatus(eStatus::UPSTAIR);
+			this->getWeapon();
 		}
 		return;
 	}
