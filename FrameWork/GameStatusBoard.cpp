@@ -70,6 +70,7 @@ void GameStatusBoard::draw(LPD3DXSPRITE spriteHandle)
 	HeartCounter::draw(spriteHandle);
 	SceneTime::draw(spriteHandle);
 	LifeCounter::draw(spriteHandle);
+	ActiveWeapon::drawIcon(spriteHandle);
 }
 
 void GameStatusBoard::drawBlankBackground(LPD3DXSPRITE spriteHandler) 

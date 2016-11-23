@@ -69,7 +69,7 @@ void Texture::render(LPD3DXSPRITE spriteHandle, RECT* srcRect, Viewport viewport
 {
 	GVector3 positionViewport;
 	positionViewport = viewport.getPositionInViewport(&GVector3(position.x, position.y, zIndex));
-	// ver 05/10/2015 - 7ung : ép kiêu về int. để tránh trường hợp bị hụt pixel 
+	//ép kiêu về int. để tránh trường hợp bị hụt pixel 
 	render(spriteHandle, srcRect, GVector2((int)positionViewport.x, (int)positionViewport.y), scale, rotate, origin, positionViewport.z);
 }
 

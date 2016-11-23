@@ -6,6 +6,7 @@
 #include"HeartCounter.h"
 #include"SceneTime.h"
 #include"LifeCounter.h"
+#include"ActiveWeapon.h"
 #define SIMONLIFEUI_POSITION GVector2(20, 23)
 #define ENEMYLIFEUI_POSITION GVector2(20, 46)
 class GameStatusBoard

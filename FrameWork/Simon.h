@@ -10,13 +10,14 @@
 #include"StopWatch.h"
 #include"SceneManager.h"
 #include"LifeUI.h"
-#include"GameStatusBoard.h"
+#include"ActiveWeapon.h"
 //========================TESTING===========================//
 #include"Item.h"
 #include"ItemManager.h"
 #include"HeartItem.h"
 #include"WhipUpgrade.h"
 #include"MoneyBag.h"
+#include"Sword.h"
 //========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
@@ -94,12 +95,14 @@ public:
 	void die();
 	void revive();
 	void hitting();
-
+	void getWeapon();
 	void enableGravity(bool);
 
 	float getMovingSpeed();
 
 	RECT getBounding() override;
+	
+	eDirection getDirection();
 
 	
 private:
@@ -117,7 +120,7 @@ private:
 	bool _isThrowing;
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
-	GameStatusBoard* _gameStatusBoard;
+
 	
 	
 

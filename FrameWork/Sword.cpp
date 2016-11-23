@@ -1,7 +1,7 @@
 #include "Sword.h"
 
 
-Sword::Sword(GVector2 startPosition, eItemType type, eDirection dir) :Weapon(startPosition,type,dir)
+Sword::Sword(GVector2 startPosition, eItemType type, eDirection dir) :Weapon(startPosition,type,dir,eItemID::SWORD)
 {
 	_damage = 3;
 }

@@ -23,6 +23,9 @@ bool PlayScene::init()
 	this->_simon->setPosition(2580, 63);
 
 	_itemManager = new ItemManager();
+	_gameStatusBoard = GameStatusBoard::getInstance();
+	_gameStatusBoard->init();
+	ActiveWeapon::setItemID(eItemID::SWORD);
 
 	//_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
 	//_spearKnight->init();
@@ -117,6 +120,8 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	_itemManager->draw(spriteHandle, _viewport);
 
 	_simon->draw(spriteHandle, _viewport);
+
+	_gameStatusBoard->draw(spriteHandle);
 	//=====================TESTING==========================//
 }
 

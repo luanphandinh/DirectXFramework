@@ -16,6 +16,8 @@
 #include "ItemManager.h"
 #include "ObjectFactory.h"
 #include"Sword.h"
+#include"GameStatusBoard.h"
+#include"ActiveWeapon.h"
 using namespace std;
 _USING_FRAMEWORK
 
@@ -51,6 +53,7 @@ private:
 	//BaseObject** _stairsLeft;
 	vector<BaseObject*>* _mapObject;
 	BaseObject** _testItem;
+	GameStatusBoard* _gameStatusBoard;
 	//==========================TEST=========================//
 };
 

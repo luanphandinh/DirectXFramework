@@ -1,9 +1,10 @@
 ﻿#include "Weapon.h"
 
 
-Weapon::Weapon(GVector2 startPosition, eItemType type, eDirection dir) :Item(startPosition,type)
+Weapon::Weapon(GVector2 startPosition, eItemType type, eDirection dir,eItemID id) :Item(startPosition,type)
 {
 	_direction = dir;
+	_itemId = id;
 }
 
 
