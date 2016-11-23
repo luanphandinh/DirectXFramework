@@ -12,7 +12,6 @@ public:
 		Khởi tạo Item:
 			@startPosition : vị trí bắt đầu
 			@type: Loại item,rớt ra hoặc bị lượm lên
-			@dir : Hướng của item khi bị ném ra
 	*/
 	Item(GVector2 startPosition, eItemType type);
 	~Item();
@@ -36,7 +35,7 @@ public:
 	void stop();
 protected:
 	GVector2	_startPosition;
-	eItemType _type;
+	eItemType	_type;
 	map<string, IComponent*> _componentList;
 };
 
