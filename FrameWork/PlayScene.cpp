@@ -57,8 +57,9 @@ bool PlayScene::init()
 		_testItem[i] = new HeartItem(GVector2(230 + i * 20, 300));
 	}
 	_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
-	_testItem[11] = new Sword(GVector2(2650, 200), eItemType::PICKED_UP, eDirection::LEFT);
-	for (int i = 0; i < 12; i++)
+	_testItem[11] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::LEFT);
+	_testItem[12] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::RIGHT);
+	for (int i = 0; i < 13; i++)
 	{
 		ItemManager::insertItem((Item*)_testItem[i]);
 	}
