@@ -18,7 +18,7 @@ public:
 	virtual void release() = 0;
 
 	virtual GVector2 initVeloc(float speed) override;
-	virtual void initCommonComponent() override;
+	virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent()  = 0;
 protected:
 	eDirection	_direction;

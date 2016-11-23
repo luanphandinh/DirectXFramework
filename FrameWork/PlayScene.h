@@ -15,6 +15,7 @@
 #include "MedusaHead.h"
 #include "ItemManager.h"
 #include "ObjectFactory.h"
+#include"Sword.h"
 using namespace std;
 _USING_FRAMEWORK
 

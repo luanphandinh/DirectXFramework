@@ -1,4 +1,4 @@
-#include "Weapon.h"
+﻿#include "Weapon.h"
 
 
 Weapon::Weapon(GVector2 startPosition, eItemType type, eDirection dir) :Item(startPosition,type)
@@ -34,17 +34,18 @@ GVector2 Weapon::initVeloc(float speed)
 	return Item::initVeloc(speed);
 }
 
-void Weapon::initCommonComponent()
+float Weapon::checkCollision(BaseObject* otherObject, float dt)
 {
-	switch (_type)
+	//Lấy collision body của item ra để checkCollision
+	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+	eID otherObjectID = otherObject->getId();
+	eDirection direction;
+	if (otherObjectID != eID::LAND && otherObjectID != eID::SIMON) return 0.0f;
+	//if ((otherObjectID == eID::LAND)
+	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
+	if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
 	{
-	case eItemType::DROP:
-		Item::initCommonComponent();
-		break;
-	case eItemType::PICKED_UP:
-		this->initWeaponComponent();
-		break;
-	default:
-		break;
+		this->stop();
 	}
+	return 0.0f;
 }

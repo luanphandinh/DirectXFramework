@@ -30,7 +30,6 @@ void Item::initCommonComponent()
 	Gravity* gravity = new Gravity(GVector2(0, -NORMAL_ITEM_SPEED), movement);
 	_componentList["Gravity"] = gravity;
 
-
 	auto collisionBody = new CollisionBody(this);
 	_componentList.insert(pair<string, IComponent*>("CollisionBody", collisionBody));
 
