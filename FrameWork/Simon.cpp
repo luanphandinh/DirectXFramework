@@ -909,3 +909,27 @@ void Simon::getWeapon()
 
 	ItemManager::insertItem((Item*)item);
 }
+
+
+void Simon::forceMoveRight() {
+	onKeyPressed(new KeyEventArg(DIK_RIGHT));
+}
+void Simon::unforceMoveRight() {
+	onKeyReleased(new KeyEventArg(DIK_RIGHT));
+}
+void Simon::forceMoveLeft() {
+	onKeyPressed(new KeyEventArg(DIK_LEFT));
+}
+void Simon::unforceMoveLeft() {
+	onKeyReleased(new KeyEventArg(DIK_LEFT));
+}
+void Simon::forceJump() {
+	onKeyPressed(new KeyEventArg(DIK_X));
+}
+void Simon::unforceJump() {
+	onKeyReleased(new KeyEventArg(DIK_X));
+}
+void Simon::removeGravity() {
+	auto graivity = (Gravity*)(this->_componentList.find("Gravity")->second);
+	graivity->setGravity(GVector2Zero);
+}

@@ -96,6 +96,13 @@ public:
 	void revive();
 	void hitting();
 	void getWeapon();
+	void forceMoveRight();
+	void unforceMoveRight();
+	void forceMoveLeft();
+	void unforceMoveLeft();
+	void forceJump();
+	void unforceJump();
+	void removeGravity();
 	void enableGravity(bool);
 
 	float getMovingSpeed();
