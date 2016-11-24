@@ -739,8 +739,8 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 		{
 			// kiểm tra coi nhảy hết qua cái land cũ chưa
 			// để gọi event end.
-			/*collisionBody->checkCollision(otherObject, dt, false);*/
-			_preObject = nullptr;
+			collisionBody->checkCollision(otherObject, dt, false);
+			//_preObject = nullptr;
 
 			//Nếu vật đi hết land cũ
 			//thì gán gravity lại thành falling

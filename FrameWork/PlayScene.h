@@ -55,6 +55,7 @@ private:
 	vector<BaseObject*>* _mapObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
+	bool _isSwitchSence;
 	//==========================TEST=========================//
 };
 

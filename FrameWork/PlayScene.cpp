@@ -4,7 +4,7 @@
 PlayScene::PlayScene()
 {
 	Director::loadStageInfo("Resources//Maps//level2ViewportInfo.txt",eID::LEVEL2);
-	Director::setCurrentViewport("s2");
+	Director::setCurrentViewport("s1");
 	GVector2 pos = Director::getCurrentStartViewportPosition();
 	_viewport = new Viewport(pos.x, pos.y, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
@@ -22,8 +22,9 @@ bool PlayScene::init()
 	//=====================TESTING==========================//
 	_simon = new Simon();
 	_simon->init();
+	_isSwitchSence = false;
 	// set pos ở đây, đừng đặt trong class
-	this->_simon->setPosition(2580, 700);
+	this->_simon->setPosition(2700, 300);
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
@@ -147,11 +148,25 @@ Simon * PlayScene::getSimon() {
 //=====================TESTING==========================//
 void PlayScene::updateViewport(BaseObject* objTracker)
 {
+	//=====================TESTING CHO THANG SIMON CHUYEN MAN==========================//
+	GVector2 pos = objTracker->getPosition();
+
+	if (pos.y > 370 && !_isSwitchSence)
+	{
+		Director::setCurrentViewport("s2");
+		GVector2 pos = Director::getCurrentStartViewportPosition();
+		_viewport->setPositionWorld(GVector2(pos.x, pos.y));
+		this->getSimon()->setPosition(2850, 500);
+		//this->getSimon()->addStatus(eStatus::STANDINGONSTAIR);
+		//this->getSimon()->setStatus(eStatus::FALLING);
+		_isSwitchSence = true;
+	}
+	//=====================TESTING CHO THANG SIMON CHUYEN MAN==========================//
 	// Vị trí hiện tại của viewport. 
 	GVector2 current_position = _viewport->getPositionWorld();
 
 	//GVector2 worldsize = this->_backGround->getWorldSize();
-	GVector2 worldsize = Director::getCurrentViewportSize();
+	GVector2 worldsize = Director::getCurrentViewportBound();
 	// Bám theo object.
 	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, worldsize.x),
 		current_position.y);

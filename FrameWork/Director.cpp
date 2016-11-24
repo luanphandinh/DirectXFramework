@@ -12,18 +12,19 @@ Director::~Director()
 
 eID	Director::_currentLevelId = eID::LEVEL2;
 string Director::_currentViewport = "s1";
-map<string, RECT> Director::_listViewportInfo;
 
-GVector2 Director::getCurrentViewportSize()
+map<string, ViewportInfo> Director::_listViewportInfo;
+
+GVector2 Director::getCurrentViewportBound()
 {
-	return GVector2(_listViewportInfo[_currentViewport].right, 
-		_listViewportInfo[_currentViewport].bottom);
+	return GVector2(_listViewportInfo[_currentViewport].bound.left, 
+		_listViewportInfo[_currentViewport].bound.right);
 }
 
 GVector2 Director::getCurrentStartViewportPosition()
 {
-	return GVector2(_listViewportInfo[_currentViewport].left,
-		_listViewportInfo[_currentViewport].top + WINDOW_HEIGHT);
+	return GVector2(_listViewportInfo[_currentViewport].position.x,
+		_listViewportInfo[_currentViewport].position.y + WINDOW_HEIGHT);
 }
 
 void Director::setCurrentViewport(const char* name)
@@ -41,14 +42,15 @@ void Director::loadStageInfo(const char* fileInfoPath, eID _levelId)
 	{
 		while (!feof(file))
 		{
-			RECT rect;
+			ViewportInfo info;
+			int x, y;
 			GVector2 origin;
 			char name[100];
 			fgets(name, 100, file);
 
-			fscanf(file, "%s %d %d %d %d", &name, &rect.left, &rect.top, &rect.right, &rect.bottom);
-
-			_listViewportInfo[name] = rect;
+			fscanf(file, "%s %d %d %d %d", &name, &x, &y, &info.bound.left, &info.bound.right);
+			info.position = GVector2(x, y);
+			_listViewportInfo[name] = info;
 		}
 	}
 
