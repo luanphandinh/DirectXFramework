@@ -3,10 +3,6 @@
 
 PlayScene::PlayScene()
 {
-	Director::loadStageInfo("Resources//Maps//level2ViewportInfo.txt",eID::LEVEL2);
-	Director::setCurrentViewport("s1");
-	GVector2 pos = Director::getCurrentStartViewportPosition();
-	_viewport = new Viewport(pos.x, pos.y, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 
@@ -19,6 +15,9 @@ PlayScene::~PlayScene()
 
 bool PlayScene::init() 
 {
+	_director = new Level2Director();
+	_director->init();
+	_viewport = _director->getViewport();
 	//=====================TESTING==========================//
 	_simon = new Simon();
 	_simon->init();
@@ -148,35 +147,7 @@ Simon * PlayScene::getSimon() {
 //=====================TESTING==========================//
 void PlayScene::updateViewport(BaseObject* objTracker)
 {
-	//=====================TESTING CHO THANG SIMON CHUYEN MAN==========================//
-	GVector2 pos = objTracker->getPosition();
-
-	if (pos.y > 370 && !_isSwitchSence)
-	{
-		Director::setCurrentViewport("s2");
-		GVector2 pos = Director::getCurrentStartViewportPosition();
-		_viewport->setPositionWorld(GVector2(pos.x, pos.y));
-		this->getSimon()->setPosition(2850, 500);
-		//this->getSimon()->addStatus(eStatus::STANDINGONSTAIR);
-		//this->getSimon()->setStatus(eStatus::FALLING);
-		_isSwitchSence = true;
-	}
-	//=====================TESTING CHO THANG SIMON CHUYEN MAN==========================//
-	// Vị trí hiện tại của viewport. 
-	GVector2 current_position = _viewport->getPositionWorld();
-
-	//GVector2 worldsize = this->_backGround->getWorldSize();
-	GVector2 worldsize = Director::getCurrentViewportBound();
-	// Bám theo object.
-	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, worldsize.x),
-		current_position.y);
-
-	// Không cho đi quá map.
-	if (new_position.x + WINDOW_WIDTH > worldsize.y)
-	{
-		new_position.x = worldsize.y - WINDOW_WIDTH;
-	}
-
-	_viewport->setPositionWorld(new_position);
+	_director->updateViewport(objTracker);
+	_viewport = _director->getViewport();
 }
 //=====================TESTING==========================//
