@@ -2,10 +2,11 @@
 
 #include "Animation.h"
 #include "IComponent.h"
-//#include "BaseEnemy.h"
 #include "StopWatch.h"
 #include "BaseObject.h"
 #include "CollisionBody.h"
+
+#define TOTAL_ANI 4
 
 class Door :public BaseObject{
 public:
@@ -16,18 +17,17 @@ public:
 	@x, y: tọa độ của pos
 	*/
 	Door(eStatus status, GVector2 pos, int direction);
-	Door(eStatus status, float x, float y, int direction);
 	~Door();
 
 	void init();
 	void update(float);
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
-	void onCollisionBegin(CollisionEventArg*);
-	void onCollisionEnd(CollisionEventArg*);
-	float checkCollision(BaseObject*, float);
+	// chắc là ko nên va chạm :v
+	//void onCollisionBegin(CollisionEventArg*);
+	//void onCollisionEnd(CollisionEventArg*);
+	//float checkCollision(BaseObject*, float);
 	void setPosition(GVector2);
-	GVector2 getVelocity();
 	IComponent* getComponent(string);
 
 private:
@@ -35,10 +35,10 @@ private:
 	map<int, Animation*> _animations;
 	BaseObject* prevObject;
 
+	StopWatch* _stopwatch;
 	void changeDirection();
-	// Init values
-	bool		_verticalflag;
-
+	bool isVirgin;
 	void updateClosing();
+	int aniCount;
 
 };
