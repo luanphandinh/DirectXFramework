@@ -1,6 +1,7 @@
 #pragma once
 #include"Weapon.h"
 #define SWORD_SPEED 250
+#define SWORD_DISTANCE GVector2(150,0)
 class Sword : public Weapon
 {
 public:
@@ -12,11 +13,13 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
 
+	virtual float checkCollision(BaseObject* object, float dt) override;
+
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
 	virtual GVector2 initVeloc(float speed) override;
 protected:
 	int		_damage;
-	long	_distance;
+	GVector2 _distance;
 };
 

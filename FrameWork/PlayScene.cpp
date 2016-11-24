@@ -25,7 +25,7 @@ bool PlayScene::init()
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
-	ActiveWeapon::setItemID(eItemID::SWORD);
+	//ActiveWeapon::setItemID(eItemID::SWORD);
 
 	//_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
 	//_spearKnight->init();
@@ -45,7 +45,7 @@ bool PlayScene::init()
 
 	//========================TESTING===========================//
 	_testItem = new BaseObject*[15];
-	_testItem[0] = new HeartItem(GVector2(50, 200));
+	_testItem[0] = new HeartItem(GVector2(2700, 200));
 	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
 	for (int i = 2; i < 4; i++)
 	{
@@ -57,7 +57,7 @@ bool PlayScene::init()
 	}
 	for (int i = 7; i < 10; i++)
 	{
-		_testItem[i] = new HeartItem(GVector2(230 + i * 20, 300));
+		_testItem[i] = new HeartItem(GVector2(2700 + i * 20, 300));
 	}
 	_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
 	_testItem[11] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::LEFT);

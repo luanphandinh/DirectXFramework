@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include"Item.h"
+#include"ActiveWeapon.h"
 class Weapon : public Item
 {
 public:
@@ -25,11 +26,13 @@ public:
 	/*
 		kiểm tra va chạm
 	*/
-	virtual float checkCollision(BaseObject* object, float dt) override;
+	virtual float checkCollision(BaseObject* object, float dt) override = 0;
 	/*
 		dùng cho các lớp con để khởi tạo các component riêng
 	*/
 	virtual void initWeaponComponent()  = 0;
+
+	virtual void pickedUp() override;
 protected:
 	eDirection	_direction;
 	eItemID		_itemId;

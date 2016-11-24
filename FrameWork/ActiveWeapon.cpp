@@ -29,6 +29,7 @@ eItemID ActiveWeapon::getItemID()
 
 void ActiveWeapon::drawIcon(LPD3DXSPRITE spriteHandler)
 {
+	if (_itemID == eItemID::NOITEM) return;
 	if (_spriteWeapon == nullptr)
 	{
 		_spriteWeapon = SpriteManager::getInstance()->getSprite(eID::ITEM);

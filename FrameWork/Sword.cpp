@@ -51,6 +51,8 @@ GVector2 Sword::initVeloc(float speed)
 void Sword::update(float deltatime)
 {
 	Weapon::update(deltatime);
+	if (abs(this->getPositionX() - this->_startPosition.x) > SWORD_DISTANCE.x)
+		this->setStatus(eStatus::DESTROY);
 }
 
 void Sword::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
@@ -75,4 +77,13 @@ void Sword::initWeaponComponent()
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::SHALLOWED);
 	gravity->setGravity(GVector2(0, 0));
+}
+
+float Sword::checkCollision(BaseObject* otherObject, float dt)
+{
+	if (_type == eItemType::DROP)
+	{
+		Weapon::checkCollision(otherObject, dt);
+	}
+	return 0.0f;
 }

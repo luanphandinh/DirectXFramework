@@ -36,7 +36,13 @@ public:
 
 	virtual float checkCollision(BaseObject* object, float dt);
 
+	//Khi va chạm với land thì ngứng
 	void stop();
+	/*
+		Khi va chạm với simon thì bị picked_up
+		Hàm này sẽ do các lớp con kế thừa xuống và xử lý
+	*/
+	virtual void pickedUp() = 0;
 protected:
 	GVector2	_startPosition;
 	eItemType	_type;

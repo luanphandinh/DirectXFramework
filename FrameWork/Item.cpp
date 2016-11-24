@@ -89,6 +89,11 @@ void Item::stop()
 	movement->setVelocity(GVector2(0, 0));
 }
 
+void Item::pickedUp()
+{
+
+}
+
 float Item::checkCollision(BaseObject* otherObject, float dt)
 {
 	//Lấy collision body của item ra để checkCollision
@@ -98,9 +103,18 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 	if (otherObjectID != eID::LAND && otherObjectID != eID::SIMON) return 0.0f;
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
-	if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
+	if (otherObjectID == eID::LAND || otherObjectID == eID::SIMON)
 	{
-		this->stop();
+		if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
+		{
+			this->stop();
+		}
+		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING)
+			&& collisionBody->checkCollision(otherObject, direction, dt, false))
+		{
+			if (this->getVelocity().y != 0) return 0.0f;
+			this->pickedUp();
+		}
 	}
 	return 0.0f;
 }

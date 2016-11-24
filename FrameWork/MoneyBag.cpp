@@ -52,41 +52,21 @@ void MoneyBag::release()
 	Item::release();
 }
 
-float MoneyBag::checkCollision(BaseObject* otherObject, float dt)
+void MoneyBag::pickedUp()
 {
-	//Lấy collision body của item ra để checkCollision
-	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
-	eID otherObjectID = otherObject->getId();
-	eDirection direction;
-	if (otherObjectID != eID::LAND && otherObjectID != eID::SIMON) return 0.0f;
-	//if ((otherObjectID == eID::LAND)
-	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
-	if (otherObjectID == eID::LAND || otherObjectID == eID::SIMON)
+	switch (_moneyBagType)
 	{
-		if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
-		{
-				this->stop();
-		}
-		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING)
-			&& collisionBody->checkCollision(otherObject, direction, dt, false)) 
-		{
-			if (this->getVelocity().y != 0) return 0.0f;
-			switch (_moneyBagType) 
-			{
-			case eMoneyBagItemType::RED:
-				Score::plusScore(100);
-				break;
-			case eMoneyBagItemType::PURPLE:
-				Score::plusScore(300);
-				break;
-			case eMoneyBagItemType::WHITE:
-				Score::plusScore(700);
-				break;
-			default:
-				break;
-			}
-			this->setStatus(eStatus::DESTROY);
-		}
+	case eMoneyBagItemType::RED:
+		Score::plusScore(100);
+		break;
+	case eMoneyBagItemType::PURPLE:
+		Score::plusScore(300);
+		break;
+	case eMoneyBagItemType::WHITE:
+		Score::plusScore(700);
+		break;
+	default:
+		break;
 	}
-	return 0.0f;
+	this->setStatus(eStatus::DESTROY);
 }
