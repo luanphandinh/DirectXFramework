@@ -61,7 +61,7 @@ void SpearKnight::init() {
 	_loopwatch = new StopWatch();
 
 	//*Test
-	this->setPosition(GVector2(100,100));
+	//this->setPosition(GVector2(100,100));
 	this->setStatus(eStatus::WALKING);
 	_sprite->drawBounding(false);
 }
