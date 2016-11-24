@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -103,6 +103,8 @@
     <ClInclude Include="MoneyBag.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Scenario.h" />
+    <ClInclude Include="ScenarioManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneTime.h" />
@@ -156,6 +158,8 @@
     <ClCompile Include="MoneyBag.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Scenario.cpp" />
+    <ClCompile Include="ScenarioManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneTime.cpp" />

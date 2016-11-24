@@ -243,6 +243,12 @@
     <ClInclude Include="ActiveWeapon.h">
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
+    <ClInclude Include="Scenario.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenarioManager.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -397,6 +403,12 @@
     </ClCompile>
     <ClCompile Include="ActiveWeapon.cpp">
       <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenario.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenarioManager.cpp">
+      <Filter>Source Files\Framework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
