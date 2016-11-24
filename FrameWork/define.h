@@ -45,6 +45,8 @@ enum eID
 	LAND = 2,
 	STAIR = 3,
 	DOOR = 4,
+	FLYLAND= 5,
+
 	STAIR_LEFTBOTTOM_RIGHTTOP = 13,
 	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
 	//Throwable weapon
@@ -103,8 +105,12 @@ enum eStatus
 	LEVEL1 = (1 << 18),
 
 	FLYING = (1 << 19),
-	HANGING = (1 << 20),
-	HIDING = (1 << 21)
+	FLYINGDOWN=(1<<20),
+	HANGING = (1 << 21),
+	HIDING = (1 << 22),
+
+	CLOSING = (1<<23),
+	OPENING = (1<<24),
 };
 
 enum eStairDirection
