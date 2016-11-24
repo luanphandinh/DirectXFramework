@@ -21,7 +21,6 @@ bool PlayScene::init()
 	_simon->init();
 	// set pos ở đây, đừng đặt trong class
 	this->_simon->setPosition(2580, 63);
-
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
@@ -60,9 +59,8 @@ bool PlayScene::init()
 		_testItem[i] = new HeartItem(GVector2(2700 + i * 20, 300));
 	}
 	_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
-	_testItem[11] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::LEFT);
-	_testItem[12] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::RIGHT);
-	for (int i = 0; i < 13; i++)
+	
+	for (int i = 0; i < 11; i++)
 	{
 		ItemManager::insertItem((Item*)_testItem[i]);
 	}
@@ -118,11 +116,13 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 		obj->draw(spriteHandle, _viewport);
 	}
 	
+	_gameStatusBoard->draw(spriteHandle);
+
 	_simon->draw(spriteHandle, _viewport);
 
 	_itemManager->draw(spriteHandle, _viewport);
 
-	_gameStatusBoard->draw(spriteHandle);
+	
 	//=====================TESTING==========================//
 }
 

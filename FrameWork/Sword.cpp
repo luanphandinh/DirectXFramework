@@ -16,7 +16,8 @@ void Sword::init()
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "sword"));
 
-	HeartCounter::plusHeart(-1);
+	if (_type == eItemType::PICKED_UP)
+		HeartCounter::plusHeart(-1);
 
 	Weapon::initCommonComponent();
 

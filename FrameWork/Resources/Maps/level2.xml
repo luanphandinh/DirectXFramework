@@ -420,48 +420,108 @@
     </Item>
     <Item Id="3" Name="stair12" X="2720" Y="262" Width="15" Height="2">
       <ActiveBound X="2720" Y="262" Width="15" Height="2" />
-	  <Params>
+      <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
     <Item Id="3" Name="stair13" X="2737" Y="270" Width="14" Height="8">
       <ActiveBound X="2737" Y="270" Width="14" Height="8" />
-	  <Params>
+      <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
     <Item Id="3" Name="stair14" X="2751" Y="291" Width="15" Height="18">
       <ActiveBound X="2751" Y="291" Width="15" Height="18" />
-	  <Params>
+      <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
     <Item Id="3" Name="stair15" X="2768" Y="303" Width="16" Height="17">
       <ActiveBound X="2768" Y="303" Width="16" Height="17" />
-	  <Params>
+      <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
     <Item Id="3" Name="stair16" X="2785" Y="320" Width="13" Height="15">
       <ActiveBound X="2785" Y="320" Width="13" Height="15" />
-	  <Params>
+      <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
     <Item Id="3" Name="stair17" X="2800" Y="334" Width="17" Height="16">
       <ActiveBound X="2800" Y="334" Width="17" Height="16" />
-	  <Params>
+      <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
     <Item Id="3" Name="stair18" X="2814" Y="353" Width="17" Height="20">
       <ActiveBound X="2814" Y="353" Width="17" Height="20" />
-	  <Params>
+      <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
     <Item Id="3" Name="stair19" X="2833" Y="368" Width="14" Height="26">
       <ActiveBound X="2833" Y="368" Width="14" Height="26" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair20" X="2816" Y="422" Width="16" Height="4">
+      <ActiveBound X="2816" Y="422" Width="16" Height="4" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair21" X="2832" Y="432" Width="14" Height="12">
+      <ActiveBound X="2832" Y="432" Width="14" Height="12" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair22" X="2847" Y="450" Width="15" Height="19">
+      <ActiveBound X="2847" Y="450" Width="15" Height="19" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair23" X="2864" Y="464" Width="14" Height="21">
+      <ActiveBound X="2864" Y="464" Width="14" Height="21" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair24" X="2879" Y="480" Width="17" Height="25">
+      <ActiveBound X="2879" Y="480" Width="17" Height="25" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair25" X="2895" Y="496" Width="14" Height="31">
+      <ActiveBound X="2895" Y="496" Width="14" Height="31" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair26" X="2912" Y="514" Width="15" Height="31">
+      <ActiveBound X="2912" Y="514" Width="15" Height="31" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair27" X="2928" Y="526" Width="15" Height="31">
+      <ActiveBound X="2928" Y="526" Width="15" Height="31" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair28" X="2944" Y="546" Width="16" Height="30">
+      <ActiveBound X="2944" Y="546" Width="16" Height="30" />
+	  <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair29" X="2963" Y="562" Width="15" Height="29">
+      <ActiveBound X="2963" Y="562" Width="15" Height="29" />
 	  <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>

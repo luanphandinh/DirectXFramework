@@ -56,7 +56,7 @@ void HeartItem::pickedUp()
 		HeartCounter::plusHeart(1);
 		break;
 	case eHeartItemType::LARGE:
-		HeartCounter::plusHeart(3);
+		HeartCounter::plusHeart(5);
 		break;
 	default:
 		break;
