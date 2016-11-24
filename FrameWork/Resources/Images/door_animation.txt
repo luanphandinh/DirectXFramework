@@ -1,0 +1,5 @@
+frame_name	left	top	right	bottom
+normal		5	0	21	96	0.5 0.5
+open_01		5	0	21	96	0.5 0.5
+open_02		48	0	80	96	0.27 0.5
+open_03		96	0	176	96	0.15 0.5
