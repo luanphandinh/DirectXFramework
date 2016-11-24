@@ -16,18 +16,18 @@ public:
 	@x, y: tọa độ của pos
 	*/
 	Door(eStatus status, GVector2 pos, int direction);
-	Door(eStatus status, float x, float y, int direction);
 	~Door();
 
 	void init();
 	void update(float);
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
-	void onCollisionBegin(CollisionEventArg*);
-	void onCollisionEnd(CollisionEventArg*);
-	float checkCollision(BaseObject*, float);
+	// chắc sẽ ko dùng
+	//void onCollisionBegin(CollisionEventArg*);
+	//void onCollisionEnd(CollisionEventArg*);
+	//float checkCollision(BaseObject*, float);
+
 	void setPosition(GVector2);
-	GVector2 getVelocity();
 	IComponent* getComponent(string);
 
 private:
@@ -36,9 +36,6 @@ private:
 	BaseObject* prevObject;
 
 	void changeDirection();
-	// Init values
-	bool		_verticalflag;
-
 	void updateClosing();
 
 };

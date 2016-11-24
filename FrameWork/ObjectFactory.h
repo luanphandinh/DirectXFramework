@@ -4,6 +4,10 @@
 #include"define.h"
 #include"Land.h"
 #include"Stair.h"
+#include"Bat.h"
+#include"MedusaHead.h"
+#include"SpearKnight.h"
+#include"Door.h"
 class ObjectFactory
 {
 public:
@@ -15,6 +19,12 @@ private:
 	static BaseObject* getObjectById(xml_node node, eID id);
 	static BaseObject* getLand(xml_node node);
 	static BaseObject* getStair(xml_node node);
+
+	static BaseObject* getBat(xml_node node);
+	static BaseObject* getSpearKnight(xml_node node);
+	static BaseObject* getMedusaHead(xml_node node);
+	static BaseObject* getDoor(xml_node node);
+	static BaseObject* getFlyLand(xml_node node);
 
 	static map<string, string> getObjectProperties(xml_node node);
 };
