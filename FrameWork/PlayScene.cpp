@@ -24,21 +24,15 @@ bool PlayScene::init()
 	_simon->init();
 	_isSwitchSence = false;
 	// set pos ở đây, đừng đặt trong class
-	this->_simon->setPosition(2700, 300);
+	this->_simon->setPosition(2700, 100);
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
 	//ActiveWeapon::setItemID(eItemID::SWORD);
 
-	//_spearKnight = new SpearKnight(NORMAL, NULL, NULL, 1);
-	//_spearKnight->init();
-
-	/*_bat = new Bat(HANGING, 340, 100, -1);
-	_bat->init();
-
-	_medusaHead = new MedusaHead(HIDING, -1, START_POSITION,
-		MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
-	_medusaHead->init();*/
+	//_medusaHead = new MedusaHead(HIDING, -1, START_POSITION,
+	//	MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
+	//_medusaHead->init();
 
 	/*_backGround = Map::LoadFromFile("Resources//Maps//test.xml", eID::MAPSTAGE1);
 	_mapObject = ObjectFactory::getListObjectFromFile("Resources//Maps//test.xml");*/
@@ -90,18 +84,24 @@ void PlayScene::update(float deltaTime)
 	}
 	for (BaseObject* obj : (*_mapObject))
 	{
+		obj->update(deltaTime);
 		_simon->checkCollision(obj, deltaTime);
 		_itemManager->checkCollision(obj, deltaTime);
+		// nếu là mấy cục shit này ko cần check va chạm 
+		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND ||
+			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
+			continue;
+		// check mấy con như knight vs land đồ :v
+		for (BaseObject* passiveobj : (*_mapObject)) {
+			if (passiveobj == nullptr || passiveobj == obj || passiveobj->isInStatus(eStatus::DESTROY))
+				continue;
+			obj->checkCollision(passiveobj, deltaTime);
+		}
 	}
-	//_spearKnight->checkCollision(_land, deltaTime);
-	//_spearKnight->checkCollision(_simon, deltaTime);
+
 	_itemManager->checkCollision(_simon, deltaTime);
 	_simon->update(deltaTime);
 	_itemManager->update(deltaTime);
-	//_spearKnight->update(deltaTime);
-	//_bat->update(deltaTime);
-	//_medusaHead->update(deltaTime);
-
 
 	//=====================TESTING==========================//
 }
