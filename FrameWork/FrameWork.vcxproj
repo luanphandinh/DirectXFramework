@@ -97,6 +97,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Land.h" />
+    <ClInclude Include="Level2Director.h" />
     <ClInclude Include="LifeCounter.h" />
     <ClInclude Include="LifeUI.h" />
     <ClInclude Include="Map.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Land.cpp" />
+    <ClCompile Include="Level2Director.cpp" />
     <ClCompile Include="LifeCounter.cpp" />
     <ClCompile Include="LifeUI.cpp" />
     <ClCompile Include="main.cpp" />

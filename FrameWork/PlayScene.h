@@ -18,7 +18,7 @@
 #include"Sword.h"
 #include"GameStatusBoard.h"
 #include"ActiveWeapon.h"
-#include"Director.h"
+#include"Level2Director.h"
 using namespace std;
 _USING_FRAMEWORK
 
@@ -56,6 +56,7 @@ private:
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
 	bool _isSwitchSence;
+	Level2Director* _director;
 	//==========================TEST=========================//
 };
 

@@ -142,6 +142,12 @@ enum eDirection
 	ALL		= (TOP | BOTTOM | LEFT | RIGHT),
 };
 
+enum eLevel2Viewport
+{
+	V1 = 1,
+	V2 = 2,
+};
+
 #define _NAMESPACE_FRAMEWORK_END	}
 
 

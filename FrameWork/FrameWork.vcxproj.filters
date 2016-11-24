@@ -246,6 +246,9 @@
     <ClInclude Include="Director.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Level2Director.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -403,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="Director.cpp">
       <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2Director.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
