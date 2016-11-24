@@ -18,6 +18,11 @@
 #include"Sword.h"
 #include"GameStatusBoard.h"
 #include"ActiveWeapon.h"
+#include "ScenarioManager.h"
+#include "Door.h"
+#define DOOR_VIEWPORT_ANCHOR		2111
+
+
 using namespace std;
 _USING_FRAMEWORK
 
@@ -44,16 +49,21 @@ private:
 	BaseObject* _spearKnight;
 	BaseObject* _bat;
 	BaseObject* _medusaHead;
-	Map* _backGround;
-	//BaseObject* _land;
-	//BaseObject* _land2;
-	//BaseObject* _land3;
-	//BaseObject* _land4;
-	//BaseObject** _stairsRight;
-	//BaseObject** _stairsLeft;
+	Map* _background;
 	vector<BaseObject*>* _mapObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
+
+	BaseObject* _door;
+	ScenarioManager* _director;
+	ScenarioManager* _directorPassDoor;
+
+	bool flagDoorScenario;
+	void doorSceneViewport(float deltaTime, bool& finish);
+	void passDoorScene(float deltatime, bool& isFinish);
+
+	void ScenarioMoveViewport(float deltaTime);
+	void ScenarioPassDoor(float deltaTime);
 	//==========================TEST=========================//
 };
 
