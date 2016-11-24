@@ -3,7 +3,10 @@
 
 PlayScene::PlayScene()
 {
-	_viewport = new Viewport(0, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT);
+	Director::loadStageInfo("Resources//Maps//level2ViewportInfo.txt",eID::LEVEL2);
+	Director::setCurrentViewport("s2");
+	GVector2 pos = Director::getCurrentStartViewportPosition();
+	_viewport = new Viewport(pos.x, pos.y, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 
@@ -20,7 +23,7 @@ bool PlayScene::init()
 	_simon = new Simon();
 	_simon->init();
 	// set pos ở đây, đừng đặt trong class
-	this->_simon->setPosition(2580, 63);
+	this->_simon->setPosition(2580, 700);
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
@@ -147,14 +150,16 @@ void PlayScene::updateViewport(BaseObject* objTracker)
 	// Vị trí hiện tại của viewport. 
 	GVector2 current_position = _viewport->getPositionWorld();
 
-	GVector2 worldsize = this->_backGround->getWorldSize();
+	//GVector2 worldsize = this->_backGround->getWorldSize();
+	GVector2 worldsize = Director::getCurrentViewportSize();
 	// Bám theo object.
-	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, 0), WINDOW_HEIGHT);
+	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, worldsize.x),
+		current_position.y);
 
 	// Không cho đi quá map.
-	if (new_position.x + WINDOW_WIDTH > worldsize.x)
+	if (new_position.x + WINDOW_WIDTH > worldsize.y)
 	{
-		new_position.x = worldsize.x - WINDOW_WIDTH;
+		new_position.x = worldsize.y - WINDOW_WIDTH;
 	}
 
 	_viewport->setPositionWorld(new_position);

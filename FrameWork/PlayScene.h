@@ -18,6 +18,7 @@
 #include"Sword.h"
 #include"GameStatusBoard.h"
 #include"ActiveWeapon.h"
+#include"Director.h"
 using namespace std;
 _USING_FRAMEWORK
 

@@ -243,6 +243,9 @@
     <ClInclude Include="ActiveWeapon.h">
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
+    <ClInclude Include="Director.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="ActiveWeapon.cpp">
       <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Director.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
