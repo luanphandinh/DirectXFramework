@@ -237,9 +237,11 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		break;
 	case DIK_Z:
 		this->removeStatus(eStatus::HITTING);
-		this->addStatus(eStatus::THROWING_ITEM);
-		_isThrowing = false;
-		
+		if (ActiveWeapon::isAvailable())
+		{
+			this->addStatus(eStatus::THROWING_ITEM);
+			_isThrowing = false;
+		}
 		break;
 	case DIK_UP:
 		this->removeStatus(eStatus::DOWNSTAIR);

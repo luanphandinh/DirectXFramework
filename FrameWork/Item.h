@@ -5,6 +5,10 @@
 #define NORMAL_ITEM_SPEED 1000
 _USING_FRAMEWORK
 
+/*
+	Là lớp cơ bản của ba loại item chính trong game(standard,weapon và special item)
+*/
+
 class Item : public BaseObject
 {
 public:

@@ -27,6 +27,28 @@ eItemID ActiveWeapon::getItemID()
 	return _itemID;
 }
 
+bool ActiveWeapon::isAvailable()
+{
+	bool _available = false;
+
+	switch (_itemID)
+	{
+	case eItemID::SWORD:
+	case eItemID::BOORMERANG:
+	case eItemID::HOLYWATER:
+	case eItemID::AXE:
+		_available = (HeartCounter::getHeart() > 0) ? true : false;
+		break;
+	case eItemID::STOPWATCH:
+		_available = (HeartCounter::getHeart() >= 5) ? true : false;
+		break;
+	default:
+		break;
+	}
+
+	return _available;
+}
+
 void ActiveWeapon::drawIcon(LPD3DXSPRITE spriteHandler)
 {
 	if (_itemID == eItemID::NOITEM) return;

@@ -16,6 +16,8 @@ void Sword::init()
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "sword"));
 
+	HeartCounter::plusHeart(-1);
+
 	Weapon::initCommonComponent();
 
 	if ((_direction & eDirection::RIGHT) == eDirection::RIGHT)

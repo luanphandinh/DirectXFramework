@@ -9,6 +9,15 @@ public:
 		@startPosition : vị trí bắt đầu
 		@type: Loại item,rớt ra hoặc bị lượm lên
 		@dir : Hướng của item khi bị ném ra
+		+ Để cho item rớt ra thì sử dụng @type = DROP	
+			Sau đó sử dụng ItemManager.insertItem((Item*)) để render
+			Khi va chạm với simon thì trả về trạng thái DESTROY đồng
+			thời gọi ActiveWeapon::setItemID(idweapon)
+		+ Nếu simon sử dụng weapon thì dùng trạng thái PickedUp
+			các hàm sử lý va chạm sẽ được override để xử lý riêng cho từng đối tượng
+			sau đó add vào ItemManager.insertItem((Item*))
+
+			Xử lý va chạm sẽ xử lý trên weapon
 	*/
 	Weapon(GVector2 startPosition, eItemType type,eDirection dir,eItemID id);
 	~Weapon();
