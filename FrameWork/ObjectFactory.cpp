@@ -110,6 +110,11 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case LAND:
 		return getLand(node);
 		break;
+		case DOOR:
+			return getDoor(node);
+			break;
+		case FLYLAND:
+			return getFlyLand(node);
 	case STAIR:
 		return getStair(node);
 		break;
@@ -124,10 +129,13 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case SPECIALITEM:
 		break;
 	case SPEARKNIGHT:
+		return getSpearKnight(node);
 		break;
 	case BAT:
+		return getBat(node);
 		break;
 	case MEDUSAHEAD:
+		return getMedusaHead(node);
 		break;
 	case MAPSTAGE1:
 		break;
@@ -216,6 +224,80 @@ BaseObject* ObjectFactory::getStair(xml_node node)
 	stair->init();
 
 	return stair;
+}
+
+BaseObject * ObjectFactory::getBat(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y, direction;
+	eStatus status;
+
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+
+	if (properties.find("status") != properties.end()) {
+		status = (eStatus)(stoi(properties.find("status")->second));
+	}
+	else {
+		status = eStatus::HANGING;
+	}
+
+	if (properties.find("direction") != properties.end()) {
+		direction = stoi(properties.find("direction")->second);
+	}
+	else {
+		direction = 1;
+	}
+
+	auto bat = new Bat(status, GVector2(x, y), direction);
+	bat->init();
+
+	return bat;
+}
+
+BaseObject * ObjectFactory::getSpearKnight(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y, direction;
+	eStatus status;
+
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+
+	if (properties.find("status") != properties.end()) {
+		status = (eStatus)(stoi(properties.find("status")->second));
+	}
+	else {
+		status = eStatus::WALKING;
+	}
+
+	if (properties.find("direction") != properties.end()) {
+		direction = stoi(properties.find("direction")->second);
+	}
+	else {
+		direction = 1;
+	}
+
+	auto spearKnight = new SpearKnight(status, GVector2(x, y), direction);
+	spearKnight->init();
+
+	return spearKnight;
+}
+
+BaseObject * ObjectFactory::getMedusaHead(xml_node node) {
+	return nullptr;
+}
+
+BaseObject * ObjectFactory::getDoor(xml_node node) {
+	return nullptr;
+}
+
+BaseObject * ObjectFactory::getFlyLand(xml_node node) {
+	return nullptr;
 }
 
 map<string, string> ObjectFactory::getObjectProperties(xml_node node)
