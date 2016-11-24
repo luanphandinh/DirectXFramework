@@ -104,7 +104,11 @@ enum eStatus
 
 	FLYING = (1 << 19),
 	HANGING = (1 << 20),
-	HIDING = (1 << 21)
+	HIDING = (1 << 21),
+
+	CLOSING = (1<<22),
+	OPENING = (1<<23),
+	CLOSED = (1<<24)
 };
 
 enum eStairDirection
