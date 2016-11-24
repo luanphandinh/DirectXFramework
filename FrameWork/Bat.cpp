@@ -133,14 +133,13 @@ void Bat::updateHanging() {
 	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	RECT objectBound = objectTracker->getBounding();
 
-	/*if (objectBound.right < this->getBounding().left-150) {
-		this->setStatus(eStatus::HANGING);
-	}*/
-	if (objectBound.left < this->getBounding().right - 150 ) {
-		this->setStatus(eStatus::HANGING);
+	if (objectBound.top > this->getBounding().bottom+50) {
+		if(objectBound.left > this->getBounding().right + 150)
+			this->setStatus(FLYING);
+		else this->setStatus(HANGING);
 	}
 	else {
-		this->setStatus(eStatus::FLYING);
+		this->setStatus(HANGING);
 	}
 }
 
