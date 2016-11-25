@@ -260,6 +260,11 @@
     </ClInclude>
     <ClInclude Include="ScenarioManager.h">
       <Filter>Header Files\Framework</Filter>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="HolyWater.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +438,11 @@
     </ClCompile>
     <ClCompile Include="ScenarioManager.cpp">
       <Filter>Source Files\Framework</Filter>
+    <ClCompile Include="Boomerang.cpp">
+      <Filter>Source Files\Objects\Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="HolyWater.cpp">
+      <Filter>Source Files\Objects\Items\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

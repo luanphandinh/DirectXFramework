@@ -30,7 +30,7 @@ public:
 	/*
 		override lại hàm initVeloc cho các lớp kế thừa cho riêng từng loại vũ khí
 	*/
-	virtual GVector2 initVeloc(GVector2 speed) override = 0;
+	virtual GVector2 initVeloc(GVector2 speed) override;
 
 	/*
 		kiểm tra va chạm

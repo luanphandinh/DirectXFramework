@@ -1,12 +1,14 @@
 #pragma once
 #include"Weapon.h"
-#define SWORD_SPEED GVector2(250,0)
-#define SWORD_DISTANCE GVector2(150,0)
-class Sword : public Weapon
+#include"Animation.h"
+#include"StopWatch.h"
+#include"define.h"
+#define HOLYWATER_SPEED GVector2(150,150)
+class HolyWater : public Weapon
 {
 public:
-	Sword(GVector2 startPosition, eItemType type, eDirection dir);
-	~Sword();
+	HolyWater(GVector2 startPosition, eItemType type, eDirection dir);
+	~HolyWater();
 
 	void init() override;
 	void update(float deltatime) override;
@@ -17,9 +19,10 @@ public:
 
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
-
 protected:
 	int		_damage;
-	GVector2 _distance;
+	Animation*	_burstAnimation;
+	Animation*	_throwAnimation;
+	StopWatch*	_burstStopWatch;
 };
 

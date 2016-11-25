@@ -32,7 +32,25 @@ void Weapon::release()
 
 GVector2 Weapon::initVeloc(GVector2 speed)
 {
-	return Item::initVeloc(speed);
+	GVector2 result;
+	if (_direction != eDirection::NONE)
+	{
+		if ((_direction & eDirection::LEFT) == eDirection::LEFT)
+		{
+			result.x = -speed.x;
+		}
+		else if ((_direction & eDirection::RIGHT) == eDirection::RIGHT)
+		{
+			result.x = speed.x;
+		}
+		else
+		{
+			result.x = 0;
+		}
+	}
+
+	result.y = speed.y;
+	return result;
 }
 
 float Weapon::checkCollision(BaseObject* otherObject, float dt)

@@ -1,12 +1,13 @@
 #pragma once
 #include"Weapon.h"
-#define SWORD_SPEED GVector2(250,0)
-#define SWORD_DISTANCE GVector2(150,0)
-class Sword : public Weapon
+#define BOORMERANG_DISTANCE GVector2(150,0)
+#define BOORMERANG_SPEED GVector2(250,0)
+class Boomerang :
+	public Weapon
 {
 public:
-	Sword(GVector2 startPosition, eItemType type, eDirection dir);
-	~Sword();
+	Boomerang(GVector2 startPosition, eItemType type, eDirection dir);
+	~Boomerang();
 
 	void init() override;
 	void update(float deltatime) override;
@@ -18,8 +19,9 @@ public:
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
 
-protected:
+private:
 	int		_damage;
 	GVector2 _distance;
+	bool	_isFliedBack;
 };
 

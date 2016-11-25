@@ -2,8 +2,8 @@ frame_name				left	top		right	bottom	origin.x	origin.y
 red_life_icon			162		189		165		195		0.5 		0.5
 white_life_icon			184		189		187		195		0.5			0.5
 yellow_life_icon		180		189		183		195		0.5			0.5	
-cross_dropped			60		3		74		16		0.5			0.5
-cross_flying			77		2		92		16		0.5			0.5
+boomerang_dropped		60		3		74		16		0.5			0.5
+boomerang_flying		77		2		92		16		0.5			0.5
 axe						96		2		111		16		0.5			0.5
 sword					115		4		131		13		0.5			0.5
 heart_small				100		88		108		96		0.5			0.5
@@ -13,3 +13,10 @@ red_money_bag			46 		84		61		99		0.5			0.5
 purple_money_bag		64		84		79		99		0.5			0.5
 white_money_bag			83		84		98		99		0.5			0.5
 whip_upgrade			74		22		90		38		0.5			0.5
+holywater_icon			35		40		51		56		0.5			0.5		
+holywater_throw			47		5		55		13		0.5			0.5		
+explosion_01			74		62		77		75		0.5			0.5
+explosion_02			92		60		100		75		0.5			0.5
+explosion_03			82		63		88		75		0.5			0.5
+explosion_04			103		61		119		75		0.5			0.5
+explosion_05			123		59		137		75		0.5			0.5		

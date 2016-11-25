@@ -20,33 +20,7 @@ void ThrowingAxe::init()
 
 	Weapon::initCommonComponent();
 
-	if ((_direction & eDirection::RIGHT) == eDirection::RIGHT)
-		_sprite->setScaleX(this->getScale().x * (-1));
-
 	initWeaponComponent();
-}
-
-GVector2 ThrowingAxe::initVeloc(GVector2 speed)
-{
-	GVector2 result;
-	if (_direction != eDirection::NONE)
-	{
-		if ((_direction & eDirection::LEFT) == eDirection::LEFT)
-		{
-			result.x = -speed.x;
-		}
-		else if ((_direction & eDirection::RIGHT) == eDirection::RIGHT)
-		{
-			result.x = speed.x;
-		}
-		else
-		{
-			result.x = 0;
-		}
-	}
-
-	result.y = speed.y;
-	return result;
 }
 
 
