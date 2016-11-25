@@ -1,277 +1,136 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Header Files\Framework">
-      <UniqueIdentifier>{7dc683af-868c-4bf3-a652-1204291a5158}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Framework\Managers">
-      <UniqueIdentifier>{c37c2ff7-c5e6-4a3f-80e8-ddeeb58f53ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Framework">
-      <UniqueIdentifier>{4873a4d0-39bc-428d-96e7-14ace37e10fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Framework\Managers">
-      <UniqueIdentifier>{dbdd2ca8-67af-49a0-89f4-b589bc200200}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Objects">
-      <UniqueIdentifier>{b436519e-9667-456d-a07c-323d319d5932}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects">
-      <UniqueIdentifier>{e5fe41d2-c6aa-48b1-b4fa-0d12991cf1ed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Framework\Map">
-      <UniqueIdentifier>{db079ee1-3882-4176-82c4-4fe063c06a3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Framework\Map">
-      <UniqueIdentifier>{68cae828-9a8c-4428-8a0b-78456bc0d0bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Framework\Components">
-      <UniqueIdentifier>{be02faed-2e73-4665-88e6-e03e7aec635c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Framework\Components">
-      <UniqueIdentifier>{4bc5487f-03e7-42eb-b875-8a3eedaeabf5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects\Enemies">
-      <UniqueIdentifier>{57f74a16-66bc-443e-b849-10ba2ffe7b4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Enemies">
-      <UniqueIdentifier>{da92c4fa-7d70-4a92-9b76-f5f3a2f0bf36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Game">
-      <UniqueIdentifier>{858426de-98dc-497d-a5f8-ad3f62cec7e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game">
-      <UniqueIdentifier>{6f154ae1-bbec-4c91-9e5d-e0233404a0b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\GameStatusBoard">
-      <UniqueIdentifier>{cb6cfc2b-2983-411c-a38f-86801006644c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects\GameStatusBoard">
-      <UniqueIdentifier>{3086576a-773d-4520-ab6d-7a21560ef9b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Items">
-      <UniqueIdentifier>{77300470-b993-46c2-8943-3a4fcdd06b61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects\Items">
-      <UniqueIdentifier>{728cb6de-6808-4c2e-8b98-913bc2d39acc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects\Items\Weapons">
-      <UniqueIdentifier>{7e149f65-e0b8-4428-918c-55d9cd5020a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Items\Weapons">
-      <UniqueIdentifier>{41bca48b-9173-409b-b0ad-0fb29e3b3dbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Items\Special">
-      <UniqueIdentifier>{f2f784b1-8125-4902-90b2-635bdd972a21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Items\Standard">
-      <UniqueIdentifier>{7c0b1f75-2a4d-45dc-b466-e3a12f013d95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects\Items\Standard">
-      <UniqueIdentifier>{f0b149dd-43b8-4f68-8a03-2de0aa73ec5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Objects\Items\Special">
-      <UniqueIdentifier>{6c778e44-be53-45d6-99bd-abe45ccff977}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DeviceManager.h">
-      <Filter>Header Files\Framework\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="define.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTime.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeSpan.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Viewport.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="CastlevaniaGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Transformable.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="InputController.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteManager.h">
-      <Filter>Header Files\Framework\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseObject.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Simon.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Header Files\Framework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>Header Files\Framework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="TileSet.h">
-      <Filter>Header Files\Framework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files\Framework\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionBody.h">
-      <Filter>Header Files\Framework\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>Header Files\Framework\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Land.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="StopWatch.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="SpearKnight.h">
-      <Filter>Header Files\Objects\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Stair.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseEnemy.h">
-      <Filter>Header Files\Objects\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScene.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Bat.h">
-      <Filter>Header Files\Objects\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="MedusaHead.h">
-      <Filter>Header Files\Objects\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="EmptyObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="LifeUI.h">
-      <Filter>Header Files\Objects\GameStatusBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStatusBoard.h">
-      <Filter>Header Files\Objects\GameStatusBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="Score.h">
-      <Filter>Header Files\Objects\GameStatusBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Objects\Items\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemManager.h">
-      <Filter>Header Files\Objects\Items\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="HeartItem.h">
-      <Filter>Header Files\Objects\Items\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="WhipUpgrade.h">
-      <Filter>Header Files\Objects\Items\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="MoneyBag.h">
-      <Filter>Header Files\Objects\Items\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectFactory.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Door.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneTime.h">
-      <Filter>Header Files\Objects\GameStatusBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="LifeCounter.h">
-      <Filter>Header Files\Objects\GameStatusBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="HeartCounter.h">
-      <Filter>Header Files\Objects\GameStatusBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Header Files\Objects\Items\Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="Sword.h">
-      <Filter>Header Files\Objects\Items\Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="ActiveWeapon.h">
-      <Filter>Header Files\Objects\GameStatusBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="Director.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2Director.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ThrowingAxe.h">
-      <Filter>Header Files\Objects\Items\Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="FlyLand.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenario.h">
-      <Filter>Header Files\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="ScenarioManager.h">
-      <Filter>Header Files\Framework</Filter>
-    <ClInclude Include="Boomerang.h">
-      <Filter>Header Files\Objects\Items\Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="HolyWater.h">
-      <Filter>Header Files\Objects\Items\Weapons</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="CastlevaniaGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IComponent.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionBody.cpp">
+      <Filter>Source Files\Framework\Components</Filter>
+    </ClCompile>
     <ClCompile Include="DeviceManager.cpp">
       <Filter>Source Files\Framework\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="ScenarioManager.cpp">
+      <Filter>Source Files\Framework\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files\Framework\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>Source Files\Framework\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet.cpp">
+      <Filter>Source Files\Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\Framework\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Director.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2Director.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Source Files\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>Source Files\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="SpearKnight.cpp">
+      <Filter>Source Files\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="MedusaHead.cpp">
+      <Filter>Source Files\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyLand.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="EmptyObject.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Simon.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Stair.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files\Objects\Items\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Objects\Items\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartItem.cpp">
+      <Filter>Source Files\Objects\Items\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyBag.cpp">
+      <Filter>Source Files\Objects\Items\Standard</Filter>
+    </ClCompile>
+    <ClCompile Include="HolyWater.cpp">
+      <Filter>Source Files\Objects\Items\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Sword.cpp">
+      <Filter>Source Files\Objects\Items\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="ThrowingAxe.cpp">
+      <Filter>Source Files\Objects\Items\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Objects\Items\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartCounter.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeCounter.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeUI.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTime.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveWeapon.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStatusBoard.cpp">
+      <Filter>Source Files\Objects\GameStatusBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="GameTime.cpp">
@@ -280,169 +139,306 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="InputController.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenario.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
     <ClCompile Include="TimeSpan.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Viewport.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="CastlevaniaGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Transformable.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="InputController.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteManager.cpp">
-      <Filter>Source Files\Framework\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseObject.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Simon.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Source Files\Framework\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="TileSet.cpp">
-      <Filter>Source Files\Framework\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files\Framework\Map</Filter>
-    </ClCompile>
     <ClCompile Include="utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionBody.cpp">
-      <Filter>Source Files\Framework\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="IComponent.cpp">
-      <Filter>Source Files\Framework\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Land.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="StopWatch.cpp">
       <Filter>Source Files\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="SpearKnight.cpp">
-      <Filter>Source Files\Objects\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Stair.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseEnemy.cpp">
-      <Filter>Source Files\Objects\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Bat.cpp">
-      <Filter>Source Files\Objects\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="MedusaHead.cpp">
-      <Filter>Source Files\Objects\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="EmptyObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
+    <ClCompile Include="Viewport.cpp">
       <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="LifeUI.cpp">
-      <Filter>Source Files\Objects\GameStatusBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStatusBoard.cpp">
-      <Filter>Source Files\Objects\GameStatusBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="Score.cpp">
-      <Filter>Source Files\Objects\GameStatusBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Objects\Items\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>Source Files\Objects\Items\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="HeartItem.cpp">
-      <Filter>Source Files\Objects\Items\Standard</Filter>
     </ClCompile>
     <ClCompile Include="WhipUpgrade.cpp">
       <Filter>Source Files\Objects\Items\Standard</Filter>
     </ClCompile>
-    <ClCompile Include="MoneyBag.cpp">
-      <Filter>Source Files\Objects\Items\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectFactory.cpp">
+    <ClCompile Include="Land.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Door.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTime.cpp">
-      <Filter>Source Files\Objects\GameStatusBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="LifeCounter.cpp">
-      <Filter>Source Files\Objects\GameStatusBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="HeartCounter.cpp">
-      <Filter>Source Files\Objects\GameStatusBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Source Files\Objects\Items\Weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="Sword.cpp">
-      <Filter>Source Files\Objects\Items\Weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="ActiveWeapon.cpp">
-      <Filter>Source Files\Objects\GameStatusBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="Director.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Level2Director.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ThrowingAxe.cpp">
-      <Filter>Source Files\Objects\Items\Weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="FlyLand.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenario.cpp">
-      <Filter>Source Files\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="ScenarioManager.cpp">
-      <Filter>Source Files\Framework</Filter>
     <ClCompile Include="Boomerang.cpp">
-      <Filter>Source Files\Objects\Items\Weapons</Filter>
+      <Filter>Source Files\Objects\Items\Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="HolyWater.cpp">
-      <Filter>Source Files\Objects\Items\Weapons</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CastlevaniaGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBody.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>Header Files\Framework\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>Header Files\Framework\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenarioManager.h">
+      <Filter>Header Files\Framework\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files\Framework\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Header Files\Framework\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet.h">
+      <Filter>Header Files\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Director.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2Director.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="SpearKnight.h">
+      <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="MedusaHead.h">
+      <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveWeapon.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStatusBoard.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartCounter.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeCounter.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeUI.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTime.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Header Files\Objects\GameStatusBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartItem.h">
+      <Filter>Header Files\Objects\Items\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Objects\Items\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Header Files\Objects\Items\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="MoneyBag.h">
+      <Filter>Header Files\Objects\Items\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="WhipUpgrade.h">
+      <Filter>Header Files\Objects\Items\Standard</Filter>
+    </ClInclude>
+    <ClInclude Include="ThrowingAxe.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Sword.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="HolyWater.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptyObject.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObject.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyLand.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Stair.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Land.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Simon.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSpan.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformable.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewport.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenario.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="InputController.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTime.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4cf99c87-687b-4747-bf9e-e5d568db8764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6933b7d7-631e-447f-8fe7-18e740491ce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework">
+      <UniqueIdentifier>{a6d0d7d7-a000-43e4-a552-2a2a66ba8a90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework\Components">
+      <UniqueIdentifier>{a6fbf165-886c-4fe4-8622-a75b7b7be2a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework\Managers">
+      <UniqueIdentifier>{fbf34dbe-9dd9-4aec-a1a0-60777004e934}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Framework\Map">
+      <UniqueIdentifier>{9c9f371e-9fc3-4504-ae09-a45a9d90fb1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{083b35ac-56d0-4bf5-a5fd-041f67100717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{373c22d4-f80b-46b6-a3f6-a44c6ef446dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Enemies">
+      <UniqueIdentifier>{af5b1dc4-233a-4ec3-a0dc-6eb0589cf198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\GameStatusBoard">
+      <UniqueIdentifier>{388448bd-6279-4443-8276-c74620c9b89b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Items">
+      <UniqueIdentifier>{35e61d89-618b-4e50-ae3d-7fff22c8fe66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Items\Special">
+      <UniqueIdentifier>{3f6acd7a-2a9c-424f-9c12-e785445fb5b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Items\Standard">
+      <UniqueIdentifier>{5943523b-3058-41d2-ab08-aa8aa0c757ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Items\Weapons">
+      <UniqueIdentifier>{39d2d9ac-b2e4-45e1-bb71-0b7855c9a9a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework">
+      <UniqueIdentifier>{e5528334-e816-403b-9118-60bb26685aaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{9954eced-b8cf-46a5-b545-d362a6baae61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{e918459d-9197-4c82-89ee-5df5a8a5ad80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework\Components">
+      <UniqueIdentifier>{986bce14-3740-4100-8f17-50f77625e4dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework\Managers">
+      <UniqueIdentifier>{4843bec4-0d62-4432-a6a9-7644b8d37a25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Framework\Map">
+      <UniqueIdentifier>{f69423cc-222e-4008-9277-926b768f710e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Enemies">
+      <UniqueIdentifier>{caeb0f1a-ba40-48ce-89bf-f8cfe22beb5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\GameStatusBoard">
+      <UniqueIdentifier>{a91489f9-4020-4bad-9621-f78c3cf5e40f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items">
+      <UniqueIdentifier>{5ea81f38-e26f-4588-a794-d3622d73ab17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items\Special">
+      <UniqueIdentifier>{c3c73972-8cff-430f-a319-093ba1d34cad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items\Standard">
+      <UniqueIdentifier>{ab8d77bb-f05a-4bb0-87ca-1c65765cf99d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items\Weapon">
+      <UniqueIdentifier>{b006ded0-c5b5-4c7f-8241-8b50c848f919}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
