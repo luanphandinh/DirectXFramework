@@ -11,6 +11,7 @@
 #include"GameStatusBoard.h"
 #include"ActiveWeapon.h"
 #include"Level2Director.h"
+#include"ScenarioManager.h"
 
 #include"Sword.h"
 #include"ThrowingAxe.h"
@@ -31,7 +32,9 @@ public:
 	void release() override;
 
 	void setViewport(Viewport* viewport);
+
 	Simon* getSimon();
+	BaseObject* getObject(eID id);
 private:
 	//==========================TEST=========================//
 	void updateViewport(BaseObject* objTracker);
@@ -41,17 +44,25 @@ private:
 	BaseObject* _bat;
 	BaseObject* _medusaHead;
 	Map* _backGround;
-	//BaseObject* _land;
-	//BaseObject* _land2;
-	//BaseObject* _land3;
-	//BaseObject* _land4;
-	//BaseObject** _stairsRight;
-	//BaseObject** _stairsLeft;
 	vector<BaseObject*>* _mapObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
 	//Level2Director* _director;
 	bool _isSwitchSence;
+
+	// Hàng họ để mở cửa :v
+	bool flagDoorScenario;
+	ScenarioManager* _directorDoor;
+	ScenarioManager* _directorPassDoor;
+
+	void passDoorScene(float deltatime, bool& isFinish);
+	// Tự đi qua cửa
+	void ScenarioPassDoor(float deltatime);
+
+	void doorScene(float dt, bool& finish);
+	// Dịch screen đi gặp cái cửa
+	void ScenarioMoveViewport(float deltatime);
+
 	//==========================TEST=========================//
 };
 

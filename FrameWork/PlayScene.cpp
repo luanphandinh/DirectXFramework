@@ -17,7 +17,8 @@ bool PlayScene::init()
 {
 	_simon = new Simon();
 	_simon->init();
-	this->_simon->setPosition(2700, 100);
+	//this->_simon->setPosition(2700, 100);
+	this->_simon->setPosition(2300, 638);
 
 	_director = new Level2Director();
 	_director->init();
@@ -62,6 +63,17 @@ bool PlayScene::init()
 		ItemManager::insertItem((Item*)_testItem[i]);
 	}
 	
+	// Scenario here
+	auto scenarioDoorMoveViewport = new Scenario("DoorViewport");
+	__hook(&Scenario::update, scenarioDoorMoveViewport, &PlayScene::doorScene);
+	_directorDoor = new ScenarioManager();
+	_directorDoor->insertScenario(scenarioDoorMoveViewport);
+
+	auto scenarioPassDoor = new Scenario("PassDoor");
+	__hook(&Scenario::update, scenarioPassDoor, &PlayScene::passDoorScene);
+	flagDoorScenario = false;
+	_directorPassDoor = new ScenarioManager();
+	_directorPassDoor->insertScenario(scenarioPassDoor);
 
 	//========================TESTING===========================//
 	
@@ -102,6 +114,10 @@ void PlayScene::update(float deltaTime)
 	_simon->update(deltaTime);
 	_itemManager->update(deltaTime);
 
+	// update scenario here
+	////*** fix later :v
+	//this->ScenarioMoveViewport(deltaTime);
+	this->ScenarioPassDoor(deltaTime);
 	//=====================TESTING==========================//
 }
 
@@ -109,11 +125,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 {
 	//=====================TESTING==========================//
 	_backGround->draw(spriteHandle, _viewport);
-	/*_spearKnight->draw(spriteHandle, _viewport);
 
-	_bat->draw(spriteHandle, _viewport);
-
-	_medusaHead->draw(spriteHandle, _viewport);*/
 	for (BaseObject* obj : (*_mapObject))
 	{
 		obj->draw(spriteHandle, _viewport);
@@ -144,10 +156,89 @@ Simon * PlayScene::getSimon() {
 	return (Simon*)this->_simon;
 }
 
+BaseObject * PlayScene::getObject(eID id) {
+	if (id == eID::SIMON)
+		return getSimon();
+	eID objectID;
+	if ((*_mapObject).size() == 0) {
+		return nullptr;
+	}
+	for (BaseObject* object : (*_mapObject)) {
+		objectID = object->getId();
+		if (objectID == id)
+			return object;
+	}
+	return nullptr;
+}
+
 //=====================TESTING==========================//
 void PlayScene::updateViewport(BaseObject* objTracker)
 {
 	_director->updateViewport();
 	_viewport = _director->getViewport();
 }
+
 //=====================TESTING==========================//
+
+#pragma region Pass the door scenario
+//************ Hàng họ để mở cửa :v ************//
+void PlayScene::doorScene(float dt, bool & finish) {
+	GVector2 current_position = _viewport->getPositionWorld();
+	GVector2 worldsize = this->_backGround->getWorldSize();
+	// dịch screen từ từ sang TRÁI, speed = vs speed simon
+	current_position.x -= SIMON_MOVING_SPEED * dt / 1000;
+
+	_viewport->setPositionWorld(current_position);
+	if (_simon->getBounding().left > current_position.x) {
+		GVector2 curPos = _simon->getPosition();
+		curPos.x = current_position.x + (_simon->getSprite()->getFrameWidth() >> 1);
+		_simon->setPosition(curPos);
+	}
+	finish = false;
+}
+void PlayScene::ScenarioMoveViewport(float deltatime) {
+	if (_directorDoor == nullptr)
+		return;
+	int xsimon = _simon->getPositionX();
+	int ysimon = _simon->getPositionY();
+	//
+	if (xsimon>2074&&xsimon<=2104&&ysimon>730&&ysimon<740) {
+		flagDoorScenario = true;
+	}
+	if (flagDoorScenario == true) {
+		this->_directorDoor->update(deltatime);
+		if (this->_directorDoor->isFinish() == true) {
+			SAFE_DELETE(_directorDoor);
+		}
+	}
+}
+
+void PlayScene::passDoorScene(float deltatime, bool & isFinish) {
+	auto simon = this->getSimon();
+	int xsimon = simon->getPositionX();
+	int ysimon = simon->getPositionY();
+	// vì có 2 cái cửa, chắc fải làm 1 cái switch case :3
+	// tới cửa tự đi, đúng ra phải dừng lại và chờ viewport dịch 1 đoạn, sẽ fix sau
+	if (xsimon < 2100 && xsimon>2070 && ysimon < 700 && ysimon>660) {
+			simon->forceMoveLeft();
+	}
+	else {
+		// Đã qua khỏi cửa vài bước thì dừng lại
+		if(xsimon < 1950 && ysimon < 700 && ysimon>660)
+			simon->unforceMoveLeft();
+	}
+}
+void PlayScene::ScenarioPassDoor(float deltatime) {
+	if (_directorPassDoor == nullptr)
+		return;
+	auto door = getObject(eID::DOOR);
+	//
+	if (door != nullptr && door->isInStatus(eStatus::OPENING) == true) {
+		this->_directorPassDoor->update(deltatime);
+		if (this->_directorPassDoor->isFinish() == true) {
+			SAFE_DELETE(_directorPassDoor);
+		}
+	}
+}
+
+#pragma endregion
