@@ -23,7 +23,9 @@ bool PlayScene::init()
 	_simon->init();
 	_isSwitchSence = false;
 	// set pos ở đây, đừng đặt trong class
-	this->_simon->setPosition(2700, 100);
+	//this->_simon->setPosition(2700, 100);
+	this->_simon->setPosition(2480, 638);
+
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();

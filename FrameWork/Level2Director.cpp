@@ -31,6 +31,8 @@ void Level2Director::updateViewport(BaseObject* objTracker)
 	// Bám theo object.
 	//GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, boundSize.x),
 	//	current_position.y);
+
+	//test
 	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2,WINDOW_HEIGHT*2),
 		current_position.y);
 
