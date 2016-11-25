@@ -26,7 +26,7 @@ public:
 	virtual void draw(LPD3DXSPRITE, Viewport*) = 0;
 	virtual void release() = 0;
 	
-	virtual GVector2 initVeloc(float speed);
+	virtual GVector2 initVeloc(GVector2 speed);
 	/*
 		Hàm initCommonComponent dùng cho các lớp con
 		để khởi tạo các giá trị ban đầu về movement và gravity...

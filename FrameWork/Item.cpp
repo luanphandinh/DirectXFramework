@@ -22,7 +22,7 @@ void Item::initCommonComponent()
 	this->setPosition(_startPosition);
 	this->setScale(SCALE_FACTOR);
 
-	GVector2 veloc = this->initVeloc(NORMAL_ITEM_SPEED);
+	GVector2 veloc = this->initVeloc(GVector2(NORMAL_ITEM_SPEED,0));
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList.insert(pair<string, IComponent*>("Movement", movement));
@@ -36,9 +36,9 @@ void Item::initCommonComponent()
 	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Item::onCollisionBegin);
 }
 
-GVector2 Item::initVeloc(float speed)
+GVector2 Item::initVeloc(GVector2 speed)
 {
-	return GVector2(0, -speed);
+	return speed;
 }
 
 void Item::update(float deltatime)

@@ -26,18 +26,18 @@ void ThrowingAxe::init()
 	initWeaponComponent();
 }
 
-GVector2 ThrowingAxe::initVeloc(float speed)
+GVector2 ThrowingAxe::initVeloc(GVector2 speed)
 {
 	GVector2 result;
 	if (_direction != eDirection::NONE)
 	{
 		if ((_direction & eDirection::LEFT) == eDirection::LEFT)
 		{
-			result.x = -speed;
+			result.x = -speed.x;
 		}
 		else if ((_direction & eDirection::RIGHT) == eDirection::RIGHT)
 		{
-			result.x = speed;
+			result.x = speed.x;
 		}
 		else
 		{
@@ -45,7 +45,7 @@ GVector2 ThrowingAxe::initVeloc(float speed)
 		}
 	}
 
-	result.y = 0;
+	result.y = speed.y;
 	return result;
 }
 
@@ -71,14 +71,17 @@ void ThrowingAxe::initWeaponComponent()
 {
 	if (_type != eItemType::PICKED_UP) return;
 
-	GVector2 veloc = this->initVeloc(THROWING_AXE_DISTANCE.x);
+	GVector2 veloc = this->initVeloc(THROWING_AXE_DISTANCE);
 
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(veloc);
 
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
-	gravity->setStatus(eGravityStatus::SHALLOWED);
-	gravity->setGravity(GVector2(0, 0));
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+	gravity->setGravity(GVector2(0, -800));
+
+	RotateMovement* rotateMovement = new RotateMovement(_sprite);
+	_componentList["RotateMovement"] = rotateMovement;
 }
 
 float ThrowingAxe::checkCollision(BaseObject* otherObject, float dt)

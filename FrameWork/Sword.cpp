@@ -27,18 +27,18 @@ void Sword::init()
 	initWeaponComponent();
 }
 
-GVector2 Sword::initVeloc(float speed)
+GVector2 Sword::initVeloc(GVector2 speed)
 {
 	GVector2 result;
 	if (_direction != eDirection::NONE)
 	{
 		if ((_direction & eDirection::LEFT) == eDirection::LEFT)
 		{
-			result.x = -speed;
+			result.x = -speed.x;
 		}
 		else if ((_direction & eDirection::RIGHT) == eDirection::RIGHT)
 		{
-			result.x = speed;
+			result.x = speed.x;
 		}
 		else
 		{

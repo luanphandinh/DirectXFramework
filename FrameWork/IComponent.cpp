@@ -112,3 +112,28 @@ void SinMovement::setFrequency(float freq) {
 	this->_linearVeloc = _amplitude * _radianVeloc;
 }
 #pragma endregion
+
+
+#pragma region RotateMovement
+
+RotateMovement::RotateMovement(Sprite* _refSprite)
+{
+	this->_refSprite = _refSprite;
+	_degree = 0.0f;
+}
+
+
+void RotateMovement::update(float deltatime)
+{
+	if (_degree < 360.0f)
+	{
+		_degree += 45.0f;
+	}
+	else
+	{
+		_degree = 0.0f;
+	}
+	_refSprite->setRotate(_degree);
+}
+
+#pragma endregion

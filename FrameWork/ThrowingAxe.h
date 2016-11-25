@@ -1,6 +1,6 @@
 #pragma once
 #include"Weapon.h"
-#define THROWING_AXE_DISTANCE GVector2(150,0)
+#define THROWING_AXE_DISTANCE GVector2(150,350)
 class ThrowingAxe : public Weapon
 {
 public:
@@ -16,7 +16,7 @@ public:
 
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
-	virtual GVector2 initVeloc(float speed) override;
+	virtual GVector2 initVeloc(GVector2 speed) override;
 protected:
 	int		_damage;
 	GVector2 _distance;

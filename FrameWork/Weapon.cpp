@@ -30,7 +30,7 @@ void Weapon::release()
 	Item::release();
 }
 
-GVector2 Weapon::initVeloc(float speed)
+GVector2 Weapon::initVeloc(GVector2 speed)
 {
 	return Item::initVeloc(speed);
 }
