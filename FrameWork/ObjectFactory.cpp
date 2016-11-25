@@ -110,11 +110,12 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case LAND:
 		return getLand(node);
 		break;
-		case DOOR:
-			return getDoor(node);
-			break;
-		case FLYLAND:
-			return getFlyLand(node);
+	case DOOR:
+		return getDoor(node);
+		break;
+	case FLYLAND:
+		return getFlyLand(node);
+		break;
 	case STAIR:
 		return getStair(node);
 		break;
@@ -293,11 +294,56 @@ BaseObject * ObjectFactory::getMedusaHead(xml_node node) {
 }
 
 BaseObject * ObjectFactory::getDoor(xml_node node) {
-	return nullptr;
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y, direction;
+	eStatus status;
+
+	xml_node activebound = node.child("ActiveBound");
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+	int width = activebound.attribute("Width").as_int();
+	//hack :v
+	x += 8;
+	width -= 64;
+	y -= 48;
+	if (properties.find("status") != properties.end()) {
+		status = (eStatus)(stoi(properties.find("status")->second));
+	}
+	else {
+		status = eStatus::CLOSING;
+	}
+
+	if (properties.find("direction") != properties.end()) {
+		direction = stoi(properties.find("direction")->second);
+	}
+	else {
+		direction = 1;
+	}
+
+	auto door = new Door(status, GVector2(x, y), direction);
+	door->init();
+
+	return door;
 }
 
 BaseObject * ObjectFactory::getFlyLand(xml_node node) {
-	return nullptr;
+	xml_node activebound = node.child("ActiveBound");
+
+	// 
+	int x = activebound.attribute("X").as_int();
+	int y = activebound.attribute("Y").as_int();
+	int width = activebound.attribute("Width").as_int();
+
+	x += 32;
+	width -= 64;
+	//y -= 32;
+
+	auto flyLand = new FlyLand(GVector2(x, y), GVector2(x + width, y));
+	flyLand->init();
+	return flyLand;
 }
 
 map<string, string> ObjectFactory::getObjectProperties(xml_node node)
