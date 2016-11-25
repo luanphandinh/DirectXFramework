@@ -1,13 +1,13 @@
 #include "Door.h"
-
+#include "PlayScene.h"
 Door::Door(eStatus status, GVector2 pos, int direction) :BaseObject(eID::DOOR){
 	_sprite = SpriteManager::getInstance()->getSprite(eID::DOOR);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
 
 	this->setStatus(status);
 	this->setPosition(pos);
-	//this->setScale(SCALE_FACTOR);
-	//this->setScaleX(direction * SCALE_FACTOR);
+	this->setScale(SCALE_FACTOR);
+	this->setScaleX(direction * SCALE_FACTOR);
 }
 
 
@@ -73,5 +73,18 @@ void Door::changeDirection() {
 }
 
 void Door::updateClosing() {
-
+	// track theo simon
+	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	RECT objectBound = objectTracker->getBounding();
+	int x = objectTracker->getPositionX();
+	int y = objectTracker->getPositionY();
+	int xthis = this->getPositionX();
+	int ythis = this->getPositionY();
+	//test :v
+	if (x > xthis&&x < xthis + 50 && y<ythis+50&&y>ythis - 50) {
+		this->setStatus(OPENING);
+	}
+	else {
+		this->setStatus(CLOSING);
+	}
 }
