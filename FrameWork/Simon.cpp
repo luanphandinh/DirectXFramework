@@ -117,6 +117,7 @@ void Simon::init()
 	this->resetValues();
 	_reviveStopWatch = nullptr;
 
+
 	this->_movingSpeed = SIMON_MOVING_SPEED;
 
 	//this->setPosition(50, 100);
