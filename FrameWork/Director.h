@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include"define.h"
 #include"Viewport.h"
-#include"Simon.h"
+#include"BaseObject.h"
 /*
 	Class đùng để gán phần viewport cho từng đoạn chơi trong stage
 	Được đọc từ file trong Resources//Maps//level?viewportinfo.txt
@@ -35,13 +35,24 @@ public:
 	Viewport* getViewport();
 
 	void setCurrentViewport(eLevel2Viewport name);
-	virtual void updateViewport(BaseObject* objTracker) = 0;
+	virtual void updateViewport() = 0;
+	void setObjectTracker(BaseObject* objTracker);
+
+	void setRevivePosition(GVector2 pos);
+	GVector2 getRevivePosition();
+	void setReviveViewport(eLevel2Viewport viewport);
+	void updateRevive();
 protected:
 	eID	_currentLevelId;
 	eLevel2Viewport _currentViewport;
 	map<eLevel2Viewport, ViewportInfo> _listViewportInfo;
-	Simon* _simon;
+	BaseObject* _objTracker;
 	Viewport* _viewport;
+
+	//Sau khi simon chết thì cần có điểm được revive
+	//Cập nhật lại vị trí được revive với viewport revive
+	GVector2	_revivePosition;
+	eLevel2Viewport _reviveViewport;
 };
 
 

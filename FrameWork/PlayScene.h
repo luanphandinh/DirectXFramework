@@ -8,11 +8,6 @@
 #include<map>
 #include"Simon.h"
 #include"Map.h"
-#include"Land.h"
-#include "SpearKnight.h"
-#include"Stair.h"
-#include "Bat.h"
-#include "MedusaHead.h"
 #include "ItemManager.h"
 #include "ObjectFactory.h"
 #include"Sword.h"
@@ -55,8 +50,8 @@ private:
 	vector<BaseObject*>* _mapObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
+	//Level2Director* _director;
 	bool _isSwitchSence;
-	Level2Director* _director;
 	//==========================TEST=========================//
 };
 

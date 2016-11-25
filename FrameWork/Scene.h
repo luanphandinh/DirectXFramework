@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include"define.h"
 #include"Viewport.h"
-
+#include"Director.h"
 /*
 	Abstract Class cho một màn chơi của game.
 	Bao gồm các hàm giống như trong game.h
@@ -19,7 +19,9 @@ public:
 	void virtual release() = 0;
 
 	Viewport* getViewport();
+	Director* getDirector();
 protected:
 	Viewport* _viewport;
+	Director* _director;
 };
 

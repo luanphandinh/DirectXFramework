@@ -121,9 +121,6 @@ private:
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
 
-	
-	
-
 	StopWatch* _stopWatch;
 	StopWatch* _reviveStopWatch;
 	StopWatch* _hittingStopWatch;

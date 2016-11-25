@@ -427,18 +427,7 @@ void Simon::die()
 
 void Simon::revive()
 {
-	//auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
-	//auto viewportPosition = viewport->getPositionWorld();
-
-	//if (auto scene = dynamic_cast<Scene*>(SceneManager::getInstance()->getCurrentScene())) {
-		//this->setPosition(viewportPos.x, WINDOW_HEIGHT);
-	this->setPosition(100, 150);
-
-	//}
-	//else {
-	//	this->setPosition(viewportPosition.x + WINDOW_WIDTH / 2, viewportPosition.y - WINDOW_HEIGHT / 2);
-	//}
-
+	SceneManager::getInstance()->getCurrentScene()->getDirector()->updateRevive();
 	//reset value
 	this->setStatus(eStatus::JUMPING);
 	this->resetValues();

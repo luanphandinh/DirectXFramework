@@ -15,15 +15,15 @@ PlayScene::~PlayScene()
 
 bool PlayScene::init() 
 {
-	_director = new Level2Director();
-	_director->init();
-	_viewport = _director->getViewport();
-	//=====================TESTING==========================//
 	_simon = new Simon();
 	_simon->init();
-	_isSwitchSence = false;
-	// set pos ở đây, đừng đặt trong class
 	this->_simon->setPosition(2700, 100);
+
+	_director = new Level2Director();
+	_director->init();
+	_director->setObjectTracker(_simon);
+	_viewport = _director->getViewport();
+	//=====================TESTING==========================//
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
@@ -147,7 +147,7 @@ Simon * PlayScene::getSimon() {
 //=====================TESTING==========================//
 void PlayScene::updateViewport(BaseObject* objTracker)
 {
-	_director->updateViewport(objTracker);
+	_director->updateViewport();
 	_viewport = _director->getViewport();
 }
 //=====================TESTING==========================//

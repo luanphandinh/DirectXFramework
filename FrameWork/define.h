@@ -150,6 +150,7 @@ enum eDirection
 
 enum eLevel2Viewport
 {
+	VNULL = 0,
 	V1 = 1,
 	V2 = 2,
 };
