@@ -903,6 +903,7 @@ void Simon::getWeapon()
 		item = new Boomerang(startPos, eItemType::PICKED_UP, dir);
 		break;
 	case eItemID::HOLYWATER:
+		startPos += GVector2(20, 0);
 		item = new HolyWater(startPos, eItemType::PICKED_UP, dir);
 		break;
 	default:

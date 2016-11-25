@@ -111,6 +111,7 @@ enum eStatus
 
 	CLOSING = (1<<23),
 	OPENING = (1<<24),
+	BURST = (1 << 25),
 };
 
 enum eStairDirection

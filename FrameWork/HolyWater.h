@@ -1,6 +1,9 @@
 #pragma once
 #include"Weapon.h"
-#define HOLYWATER_SPEED GVector2(250,150)
+#include"Animation.h"
+#include"StopWatch.h"
+#include"define.h"
+#define HOLYWATER_SPEED GVector2(150,150)
 class HolyWater : public Weapon
 {
 public:
@@ -18,5 +21,8 @@ public:
 	virtual void initWeaponComponent() override;
 protected:
 	int		_damage;
+	Animation*	_burstAnimation;
+	Animation*	_throwAnimation;
+	StopWatch*	_burstStopWatch;
 };
 
