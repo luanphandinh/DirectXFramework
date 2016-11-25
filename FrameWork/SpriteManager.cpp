@@ -43,6 +43,11 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::DOOR, sp));
 	this->loadSpriteInfo(eID::DOOR, "Resources//Images//door_animation.txt");
 
+	// FLYLAND
+	sp = new Sprite(spriteHandler, L"Resources//Images//flyLand.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::FLYLAND, sp));
+	this->loadSpriteInfo(eID::FLYLAND, "Resources//Images//flyLand_animation.txt");
+
 	//sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	//sp->setOrigin(GVector2(0.0f, 0.0f));
 	//this->_listSprite[eID::MAPSTAGE1] = sp;
