@@ -68,6 +68,9 @@ void ActiveWeapon::drawIcon(LPD3DXSPRITE spriteHandler)
 	case eItemID::AXE:
 		_spriteWeapon->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "axe"));
 		break;
+	case eItemID::BOORMERANG:
+		_spriteWeapon->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "boomerang_flying"));
+		break;
 	default:
 		break;
 	}

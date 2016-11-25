@@ -57,7 +57,8 @@ bool PlayScene::init()
 	}
 	_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
 	_testItem[11] = new ThrowingAxe(GVector2(2750, 200), eItemType::DROP, eDirection::LEFT);
-	for (int i = 0; i < 12; i++)
+	_testItem[12] = new Boomerang(GVector2(2780, 200), eItemType::DROP, eDirection::LEFT);
+	for (int i = 0; i < 13; i++)
 	{
 		ItemManager::insertItem((Item*)_testItem[i]);
 	}
@@ -118,14 +119,14 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	{
 		obj->draw(spriteHandle, _viewport);
 	}
-	
-	_gameStatusBoard->draw(spriteHandle);
 
+	_gameStatusBoard->draw(spriteHandle);
+	
 	_simon->draw(spriteHandle, _viewport);
 
 	_itemManager->draw(spriteHandle, _viewport);
 
-	
+
 	//=====================TESTING==========================//
 }
 

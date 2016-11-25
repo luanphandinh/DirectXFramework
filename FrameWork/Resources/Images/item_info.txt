@@ -2,8 +2,8 @@ frame_name				left	top		right	bottom	origin.x	origin.y
 red_life_icon			162		189		165		195		0.5 		0.5
 white_life_icon			184		189		187		195		0.5			0.5
 yellow_life_icon		180		189		183		195		0.5			0.5	
-cross_dropped			60		3		74		16		0.5			0.5
-cross_flying			77		2		92		16		0.5			0.5
+boomerang_dropped		60		3		74		16		0.5			0.5
+boomerang_flying		77		2		92		16		0.5			0.5
 axe						96		2		111		16		0.5			0.5
 sword					115		4		131		13		0.5			0.5
 heart_small				100		88		108		96		0.5			0.5

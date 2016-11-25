@@ -255,6 +255,9 @@
     <ClInclude Include="FlyLand.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="FlyLand.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Boomerang.cpp">
+      <Filter>Source Files\Objects\Items\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

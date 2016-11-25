@@ -899,6 +899,9 @@ void Simon::getWeapon()
 	case eItemID::AXE:
 		item = new ThrowingAxe(startPos, eItemType::PICKED_UP, dir);
 		break;
+	case eItemID::BOORMERANG:
+		item = new Boomerang(startPos, eItemType::PICKED_UP, dir);
+		break;
 	default:
 		break;
 	}

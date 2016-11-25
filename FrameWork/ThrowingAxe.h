@@ -16,7 +16,7 @@ public:
 
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
-	virtual GVector2 initVeloc(GVector2 speed) override;
+
 protected:
 	int		_damage;
 	GVector2 _distance;
