@@ -18,6 +18,7 @@
 #include"WhipUpgrade.h"
 #include"MoneyBag.h"
 #include"Sword.h"
+#include"ThrowingAxe.h"
 //========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126

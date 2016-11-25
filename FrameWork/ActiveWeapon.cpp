@@ -65,6 +65,9 @@ void ActiveWeapon::drawIcon(LPD3DXSPRITE spriteHandler)
 	case eItemID::SWORD:
 		_spriteWeapon->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "sword"));
 		break;
+	case eItemID::AXE:
+		_spriteWeapon->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "axe"));
+		break;
 	default:
 		break;
 	}

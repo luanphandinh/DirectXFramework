@@ -895,6 +895,9 @@ void Simon::getWeapon()
 	case eItemID::SWORD:
 		item = new Sword(startPos, eItemType::PICKED_UP, dir);
 		break;
+	case eItemID::AXE:
+		item = new ThrowingAxe(startPos, eItemType::PICKED_UP, dir);
+		break;
 	default:
 		break;
 	}

@@ -2,18 +2,18 @@
 #include"define.h"
 #include "Scene.h"
 #include "Game.h"
-#include"Texture.h"
-#include"Sprite.h"
 #include"Animation.h"
 #include<map>
 #include"Simon.h"
 #include"Map.h"
 #include "ItemManager.h"
 #include "ObjectFactory.h"
-#include"Sword.h"
 #include"GameStatusBoard.h"
 #include"ActiveWeapon.h"
 #include"Level2Director.h"
+
+#include"Sword.h"
+#include"ThrowingAxe.h"
 using namespace std;
 _USING_FRAMEWORK
 
