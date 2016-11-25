@@ -34,3 +34,7 @@ void WhipUpgrade::release()
 {
 	Item::release();
 }
+
+void WhipUpgrade::pickedUp()
+{
+}

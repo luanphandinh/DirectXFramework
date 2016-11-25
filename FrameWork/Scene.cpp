@@ -14,3 +14,8 @@ Viewport* Scene::getViewport()
 {
 	return _viewport;
 }
+
+Director* Scene::getDirector()
+{
+	return _director;
+}

@@ -1,12 +1,11 @@
 #pragma once
 #include"Weapon.h"
-#define SWORD_SPEED GVector2(250,0)
-#define SWORD_DISTANCE GVector2(150,0)
-class Sword : public Weapon
+#define THROWING_AXE_DISTANCE GVector2(150,350)
+class ThrowingAxe : public Weapon
 {
 public:
-	Sword(GVector2 startPosition, eItemType type, eDirection dir);
-	~Sword();
+	ThrowingAxe(GVector2 startPosition, eItemType type, eDirection dir);
+	~ThrowingAxe();
 
 	void init() override;
 	void update(float deltatime) override;

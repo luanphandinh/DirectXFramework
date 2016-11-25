@@ -3,7 +3,6 @@
 
 PlayScene::PlayScene()
 {
-	_viewport = new Viewport(0, WINDOW_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 
@@ -16,9 +15,9 @@ PlayScene::~PlayScene()
 
 bool PlayScene::init() 
 {
-	//=====================TESTING==========================//
 	_simon = new Simon();
 	_simon->init();
+<<<<<<< HEAD
 	// set pos ở đây, đừng đặt trong class
 	//stage 1
 	//this->_simon->setPosition(2580, 63);
@@ -38,6 +37,23 @@ bool PlayScene::init()
 	_medusaHead = new MedusaHead(HIDING, 1, GVector2(2560,263),
 		MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
 	_medusaHead->init();
+=======
+	this->_simon->setPosition(2700, 100);
+
+	_director = new Level2Director();
+	_director->init();
+	_director->setObjectTracker(_simon);
+	_viewport = _director->getViewport();
+	//=====================TESTING==========================//
+	_itemManager = new ItemManager();
+	_gameStatusBoard = GameStatusBoard::getInstance();
+	_gameStatusBoard->init();
+	//ActiveWeapon::setItemID(eItemID::SWORD);
+
+	//_medusaHead = new MedusaHead(HIDING, -1, START_POSITION,
+	//	MEDUSAHEAD_HORIZONTAL_VELOC, MEDUSAHEAD_AMPLITUDE, MEDUSAHEAD_FREQUENCY);
+	//_medusaHead->init();
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 
 	_door = new Door(CLOSING, GVector2(2070, 687), -1);
 	_door->init();
@@ -49,7 +65,7 @@ bool PlayScene::init()
 
 	//========================TESTING===========================//
 	_testItem = new BaseObject*[15];
-	_testItem[0] = new HeartItem(GVector2(50, 200));
+	_testItem[0] = new HeartItem(GVector2(2700, 200));
 	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
 	for (int i = 2; i < 4; i++)
 	{
@@ -61,12 +77,11 @@ bool PlayScene::init()
 	}
 	for (int i = 7; i < 10; i++)
 	{
-		_testItem[i] = new HeartItem(GVector2(230 + i * 20, 300));
+		_testItem[i] = new HeartItem(GVector2(2700 + i * 20, 300));
 	}
 	_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
-	_testItem[11] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::LEFT);
-	_testItem[12] = new Sword(GVector2(2675, 200), eItemType::PICKED_UP, eDirection::RIGHT);
-	for (int i = 0; i < 13; i++)
+	_testItem[11] = new ThrowingAxe(GVector2(2750, 200), eItemType::DROP, eDirection::LEFT);
+	for (int i = 0; i < 12; i++)
 	{
 		ItemManager::insertItem((Item*)_testItem[i]);
 	}
@@ -102,21 +117,37 @@ void PlayScene::update(float deltaTime)
 	}
 	for (BaseObject* obj : (*_mapObject))
 	{
+		obj->update(deltaTime);
 		_simon->checkCollision(obj, deltaTime);
 		_itemManager->checkCollision(obj, deltaTime);
+<<<<<<< HEAD
 		_spearKnight->checkCollision(obj, deltaTime);
+=======
+		// nếu là mấy cục shit này ko cần check va chạm 
+		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND ||
+			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
+			continue;
+		// check mấy con như knight vs land đồ :v
+		for (BaseObject* passiveobj : (*_mapObject)) {
+			if (passiveobj == nullptr || passiveobj == obj || passiveobj->isInStatus(eStatus::DESTROY))
+				continue;
+			obj->checkCollision(passiveobj, deltaTime);
+		}
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	}
-	//_spearKnight->checkCollision(_land, deltaTime);
-	//_spearKnight->checkCollision(_simon, deltaTime);
+
 	_itemManager->checkCollision(_simon, deltaTime);
 	_simon->update(deltaTime);
 	_itemManager->update(deltaTime);
+<<<<<<< HEAD
 
 	_spearKnight->update(deltaTime);
 	_bat->update(deltaTime);
 	_medusaHead->update(deltaTime);
 
 	_door->update(deltaTime);
+=======
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 
 	// có gì đó sai sai :v 
 	//this->ScenarioMoveViewport(deltaTime);
@@ -142,11 +173,13 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 		obj->draw(spriteHandle, _viewport);
 	}
 	
+	_gameStatusBoard->draw(spriteHandle);
+
 	_simon->draw(spriteHandle, _viewport);
 
 	_itemManager->draw(spriteHandle, _viewport);
 
-	_gameStatusBoard->draw(spriteHandle);
+	
 	//=====================TESTING==========================//
 }
 
@@ -168,6 +201,7 @@ Simon * PlayScene::getSimon() {
 //=====================TESTING==========================//
 void PlayScene::updateViewport(BaseObject* objTracker)
 {
+<<<<<<< HEAD
 	// Vị trí hiện tại của viewport. 
 	GVector2 current_position = _viewport->getPositionWorld();
 
@@ -194,6 +228,10 @@ void PlayScene::updateViewport(BaseObject* objTracker)
 	}
 
 	_viewport->setPositionWorld(new_position);
+=======
+	_director->updateViewport();
+	_viewport = _director->getViewport();
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 }
 
 void PlayScene::doorSceneViewport(float deltaTime, bool & finish) {

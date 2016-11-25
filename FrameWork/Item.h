@@ -5,6 +5,10 @@
 #define NORMAL_ITEM_SPEED 1000
 _USING_FRAMEWORK
 
+/*
+	Là lớp cơ bản của ba loại item chính trong game(standard,weapon và special item)
+*/
+
 class Item : public BaseObject
 {
 public:
@@ -22,7 +26,7 @@ public:
 	virtual void draw(LPD3DXSPRITE, Viewport*) = 0;
 	virtual void release() = 0;
 	
-	virtual GVector2 initVeloc(float speed);
+	virtual GVector2 initVeloc(GVector2 speed);
 	/*
 		Hàm initCommonComponent dùng cho các lớp con
 		để khởi tạo các giá trị ban đầu về movement và gravity...
@@ -36,7 +40,13 @@ public:
 
 	virtual float checkCollision(BaseObject* object, float dt);
 
+	//Khi va chạm với land thì ngứng
 	void stop();
+	/*
+		Khi va chạm với simon thì bị picked_up
+		Hàm này sẽ do các lớp con kế thừa xuống và xử lý
+	*/
+	virtual void pickedUp() = 0;
 protected:
 	GVector2	_startPosition;
 	eItemType	_type;

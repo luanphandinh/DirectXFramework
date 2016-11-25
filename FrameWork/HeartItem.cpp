@@ -47,3 +47,19 @@ void HeartItem::release()
 {
 	Item::release();
 }
+
+void HeartItem::pickedUp()
+{
+	switch (_heartType)
+	{
+	case eHeartItemType::SMALL:
+		HeartCounter::plusHeart(1);
+		break;
+	case eHeartItemType::LARGE:
+		HeartCounter::plusHeart(5);
+		break;
+	default:
+		break;
+	}
+	this->setStatus(eStatus::DESTROY);
+}

@@ -65,6 +65,9 @@ void Bat::init() {
 	_animations[eStatus::HANGING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::HANGING]->addFrameRect(eID::BAT, "normal", NULL);
 
+	_animations[FLYINGDOWN] = new Animation(_sprite, 0.15f);
+	_animations[FLYINGDOWN]->addFrameRect(eID::BAT, "fly_02", "fly_03", "fly_04", NULL);
+
 	_animations[FLYING] = new Animation(_sprite, 0.15f);
 	_animations[FLYING]->addFrameRect(eID::BAT,  "fly_02", "fly_03", "fly_04", NULL);
 
@@ -76,6 +79,8 @@ void Bat::init() {
 	//this->setPosition(GVector2(300, 200));
 	this->setStatus(eStatus::HANGING);
 	_sprite->drawBounding(false);
+
+	this->hack = 0;
 }
 
 void Bat::draw(LPD3DXSPRITE spritehandle, Viewport* viewport) {
@@ -107,40 +112,66 @@ void Bat::update(float deltaTime) {
 		return;
 	}
 	else {
-
+		if (hack == 30) {
+			this->setStatus(FLYING);
+			this->fly();
+		}
+		if (this->getStatus() == FLYINGDOWN) {
+			hack++;
+			this->flyingDown();
+		}
 		/*this->checkIfOutOfScreen();*/
 		for (auto component : _listComponent) {
-
 			component.second->update(deltaTime);
 		}
 		_animations[this->getStatus()]->update(deltaTime);
-
 	}
-
 }
 
 void Bat::setPosition(GVector2 pos) {
 	_sprite->setPosition(pos);
 }
+
+
 void Bat::changeDirection() {
 	_sprite->setScaleX(-this->getScale().x);
 	Movement *movement = (Movement*)this->getComponent("Movement");
 	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
 }
 
+void Bat::flyingDown() {
+	Movement *movement = (Movement*)this->getComponent("Movement");
+	movement->setVelocity(GVector2(movement->getVelocity().x, -50));
+}
+
+void Bat::fly() {
+	Movement *movement = (Movement*)this->getComponent("Movement");
+	movement->setVelocity(GVector2(movement->getVelocity().x, 0));
+}
+
 void Bat::updateHanging() {
 	// track theo simon
 	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	RECT objectBound = objectTracker->getBounding();
+<<<<<<< HEAD
 
 	if (objectBound.top > this->getBounding().bottom+50) {
 		if(objectBound.left > this->getBounding().right + 150)
 			this->setStatus(FLYING);
 		else this->setStatus(HANGING);
+=======
+	int x = objectTracker->getPositionX();
+	int y = objectTracker->getPositionY();
+	int xthis = this->getPositionX();
+	int ythis = this->getBounding().bottom;
+	if (x > xthis&&x<xthis + 150 && y<ythis&&y>ythis-200) {
+		this->setStatus(FLYINGDOWN);
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	}
 	else {
 		this->setStatus(HANGING);
 	}
+
 }
 
 void Bat::onCollisionBegin(CollisionEventArg* collision_event) {

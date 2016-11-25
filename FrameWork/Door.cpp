@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿#include "Door.h"
 #include "PlayScene.h"
 Door::Door(eStatus status, GVector2 pos, int direction) :BaseObject(eID::DOOR){
@@ -7,24 +8,44 @@ Door::Door(eStatus status, GVector2 pos, int direction) :BaseObject(eID::DOOR){
 	this->setPosition(pos);
 	this->setScale(1.0f);
 	this->setScaleX(direction * 1.0f);
+=======
+#include "Door.h"
+
+Door::Door(eStatus status, GVector2 pos, int direction) :BaseObject(eID::DOOR){
+	_sprite = SpriteManager::getInstance()->getSprite(eID::DOOR);
+	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
+
+	this->setStatus(status);
+	this->setPosition(pos);
+	//this->setScale(SCALE_FACTOR);
+	//this->setScaleX(direction * SCALE_FACTOR);
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 }
 
 
 Door::~Door() {}
 
 void Door::init() {
+<<<<<<< HEAD
 	_animations[eStatus::CLOSING] = new Animation(_sprite, 0.1f);
+=======
+	_animations[eStatus::CLOSING] = new Animation(_sprite, 0.5f);
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	_animations[eStatus::CLOSING]->addFrameRect(eID::DOOR, "normal", NULL);
 
 	_animations[OPENING] = new Animation(_sprite, 0.5f);
 	_animations[OPENING]->addFrameRect(eID::DOOR, "open_02", "open_03", "open_02","open_01", NULL);
 
+<<<<<<< HEAD
 	_animations[CLOSED] = new Animation(_sprite, 0.5f);
 	_animations[CLOSED]->addFrameRect(eID::DOOR, "open_01", NULL);
+=======
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	//*Test
 	//this->setPosition(GVector2(300, 200));
 	this->setStatus(eStatus::CLOSING);
 	_sprite->drawBounding(false);
+<<<<<<< HEAD
 
 	_stopwatch = new StopWatch();
 	this->aniCount = 0;
@@ -36,12 +57,19 @@ void Door::update(float deltaTime) {
 
 
 	if (this->getStatus() == eStatus::DESTROY|| this->getStatus() == eStatus::CLOSED)
+=======
+}
+
+void Door::update(float deltaTime) {
+	if (this->getStatus() == eStatus::DESTROY)
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 		return;
 	if (this->getStatus() == eStatus::CLOSING) {
 		this->updateClosing();
 		return;
 	}
 	else {
+<<<<<<< HEAD
 		aniCount++;
 		//HACK :V
 		if (aniCount == 30)
@@ -58,6 +86,20 @@ void Door::update(float deltaTime) {
 }
 
 void Door::draw(LPD3DXSPRITE spriteHandler, Viewport * viewport) {
+=======
+
+		/*this->checkIfOutOfScreen();*/
+		for (auto component : _listComponent) {
+
+			component.second->update(deltaTime);
+		}
+		_animations[this->getStatus()]->update(deltaTime);
+
+	}
+}
+
+void Door::draw(LPD3DXSPRITE spriteHandler, Viewport *viewport) {
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	_animations[this->getStatus()]->draw(spriteHandler, viewport);
 }
 
@@ -67,11 +109,16 @@ void Door::release() {
 	}
 	_listComponent.clear();
 
+<<<<<<< HEAD
+=======
+	//SAFE_DELETE(this->_loopwatch);
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	SAFE_DELETE(this->_sprite);
 }
 
 void Door::setPosition(GVector2 pos) {
 	_sprite->setPosition(pos);
+<<<<<<< HEAD
 }
 
 
@@ -88,5 +135,19 @@ void Door::updateClosing() {
 	// vào đúng cái khoảng này mới mở cửa :v
 	if (x < 2100 && x>2070 && y < 700 && y>660) this->setStatus(OPENING);
 	else this->setStatus(CLOSING);
+=======
+
+}
+
+IComponent * Door::getComponent(string componentName) {
+	return _listComponent.find(componentName)->second;
+}
+
+void Door::changeDirection() {
+	_sprite->setScaleX(-this->getScale().x);
+}
+
+void Door::updateClosing() {
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 
 }

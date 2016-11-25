@@ -10,6 +10,8 @@ public:
 	void update(float deltatime) override;
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
+
+	virtual void pickedUp() override;
 private:
 	int _levelUpgrade;
 };

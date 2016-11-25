@@ -18,6 +18,7 @@ Sprite* HeartCounter::_heartSprite = nullptr;
 
 void HeartCounter::plusHeart(int value)
 {
+	if (_heart == 0 && value < 0) return;
 	_heart += value;
 }
 

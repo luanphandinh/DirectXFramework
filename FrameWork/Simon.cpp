@@ -237,9 +237,11 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		break;
 	case DIK_Z:
 		this->removeStatus(eStatus::HITTING);
-		this->addStatus(eStatus::THROWING_ITEM);
-		_isThrowing = false;
-		
+		if (ActiveWeapon::isAvailable())
+		{
+			this->addStatus(eStatus::THROWING_ITEM);
+			_isThrowing = false;
+		}
 		break;
 	case DIK_UP:
 		this->removeStatus(eStatus::DOWNSTAIR);
@@ -425,18 +427,7 @@ void Simon::die()
 
 void Simon::revive()
 {
-	//auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
-	//auto viewportPosition = viewport->getPositionWorld();
-
-	//if (auto scene = dynamic_cast<Scene*>(SceneManager::getInstance()->getCurrentScene())) {
-		//this->setPosition(viewportPos.x, WINDOW_HEIGHT);
-	this->setPosition(100, 150);
-
-	//}
-	//else {
-	//	this->setPosition(viewportPosition.x + WINDOW_WIDTH / 2, viewportPosition.y - WINDOW_HEIGHT / 2);
-	//}
-
+	SceneManager::getInstance()->getCurrentScene()->getDirector()->updateRevive();
 	//reset value
 	this->setStatus(eStatus::JUMPING);
 	this->resetValues();
@@ -713,7 +704,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			else _canOnStair = false;
 			//Nếu như va chạm hướng top,và trừ cái trường hợp mà simon đang trong trạng thái nhảy mà rớt xuống 
 			//với vận tốc mà > -200
-			if (direction == eDirection::TOP && !(this->getVelocity().y > -200 && this->isInStatus(eStatus::JUMPING)))
+			if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
 			{
 				//vận tốc 200 hướng xuống => cho trường hợp nhảy từ dưới lên
 				//xử lý đặc biệt,collision body update position bt ko được
@@ -737,8 +728,14 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 		{
 			// kiểm tra coi nhảy hết qua cái land cũ chưa
 			// để gọi event end.
+<<<<<<< HEAD
 			//collisionBody->checkCollision(otherObject, dt, false);
 			_preObject = nullptr;
+=======
+			collisionBody->checkCollision(otherObject, dt, false);
+			//_preObject = nullptr;
+
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 			//Nếu vật đi hết land cũ
 			//thì gán gravity lại thành falling
 			//Vì simon chỉ check collion kkhi nằm trong 1 trong 2 trạng thái,nên ra khỏi lane sẽ falling
@@ -902,6 +899,9 @@ void Simon::getWeapon()
 	{
 	case eItemID::SWORD:
 		item = new Sword(startPos, eItemType::PICKED_UP, dir);
+		break;
+	case eItemID::AXE:
+		item = new ThrowingAxe(startPos, eItemType::PICKED_UP, dir);
 		break;
 	default:
 		break;

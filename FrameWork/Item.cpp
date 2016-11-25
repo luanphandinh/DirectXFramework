@@ -22,7 +22,7 @@ void Item::initCommonComponent()
 	this->setPosition(_startPosition);
 	this->setScale(SCALE_FACTOR);
 
-	GVector2 veloc = this->initVeloc(NORMAL_ITEM_SPEED);
+	GVector2 veloc = this->initVeloc(GVector2(NORMAL_ITEM_SPEED,0));
 
 	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
 	_componentList.insert(pair<string, IComponent*>("Movement", movement));
@@ -36,9 +36,9 @@ void Item::initCommonComponent()
 	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Item::onCollisionBegin);
 }
 
-GVector2 Item::initVeloc(float speed)
+GVector2 Item::initVeloc(GVector2 speed)
 {
-	return GVector2(0, -speed);
+	return speed;
 }
 
 void Item::update(float deltatime)
@@ -89,6 +89,11 @@ void Item::stop()
 	movement->setVelocity(GVector2(0, 0));
 }
 
+void Item::pickedUp()
+{
+
+}
+
 float Item::checkCollision(BaseObject* otherObject, float dt)
 {
 	//Lấy collision body của item ra để checkCollision
@@ -98,9 +103,18 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 	if (otherObjectID != eID::LAND && otherObjectID != eID::SIMON) return 0.0f;
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
-	if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
+	if (otherObjectID == eID::LAND || otherObjectID == eID::SIMON)
 	{
-		this->stop();
+		if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
+		{
+			this->stop();
+		}
+		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING)
+			&& collisionBody->checkCollision(otherObject, direction, dt, false))
+		{
+			if (this->getVelocity().y != 0) return 0.0f;
+			this->pickedUp();
+		}
 	}
 	return 0.0f;
 }

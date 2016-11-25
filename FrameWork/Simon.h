@@ -18,12 +18,13 @@
 #include"WhipUpgrade.h"
 #include"MoneyBag.h"
 #include"Sword.h"
+#include"ThrowingAxe.h"
 //========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
 
 #define GRAVITY 800
-#define SIMON_JUMP_VELOCITY 450
+#define SIMON_JUMP_VELOCITY 350
 // Sửa phần lên cầu thang cho hết sida
 #define SIMON_UPSTAIR_VELOCITY_X 82
 #define SIMON_UPSTAIR_VELOCITY_Y 136
@@ -127,9 +128,6 @@ private:
 	bool _isThrowing;
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
-
-	
-	
 
 	StopWatch* _stopWatch;
 	StopWatch* _reviveStopWatch;

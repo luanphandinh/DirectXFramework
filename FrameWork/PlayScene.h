@@ -2,27 +2,26 @@
 #include"define.h"
 #include "Scene.h"
 #include "Game.h"
-#include"Texture.h"
-#include"Sprite.h"
 #include"Animation.h"
 #include<map>
 #include"Simon.h"
 #include"Map.h"
-#include"Land.h"
-#include "SpearKnight.h"
-#include"Stair.h"
-#include "Bat.h"
-#include "MedusaHead.h"
 #include "ItemManager.h"
 #include "ObjectFactory.h"
-#include"Sword.h"
 #include"GameStatusBoard.h"
 #include"ActiveWeapon.h"
+<<<<<<< HEAD
 #include "ScenarioManager.h"
 #include "Door.h"
 #define DOOR_VIEWPORT_ANCHOR		2111
 
 
+=======
+#include"Level2Director.h"
+
+#include"Sword.h"
+#include"ThrowingAxe.h"
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 using namespace std;
 _USING_FRAMEWORK
 
@@ -53,6 +52,7 @@ private:
 	vector<BaseObject*>* _mapObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
+<<<<<<< HEAD
 
 	BaseObject* _door;
 	ScenarioManager* _director;
@@ -64,6 +64,10 @@ private:
 
 	void ScenarioMoveViewport(float deltaTime);
 	void ScenarioPassDoor(float deltaTime);
+=======
+	//Level2Director* _director;
+	bool _isSwitchSence;
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	//==========================TEST=========================//
 };
 

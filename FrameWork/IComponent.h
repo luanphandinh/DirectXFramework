@@ -89,4 +89,15 @@ private:
 
 };
 
+//Chuyển động xoay
+class RotateMovement : public IComponent
+{
+public:
+	RotateMovement(Sprite* _refSprite);
+	void update(float deltatime);
+private:
+	Sprite* _refSprite;
+	float _degree;
+};
+
 #endif // !__ICOMPONENT_H__

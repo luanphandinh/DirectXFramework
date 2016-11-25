@@ -23,10 +23,18 @@ public:
 	void update(float);
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
+<<<<<<< HEAD
 	// chắc là ko nên va chạm :v
 	//void onCollisionBegin(CollisionEventArg*);
 	//void onCollisionEnd(CollisionEventArg*);
 	//float checkCollision(BaseObject*, float);
+=======
+	// chắc sẽ ko dùng
+	//void onCollisionBegin(CollisionEventArg*);
+	//void onCollisionEnd(CollisionEventArg*);
+	//float checkCollision(BaseObject*, float);
+
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	void setPosition(GVector2);
 	IComponent* getComponent(string);
 
@@ -37,7 +45,10 @@ private:
 
 	StopWatch* _stopwatch;
 	void changeDirection();
+<<<<<<< HEAD
 	bool isVirgin;
+=======
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 	void updateClosing();
 	int aniCount;
 

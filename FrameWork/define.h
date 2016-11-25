@@ -45,6 +45,8 @@ enum eID
 	LAND = 2,
 	STAIR = 3,
 	DOOR = 4,
+	FLYLAND= 5,
+
 	STAIR_LEFTBOTTOM_RIGHTTOP = 13,
 	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
 	//Throwable weapon
@@ -103,12 +105,21 @@ enum eStatus
 	LEVEL1 = (1 << 18),
 
 	FLYING = (1 << 19),
+<<<<<<< HEAD
 	HANGING = (1 << 20),
 	HIDING = (1 << 21),
 
 	CLOSING = (1<<22),
 	OPENING = (1<<23),
 	CLOSED = (1<<24)
+=======
+	FLYINGDOWN=(1<<20),
+	HANGING = (1 << 21),
+	HIDING = (1 << 22),
+
+	CLOSING = (1<<23),
+	OPENING = (1<<24),
+>>>>>>> 6f5e0eb664cfa72f86d01e56c5cafce7be0495aa
 };
 
 enum eStairDirection
@@ -144,6 +155,13 @@ enum eDirection
 	LEFT	=		4,
 	RIGHT	=		8,
 	ALL		= (TOP | BOTTOM | LEFT | RIGHT),
+};
+
+enum eLevel2Viewport
+{
+	VNULL = 0,
+	V1 = 1,
+	V2 = 2,
 };
 
 #define _NAMESPACE_FRAMEWORK_END	}

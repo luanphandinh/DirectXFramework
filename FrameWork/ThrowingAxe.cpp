@@ -1,20 +1,19 @@
-#include "Sword.h"
+#include "ThrowingAxe.h"
 
 
-Sword::Sword(GVector2 startPosition, eItemType type, eDirection dir) :Weapon(startPosition,type,dir,eItemID::SWORD)
-{
-	_damage = 3;
-}
-
-
-Sword::~Sword()
+ThrowingAxe::ThrowingAxe(GVector2 startPosition, eItemType type, eDirection dir) : Weapon(startPosition, type, dir, eItemID::AXE)
 {
 }
 
-void Sword::init()
+
+ThrowingAxe::~ThrowingAxe()
+{
+}
+
+void ThrowingAxe::init()
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "sword"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "axe"));
 
 	if (_type == eItemType::PICKED_UP)
 		HeartCounter::plusHeart(-1);
@@ -27,7 +26,7 @@ void Sword::init()
 	initWeaponComponent();
 }
 
-GVector2 Sword::initVeloc(GVector2 speed)
+GVector2 ThrowingAxe::initVeloc(GVector2 speed)
 {
 	GVector2 result;
 	if (_direction != eDirection::NONE)
@@ -46,43 +45,46 @@ GVector2 Sword::initVeloc(GVector2 speed)
 		}
 	}
 
-	result.y = 0;
+	result.y = speed.y;
 	return result;
 }
 
 
-void Sword::update(float deltatime)
+void ThrowingAxe::update(float deltatime)
 {
 	Weapon::update(deltatime);
-	if (abs(this->getPositionX() - this->_startPosition.x) > SWORD_DISTANCE.x)
+	if (abs(this->getPositionX() - this->_startPosition.x) > THROWING_AXE_DISTANCE.x)
 		this->setStatus(eStatus::DESTROY);
 }
 
-void Sword::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
+void ThrowingAxe::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
 	Weapon::draw(spriteHandler, viewport);
 }
 
-void Sword::release()
+void ThrowingAxe::release()
 {
-	
+
 }
 
-void Sword::initWeaponComponent()
+void ThrowingAxe::initWeaponComponent()
 {
 	if (_type != eItemType::PICKED_UP) return;
 
-	GVector2 veloc = this->initVeloc(SWORD_SPEED);
+	GVector2 veloc = this->initVeloc(THROWING_AXE_DISTANCE);
 
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(veloc);
 
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
-	gravity->setStatus(eGravityStatus::SHALLOWED);
-	gravity->setGravity(GVector2(0, 0));
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+	gravity->setGravity(GVector2(0, -800));
+
+	RotateMovement* rotateMovement = new RotateMovement(_sprite);
+	_componentList["RotateMovement"] = rotateMovement;
 }
 
-float Sword::checkCollision(BaseObject* otherObject, float dt)
+float ThrowingAxe::checkCollision(BaseObject* otherObject, float dt)
 {
 	if (_type == eItemType::DROP)
 	{

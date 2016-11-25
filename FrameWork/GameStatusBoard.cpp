@@ -78,7 +78,7 @@ void GameStatusBoard::drawBlankBackground(LPD3DXSPRITE spriteHandler)
 	RECT r;
 	r.top = 0;
 	r.left = 0;
-	r.bottom = 70;
+	r.bottom = 64;
 	r.right = WINDOW_WIDTH;
 	DeviceManager::getInstance()->getDevice()->ColorFill(_surface, NULL, D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f));
 

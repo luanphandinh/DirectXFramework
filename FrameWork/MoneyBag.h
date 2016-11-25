@@ -12,7 +12,7 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
 
-	virtual float checkCollision(BaseObject* object, float dt) override;
+	virtual void pickedUp() override;
 private:
 	eMoneyBagItemType _moneyBagType;
 };

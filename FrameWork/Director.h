@@ -1,0 +1,61 @@
+﻿#pragma once
+#include"define.h"
+#include"Viewport.h"
+#include"BaseObject.h"
+#include"LifeCounter.h"
+/*
+	Class đùng để gán phần viewport cho từng đoạn chơi trong stage
+	Được đọc từ file trong Resources//Maps//level?viewportinfo.txt
+*/
+struct AreaBound
+{
+	int		left;
+	int		right;
+};
+
+struct ViewportInfo
+{
+	GVector2 position;
+	AreaBound bound;
+};
+
+class Director
+{
+public:
+	Director();
+	~Director();
+
+	virtual void init() = 0;
+
+	void loadStageInfo(const char* path,eID _levelId);
+
+	GVector2 getCurrentViewportBound();
+
+	GVector2 getCurrentViewportStartPosition();
+
+	Viewport* getViewport();
+
+	void setCurrentViewport(eLevel2Viewport name);
+	virtual void updateViewport() = 0;
+	void setObjectTracker(BaseObject* objTracker);
+
+	void setRevivePosition(GVector2 pos);
+	GVector2 getRevivePosition();
+	void setReviveViewport(eLevel2Viewport viewport);
+	void updateRevive();
+protected:
+	eID	_currentLevelId;
+	eLevel2Viewport _currentViewport;
+	map<eLevel2Viewport, ViewportInfo> _listViewportInfo;
+	BaseObject* _objTracker;
+	Viewport* _viewport;
+
+	//Sau khi simon chết thì cần có điểm được revive
+	//Cập nhật lại vị trí được revive với viewport revive
+	GVector2	_revivePosition;
+	eLevel2Viewport _reviveViewport;
+};
+
+
+
+
