@@ -29,11 +29,15 @@ void Level2Director::updateViewport(BaseObject* objTracker)
 	//GVector2 worldsize = this->_backGround->getWorldSize();
 	GVector2 boundSize = this->getCurrentViewportBound();
 	// Bám theo object.
+<<<<<<< HEAD
 	//GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, boundSize.x),
 	//	current_position.y);
 
 	//test
 	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2,WINDOW_HEIGHT*2),
+=======
+	GVector2 new_position = GVector2(max(objTracker->getPositionX() - WINDOW_WIDTH / 2, boundSize.x),
+>>>>>>> origin
 		current_position.y);
 
 	// Không cho đi quá map.
