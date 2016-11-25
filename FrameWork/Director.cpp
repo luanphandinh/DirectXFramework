@@ -1,4 +1,4 @@
-#include "Director.h"
+﻿#include "Director.h"
 
 
 Director::Director()
@@ -80,6 +80,14 @@ void Director::setReviveViewport(eLevel2Viewport viewport)
 
 void Director::updateRevive()
 {
+	if (LifeCounter::getLife() == 0)
+	{
+		//có thể xử lý game over tại đây(để sau này xem thử)
+		return;
+	}
+
+	LifeCounter::setLife(LifeCounter::getLife() - 1);
+
 	if (_reviveViewport != eLevel2Viewport::VNULL)
 		_currentViewport = _reviveViewport;
 	_objTracker->setPosition(_revivePosition);

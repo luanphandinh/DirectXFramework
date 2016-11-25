@@ -2,6 +2,7 @@
 #include"define.h"
 #include"Viewport.h"
 #include"BaseObject.h"
+#include"LifeCounter.h"
 /*
 	Class đùng để gán phần viewport cho từng đoạn chơi trong stage
 	Được đọc từ file trong Resources//Maps//level?viewportinfo.txt
