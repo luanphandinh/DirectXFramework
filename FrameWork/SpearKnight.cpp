@@ -1,5 +1,5 @@
 #include "SpearKnight.h"
-float delay = 250.0f;
+float delay = 500.0f;
 
 SpearKnight::SpearKnight(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::SPEARKNIGHT) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SPEARKNIGHT);
@@ -114,7 +114,7 @@ void SpearKnight::update(float deltatime) {
 		if (_loopwatch->isTimeLoop(delay)) {
 			
 			this->changeDirection();
-			delay = 1000.0f;
+			delay = 2000.0f;
 		}
 	}
 }
