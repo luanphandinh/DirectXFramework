@@ -2,7 +2,6 @@
 
 #include "Animation.h"
 #include "IComponent.h"
-//#include "BaseEnemy.h"
 #include "StopWatch.h"
 #include "BaseObject.h"
 #include "CollisionBody.h"
@@ -34,8 +33,9 @@ private:
 	map<string, IComponent*> _listComponent;
 	map<int, Animation*> _animations;
 	BaseObject* prevObject;
+	StopWatch* _stopWatch;
 
 	void changeDirection();
 	void updateClosing();
-
+	int _hack;
 };
