@@ -8,6 +8,7 @@
 #include"MedusaHead.h"
 #include"SpearKnight.h"
 #include"Door.h"
+#include"FlyLand.h"
 class ObjectFactory
 {
 public:

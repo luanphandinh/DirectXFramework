@@ -204,7 +204,7 @@ float Bat::checkCollision(BaseObject * object, float dt) {
 	eID objectId = object->getId();
 	eDirection direction;
 
-	if (objectId == eID::LAND) {
+	/*if (objectId == eID::LAND) {
 		if (collisionBody->checkCollision(object, direction, dt)) {
 			if (direction == eDirection::TOP && this->getVelocity().y < 0) {
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
@@ -227,7 +227,9 @@ float Bat::checkCollision(BaseObject * object, float dt) {
 
 		collisionBody->checkCollision(object, dt, false);
 
-	}
+	}*/
+	collisionBody->checkCollision(object, dt, false);
+
 	return 0.0f;
 
 }

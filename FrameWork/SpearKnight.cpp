@@ -168,30 +168,43 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 
 	if (objectId == eID::LAND) {
 		if (collisionBody->checkCollision(object, direction, dt)) {
-				if (direction == eDirection::TOP && this->getVelocity().y < 0) {
-					auto gravity = (Gravity*)this->_listComponent["Gravity"];
-					auto movement = (Movement*)this->_listComponent["Movement"];
-					movement->setVelocity(GVector2(movement->getVelocity().x, 0));
-					gravity->setStatus(eGravityStatus::SHALLOWED);
+			if (direction == eDirection::TOP && this->getVelocity().y < 0) {
+				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+				auto movement = (Movement*)this->_listComponent["Movement"];
+				movement->setVelocity(GVector2(movement->getVelocity().x, 0));
+				gravity->setStatus(eGravityStatus::SHALLOWED);
 
-					this->setStatus(eStatus::WALKING);
-					prevObject = object;
-				}
+				this->setStatus(eStatus::WALKING);
+				prevObject = object;
+			}
+			if (direction == eDirection::RIGHT&& this->getVelocity().y < 0) {
+				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+				this->changeDirection();
+				gravity->setStatus(eGravityStatus::SHALLOWED);
+
+				this->setStatus(eStatus::WALKING);
+				prevObject = object;
+			}
+			if ( direction == eDirection::LEFT && this->getVelocity().y < 0) {
+				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+				gravity->setStatus(eGravityStatus::SHALLOWED);
+				this->changeDirection();
+
+				this->setStatus(eStatus::WALKING);
+				prevObject = object;
+			}
+			else if (prevObject == object) {
+				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+				gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+				prevObject = nullptr;
+			}
 		}
-		else if (prevObject == object) {
-			auto gravity = (Gravity*)this->_listComponent["Gravity"];
-			gravity->setStatus(eGravityStatus::FALLING_DOWN);
-
-			prevObject = nullptr;
+		else {
+			collisionBody->checkCollision(object, dt, false);
 		}
+		return 0.0f;
 	}
-	else {
-
-		collisionBody->checkCollision(object, dt, false);
-
-	}
-	return 0.0f;
-
 }
 
 GVector2 SpearKnight::getVelocity() {

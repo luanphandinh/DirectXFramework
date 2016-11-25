@@ -24,6 +24,16 @@ bool PlayScene::init()
 	_director->setObjectTracker(_simon);
 	_viewport = _director->getViewport();
 	//=====================TESTING==========================//
+<<<<<<< HEAD
+=======
+	_simon = new Simon();
+	_simon->init();
+	_isSwitchSence = false;
+	// set pos ở đây, đừng đặt trong class
+	//this->_simon->setPosition(2700, 100);
+	this->_simon->setPosition(2480, 638);
+
+>>>>>>> lordhung
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
