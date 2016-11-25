@@ -13,7 +13,8 @@ red_money_bag			46 		84		61		99		0.5			0.5
 purple_money_bag		64		84		79		99		0.5			0.5
 white_money_bag			83		84		98		99		0.5			0.5
 whip_upgrade			74		22		90		38		0.5			0.5
-holywater_icon			35		40		51		56		0.5			0.5				
+holywater_icon			35		40		51		56		0.5			0.5		
+holywater_throw			47		5		55		13		0.5		0.5		
 explosion_01			74		62		77		75		0.5			0.5
 explosion_02			92		60		100		75		0.5			0.5
 explosion_03			82		63		88		75		0.5			0.5

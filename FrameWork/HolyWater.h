@@ -1,6 +1,6 @@
 #pragma once
 #include"Weapon.h"
-#define HOLYWATER_SPEED GVector2(250,0)
+#define HOLYWATER_SPEED GVector2(250,150)
 class HolyWater : public Weapon
 {
 public:

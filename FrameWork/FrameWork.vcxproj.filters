@@ -259,7 +259,7 @@
       <Filter>Header Files\Objects\Items\Weapons</Filter>
     </ClInclude>
     <ClInclude Include="HolyWater.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -432,7 +432,7 @@
       <Filter>Source Files\Objects\Items\Weapons</Filter>
     </ClCompile>
     <ClCompile Include="HolyWater.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Items\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

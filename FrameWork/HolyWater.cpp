@@ -13,7 +13,7 @@ HolyWater::~HolyWater()
 void HolyWater::init()
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "holywater_icon"));
+	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "holywater_throw"));
 
 	if (_type == eItemType::PICKED_UP)
 		HeartCounter::plusHeart(-1);
@@ -60,6 +60,11 @@ float HolyWater::checkCollision(BaseObject* otherObject, float dt)
 	if (_type == eItemType::DROP)
 	{
 		Weapon::checkCollision(otherObject, dt);
+	}
+	else
+	if (_type == eItemType::PICKED_UP)
+	{
+
 	}
 	return 0.0f;
 }
