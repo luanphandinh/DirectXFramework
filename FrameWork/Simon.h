@@ -105,7 +105,14 @@ public:
 	
 	eDirection getDirection();
 
-	
+	// Hàng để auto move
+	void removeGravity();
+	void forceMoveRight();
+	void unforceMoveRight();
+	void forceMoveLeft();
+	void unforceMoveLeft();
+	void forceJump();
+	void unforceJump();
 private:
 	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
