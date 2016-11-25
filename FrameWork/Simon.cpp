@@ -902,6 +902,9 @@ void Simon::getWeapon()
 	case eItemID::BOORMERANG:
 		item = new Boomerang(startPos, eItemType::PICKED_UP, dir);
 		break;
+	case eItemID::HOLYWATER:
+		item = new HolyWater(startPos, eItemType::PICKED_UP, dir);
+		break;
 	default:
 		break;
 	}

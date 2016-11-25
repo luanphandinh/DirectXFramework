@@ -20,6 +20,7 @@
 #include"Sword.h"
 #include"ThrowingAxe.h"
 #include"Boomerang.h"
+#include"HolyWater.h"
 //========================TESTING===========================//
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126

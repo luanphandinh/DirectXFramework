@@ -258,6 +258,9 @@
     <ClInclude Include="Boomerang.h">
       <Filter>Header Files\Objects\Items\Weapons</Filter>
     </ClInclude>
+    <ClInclude Include="HolyWater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -427,6 +430,9 @@
     </ClCompile>
     <ClCompile Include="Boomerang.cpp">
       <Filter>Source Files\Objects\Items\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="HolyWater.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

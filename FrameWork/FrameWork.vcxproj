@@ -94,6 +94,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="HeartCounter.h" />
     <ClInclude Include="HeartItem.h" />
+    <ClInclude Include="HolyWater.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
     <ClInclude Include="Item.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HeartCounter.cpp" />
     <ClCompile Include="HeartItem.cpp" />
+    <ClCompile Include="HolyWater.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
     <ClCompile Include="Item.cpp" />
