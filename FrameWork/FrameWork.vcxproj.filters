@@ -249,6 +249,9 @@
     <ClInclude Include="Level2Director.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FlyLand.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DeviceManager.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Level2Director.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyLand.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
