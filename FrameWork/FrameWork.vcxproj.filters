@@ -255,6 +255,11 @@
     <ClInclude Include="FlyLand.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Scenario.h">
+      <Filter>Header Files\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenarioManager.h">
+      <Filter>Header Files\Framework</Filter>
     <ClInclude Include="Boomerang.h">
       <Filter>Header Files\Objects\Items\Weapons</Filter>
     </ClInclude>
@@ -428,6 +433,11 @@
     <ClCompile Include="FlyLand.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Scenario.cpp">
+      <Filter>Source Files\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenarioManager.cpp">
+      <Filter>Source Files\Framework</Filter>
     <ClCompile Include="Boomerang.cpp">
       <Filter>Source Files\Objects\Items\Weapons</Filter>
     </ClCompile>

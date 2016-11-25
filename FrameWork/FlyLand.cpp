@@ -26,8 +26,6 @@ void FlyLand::update(float deltaTime) {
 		return;
 
 	this->checkPosition();
-
-
 	if (this->getStatus() == eStatus::WAITING) {
 		if (true) {
 			auto simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
@@ -36,8 +34,6 @@ void FlyLand::update(float deltaTime) {
 			if (simon->isInStatus(MOVING_LEFT) || simon->isInStatus(MOVING_RIGHT))
 				this->setStatus(RUNNING);
 		}
-
-
 	}
 
 	GVector2 position = this->getPosition();

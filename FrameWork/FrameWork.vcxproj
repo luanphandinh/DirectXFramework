@@ -108,6 +108,8 @@
     <ClInclude Include="MoneyBag.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Scenario.h" />
+    <ClInclude Include="ScenarioManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneTime.h" />
@@ -167,6 +169,8 @@
     <ClCompile Include="MoneyBag.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Scenario.cpp" />
+    <ClCompile Include="ScenarioManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneTime.cpp" />

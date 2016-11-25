@@ -4,7 +4,10 @@
 Level2Director::Level2Director()
 {
 	_reviveViewport = eLevel2Viewport::V1;
-	_revivePosition = GVector2(2700, 100);
+	//_revivePosition = GVector2(2700, 100);
+	// -_-  
+	_revivePosition = GVector2(2300, 638);
+
 }
 
 
@@ -16,7 +19,8 @@ void Level2Director::init()
 {
 	this->loadStageInfo("Resources//Maps//level2ViewportInfo.txt", eID::LEVEL2);
 	_viewport = new Viewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	this->setCurrentViewport(V1);
+	this->setCurrentViewport(V2);
+
 }
 
 void Level2Director::updateViewport()
@@ -59,7 +63,9 @@ void Level2Director::switchViewport()
 	case eLevel2Viewport::V2:
 		if (pos.y < 440 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR))
 		{
+			//this->setCurrentViewport(V1);
 			this->setCurrentViewport(V1);
+
 			_objTracker->setPosition(2816, 380);
 		}
 		break;

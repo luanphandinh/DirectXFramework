@@ -14,7 +14,7 @@ Door::Door(eStatus status, GVector2 pos, int direction) :BaseObject(eID::DOOR){
 Door::~Door() {}
 
 void Door::init() {
-	_animations[eStatus::CLOSING] = new Animation(_sprite, 0.5f);
+	_animations[eStatus::CLOSING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::CLOSING]->addFrameRect(eID::DOOR, "normal", NULL);
 
 	_animations[OPENING] = new Animation(_sprite, 0.5f);
@@ -24,6 +24,9 @@ void Door::init() {
 	//this->setPosition(GVector2(300, 200));
 	this->setStatus(eStatus::CLOSING);
 	_sprite->drawBounding(false);
+
+	_stopWatch = new StopWatch();
+	_hack = 0;
 }
 
 void Door::update(float deltaTime) {
@@ -34,14 +37,19 @@ void Door::update(float deltaTime) {
 		return;
 	}
 	else {
+		_hack++;
+		//HACK :V
+		if (_hack >= 60)
+			this->setStatus(CLOSING);
+		else {
+			/*this->checkIfOutOfScreen();*/
+			for (auto component : _listComponent) {
 
-		/*this->checkIfOutOfScreen();*/
-		for (auto component : _listComponent) {
-
-			component.second->update(deltaTime);
+				component.second->update(deltaTime);
+			}
+			_animations[this->getStatus()]->update(deltaTime);
 		}
-		_animations[this->getStatus()]->update(deltaTime);
-
+		
 	}
 }
 
@@ -80,11 +88,13 @@ void Door::updateClosing() {
 	int y = objectTracker->getPositionY();
 	int xthis = this->getPositionX();
 	int ythis = this->getPositionY();
-	//test :v
-	if (x > xthis&&x < xthis + 50 && y<ythis+50&&y>ythis - 50) {
-		this->setStatus(OPENING);
-	}
-	else {
-		this->setStatus(CLOSING);
-	}
+	////test :v
+	//if (x > xthis&&x < xthis + 50 && y<ythis+50&&y>ythis - 50) {
+	//	this->setStatus(OPENING);
+	//}
+	//else {
+	//	this->setStatus(CLOSING);
+	//}
+	if (x < 2100 && x>2070 && y < 700 && y>660) this->setStatus(OPENING);
+	else this->setStatus(CLOSING);
 }

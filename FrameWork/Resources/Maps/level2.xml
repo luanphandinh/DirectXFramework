@@ -610,8 +610,8 @@
     <Item Id="36" Name="bat1" X="2647" Y="756" Width="24" Height="32">
       <ActiveBound X="2647" Y="756" Width="24" Height="32" />
     </Item>
-    <Item Id="35" Name="spearKnight2" X="2275" Y="701" Width="34" Height="64">
-      <ActiveBound X="2275" Y="701" Width="34" Height="64" />
+    <Item Id="35" Name="spearKnight2" X="2300" Y="701" Width="34" Height="64">
+      <ActiveBound X="2300" Y="701" Width="34" Height="64" />
     </Item>
     <Item Id="5" Name="flyLand0" X="2114" Y="636" Width="64" Height="16">
       <ActiveBound X="2114" Y="636" Width="124" Height="16" />
