@@ -157,7 +157,7 @@ void Bat::updateHanging() {
 	int y = objectTracker->getPositionY();
 	int xthis = this->getPositionX();
 	int ythis = this->getBounding().bottom;
-	if (x > xthis&&x<xthis + 150 && y<ythis&&y>ythis-200) {
+	if (x > xthis&&x<xthis + 250 && y<ythis&&y>ythis-100) {
 		this->setStatus(FLYINGDOWN);
 	}
 	else {

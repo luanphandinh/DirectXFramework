@@ -5,8 +5,8 @@
 #include "BaseEnemy.h"
 #include "StopWatch.h"
 
-#define BAT_SPEED 50
-#define BAT_HITPOINT 1
+#define BAT_SPEED 90
+#define BAT_HITPOINT 20
 #define BAT_SCORE 100
 
 class Bat : public BaseEnemy {
