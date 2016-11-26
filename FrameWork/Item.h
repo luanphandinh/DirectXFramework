@@ -50,6 +50,7 @@ public:
 protected:
 	GVector2	_startPosition;
 	eItemType	_type;
+	eItemID		_itemId;
 	map<string, IComponent*> _componentList;
 };
 

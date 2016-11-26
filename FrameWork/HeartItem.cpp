@@ -1,9 +1,9 @@
 #include "HeartItem.h"
 
 
-HeartItem::HeartItem(GVector2 startPosition) :Item(startPosition,eItemType::DROP)
+HeartItem::HeartItem(GVector2 startPosition,eItemID itemId) :Item(startPosition,eItemType::DROP)
 {
-
+	_itemId = itemId;
 }
 
 

@@ -78,6 +78,7 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Boomerang.h" />
+    <ClInclude Include="Candle.h" />
     <ClInclude Include="CastlevaniaGame.h" />
     <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="define.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
+    <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />
     <ClCompile Include="CollisionBody.cpp" />
     <ClCompile Include="DeviceManager.cpp" />

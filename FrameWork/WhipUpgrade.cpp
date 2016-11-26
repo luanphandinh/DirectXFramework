@@ -4,7 +4,7 @@
 
 WhipUpgrade::WhipUpgrade(GVector2 startPosition) :Item(startPosition, eItemType::DROP)
 {
-
+	_itemId = eItemID::WHIPUPGRADE;
 }
 
 

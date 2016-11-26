@@ -181,7 +181,6 @@ void PlayScene::update(float deltaTime)
 		obj->update(deltaTime);
 	}
 
-
 	//for (BaseObject* obj : (*_mapTestObject))
 	//{
 	//	obj->update(deltaTime);

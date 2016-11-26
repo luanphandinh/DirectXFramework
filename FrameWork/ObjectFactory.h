@@ -9,6 +9,7 @@
 #include"SpearKnight.h"
 #include"Door.h"
 #include"FlyLand.h"
+#include"Candle.h"
 class ObjectFactory
 {
 public:
@@ -26,6 +27,7 @@ private:
 	static BaseObject* getMedusaHead(xml_node node);
 	static BaseObject* getDoor(xml_node node);
 	static BaseObject* getFlyLand(xml_node node);
+	static BaseObject* getCandle(xml_node node);
 
 	static map<string, string> getObjectProperties(xml_node node);
 };

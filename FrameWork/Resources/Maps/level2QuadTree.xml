@@ -133,7 +133,7 @@
               </QNode>
             </QNode>
             <QNode Id="197429" Level="6" X="2928" Y="1344" Width="48" Height="48">
-              <Objects>stair8 land1 </Objects>
+              <Objects>stair8 land1 candle01 </Objects>
             </QNode>
             <QNode Id="197431" Level="6" X="2928" Y="1392" Width="48" Height="48" />
             <QNode Id="197430" Level="6" X="2880" Y="1392" Width="48" Height="48">
@@ -141,7 +141,25 @@
             </QNode>
           </QNode>
           <QNode Id="197429" Level="5" X="2976" Y="1344" Width="96" Height="96">
-            <Objects>land1 wall0 wall1 </Objects>
+            <QNode Id="197429" Level="6" X="2976" Y="1344" Width="48" Height="48">
+              <QNode Id="197429" Level="7" X="2976" Y="1344" Width="24" Height="24">
+                <Objects>land1 candle01 </Objects>
+              </QNode>
+              <QNode Id="197429" Level="7" X="3000" Y="1344" Width="24" Height="24">
+                <Objects>land1 wall1 </Objects>
+              </QNode>
+              <QNode Id="197431" Level="7" X="3000" Y="1368" Width="24" Height="24">
+                <Objects>wall0 </Objects>
+              </QNode>
+              <QNode Id="197431" Level="7" X="2976" Y="1368" Width="24" Height="24">
+                <Objects>candle01 </Objects>
+              </QNode>
+            </QNode>
+            <QNode Id="197429" Level="6" X="3024" Y="1344" Width="48" Height="48" />
+            <QNode Id="197431" Level="6" X="3024" Y="1392" Width="48" Height="48" />
+            <QNode Id="197431" Level="6" X="2976" Y="1392" Width="48" Height="48">
+              <Objects>wall0 </Objects>
+            </QNode>
           </QNode>
           <QNode Id="197431" Level="5" X="2976" Y="1440" Width="96" Height="96">
             <Objects>land0 wall0 </Objects>
@@ -151,7 +169,9 @@
           </QNode>
         </QNode>
         <QNode Id="131892" Level="4" X="2688" Y="1344" Width="192" Height="192">
-          <QNode Id="131892" Level="5" X="2688" Y="1344" Width="96" Height="96" />
+          <QNode Id="131892" Level="5" X="2688" Y="1344" Width="96" Height="96">
+            <Objects>candle0 </Objects>
+          </QNode>
           <QNode Id="131893" Level="5" X="2784" Y="1344" Width="96" Height="96">
             <QNode Id="131893" Level="6" X="2784" Y="1344" Width="48" Height="48" />
             <QNode Id="131893" Level="6" X="2832" Y="1344" Width="48" Height="48" />

@@ -5,7 +5,7 @@ class HeartItem :
 	public Item
 {
 public:
-	HeartItem(GVector2 startPosition);
+	HeartItem(GVector2 startPosition,eItemID itemId = eItemID::SMALLHEART);
 	~HeartItem();
 
 	void init() override;

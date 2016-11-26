@@ -634,5 +634,17 @@
         <Elem Key="direction" Value="-1" />
       </Params>
     </Item>
+    <Item Id="6" Name="candle0" X="2713" Y="187" Width="21" Height="22">
+      <ActiveBound X="2713" Y="187" Width="21" Height="22" />
+      <Params>
+        <Elem Key="DropItemId" Value="9" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="candle01" X="2963" Y="171" Width="25" Height="17">
+      <ActiveBound X="2963" Y="171" Width="25" Height="17" />
+      <Params>
+        <Elem Key="DropItemId" Value="2" />
+      </Params>
+    </Item>
   </Objects>
 </Tilesmap>

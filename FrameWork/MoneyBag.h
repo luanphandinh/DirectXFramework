@@ -4,7 +4,7 @@
 class MoneyBag : public Item
 {
 public:
-	MoneyBag(GVector2 startPosition);
+	MoneyBag(GVector2 startPosition,eItemID id = eItemID::MONEYBAGRED);
 	~MoneyBag();
 
 	void init() override;
