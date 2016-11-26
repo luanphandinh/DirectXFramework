@@ -182,6 +182,11 @@ void PlayScene::update(float deltaTime)
 	}
 
 
+	// update scenario here
+	////*** fix later :v
+	//this->ScenarioMoveViewport(deltaTime);
+	this->ScenarioPassDoor(deltaTime);
+
 	//for (BaseObject* obj : (*_mapTestObject))
 	//{
 	//	obj->update(deltaTime);
@@ -203,10 +208,6 @@ void PlayScene::update(float deltaTime)
 	//_simon->update(deltaTime);
 	//_itemManager->update(deltaTime);
 
-	// update scenario here
-	////*** fix later :v
-	//this->ScenarioMoveViewport(deltaTime);
-	//this->ScenarioPassDoor(deltaTime);
 	//=====================TESTING==========================//
 }
 
@@ -296,15 +297,15 @@ Simon * PlayScene::getSimon() {
 BaseObject * PlayScene::getObject(eID id) {
 	if (id == eID::SIMON)
 		return getSimon();
-	//eID objectID;
-	////if ((*_mapTestObject).size() == 0) {
-	////	return nullptr;
-	////}
-	//for (BaseObject* object : (*_mapTestObject)) {
-	//	objectID = object->getId();
-	//	if (objectID == id)
-	//		return object;
-	//}
+	eID objectID;
+	if (_activeObject.size() == 0) {
+		return nullptr;
+	}
+	for (BaseObject* object : _activeObject) {
+		objectID = object->getId();
+		if (objectID == id)
+			return object;
+	}
 	return nullptr;
 }
 
