@@ -20,7 +20,6 @@ void Level2Director::init()
 	this->loadStageInfo("Resources//Maps//level2ViewportInfo.txt", eID::LEVEL2);
 	_viewport = new Viewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	this->setCurrentViewport(V1);
-
 }
 
 void Level2Director::updateViewport()
@@ -65,7 +64,6 @@ void Level2Director::switchViewport()
 		{
 			//this->setCurrentViewport(V1);
 			this->setCurrentViewport(V1);
-
 			_objTracker->setPosition(2816, 380);
 		}
 		break;

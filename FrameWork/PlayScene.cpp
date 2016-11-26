@@ -34,12 +34,17 @@ bool PlayScene::init()
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
 
+	/*
+		Load QuadTree
+	*/
 	_quadTree = QNode::loadQuadTree("Resources//Maps//level2QuadTree.xml");
+	/*
+		_mapObject sẽ chứa tất cả các object có trong toàn bộ map của game
+	*/
 	map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level2.xml");
 	this->_mapObject.insert(maptemp->begin(), maptemp->end());
 
 	_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
-	_mapTestObject = ObjectFactory::getListObjectFromFile("Resources//Maps//level2.xml");
 
 	//========================TESTING===========================//
 	_testItem = new BaseObject*[15];
@@ -99,13 +104,14 @@ void PlayScene::update(float deltaTime)
 	/*
 		Hiện tại ta có 2 danh sách Object.
 		Một là _listobject chứa các đối tượng hoạt động rộng,không thể đưa vào quadtree
-		Hai là _mapObject chứa các đối tượng đã đưa vào quad tree
-		Ta có một listObject phụ là activeObject chauw các object sẽ được update,draww ở mỗi frame,được clear ở đầu hàm update.
+		Hai là _mapObject chứa tất cả các đối tượng của map
+		Ta có một listObject phụ là activeObject chứa các object sẽ được update,draww ở mỗi frame,được clear ở đầu hàm update.
+		_activeObject chứa các object được lấy ra từ quadtree
 
 		Quá trình update gồm các bước:
 			Bước 1	:	Kiểm tra các đối tương hết hiệu lực (Status = Destroy) từ frame trước
 			Bước 2	:	Clear danh sách activeObject của frame trước,chuẩn bị cho vòng lặp mới
-			Bước 3	:	Tìm các tên của đối tượng đã được lưu vào quadtree
+			Bước 3	:	Tìm các tên của đối tượng có trong vùng screen mà quadtree lấy ra được
 			Bước 4	:	Từ danh sách B3,add các đối tượng có tên tương ứng với _mapObject vào activeObject
 			Bước 5	:	Add danh sách các đối tương trong _listOBject vào _activeObject
 			Bước 6	:	Kiểm tra va chạm giữa các activeObject,nếu có n đối tượng,thì có n*n lần kiểm tra
@@ -146,7 +152,6 @@ void PlayScene::update(float deltaTime)
 	_activeObject.insert(_activeObject.end(), _listObject.begin(), _listObject.end());
 
 	//[Bước 6]
-
 	for (BaseObject* obj : _activeObject)
 	{
 		if (_itemManager != nullptr && obj->getId() == eID::LAND)
@@ -164,6 +169,7 @@ void PlayScene::update(float deltaTime)
 			obj->checkCollision(passiveobj, deltaTime);
 		}
 	}
+
 	if (_itemManager != nullptr)
 	{
 		_itemManager->checkCollision(_simon, deltaTime);
@@ -199,8 +205,8 @@ void PlayScene::update(float deltaTime)
 
 	// update scenario here
 	////*** fix later :v
-	this->ScenarioMoveViewport(deltaTime);
-	this->ScenarioPassDoor(deltaTime);
+	//this->ScenarioMoveViewport(deltaTime);
+	//this->ScenarioPassDoor(deltaTime);
 	//=====================TESTING==========================//
 }
 
@@ -230,14 +236,19 @@ void PlayScene::destroyObject()
 
 	for (auto name : QNode::ActiveObject)
 	{
+		//Lấy object từ toàn bộ map
 		auto object = _mapObject.find(name);
+		//Nếu ko tìm thấy object này
 		if (object == _mapObject.end() || object._Ptr == nullptr)
 			continue;
+		//Nếu tìm thấy mà obj này đang trong trạng thái hủy
 		if (object->second->getStatus() == eStatus::DESTROY)
 		{
+			//release nó
 			object->second->release();
 			delete object->second;
 			object->second = NULL;
+			//xóa khỏi _mapObject
 			_mapObject.erase(name);
 		}
 	}
@@ -257,13 +268,13 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	//	obj->draw(spriteHandle, _viewport);
 	//}
 
-	_gameStatusBoard->draw(spriteHandle);
+	
 	
 	//_simon->draw(spriteHandle, _viewport);
 
 	_itemManager->draw(spriteHandle, _viewport);
 
-
+	_gameStatusBoard->draw(spriteHandle);
 	//=====================TESTING==========================//
 }
 
@@ -285,15 +296,15 @@ Simon * PlayScene::getSimon() {
 BaseObject * PlayScene::getObject(eID id) {
 	if (id == eID::SIMON)
 		return getSimon();
-	eID objectID;
-	if ((*_mapTestObject).size() == 0) {
-		return nullptr;
-	}
-	for (BaseObject* object : (*_mapTestObject)) {
-		objectID = object->getId();
-		if (objectID == id)
-			return object;
-	}
+	//eID objectID;
+	////if ((*_mapTestObject).size() == 0) {
+	////	return nullptr;
+	////}
+	//for (BaseObject* object : (*_mapTestObject)) {
+	//	objectID = object->getId();
+	//	if (objectID == id)
+	//		return object;
+	//}
 	return nullptr;
 }
 

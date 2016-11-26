@@ -75,7 +75,7 @@ private:
 	void ScenarioMoveViewport(float deltatime);
 
 	//==========================TEST=========================//
-	vector<BaseObject*>* _mapTestObject;
+	//vector<BaseObject*>* _mapTestObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
 	//==========================TEST=========================//
