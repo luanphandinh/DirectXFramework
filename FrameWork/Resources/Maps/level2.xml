@@ -677,6 +677,8 @@
       <ActiveBound X="673" Y="771" Width="12" Height="32" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
     <Item Id="6" Name="candle0" X="2713" Y="187" Width="21" Height="22">
       <ActiveBound X="2713" Y="187" Width="21" Height="22" />
       <Params>
