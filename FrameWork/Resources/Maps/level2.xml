@@ -566,12 +566,14 @@
       <ActiveBound X="3011" Y="160" Width="8" Height="96" />
       <Params>
         <Elem Key="physicBodyDirection" Value="4" />
+        <Elem Key="canJumpDown" Value="0" />
       </Params>
     </Item>
     <Item Id="2" Name="wall1" X="3010" Y="379" Width="8" Height="189">
       <ActiveBound X="3010" Y="379" Width="8" Height="189" />
       <Params>
         <Elem Key="physicBodyDirection" Value="4" />
+        <Elem Key="canJumpDown" Value="0" />
       </Params>
     </Item>
     <Item Id="2" Name="brick0" X="2594" Y="284" Width="30" Height="30">
@@ -584,10 +586,11 @@
       <ActiveBound X="2586" Y="382" Width="4" Height="90" />
       <Params>
         <Elem Key="physicBodyDirection" Value="8" />
+        <Elem Key="canJumpDown" Value="0" />
       </Params>
     </Item>
-    <Item Id="2" Name="land2" X="2626" Y="251" Width="250" Height="10">
-      <ActiveBound X="2626" Y="251" Width="250" Height="10" />
+    <Item Id="2" Name="land2" X="2626" Y="251" Width="250" Height="20">
+      <ActiveBound X="2626" Y="251" Width="250" Height="20" />
       <Params>
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
@@ -602,6 +605,7 @@
       <ActiveBound X="3011" Y="768" Width="4" Height="193" />
       <Params>
         <Elem Key="physicBodyDirection" Value="4" />
+        <Elem Key="canJumpDown" Value="0" />
       </Params>
     </Item>
     <Item Id="35" Name="spearKnight1" X="2690" Y="573" Width="34" Height="64">
@@ -626,6 +630,7 @@
       <ActiveBound X="2753" Y="604" Width="6" Height="93" />
       <Params>
         <Elem Key="physicBodyDirection" Value="4" />
+        <Elem Key="canJumpDown" Value="0" />
       </Params>
     </Item>
     <Item Id="4" Name="door0" X="2054" Y="736" Width="20" Height="96">
