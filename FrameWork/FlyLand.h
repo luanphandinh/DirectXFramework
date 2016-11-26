@@ -5,8 +5,8 @@
 #include "CollisionBody.h"
 //#include "Scenes/PlayScene.h"
 
-#define FLYLAND_HORIZONTAL_VELOC		GVector2(96.0f, 0.0f)		// vận tốc ngang
-#define FLYLAND_HORIZONTAL_VELOC_PRE	GVector2(-96.0f, 0.0f)		// vận tốc ngang
+#define FLYLAND_HORIZONTAL_VELOC		GVector2(48.0f, 0.0f)		// vận tốc ngang
+#define FLYLAND_HORIZONTAL_VELOC_PRE	GVector2(-48.0f, 0.0f)		// vận tốc ngang
 
 class FlyLand : public BaseObject {
 public:
