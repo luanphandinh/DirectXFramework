@@ -1,7 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <QNode Id="0" Level="0" X="0" Y="0" Width="3072" Height="3072">
   <QNode Id="0" Level="1" X="0" Y="0" Width="1536" Height="1536">
-    <Objects>land10 </Objects>
+    <QNode Id="0" Level="2" X="0" Y="0" Width="768" Height="768">
+      <Objects>stair31 </Objects>
+    </QNode>
+    <QNode Id="16" Level="2" X="768" Y="0" Width="768" Height="768" />
+    <QNode Id="48" Level="2" X="768" Y="768" Width="768" Height="768">
+      <Objects>land10 land11 land12 </Objects>
+    </QNode>
+    <QNode Id="32" Level="2" X="0" Y="768" Width="768" Height="768">
+      <QNode Id="32" Level="3" X="0" Y="768" Width="384" Height="384" />
+      <QNode Id="288" Level="3" X="384" Y="768" Width="384" Height="384">
+        <QNode Id="288" Level="4" X="384" Y="768" Width="192" Height="192" />
+        <QNode Id="65824" Level="4" X="576" Y="768" Width="192" Height="192">
+          <QNode Id="65824" Level="5" X="576" Y="768" Width="96" Height="96">
+            <QNode Id="65824" Level="6" X="576" Y="768" Width="48" Height="48" />
+            <QNode Id="65825" Level="6" X="624" Y="768" Width="48" Height="48">
+              <Objects>stair29 stair30 </Objects>
+            </QNode>
+            <QNode Id="65827" Level="6" X="624" Y="816" Width="48" Height="48">
+              <Objects>land13 stair28 stair29 </Objects>
+            </QNode>
+            <QNode Id="65826" Level="6" X="576" Y="816" Width="48" Height="48">
+              <Objects>land13 stair27 </Objects>
+            </QNode>
+          </QNode>
+          <QNode Id="65825" Level="5" X="672" Y="768" Width="96" Height="96">
+            <Objects>stair31 </Objects>
+          </QNode>
+          <QNode Id="65827" Level="5" X="672" Y="864" Width="96" Height="96">
+            <Objects>land12 </Objects>
+          </QNode>
+          <QNode Id="65826" Level="5" X="576" Y="864" Width="96" Height="96">
+            <Objects>land12 </Objects>
+          </QNode>
+        </QNode>
+        <QNode Id="196896" Level="4" X="576" Y="960" Width="192" Height="192" />
+        <QNode Id="131360" Level="4" X="384" Y="960" Width="192" Height="192" />
+      </QNode>
+      <QNode Id="800" Level="3" X="384" Y="1152" Width="384" Height="384" />
+      <QNode Id="544" Level="3" X="0" Y="1152" Width="384" Height="384" />
+    </QNode>
   </QNode>
   <QNode Id="4" Level="1" X="1536" Y="0" Width="1536" Height="1536">
     <QNode Id="4" Level="2" X="1536" Y="0" Width="768" Height="768" />
