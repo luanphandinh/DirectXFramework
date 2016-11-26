@@ -134,7 +134,7 @@ void QNode::loadChild(xml_node& node, QNode* parent)
 }
 
 
-vector<string> QNode::GetActiveObject(RECT bound, bool botLeft = false)
+vector<string> QNode::GetActiveObject(RECT bound, bool botLeft)
 {
 	if (botLeft)
 	{

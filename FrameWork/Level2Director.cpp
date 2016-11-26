@@ -4,9 +4,9 @@
 Level2Director::Level2Director()
 {
 	_reviveViewport = eLevel2Viewport::V1;
-	//_revivePosition = GVector2(2700, 100);
+	_revivePosition = GVector2(2700, 100);
 	// -_-  
-	_revivePosition = GVector2(2300, 638);
+	//_revivePosition = GVector2(2300, 638);
 
 }
 
@@ -19,7 +19,7 @@ void Level2Director::init()
 {
 	this->loadStageInfo("Resources//Maps//level2ViewportInfo.txt", eID::LEVEL2);
 	_viewport = new Viewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	this->setCurrentViewport(V2);
+	this->setCurrentViewport(V1);
 
 }
 
