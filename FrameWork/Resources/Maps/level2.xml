@@ -595,7 +595,7 @@
     <Item Id="2" Name="land6" X="2626" Y="573" Width="61" Height="26">
       <ActiveBound X="2626" Y="573" Width="61" Height="26" />
       <Params>
-        <Elem Key="physicBodyDirection" Value="1|2|4|8" />
+        <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
     <Item Id="2" Name="wall3" X="3011" Y="768" Width="4" Height="193">
