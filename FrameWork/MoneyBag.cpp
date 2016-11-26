@@ -1,9 +1,9 @@
 ﻿#include "MoneyBag.h"
 
 
-MoneyBag::MoneyBag(GVector2 startPosition) :Item(startPosition, eItemType::DROP)
+MoneyBag::MoneyBag(GVector2 startPosition,eItemID itemId) :Item(startPosition, eItemType::DROP)
 {
-
+	_itemId = itemId;
 }
 
 

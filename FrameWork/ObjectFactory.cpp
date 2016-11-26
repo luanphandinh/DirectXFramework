@@ -47,7 +47,7 @@ vector<BaseObject*>* ObjectFactory::getListObjectFromFile(const string path)
 			continue;
 		}
 		BaseObject* obj = getObjectById(item, enumID);
-//		obj->setZIndex(0.5f);
+		obj->setZIndex(0.5f);
 		if (obj != NULL)
 			listobject->push_back(obj);
 	}
@@ -93,7 +93,7 @@ map<string, BaseObject*>* ObjectFactory::getMapObjectFromFile(const string path)
 			continue;
 		}
 		BaseObject* obj = getObjectById(item, enumID);
-		obj->setZIndex(0.5f);
+		//obj->setZIndex(0.5f);
 		if (obj != NULL)
 			(*listobject)[name] = obj;
 	}
@@ -118,6 +118,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 		break;
 	case STAIR:
 		return getStair(node);
+		break;
+	case CANDLE:
+		return getCandle(node);
 		break;
 	case STAIR_LEFTBOTTOM_RIGHTTOP:
 		break;
@@ -344,6 +347,30 @@ BaseObject * ObjectFactory::getFlyLand(xml_node node) {
 	auto flyLand = new FlyLand(GVector2(x, y), GVector2(x + width, y));
 	flyLand->init();
 	return flyLand;
+}
+
+
+
+BaseObject* ObjectFactory::getCandle(xml_node node)
+{
+	auto properties = ObjectFactory::getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y, width, height;
+	eItemID	_dropItemId;
+
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+	width = stoi(properties["Width"]);
+	height = stoi(properties["Height"]);
+
+	GVector2 pos = GVector2(x + width/2,y + height/2);
+	_dropItemId = (eItemID)stoi(properties["DropItemId"]);
+
+	auto candle = new Candle(pos,_dropItemId);
+	candle->init();
+	return candle;
 }
 
 map<string, string> ObjectFactory::getObjectProperties(xml_node node)

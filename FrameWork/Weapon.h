@@ -44,6 +44,5 @@ public:
 	virtual void pickedUp() override;
 protected:
 	eDirection	_direction;
-	eItemID		_itemId;
 };
 

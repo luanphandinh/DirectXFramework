@@ -179,6 +179,11 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 			}
 			if (direction == eDirection::RIGHT&& this->getVelocity().y < 0) {
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+				float moveX, moveY;
+				if (collisionBody->isCollidingIntersected(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
 				this->changeDirection();
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
@@ -187,6 +192,11 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 			}
 			if ( direction == eDirection::LEFT && this->getVelocity().y < 0) {
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+				float moveX, moveY;
+				if (collisionBody->isCollidingIntersected(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 				this->changeDirection();
 

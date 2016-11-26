@@ -79,12 +79,6 @@
     <ClCompile Include="Stair.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>Source Files\Objects\Items\Standard</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Objects\Items\Standard</Filter>
-    </ClCompile>
     <ClCompile Include="HeartItem.cpp">
       <Filter>Source Files\Objects\Items\Standard</Filter>
     </ClCompile>
@@ -181,6 +175,15 @@
     <ClCompile Include="QNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files\Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Candle.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -268,12 +271,6 @@
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
     <ClInclude Include="HeartItem.h">
-      <Filter>Header Files\Objects\Items\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Objects\Items\Standard</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemManager.h">
       <Filter>Header Files\Objects\Items\Standard</Filter>
     </ClInclude>
     <ClInclude Include="MoneyBag.h">
@@ -365,6 +362,15 @@
     </ClInclude>
     <ClInclude Include="QNode.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Header Files\Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Candle.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
