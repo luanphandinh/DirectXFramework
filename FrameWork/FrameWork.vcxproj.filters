@@ -178,6 +178,9 @@
     <ClCompile Include="Boomerang.cpp">
       <Filter>Source Files\Objects\Items\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="QNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -359,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="Boomerang.h">
       <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="QNode.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
