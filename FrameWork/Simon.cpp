@@ -724,6 +724,21 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 
 				_preObject = otherObject;
 			}
+			else if (((direction == eDirection::LEFT && this->getScale().x > 0) 
+				|| (direction == eDirection::RIGHT && this->getScale().x < 0)) && !this->isInStatus(eStatus::STANDINGONSTAIR)
+				&& !this->isInStatus(eStatus::JUMPING))
+			{
+				//vì khi có va chạm thì vật vẫn còn di chuyển
+				//nên cần dùng hàm dưới để cập nhật lại vị trí khi simon giao với wall(land với hướng va chạm trái phải)
+				float moveX, moveY;
+				if (collisionBody->isCollidingIntersected(otherObject, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
+				}
+				this->standing();
+				enableGravity(false);
+				_preObject = otherObject;
+			}
 		}
 		else if (_preObject == otherObject)
 		{
