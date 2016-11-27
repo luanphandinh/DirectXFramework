@@ -14,17 +14,17 @@ HeartItem::~HeartItem()
 void HeartItem::init() 
 {
 	/*between 1 and 3: */
-	int type = rand() % 2 + 1;
-	_heartType = (eHeartItemType)type;
+	//int type = rand() % 2 + 1;
+	//_heartType = (eHeartItemType)type;
 
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
 
-	switch (_heartType)
+	switch (_itemId)
 	{
-	case eHeartItemType::SMALL:
+	case eItemID::SMALLHEART:
 		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "heart_small"));
 		break;
-	case eHeartItemType::LARGE:
+	case eItemID::LARGEHEART:
 		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "heart_large"));
 		break;
 	default:
@@ -50,12 +50,12 @@ void HeartItem::release()
 
 void HeartItem::pickedUp()
 {
-	switch (_heartType)
+	switch (_itemId)
 	{
-	case eHeartItemType::SMALL:
+	case eItemID::SMALLHEART:
 		HeartCounter::plusHeart(1);
 		break;
-	case eHeartItemType::LARGE:
+	case eItemID::LARGEHEART:
 		HeartCounter::plusHeart(5);
 		break;
 	default:

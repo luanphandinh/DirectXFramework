@@ -7,7 +7,7 @@
 class HolyWater : public Weapon
 {
 public:
-	HolyWater(GVector2 startPosition, eItemType type, eDirection dir);
+	HolyWater(GVector2 startPosition, eItemType type, eDirection dir = eDirection::NONE);
 	~HolyWater();
 
 	void init() override;

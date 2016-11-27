@@ -48,7 +48,7 @@ bool PlayScene::init()
 
 	//========================TESTING===========================//
 	_testItem = new BaseObject*[15];
-	_testItem[0] = new HeartItem(GVector2(2700, 200));
+	_testItem[0] = new HeartItem(GVector2(2700, 200),eItemID::LARGEHEART);
 	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
 	for (int i = 2; i < 4; i++)
 	{

@@ -5,7 +5,7 @@
 class Sword : public Weapon
 {
 public:
-	Sword(GVector2 startPosition, eItemType type, eDirection dir);
+	Sword(GVector2 startPosition, eItemType type, eDirection dir = eDirection::NONE);
 	~Sword();
 
 	void init() override;

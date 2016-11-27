@@ -129,21 +129,24 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 		item = new HeartItem(pos, id);
 		break;
 	case MONEYBAGPURPLE:
-		break;
 	case MONEYBAGRED:
-		break;
 	case MOENYBAGWHITE:
+		item = new MoneyBag(pos, id);
 		break;
 	case WHIPUPGRADE:
+		item = new WhipUpgrade(pos);
 		break;
 	case SWORD:
+		item = new Sword(pos, type);
 		break;
 	case AXE:
+		item = new ThrowingAxe(pos, type);
 		break;
 	case BOORMERANG:
 		item = new Boomerang(pos, type);
 		break;
 	case HOLYWATER:
+		item = new HolyWater(pos, type);
 		break;
 	case STOPWATCH:
 		break;

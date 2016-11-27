@@ -6,7 +6,7 @@ class Boomerang :
 	public Weapon
 {
 public:
-	Boomerang(GVector2 startPosition, eItemType type, eDirection dir = eDirection::LEFT);
+	Boomerang(GVector2 startPosition, eItemType type, eDirection dir = eDirection::NONE);
 	~Boomerang();
 
 	void init() override;

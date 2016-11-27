@@ -4,7 +4,7 @@
 class ThrowingAxe : public Weapon
 {
 public:
-	ThrowingAxe(GVector2 startPosition, eItemType type, eDirection dir);
+	ThrowingAxe(GVector2 startPosition, eItemType type, eDirection dir = eDirection::NONE);
 	~ThrowingAxe();
 
 	void init() override;

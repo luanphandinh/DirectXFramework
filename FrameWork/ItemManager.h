@@ -38,7 +38,7 @@ public:
 	RECT getBounding();
 	float checkCollision(BaseObject * object, float dt);
 	static void generateItem(eItemID id, GVector2 pos,eItemType type = eItemType::DROP);
-	static void generateWeapon(eItemID id, GVector2 pos, eDirection dir, eItemType type = eItemType::DROP);
+	static void generateWeapon(eItemID id, GVector2 pos, eDirection dir, eItemType type = eItemType::PICKED_UP);
 private:
 	static list<Item*> _listItem;
 };

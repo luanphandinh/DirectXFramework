@@ -15,20 +15,20 @@ MoneyBag::~MoneyBag()
 void MoneyBag::init()
 {
 	/*between 1 and 3: */
-	int type = rand() % 3 + 1;
-	_moneyBagType = (eMoneyBagItemType)type;
+	//int type = rand() % 3 + 1;
+	//_moneyBagType = (eMoneyBagItemType)type;
 
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
 
-	switch (_moneyBagType)
+	switch (_itemId)
 	{
-	case eMoneyBagItemType::RED:
+	case eItemID::MONEYBAGRED:
 		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "red_money_bag"));
 		break;
-	case eMoneyBagItemType::PURPLE:
+	case eItemID::MONEYBAGPURPLE:
 		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "purple_money_bag"));
 		break;
-	case eMoneyBagItemType::WHITE:
+	case eItemID::MOENYBAGWHITE:
 		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "white_money_bag"));
 		break;
 	default:
@@ -54,15 +54,15 @@ void MoneyBag::release()
 
 void MoneyBag::pickedUp()
 {
-	switch (_moneyBagType)
+	switch (_itemId)
 	{
-	case eMoneyBagItemType::RED:
+	case eItemID::MONEYBAGRED:
 		Score::plusScore(100);
 		break;
-	case eMoneyBagItemType::PURPLE:
+	case eItemID::MONEYBAGPURPLE:
 		Score::plusScore(300);
 		break;
-	case eMoneyBagItemType::WHITE:
+	case eItemID::MOENYBAGWHITE:
 		Score::plusScore(700);
 		break;
 	default:
