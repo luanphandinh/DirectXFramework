@@ -66,7 +66,7 @@ float Sword::checkCollision(BaseObject* otherObject, float dt)
 	}
 	else if (_type == eItemType::PICKED_UP)
 	{
-		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+		/*auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 		eID otherObjectID = otherObject->getId();
 		eDirection direction;
 		if (otherObjectID == eID::SPEARKNIGHT)
@@ -83,7 +83,7 @@ float Sword::checkCollision(BaseObject* otherObject, float dt)
 			{
 				HeartCounter::plusHeart(10);
 			}
-		}
+		}*/
 	}
 	return 0.0f;
 }
