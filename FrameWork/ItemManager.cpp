@@ -117,3 +117,39 @@ float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 
 	return 0.0f;
 }
+
+void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
+{
+	Item* item = nullptr;
+	switch (id)
+	{
+	case SMALLHEART:
+		break;
+	case LARGEHEART:
+		item = new HeartItem(pos, id);
+		break;
+	case MONEYBAGPURPLE:
+		break;
+	case MONEYBAGRED:
+		break;
+	case MOENYBAGWHITE:
+		break;
+	case WHIPUPGRADE:
+		break;
+	case SWORD:
+		break;
+	case AXE:
+		break;
+	case BOORMERANG:
+		item = new Boomerang(pos, type);
+		break;
+	case HOLYWATER:
+		break;
+	case STOPWATCH:
+		break;
+	default:
+		break;
+	}
+	if (item != nullptr)
+		insertItem(item);
+}

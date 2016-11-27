@@ -1,4 +1,5 @@
 ﻿#include "Candle.h"
+#include"ItemManager.h"
 
 Candle::Candle(GVector2 pos,eItemID _dropItemId) :BaseObject(eID::CANDLE)
 {
@@ -43,6 +44,7 @@ void Candle::update(float deltaTime)
 			this->removeStatus(eStatus::BURST);
 			SAFE_DELETE(_burstStopWatch);
 			this->setStatus(eStatus::DESTROY);
+			ItemManager::generateItem(_dropItemId, this->getPosition());
 		}
 	}
 
