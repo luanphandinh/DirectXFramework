@@ -153,3 +153,29 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 	if (item != nullptr)
 		insertItem(item);
 }
+
+void ItemManager::generateWeapon(eItemID id, GVector2 startPos, eDirection dir, eItemType type)
+{
+	Item* item = nullptr;
+	switch (id)
+	{
+	case NOITEM:
+		break;
+	case eItemID::SWORD:
+		item = new Sword(startPos, eItemType::PICKED_UP, dir);
+		break;
+	case eItemID::AXE:
+		item = new ThrowingAxe(startPos, eItemType::PICKED_UP, dir);
+		break;
+	case eItemID::BOORMERANG:
+		item = new Boomerang(startPos, eItemType::PICKED_UP, dir);
+		break;
+	case eItemID::HOLYWATER:
+		item = new HolyWater(startPos, eItemType::PICKED_UP, dir);
+		break;
+	default:
+		break;
+	}
+	if (item != nullptr)
+		insertItem(item);
+}

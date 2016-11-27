@@ -913,25 +913,7 @@ void Simon::getWeapon()
 
 	eDirection dir = this->getDirection();
 
-	switch (_itemID)
-	{
-	case eItemID::SWORD:
-		item = new Sword(startPos, eItemType::PICKED_UP, dir);
-		break;
-	case eItemID::AXE:
-		item = new ThrowingAxe(startPos, eItemType::PICKED_UP, dir);
-		break;
-	case eItemID::BOORMERANG:
-		item = new Boomerang(startPos, eItemType::PICKED_UP, dir);
-		break;
-	case eItemID::HOLYWATER:
-		item = new HolyWater(startPos, eItemType::PICKED_UP, dir);
-		break;
-	default:
-		break;
-	}
-
-	ItemManager::insertItem((Item*)item);
+	ItemManager::generateWeapon(_itemID, startPos,dir, eItemType::PICKED_UP);
 }
 
 void Simon::forceMoveRight() {
