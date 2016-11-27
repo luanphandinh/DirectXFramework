@@ -1,4 +1,12 @@
 ﻿#include "ItemManager.h"
+#include"Weapon.h"
+#include"ThrowingAxe.h"
+#include"Boomerang.h"
+#include"MoneyBag.h"
+#include"HeartItem.h"
+#include"WhipUpgrade.h"
+#include"HolyWater.h"
+#include"Sword.h"
 
 list<Item*> ItemManager::_listItem;
 

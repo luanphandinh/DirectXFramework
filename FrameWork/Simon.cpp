@@ -724,6 +724,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 
 				_preObject = otherObject;
 			}
+			//Va chạm với wall
 			else if (((direction == eDirection::LEFT && this->getScale().x > 0) 
 				|| (direction == eDirection::RIGHT && this->getScale().x < 0)) && !this->isInStatus(eStatus::STANDINGONSTAIR)
 				&& (!this->isInStatus(eStatus::JUMPING) || (this->isInStatus(eStatus::JUMPING) && !_canJumpDown)))
@@ -924,7 +925,6 @@ void Simon::getWeapon()
 		item = new Boomerang(startPos, eItemType::PICKED_UP, dir);
 		break;
 	case eItemID::HOLYWATER:
-		startPos += GVector2(20, 0);
 		item = new HolyWater(startPos, eItemType::PICKED_UP, dir);
 		break;
 	default:

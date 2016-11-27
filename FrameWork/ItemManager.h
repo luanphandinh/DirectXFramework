@@ -3,9 +3,10 @@
 #include"Item.h"
 #include"define.h"
 #include<list>
+
 /*
 *	ItemManager:
-*			Là class dùng để quản lý các standard item trong game
+*			Là class dùng để quản lý các items trong game
 *
 *			Hàm update: gọi từng thành phần để update
 *			Hàm draw: gọi từng thành phần để draw

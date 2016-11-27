@@ -102,7 +102,10 @@ void PlayScene::update(float deltaTime)
 		this->updateViewport(_simon);
 	}
 	/*
-		Hiện tại ta có 2 danh sách Object.
+		Khi vào game thì bản thân các Object sẽ được load toàn bộ và được init() sau đó add vào _mapObject
+		Quá trình game chạy thì những object nào được load lên vùng viewport mới update và checkCollision
+
+		Ta có 2 danh sách Object.
 		Một là _listobject chứa các đối tượng hoạt động rộng,không thể đưa vào quadtree
 		Hai là _mapObject chứa tất cả các đối tượng của map
 		Ta có một listObject phụ là activeObject chứa các object sẽ được update,draww ở mỗi frame,được clear ở đầu hàm update.
@@ -239,7 +242,7 @@ void PlayScene::destroyObject()
 	{
 		//Lấy object từ toàn bộ map
 		auto object = _mapObject.find(name);
-		//Nếu ko tìm thấy object này
+		//Nếu ko tìm thấy object này thì chuyển sang tìm object khác
 		if (object == _mapObject.end() || object._Ptr == nullptr)
 			continue;
 		//Nếu tìm thấy mà obj này đang trong trạng thái hủy

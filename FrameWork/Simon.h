@@ -12,7 +12,7 @@
 #include"LifeUI.h"
 #include"ActiveWeapon.h"
 //========================TESTING===========================//
-#include"Item.h"
+
 #include"ItemManager.h"
 #include"HeartItem.h"
 #include"WhipUpgrade.h"
@@ -26,7 +26,7 @@ _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
 
 #define GRAVITY 900
-#define SIMON_JUMP_VELOCITY 350
+#define SIMON_JUMP_VELOCITY 380
 // Sửa phần lên cầu thang cho hết sida
 #define SIMON_UPSTAIR_VELOCITY_X 82
 #define SIMON_UPSTAIR_VELOCITY_Y 136
@@ -143,10 +143,6 @@ private:
 	BaseObject* _preObject;
 	// reset các thuộc tính lại giá trị ban đầu.
 	void resetValues();
-
-	//========================TESTING===========================//
-	Item** _testItem;
-	//========================TESTING===========================//
 };
 _NAMESPACE_FRAMEWORK_END
 
