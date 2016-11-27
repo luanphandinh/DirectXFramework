@@ -8,7 +8,7 @@
 using namespace std;
 
 #define SPEARKNIGHT_SPEED 50
-#define SPEARKNIGHT_HITPOINT 1
+#define SPEARKNIGHT_HITPOINT 16
 #define SPEARKNIGHT_SCORE 100
 
 class SpearKnight : public BaseEnemy {
@@ -44,4 +44,5 @@ private:
 	// Vòng lặp thời gian, giúp knight di chuyển qua lại liên tục
 	StopWatch *_loopwatch;
 	void changeDirection();
+	bool isHitted;
 };

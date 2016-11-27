@@ -915,6 +915,11 @@ void Simon::getWeapon()
 
 	ItemManager::generateWeapon(_itemID, startPos,dir, eItemType::PICKED_UP);
 }
+int Simon::getDamage()
+{
+	return 6;
+}
+
 
 void Simon::forceMoveRight() {
 	onKeyPressed(new KeyEventArg(DIK_RIGHT));

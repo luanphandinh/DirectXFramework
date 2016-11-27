@@ -157,10 +157,10 @@ void PlayScene::update(float deltaTime)
 	//[Bước 6]
 	for (BaseObject* obj : _activeObject)
 	{
-		if (_itemManager != nullptr && obj->getId() == eID::LAND)
-		{
+		//if (_itemManager != nullptr && (obj->getId() == eID::LAND || obj->getId()== eID::SPEARKNIGHT))
+		//{
 			_itemManager->checkCollision(obj, deltaTime);
-		}
+		//}
 		//không cần xét va chạm cho các trường hợp này
 		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND ||
 			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
@@ -175,7 +175,7 @@ void PlayScene::update(float deltaTime)
 
 	if (_itemManager != nullptr)
 	{
-		_itemManager->checkCollision(_simon, deltaTime);
+		//_itemManager->checkCollision(_simon, deltaTime);
 		_itemManager->update(deltaTime);
 	}
 	//[Bước 7]

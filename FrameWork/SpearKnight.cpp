@@ -1,4 +1,5 @@
 #include "SpearKnight.h"
+#include "GameStatusBoard.h"
 float delay = 500.0f;
 
 SpearKnight::SpearKnight(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::SPEARKNIGHT) {
@@ -12,6 +13,7 @@ SpearKnight::SpearKnight(eStatus status, GVector2 pos, int direction) : BaseEnem
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 SpearKnight::SpearKnight(eStatus status, float x, float y, int direction) : 
@@ -31,6 +33,7 @@ SpearKnight::SpearKnight(eStatus status, float x, float y, int direction) :
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 
@@ -64,12 +67,12 @@ void SpearKnight::init() {
 	//this->setPosition(GVector2(100,100));
 	this->setStatus(eStatus::WALKING);
 	_sprite->drawBounding(false);
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 void SpearKnight::draw(LPD3DXSPRITE spritehandle, Viewport* viewport) {
-
+	if (this->isInStatus(eStatus::DESTROY)) return;
 	_animations[this->getStatus()]->draw(spritehandle, viewport);
-
 }
 
 void SpearKnight::release() {
@@ -210,11 +213,30 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 				prevObject = nullptr;
 			}
 		}
-		else {
-			collisionBody->checkCollision(object, dt, false);
+		//else {
+		//	collisionBody->checkCollision(object, dt, false);
+		//}
+		return 0.0f;
+	}
+	else
+	if (objectId == eID::SIMON)
+	{
+		if (collisionBody->checkCollision(object, direction, dt,false) && object->isInStatus(eStatus::HITTING))
+		{
+			if (!isHitted)
+			{
+				this->dropHitpoint(((Simon*)(object))->getDamage());
+				//this->dropHitpoint(3);
+				isHitted = true;
+			}
+		}
+		else 
+		{
+			isHitted = false;
 		}
 		return 0.0f;
 	}
+	return 0.0f;
 }
 
 GVector2 SpearKnight::getVelocity() {
@@ -227,5 +249,6 @@ void SpearKnight::die() {
 	gravity->setStatus(eGravityStatus::SHALLOWED);
 	Movement *movement = (Movement*)this->getComponent("Movement");
 	movement->setVelocity(GVector2(0, 200));
+	this->setStatus(eStatus::DESTROY);
 }
 

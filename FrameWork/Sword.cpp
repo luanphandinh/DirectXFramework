@@ -64,5 +64,26 @@ float Sword::checkCollision(BaseObject* otherObject, float dt)
 	{
 		Weapon::checkCollision(otherObject, dt);
 	}
+	else if (_type == eItemType::PICKED_UP)
+	{
+		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+		eID otherObjectID = otherObject->getId();
+		eDirection direction;
+		if (otherObjectID == eID::SPEARKNIGHT)
+		{
+			if (collisionBody->checkCollision(otherObject, direction, dt, false))
+			{
+				this->setStatus(eStatus::DESTROY);
+			}
+		}
+		else
+		if (otherObjectID == eID::SIMON)
+		{
+			if (collisionBody->checkCollision(otherObject, direction, dt, false))
+			{
+				HeartCounter::plusHeart(10);
+			}
+		}
+	}
 	return 0.0f;
 }

@@ -1,8 +1,9 @@
-#include "Boomerang.h"
-
+﻿#include "Boomerang.h"
+#include"BaseEnemy.h"
 
 Boomerang::Boomerang(GVector2 startPosition, eItemType type, eDirection dir) : Weapon(startPosition, type, dir, eItemID::BOORMERANG)
 {
+	_damage = 1;
 }
 
 
@@ -74,6 +75,13 @@ void Boomerang::initWeaponComponent()
 
 	RotateMovement* rotateMovement = new RotateMovement(_sprite);
 	_componentList["RotateMovement"] = rotateMovement;
+	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Boomerang::onCollisionBegin);
+}
+
+void Boomerang::onCollisionBegin(CollisionEventArg* collision_arg)
+{
+	
 }
 
 float Boomerang::checkCollision(BaseObject* otherObject, float dt)
@@ -81,6 +89,9 @@ float Boomerang::checkCollision(BaseObject* otherObject, float dt)
 	if (_type == eItemType::DROP)
 	{
 		Weapon::checkCollision(otherObject, dt);
+	}
+	else if (_type == eItemType::PICKED_UP)
+	{
 	}
 	return 0.0f;
 }

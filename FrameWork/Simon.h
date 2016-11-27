@@ -99,6 +99,7 @@ public:
 	void revive();
 	void hitting();
 	void getWeapon();
+	int getDamage();
 	void enableGravity(bool);
 
 	float getMovingSpeed();
