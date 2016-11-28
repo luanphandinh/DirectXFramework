@@ -278,10 +278,10 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 		{
 			if (object->isInStatus(eStatus::HITTING))
 			{
+				// bị chớp
 				this->_animations[_currentAnimateIndex]->enableFlashes(true);
 				this->dropHitpoint(((Simon*)(object))->getDamage());
 				//this->dropHitpoint(3);
-				// bị chớp
 				isHitted = true;
 			}
 		}
