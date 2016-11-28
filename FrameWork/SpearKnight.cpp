@@ -284,6 +284,10 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 				//this->dropHitpoint(3);
 				isHitted = true;
 			}
+			else
+			{
+				((Simon*)object)->getHitted();
+			}
 		}
 		else 
 		{
@@ -292,22 +296,22 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 
 		}
 
-				// if (!isHitted)
-				// {
-					// this->dropHitpoint(((Simon*)(object))->getDamage());
-					// //this->dropHitpoint(3);
-					// isHitted = true;
-				// }
-				// else
-				// {
-					// isHitted = false;
-				// }
+			//	 if (!isHitted)
+			//	 {
+			//		 this->dropHitpoint(((Simon*)(object))->getDamage());
+			//		 //this->dropHitpoint(3);
+			//		 isHitted = true;
+			//	 }
+			//	 else
+			//	 {
+			//		 isHitted = false;
+			//	 }
 			// }
 			// else
 			// {
-				// ((Simon*)object)->getHitted();
+			//	 ((Simon*)object)->getHitted();
 			// }
-		// }
+		 //}
 		
 		return 0.0f;
 	}
