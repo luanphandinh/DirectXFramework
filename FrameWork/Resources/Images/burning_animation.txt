@@ -1,0 +1,5 @@
+frame_name	left	top	right	bottom
+explode		68	8	76	18	0.5 0.5
+burn_01		49	3	57	18	0.5 0.5
+burn_02		29	6	35	18	0.5 0.5
+burn_03		9	5	12	18	0.5 0.5
