@@ -99,6 +99,10 @@ public:
 	void revive();
 	void hitting();
 	void getWeapon();
+	/*
+		Hàm này được gọi khi enemy va chạm với simon
+	*/
+	void getHitted();
 	int getDamage();
 	void enableGravity(bool);
 
@@ -129,6 +133,10 @@ private:
 	bool _isHitting;
 	//Sử dụng để animation throwing khi có stopwatch
 	bool _isThrowing;
+	//Sử dụng để tạo flash lúc simon bị mất máu lên
+	bool _isHitted;
+	//Sử dụng để xem simon có được bảo vệ hay không
+	bool _isProtected;
 	//Hướng cầu thang đi lên qua phải hoặc đi lên qua trái
 	eStairDirection _stairDirection;
 
@@ -136,6 +144,8 @@ private:
 	StopWatch* _reviveStopWatch;
 	StopWatch* _hittingStopWatch;
 	StopWatch* _throwItemStopWatch;
+	StopWatch* _isHittedStopWatch;
+	StopWatch* _protectStopWatch;
 
 	eStatus _currentAnimationIndex;
 

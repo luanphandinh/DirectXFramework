@@ -1,4 +1,5 @@
 ﻿#include "Simon.h"
+#include"GameStatusBoard.h"
 _USING_FRAMEWORK
 
 Simon::Simon() :BaseObject(eID::SIMON)
@@ -183,12 +184,16 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 	if (this->isInStatus(eStatus::DYING))
 		return;
 
+	//if (_hittingStopWatch != nullptr || _reviveStopWatch != nullptr)
+	//	return;
+	if (_isHitted)
+		return;
+
 	switch (key_event->_key)
 	{
 	case DIK_W:
 	case DIK_S:
-		if (!this->isInStatus(eStatus::SITTING) || this->isInStatus(eStatus::MOVING_LEFT)
-			|| this->isInStatus(eStatus::MOVING_RIGHT))
+		if (!this->isInStatus(eStatus::SITTING) && !this->isInStatus(eStatus::STANDINGONSTAIR))
 		{
 			//Nếu đang ngồi hoặc di chuyển thì cho phép nhảy
 			//Chỉ add trạng thái nhảy vào thôi
@@ -225,6 +230,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_A:
+		if (_hittingStopWatch != nullptr) break;
 		this->removeStatus(eStatus::THROWING_ITEM);
 		this->removeStatus(eStatus::UPSTAIR);
 		this->removeStatus(eStatus::DOWNSTAIR);
@@ -315,6 +321,40 @@ void Simon::updateStatus(float deltatime)
 		}
 		return; 
 	}
+	//Nếu nhân vật đang lượm item
+	if (_isHitted)
+	{
+		if (_isHittedStopWatch == nullptr)
+		{
+			_isHittedStopWatch = new StopWatch();
+			//Nhân với trừ 1 để nhảy ngược lại
+			auto move = (Movement*)this->_componentList["Movement"];
+			move->setVelocity(GVector2((-1) * _movingSpeed * (this->getScale().x / SCALE_FACTOR), this->getVelocity().y + 300));
+			auto gravity = (Gravity*)this->_componentList["Gravity"];
+			gravity->setStatus(eGravityStatus::FALLING_DOWN);
+		}
+	
+
+		if (_isHittedStopWatch->isStopWatch(200))
+		{
+			_isHitted = false;
+			SAFE_DELETE(_isHittedStopWatch);
+		}
+		return;
+	}
+
+	if (_isProtected)
+	{
+		if (_protectStopWatch == nullptr)
+		{
+			_protectStopWatch = new StopWatch();
+		}
+		if (_protectStopWatch->isStopWatch(1000))
+		{
+			_isProtected = false;
+			SAFE_DELETE(_protectStopWatch);
+		}
+	}
 	//Nếu nhân vật đang đánh
 	if (this->isInStatus(eStatus::HITTING))
 	{
@@ -348,6 +388,7 @@ void Simon::updateStatus(float deltatime)
 		return;
 	}
 
+	//_isHitted = false;
 
 	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT && (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR)
 	{
@@ -591,6 +632,17 @@ void Simon::hitting()
 	move->setVelocity(GVector2Zero);
 }
 
+void Simon::getHitted()
+{
+	//Nếu simon chưa bị hit và ko được protected
+	if (_isHitted == false && _isHittedStopWatch == nullptr && !_isProtected)
+	{
+		_isHitted = true;
+		_isProtected = true;
+		GameStatusBoard::getInstance()->getSimonLifeUI()->setHPNumber(
+			GameStatusBoard::getInstance()->getSimonLifeUI()->getHPNumber() - 1);
+	}
+}
 #pragma endregion
 
 GVector2 Simon::getVelocity()
@@ -775,6 +827,8 @@ void  Simon::updateCurrentAnimateIndex()
 	//Lấy trạng thái của nhân vật
 	_currentAnimationIndex = this->getStatus();
 
+	if (_currentAnimationIndex & eStatus::PICKUPITEM == eStatus::PICKUPITEM)
+		_currentAnimationIndex = (eStatus)(_currentAnimationIndex & ~eStatus::PICKUPITEM);
 	//Đang di chuyển
 	if ((_currentAnimationIndex & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT 
 		|| ((_currentAnimationIndex & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT)) 
@@ -889,7 +943,24 @@ void  Simon::updateCurrentAnimateIndex()
 	{
 		_currentAnimationIndex = eStatus::DYING;
 	}
-	
+
+	if (_isHitted)
+	{
+		_currentAnimationIndex = eStatus::STANDINGONSTAIR_DOWN;
+	}
+
+	if (_isProtected)
+	{
+
+		_animations[_currentAnimationIndex]->enableFlashes(true);
+		_animations[_currentAnimationIndex]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));
+	}
+	else
+	{
+		_animations[_currentAnimationIndex]->enableFlashes(false);
+		_animations[_currentAnimationIndex]->setColorFlash(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1));
+	}
+		
 }
 
 eDirection Simon::getDirection()

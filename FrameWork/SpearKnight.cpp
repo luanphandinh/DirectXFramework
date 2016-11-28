@@ -221,19 +221,27 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	else
 	if (objectId == eID::SIMON)
 	{
-		if (collisionBody->checkCollision(object, direction, dt,false) && object->isInStatus(eStatus::HITTING))
+		if (collisionBody->checkCollision(object, direction, dt,false))
 		{
-			if (!isHitted)
+			if (object->isInStatus(eStatus::HITTING))
 			{
-				this->dropHitpoint(((Simon*)(object))->getDamage());
-				//this->dropHitpoint(3);
-				isHitted = true;
+				if (!isHitted)
+				{
+					this->dropHitpoint(((Simon*)(object))->getDamage());
+					//this->dropHitpoint(3);
+					isHitted = true;
+				}
+				else
+				{
+					isHitted = false;
+				}
+			}
+			else
+			{
+				((Simon*)object)->getHitted();
 			}
 		}
-		else 
-		{
-			isHitted = false;
-		}
+		
 		return 0.0f;
 	}
 	return 0.0f;
