@@ -5,6 +5,7 @@
 #include "BaseEnemy.h"
 #include "Simon.h"
 #include "StopWatch.h"
+#include "Burning.h"
 using namespace std;
 
 #define SPEARKNIGHT_SPEED 50
@@ -40,9 +41,16 @@ private:
 	map<string, IComponent*> _listComponent;
 	map<int, Animation*> _animations;
 	BaseObject* prevObject;
+	BaseObject *_explosion;
+	BaseObject *_burning;
+	StopWatch *_stopwatch;
+
 
 	// Vòng lặp thời gian, giúp knight di chuyển qua lại liên tục
 	StopWatch *_loopwatch;
 	void changeDirection();
 	bool isHitted;
+	eStatus _currentAnimateIndex;
+	void updateCurrentAnimateIndex();
+
 };

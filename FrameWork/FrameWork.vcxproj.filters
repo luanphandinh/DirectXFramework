@@ -184,6 +184,9 @@
     <ClCompile Include="Candle.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Burning.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -370,6 +373,9 @@
       <Filter>Header Files\Objects\Items</Filter>
     </ClInclude>
     <ClInclude Include="Candle.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Burning.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>

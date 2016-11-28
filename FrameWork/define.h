@@ -58,6 +58,7 @@ enum eID
 	SPEARKNIGHT = 35,
 	BAT = 36,
 	MEDUSAHEAD = 37,
+	BURNING= 38,
 
 	//stage
 	MAPSTAGE1 = 40,

@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -87,6 +87,7 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="EmptyObject.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Burning.h" />
     <ClInclude Include="FlyLand.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameStatusBoard.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
+    <ClCompile Include="Burning.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />
     <ClCompile Include="CollisionBody.cpp" />

@@ -1,4 +1,4 @@
-#include "SpearKnight.h"
+﻿#include "SpearKnight.h"
 #include "GameStatusBoard.h"
 float delay = 500.0f;
 
@@ -62,6 +62,7 @@ void SpearKnight::init() {
 	_animations[DYING]->addFrameRect(eID::SPEARKNIGHT, NULL);
 
 	_loopwatch = new StopWatch();
+	_stopwatch = new StopWatch();
 
 	//*Test
 	//this->setPosition(GVector2(100,100));
@@ -72,7 +73,14 @@ void SpearKnight::init() {
 
 void SpearKnight::draw(LPD3DXSPRITE spritehandle, Viewport* viewport) {
 	if (this->isInStatus(eStatus::DESTROY)) return;
-	_animations[this->getStatus()]->draw(spritehandle, viewport);
+
+	if (_burning != NULL)
+		_burning->draw(spritehandle, viewport);
+	if (this->getStatus() == eStatus::DESTROY || this->getStatus() == eStatus::BURST)
+		return;
+
+	_animations[_currentAnimateIndex]->draw(spritehandle, viewport);
+
 }
 
 void SpearKnight::release() {
@@ -81,7 +89,13 @@ void SpearKnight::release() {
 	}
 	_listComponent.clear();
 
+	if (this->_burning != NULL)
+		this->_burning->release();
+	SAFE_DELETE(this->_burning);
+
 	SAFE_DELETE(this->_loopwatch);
+	SAFE_DELETE(this->_stopwatch);
+
 	SAFE_DELETE(this->_sprite);
 }
 
@@ -90,8 +104,28 @@ IComponent* SpearKnight::getComponent(string componentName) {
 }
 
 void SpearKnight::update(float deltatime) {
+	// Bị nướng
+	if (_burning != NULL) {
+		_burning->update(deltatime);
 
-	if (this->getStatus() == DESTROY )
+	}
+
+	if (this->getStatus() == eStatus::BURST) {
+		if (_burning == nullptr) {
+			auto pos = this->getPosition();
+			_burning = new Burning(2);
+			_burning->init();
+			_burning->setScale(SCALE_FACTOR);
+			_burning->setPosition(pos);
+		}
+		else if (_burning->getStatus() == eStatus::DESTROY) {
+			this->setStatus(eStatus::DESTROY);
+		}
+		return;
+	}
+
+
+	if (this->getStatus() == DESTROY)
 		return;
 
 	Gravity *gravity = (Gravity*)this->getComponent("Gravity");
@@ -103,7 +137,25 @@ void SpearKnight::update(float deltatime) {
 	}
 
 	if (this->getStatus() == eStatus::DYING) {
-		// do nothing
+
+		if (_stopwatch->isStopWatch(100)) {
+			movement->setVelocity(GVector2(0, 0));
+			this->setStatus(eStatus::BURST);
+			return;
+		}
+	}
+
+	if (this->getStatus() == eStatus::BURST) {
+		if (_burning == nullptr) {
+			auto pos = this->getPosition();
+			_burning = new Burning(2);
+			_burning->init();
+			_burning->setScale(SCALE_FACTOR);
+			_burning->setPosition(pos);
+		}
+		else if (_burning->getStatus() == eStatus::DESTROY) {
+			this->setStatus(eStatus::DESTROY);
+		}
 	}
 
 	for (auto it : _listComponent) {
@@ -111,13 +163,14 @@ void SpearKnight::update(float deltatime) {
 	}
 
 	if (this->getStatus() != DESTROY) {
-		_animations[this->getStatus()]->update(deltatime);
+		this->updateCurrentAnimateIndex();
 
+		_animations[_currentAnimateIndex]->update(deltatime);
 
 		if (_loopwatch->isTimeLoop(delay)) {
 			
 			this->changeDirection();
-			delay = 2000.0f;
+			delay =2000.0f;
 		}
 	}
 }
@@ -162,7 +215,7 @@ void SpearKnight::onCollisionEnd(CollisionEventArg* collision_event) {
 
 float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	if (this->getStatus() == eStatus::DESTROY || 
-		this->isInStatus(eStatus::DYING))
+		this->isInStatus(eStatus::DYING ) || this->isInStatus(eStatus::BURST))
 		return 0.0f;
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
@@ -225,19 +278,40 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 		{
 			if (!isHitted)
 			{
+				this->_animations[_currentAnimateIndex]->enableFlashes(true);
 				this->dropHitpoint(((Simon*)(object))->getDamage());
 				//this->dropHitpoint(3);
+				// bị chớp
 				isHitted = true;
 			}
 		}
 		else 
 		{
 			isHitted = false;
+			this->_animations[_currentAnimateIndex]->enableFlashes(false);
+
 		}
 		return 0.0f;
 	}
 	return 0.0f;
 }
+
+void SpearKnight::updateCurrentAnimateIndex() {
+
+	if (this->isInStatus(eStatus::WALKING)) {
+		_currentAnimateIndex = eStatus::WALKING;
+	}
+
+	if ((_currentAnimateIndex & eStatus::FALLING) == eStatus::FALLING) {
+		_currentAnimateIndex = eStatus::FALLING;
+	}
+
+	// chết
+	if (this->isInStatus(eStatus::DYING)) {
+		_currentAnimateIndex = eStatus::DYING;
+	}
+}
+
 
 GVector2 SpearKnight::getVelocity() {
 	auto move = (Movement*)this->_listComponent["Movement"];
@@ -248,7 +322,7 @@ void SpearKnight::die() {
 	Gravity *gravity = (Gravity*)this->getComponent("Gravity");
 	gravity->setStatus(eGravityStatus::SHALLOWED);
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(0, 200));
-	this->setStatus(eStatus::DESTROY);
+	//movement->setVelocity(GVector2(0, 200));
+	//this->setStatus(eStatus::DESTROY);
 }
 
