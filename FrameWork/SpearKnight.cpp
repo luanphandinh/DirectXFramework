@@ -274,9 +274,9 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	else
 	if (objectId == eID::SIMON)
 	{
-		if (collisionBody->checkCollision(object, direction, dt,false) && object->isInStatus(eStatus::HITTING))
+		if (collisionBody->checkCollision(object, direction, dt,false))
 		{
-			if (!isHitted)
+			if (object->isInStatus(eStatus::HITTING))
 			{
 				this->_animations[_currentAnimateIndex]->enableFlashes(true);
 				this->dropHitpoint(((Simon*)(object))->getDamage());
@@ -291,6 +291,24 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 			this->_animations[_currentAnimateIndex]->enableFlashes(false);
 
 		}
+
+				// if (!isHitted)
+				// {
+					// this->dropHitpoint(((Simon*)(object))->getDamage());
+					// //this->dropHitpoint(3);
+					// isHitted = true;
+				// }
+				// else
+				// {
+					// isHitted = false;
+				// }
+			// }
+			// else
+			// {
+				// ((Simon*)object)->getHitted();
+			// }
+		// }
+		
 		return 0.0f;
 	}
 	return 0.0f;

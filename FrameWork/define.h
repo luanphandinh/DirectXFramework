@@ -120,6 +120,8 @@ enum eStatus
 	CLOSING = (1<<23),
 	OPENING = (1<<24),
 	BURST = (1 << 25),
+	ISHITTED = (1 << 26),
+	PICKUPITEM = (1 << 27),
 };
 
 enum eStairDirection

@@ -1,5 +1,5 @@
 ﻿#include "Item.h"
-
+#include"Simon.h"
 
 Item::Item(GVector2 startPosition, eItemType type) :BaseObject(eID::ITEM)
 {
