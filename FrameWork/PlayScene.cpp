@@ -317,20 +317,20 @@ void PlayScene::updateDirector(float deltaTime)
 
 #pragma region Pass the door scenario
 //************ Hàng họ để mở cửa :v ************//
-void PlayScene::doorScene(float dt, bool & finish) {
-	GVector2 current_position = _viewport->getPositionWorld();
-	GVector2 worldsize = this->_backGround->getWorldSize();
-	// dịch screen từ từ sang TRÁI, speed = vs speed simon
-	current_position.x -= SIMON_MOVING_SPEED * dt / 1000;
-
-	_viewport->setPositionWorld(current_position);
-	if (_simon->getBounding().left > current_position.x) {
-		GVector2 curPos = _simon->getPosition();
-		curPos.x = current_position.x + (_simon->getSprite()->getFrameWidth() >> 1);
-		_simon->setPosition(curPos);
-	}
-	finish = false;
-}
+//void PlayScene::doorScene(float dt, bool & finish) {
+//	GVector2 current_position = _viewport->getPositionWorld();
+//	GVector2 worldsize = this->_backGround->getWorldSize();
+//	// dịch screen từ từ sang TRÁI, speed = vs speed simon
+//	current_position.x -= SIMON_MOVING_SPEED * dt / 1000;
+//
+//	_viewport->setPositionWorld(current_position);
+//	if (_simon->getBounding().left > current_position.x) {
+//		GVector2 curPos = _simon->getPosition();
+//		curPos.x = current_position.x + (_simon->getSprite()->getFrameWidth() >> 1);
+//		_simon->setPosition(curPos);
+//	}
+//	finish = false;
+//}
 void PlayScene::ScenarioMoveViewport(float deltatime) {
 	if (_directorDoor == nullptr)
 		return;

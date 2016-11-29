@@ -22,9 +22,22 @@ void Level2Director::init()
 	this->setCurrentViewport(V1);
 
 	auto scenarioPassDoor = new Scenario("PassDoor");
+	//Mấy cái hàm này chạy theo thứ tự từ dưới lên khi gọi updateScenario(deltaTime);
+	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::moveViewportPassDoor2);
 	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::passDoorScene);
-	//flagDoorScenario = false;
+	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::moveViewportPassDoor);
+	
+	_flagMoveSimonPassDoor = false;
+	_flagMoveViewportPassDoor = false;
+	_flagMoveViewportPassDoor2 = false;
 	_scenarioManager->insertScenario(scenarioPassDoor);
+
+
+}
+void Level2Director::update(float deltaTime) 
+{
+	updateScenario(deltaTime);
+	updateViewport();
 }
 
 void Level2Director::updateScenario(float deltaTime)
@@ -35,6 +48,8 @@ void Level2Director::updateScenario(float deltaTime)
 void Level2Director::updateViewport()
 {
 	GVector2 pos = _objTracker->getPosition();
+	
+	if (_flagMoveViewportPassDoor || _flagMoveSimonPassDoor || _flagMoveViewportPassDoor2) return;
 
 	Level2Director::switchViewport();
 	// Vị trí hiện tại của viewport. 
@@ -42,11 +57,11 @@ void Level2Director::updateViewport()
 
 	//GVector2 worldsize = this->_backGround->getWorldSize();
 	GVector2 boundSize = this->getCurrentViewportBound();
-	// Bám theo object.
+	// Bám theo object.ko cho nhân vật vượt quá biên trái vủa vùng viewport hiện đang xét
 	GVector2 new_position = GVector2(max(_objTracker->getPositionX() - WINDOW_WIDTH / 2, boundSize.x),
 		current_position.y);
 
-	// Không cho đi quá vùng viewport hiện tại.
+	// Không cho đi quá biên bên phải của vùng viewport hiện tại hiện tại.
 	if (new_position.x + WINDOW_WIDTH > boundSize.y)
 	{
 		new_position.x = boundSize.y - WINDOW_WIDTH;
@@ -76,7 +91,19 @@ void Level2Director::switchViewport()
 			this->setCurrentViewport(V1);
 			_objTracker->setPosition(2816, 380);
 		}
+
+		if (pos.x < this->getCurrentViewportBound().x) 
+		{
+			this->setCurrentViewport(V3);
+		}
 		break;
+	case eLevel2Viewport::V3:
+		//if (pos.y < 440 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR)) {
+		//	//this->setCurrentViewport(V1);
+		//	this->setCurrentViewport(V1);
+		//	_objTracker->setPosition(2816, 380);
+		//}
+		//break;
 	default:
 		break;
 	}
@@ -85,6 +112,7 @@ void Level2Director::switchViewport()
 
 void Level2Director::passDoorScene(float deltatime, bool & isFinish) 
 {
+	if (_flagMoveViewportPassDoor) return;
 	auto door =  ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getObject(eID::DOOR);
 	if (door == nullptr)
 		return;
@@ -104,9 +132,58 @@ void Level2Director::passDoorScene(float deltatime, bool & isFinish)
 	if (xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660) {
 		door->setStatus(OPENING);
 		((Simon*)_simon)->forceMoveLeft();
+		_flagMoveSimonPassDoor = true;
 	}
-	else if (xSimon < 1950 && ySimon < 700 && ySimon>660) {
+	else if (xSimon < 1950 && ySimon < 700 && ySimon>660 && _flagMoveSimonPassDoor) {
 		((Simon*)_simon)->unforceMoveLeft();
 		door->setStatus(CLOSING);
+		_flagMoveSimonPassDoor = false;
 	}
+	
+}
+
+void Level2Director::moveViewportPassDoor(float deltatime, bool & finish) {
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xSimon = _simon->getPositionX();
+	int ySimon = _simon->getPositionY();
+
+	
+	if (_currentViewport != eLevel2Viewport::V2 || !((xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660))) return;
+	if(xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660)
+		_flagMoveViewportPassDoor = true;
+
+	GVector2 boundSize = this->getCurrentViewportBound();
+
+	GVector2 current_position = _viewport->getPositionWorld();
+	// dịch screen từ từ sang TRÁI, speed = vs speed simon
+	current_position.x -= SIMON_MOVING_SPEED * deltatime / 1000;
+	
+	if (current_position.x < boundSize.x - WINDOW_WIDTH / 2)
+	{
+		current_position.x = boundSize.x - WINDOW_WIDTH / 2;
+		_flagMoveViewportPassDoor = false;
+	}
+		
+	_viewport->setPositionWorld(current_position);
+}
+
+void Level2Director::moveViewportPassDoor2(float deltatime, bool & finish) 
+{
+	GVector2 current_position = _viewport->getPositionWorld();
+
+	GVector2 boundSize = this->getCurrentViewportBound();
+
+	if((!_flagMoveSimonPassDoor && !_flagMoveViewportPassDoor && current_position.x < boundSize.x) == false) return;
+
+	_flagMoveViewportPassDoor2 = true;
+
+	// dịch screen từ từ sang TRÁI, speed = vs speed simon
+	current_position.x -= SIMON_MOVING_SPEED * deltatime / 1000;
+
+	if (current_position.x < boundSize.x - WINDOW_WIDTH) {
+		current_position.x = boundSize.x - WINDOW_WIDTH;
+		_flagMoveViewportPassDoor2 = false;
+	}
+
+	_viewport->setPositionWorld(current_position);
 }

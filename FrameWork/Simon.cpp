@@ -618,6 +618,16 @@ void Simon::moveLeft()
 
 void Simon::moveRight()
 {
+	//Lấy viewport hiện tại
+	Viewport* viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+	GVector2 viewportPosition = viewport->getPositionWorld();
+	float simonPositionX = this->getPositionX();
+	auto halfWidth = this->getSprite()->getFrameWidth() * this->getOrigin().x;
+	//Không cho đi vượt quá cạnh phải
+	if (halfWidth + simonPositionX > viewportPosition.x + WINDOW_WIDTH) {
+		this->setPositionX(simonPositionX - halfWidth);
+		return;
+	}
 	//Nếu animation đang hướng sang left thì gán lại sang right
 	if (this->getScale().x < 0)
 		this->setScaleX(this->getScale().x * (-1));

@@ -11,10 +11,6 @@ Director::~Director()
 {
 }
 
-void Director::update(float deltaTime) {
-	updateScenario(deltaTime);
-	updateViewport();
-}
 
 GVector2 Director::getCurrentViewportBound()
 {

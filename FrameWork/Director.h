@@ -37,7 +37,7 @@ public:
 	Viewport* getViewport();
 
 	//Cập nhật lại kịch bản
-	virtual void update(float deltaTime);
+	virtual void update(float deltaTime) = 0;
 	virtual void updateViewport() = 0;
 	virtual void updateScenario(float deltaTime) = 0;
 
