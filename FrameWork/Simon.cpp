@@ -798,8 +798,11 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				{
 					collisionBody->updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
 				}
-				if (!this->isInStatus(eStatus::JUMPING))
-					this->standing();
+				if (!this->isInStatus(eStatus::JUMPING)) 
+				{
+					auto move = (Movement*)this->_componentList["Movement"];
+					move->setVelocity(GVector2(0, this->getVelocity().y));
+				}
 				else
 				{
 					auto move = (Movement*)this->_componentList["Movement"];

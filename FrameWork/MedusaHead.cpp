@@ -11,7 +11,7 @@ MedusaHead::MedusaHead(eStatus status, int direction, GVector2 pos,
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(this->_id, "normal"));
 
 	this->_listComponent.insert(pair<string, IComponent*>("Movement",
-		new Movement(GVector2Zero, -_horizontalVeloc, _sprite)));
+		new Movement(GVector2Zero, _horizontalVeloc, _sprite)));
 	this->_listComponent.insert(pair<string, IComponent*>("Sinmovement", 
 		new SinMovement(_amplitude, _frequence, _sprite)));
 	
