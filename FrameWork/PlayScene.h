@@ -59,14 +59,13 @@ private:
 	BaseObject* _simon;
 	BaseObject* _itemManager;
 
-	void updateViewport(BaseObject* objTracker);
+	void updateDirector(float deltaTime);
 
 	// Hàng họ để mở cửa :v
 	bool flagDoorScenario;
 	ScenarioManager* _directorDoor;
 	ScenarioManager* _directorPassDoor;
 
-	void passDoorScene(float deltatime, bool& isFinish);
 	// Tự đi qua cửa
 	void ScenarioPassDoor(float deltatime);
 

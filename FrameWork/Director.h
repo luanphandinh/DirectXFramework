@@ -3,6 +3,7 @@
 #include"Viewport.h"
 #include"BaseObject.h"
 #include"LifeCounter.h"
+#include"ScenarioManager.h"
 /*
 	Class đùng để gán phần viewport cho từng đoạn chơi trong stage
 	Được đọc từ file trong Resources//Maps//level?viewportinfo.txt
@@ -35,8 +36,13 @@ public:
 
 	Viewport* getViewport();
 
-	void setCurrentViewport(eLevel2Viewport name);
+	//Cập nhật lại kịch bản
+	virtual void update(float deltaTime);
 	virtual void updateViewport() = 0;
+	virtual void updateScenario(float deltaTime) = 0;
+
+	
+	void setCurrentViewport(eLevel2Viewport name);
 	void setObjectTracker(BaseObject* objTracker);
 
 	void setRevivePosition(GVector2 pos);
@@ -54,6 +60,9 @@ protected:
 	//Cập nhật lại vị trí được revive với viewport revive
 	GVector2	_revivePosition;
 	eLevel2Viewport _reviveViewport;
+
+	//ScenarioManager dùng để cập nhật kịch bản cho game,ví dụ như qua của,gặp boss
+	ScenarioManager* _scenarioManager;
 };
 
 

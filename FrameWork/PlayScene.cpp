@@ -17,8 +17,8 @@ bool PlayScene::init()
 {
 	auto simon = new Simon();
 	simon->init();
-	simon->setPosition(2700, 100);
-	//simon->setPosition(2300, 638);
+	//simon->setPosition(2700, 100);
+	simon->setPosition(2300, 638);
 	this->_simon = simon;
 
 	_listControlObject.push_back(simon);
@@ -27,7 +27,7 @@ bool PlayScene::init()
 	_director = new Level2Director();
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V1);
+	_director->setCurrentViewport(V2);
 	_viewport = _director->getViewport();
 	//=====================TESTING==========================//
 	_itemManager = new ItemManager();
@@ -72,16 +72,11 @@ bool PlayScene::init()
 	}
 	
 	// Scenario here
-	auto scenarioDoorMoveViewport = new Scenario("DoorViewport");
-	__hook(&Scenario::update, scenarioDoorMoveViewport, &PlayScene::doorScene);
-	_directorDoor = new ScenarioManager();
-	_directorDoor->insertScenario(scenarioDoorMoveViewport);
+	//auto scenarioDoorMoveViewport = new Scenario("DoorViewport");
+	//__hook(&Scenario::update, scenarioDoorMoveViewport, &PlayScene::doorScene);
+	//_directorDoor = new ScenarioManager();
+	//_directorDoor->insertScenario(scenarioDoorMoveViewport);
 
-	auto scenarioPassDoor = new Scenario("PassDoor");
-	__hook(&Scenario::update, scenarioPassDoor, &PlayScene::passDoorScene);
-	flagDoorScenario = false;
-	_directorPassDoor = new ScenarioManager();
-	_directorPassDoor->insertScenario(scenarioPassDoor);
 
 	//========================TESTING===========================//
 	
@@ -99,7 +94,7 @@ void PlayScene::update(float deltaTime)
 	//=====================TESTING==========================//
 	if (_simon->isInStatus(eStatus::DYING) == false)
 	{
-		this->updateViewport(_simon);
+		this->updateDirector(deltaTime);
 	}
 	/*
 		Khi vào game thì bản thân các Object sẽ được load toàn bộ và được init() sau đó add vào _mapObject
@@ -187,8 +182,7 @@ void PlayScene::update(float deltaTime)
 
 	// update scenario here
 	////*** fix later :v
-	this->ScenarioMoveViewport(deltaTime);
-	//this->ScenarioPassDoor(deltaTime);
+	//this->ScenarioMoveViewport(deltaTime);
 
 	//for (BaseObject* obj : (*_mapTestObject))
 	//{
@@ -313,9 +307,9 @@ BaseObject * PlayScene::getObject(eID id) {
 }
 
 //=====================TESTING==========================//
-void PlayScene::updateViewport(BaseObject* objTracker)
+void PlayScene::updateDirector(float deltaTime)
 {
-	_director->updateViewport();
+	_director->update(deltaTime);
 	_viewport = _director->getViewport();
 }
 
@@ -354,32 +348,8 @@ void PlayScene::ScenarioMoveViewport(float deltatime) {
 	}
 }
 
-void PlayScene::passDoorScene(float deltatime, bool & isFinish) {
-	auto simon = this->getSimon();
-	int xsimon = simon->getPositionX();
-	int ysimon = simon->getPositionY();
-	// vì có 2 cái cửa, chắc fải làm 1 cái switch case :3
-	// tới cửa tự đi, đúng ra phải dừng lại và chờ viewport dịch 1 đoạn, sẽ fix sau
-	if (xsimon < 2100 && xsimon>2070 && ysimon < 700 && ysimon>660) {
-			simon->forceMoveLeft();
-	}
-	else {
-		// Đã qua khỏi cửa vài bước thì dừng lại
-		if(xsimon < 1950 && ysimon < 700 && ysimon>660)
-			simon->unforceMoveLeft();
-	}
-}
 void PlayScene::ScenarioPassDoor(float deltatime) {
-	if (_directorPassDoor == nullptr)
-		return;
-	auto door = getObject(eID::DOOR);
-	//
-	if (door != nullptr && door->isInStatus(eStatus::OPENING) == true) {
-		this->_directorPassDoor->update(deltatime);
-		if (this->_directorPassDoor->isFinish() == true) {
-			SAFE_DELETE(_directorPassDoor);
-		}
-	}
+	
 }
 
 #pragma endregion

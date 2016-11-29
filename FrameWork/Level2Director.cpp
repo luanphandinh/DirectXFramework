@@ -1,7 +1,7 @@
 ﻿#include "Level2Director.h"
+#include "PlayScene.h"
 
-
-Level2Director::Level2Director()
+Level2Director::Level2Director() : Director()
 {
 	_reviveViewport = eLevel2Viewport::V1;
 	_revivePosition = GVector2(2700, 100);
@@ -20,6 +20,16 @@ void Level2Director::init()
 	this->loadStageInfo("Resources//Maps//level2ViewportInfo.txt", eID::LEVEL2);
 	_viewport = new Viewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	this->setCurrentViewport(V1);
+
+	auto scenarioPassDoor = new Scenario("PassDoor");
+	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::passDoorScene);
+	//flagDoorScenario = false;
+	_scenarioManager->insertScenario(scenarioPassDoor);
+}
+
+void Level2Director::updateScenario(float deltaTime)
+{
+	_scenarioManager->update(deltaTime);
 }
 
 void Level2Director::updateViewport()
@@ -72,3 +82,31 @@ void Level2Director::switchViewport()
 	}
 }
 
+
+void Level2Director::passDoorScene(float deltatime, bool & isFinish) 
+{
+	auto door =  ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getObject(eID::DOOR);
+	if (door == nullptr)
+		return;
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	// track theo simon
+	int xSimon = _simon->getPositionX();
+	int ySimon = _simon->getPositionY();
+	int xthis = door->getPositionX();
+	int ythis = door->getPositionY();
+	////test :v
+	//if (x > xthis&&x < xthis + 50 && y<ythis+50&&y>ythis - 50) {
+	//	this->setStatus(OPENING);
+	//}
+	//else {
+	//	this->setStatus(CLOSING);
+	//}
+	if (xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660) {
+		door->setStatus(OPENING);
+		((Simon*)_simon)->forceMoveLeft();
+	}
+	else if (xSimon < 1950 && ySimon < 700 && ySimon>660) {
+		((Simon*)_simon)->unforceMoveLeft();
+		door->setStatus(CLOSING);
+	}
+}

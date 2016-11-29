@@ -3,7 +3,7 @@
 
 Director::Director()
 {
-	
+	_scenarioManager = new ScenarioManager();
 }
 
 
@@ -11,10 +11,10 @@ Director::~Director()
 {
 }
 
-//eID	Director::_currentLevelId = eID::LEVEL2;
-//string Director::_currentViewport = "s1";
-//
-//map<string, ViewportInfo> Director::_listViewportInfo;
+void Director::update(float deltaTime) {
+	updateScenario(deltaTime);
+	updateViewport();
+}
 
 GVector2 Director::getCurrentViewportBound()
 {

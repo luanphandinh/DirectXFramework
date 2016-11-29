@@ -81,20 +81,5 @@ void Door::changeDirection() {
 }
 
 void Door::updateClosing() {
-	// track theo simon
-	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	RECT objectBound = objectTracker->getBounding();
-	int x = objectTracker->getPositionX();
-	int y = objectTracker->getPositionY();
-	int xthis = this->getPositionX();
-	int ythis = this->getPositionY();
-	////test :v
-	//if (x > xthis&&x < xthis + 50 && y<ythis+50&&y>ythis - 50) {
-	//	this->setStatus(OPENING);
-	//}
-	//else {
-	//	this->setStatus(CLOSING);
-	//}
-	if (x < 2100 && x>2070 && y < 700 && y>660) this->setStatus(OPENING);
-	else this->setStatus(CLOSING);
+	
 }
