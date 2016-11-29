@@ -59,6 +59,7 @@ enum eID
 	BAT = 36,
 	MEDUSAHEAD = 37,
 	BURNING= 38,
+	SPAWNER=39,
 
 	//stage
 	MAPSTAGE1 = 40,

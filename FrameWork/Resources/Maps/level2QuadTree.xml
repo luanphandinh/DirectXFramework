@@ -6,7 +6,14 @@
     </QNode>
     <QNode Id="16" Level="2" X="768" Y="0" Width="768" Height="768" />
     <QNode Id="48" Level="2" X="768" Y="768" Width="768" Height="768">
-      <Objects>land10 land11 land12 </Objects>
+      <QNode Id="48" Level="3" X="768" Y="768" Width="384" Height="384">
+        <Objects>land11 land12 spearKnight3 </Objects>
+      </QNode>
+      <QNode Id="304" Level="3" X="1152" Y="768" Width="384" Height="384">
+        <Objects>land10 </Objects>
+      </QNode>
+      <QNode Id="816" Level="3" X="1152" Y="1152" Width="384" Height="384" />
+      <QNode Id="560" Level="3" X="768" Y="1152" Width="384" Height="384" />
     </QNode>
     <QNode Id="32" Level="2" X="0" Y="768" Width="768" Height="768">
       <QNode Id="32" Level="3" X="0" Y="768" Width="384" Height="384" />
@@ -269,14 +276,25 @@
     </QNode>
     <QNode Id="36" Level="2" X="1536" Y="768" Width="768" Height="768">
       <QNode Id="36" Level="3" X="1536" Y="768" Width="384" Height="384">
-        <Objects>land10 </Objects>
+        <Objects>land10 medusaHeadSpawner0 </Objects>
       </QNode>
       <QNode Id="292" Level="3" X="1920" Y="768" Width="384" Height="384">
         <QNode Id="292" Level="4" X="1920" Y="768" Width="192" Height="192">
-          <Objects>land10 door0 </Objects>
+          <Objects>land10 door0 medusaHeadSpawner0 </Objects>
         </QNode>
         <QNode Id="65828" Level="4" X="2112" Y="768" Width="192" Height="192">
-          <Objects>land8 spearKnight2 flyLand0 </Objects>
+          <QNode Id="65828" Level="5" X="2112" Y="768" Width="96" Height="96">
+            <Objects>medusaHeadSpawner0 </Objects>
+          </QNode>
+          <QNode Id="65829" Level="5" X="2208" Y="768" Width="96" Height="96">
+            <Objects>spearKnight2 </Objects>
+          </QNode>
+          <QNode Id="65831" Level="5" X="2208" Y="864" Width="96" Height="96">
+            <Objects>land8 spearKnight2 flyLand0 </Objects>
+          </QNode>
+          <QNode Id="65830" Level="5" X="2112" Y="864" Width="96" Height="96">
+            <Objects>flyLand0 </Objects>
+          </QNode>
         </QNode>
         <QNode Id="196900" Level="4" X="2112" Y="960" Width="192" Height="192">
           <Objects>land9 </Objects>

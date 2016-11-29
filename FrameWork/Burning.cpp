@@ -6,25 +6,27 @@
  * hiện tại có 2 kiểu nổ. (xem hình resource)
  * lớp nào chứa Burning nhớ quản lý huỷ đối tương này
 */
-Burning::Burning(int type) : BaseObject(eID::BURNING) {
+Burning::Burning(int type,GVector2 pos) : BaseObject(eID::BURNING) {
 	this->_type = type;
+	this->_sprite = SpriteManager::getInstance()->getSprite(eID::BURNING);
+	this->setPosition(pos);
 }
 
 Burning::~Burning() {}
 
 
 void Burning::init() {
-	this->_sprite = SpriteManager::getInstance()->getSprite(eID::BURNING);
+	this->setScale(SCALE_FACTOR);
+
+	this->setStatus(eStatus::NORMAL);
 
 	this->_animation = new Animation(this->_sprite, SPEED_ANIMATION);
+
 	if (this->_type == 1) {
-		this->_animation->addFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BURNING, "explode"));
+		this->_animation->addFrameRect(eID::BURNING, "explode",NULL);
 	}
 	else {
-		this->_animation->addFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BURNING, "burn_01"));
-		this->_animation->addFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BURNING, "burn_02"));
-		this->_animation->addFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BURNING, "burn_03"));
-		
+		this->_animation->addFrameRect(eID::BURNING, "burn_01","burn_02","burn_03",NULL);
 	}
 }
 

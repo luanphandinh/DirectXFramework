@@ -73,16 +73,16 @@ void Animation::setIndex(int index)
 
 	_currentRect = _frameRectList[_index];
 
-	//if (!_useDefaultOrigin)
-	//	_currentOrigin = _frameOriginList[_index];
-	//else _currentOrigin = DEFAULT_ORIGIN;
+	if (!_useDefaultOrigin)
+		_currentOrigin = _frameOriginList[_index];
+	else _currentOrigin = DEFAULT_ORIGIN;
 
 	// hack cho burning, sẽ fix sau :v
-	if (!_useDefaultOrigin&&_frameOriginList.size() == 0)
+	/*if (!_useDefaultOrigin&&_frameOriginList.size() == 0)
 		_currentOrigin = DEFAULT_ORIGIN;
 	else if(!_useDefaultOrigin)
 		_currentOrigin = _frameOriginList[_index];
-	else _currentOrigin = DEFAULT_ORIGIN;
+	else _currentOrigin = DEFAULT_ORIGIN;*/
 
 	if (!_isLoop && _index == _endFrame)
 		this->stop();

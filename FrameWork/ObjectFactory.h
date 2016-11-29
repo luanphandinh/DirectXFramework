@@ -6,6 +6,7 @@
 #include"Stair.h"
 #include"Bat.h"
 #include"MedusaHead.h"
+#include"ObjectSpawner.h"
 #include"SpearKnight.h"
 #include"Door.h"
 #include"FlyLand.h"
@@ -25,6 +26,8 @@ private:
 	static BaseObject* getBat(xml_node node);
 	static BaseObject* getSpearKnight(xml_node node);
 	static BaseObject* getMedusaHead(xml_node node);
+	static BaseObject* getSpawner(xml_node node);
+
 	static BaseObject* getDoor(xml_node node);
 	static BaseObject* getFlyLand(xml_node node);
 	static BaseObject* getCandle(xml_node node);

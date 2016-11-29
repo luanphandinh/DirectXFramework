@@ -187,8 +187,8 @@ void PlayScene::update(float deltaTime)
 
 	// update scenario here
 	////*** fix later :v
-	//this->ScenarioMoveViewport(deltaTime);
-	this->ScenarioPassDoor(deltaTime);
+	this->ScenarioMoveViewport(deltaTime);
+	//this->ScenarioPassDoor(deltaTime);
 
 	//for (BaseObject* obj : (*_mapTestObject))
 	//{

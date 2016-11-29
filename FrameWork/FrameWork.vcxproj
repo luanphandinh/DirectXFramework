@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -109,6 +109,7 @@
     <ClInclude Include="MedusaHead.h" />
     <ClInclude Include="MoneyBag.h" />
     <ClInclude Include="ObjectFactory.h" />
+    <ClInclude Include="ObjectSpawner.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="QNode.h" />
     <ClInclude Include="Scenario.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="MedusaHead.cpp" />
     <ClCompile Include="MoneyBag.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
+    <ClCompile Include="ObjectSpawner.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="QNode.cpp" />
     <ClCompile Include="Scenario.cpp" />

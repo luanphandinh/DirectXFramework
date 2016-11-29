@@ -43,8 +43,6 @@ private:
 	BaseObject* prevObject;
 	BaseObject *_explosion;
 	BaseObject *_burning;
-	StopWatch *_stopwatch;
-
 
 	// Vòng lặp thời gian, giúp knight di chuyển qua lại liên tục
 	StopWatch *_loopwatch;
@@ -52,5 +50,6 @@ private:
 	bool isHitted;
 	eStatus _currentAnimateIndex;
 	void updateCurrentAnimateIndex();
+	StopWatch*	_burstStopWatch;
 
 };

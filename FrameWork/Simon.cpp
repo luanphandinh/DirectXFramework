@@ -321,7 +321,7 @@ void Simon::updateStatus(float deltatime)
 		}
 		return; 
 	}
-	//Nếu nhân vật đang lượm item
+	//Nếu nhân vật đang bị đánh
 	if (_isHitted)
 	{
 		if (_isHittedStopWatch == nullptr)

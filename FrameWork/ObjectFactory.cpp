@@ -141,6 +141,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case MEDUSAHEAD:
 		return getMedusaHead(node);
 		break;
+	case SPAWNER:
+		return getSpawner(node);
+		break;
 	case MAPSTAGE1:
 		break;
 	case LIFE_ICON:
@@ -293,7 +296,145 @@ BaseObject * ObjectFactory::getSpearKnight(xml_node node) {
 }
 
 BaseObject * ObjectFactory::getMedusaHead(xml_node node) {
-	return nullptr;
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y,direction;
+	eStatus status;
+	GVector2 pos, hVeloc, ampl;
+	float freq;
+
+	pos.x = stoi(properties["X"]);
+	pos.y = stoi(properties["Y"]);
+	// status
+	if (properties.find("status") != properties.end()) {
+		status = (eStatus)(stoi(properties.find("status")->second));
+	}
+	else {
+		status = eStatus::FLYING;
+	}
+
+	if (properties.find("direction") != properties.end()) {
+		direction = stoi(properties.find("direction")->second);
+	}
+	else {
+		direction = 1;
+	}
+
+	// ampl
+	if (properties.find("Amplitude") != properties.end()) {
+		auto velocStr = properties.find("Amplitude")->second;
+		auto value = splitString(velocStr, ',');
+
+		ampl.x = stoi(value[0]);
+		ampl.y = stoi(value[1]);
+	}
+	else {
+		ampl = MEDUSAHEAD_AMPLITUDE;
+	}
+
+	// hVeloc
+	if (properties.find("HVelocity") != properties.end()) {
+		auto velocStr = properties.find("HVelocity")->second;
+		auto value = splitString(velocStr, ',');
+
+		hVeloc.x = stoi(value[0]);
+		hVeloc.y = stoi(value[1]);
+	}
+	else {
+		hVeloc = MEDUSAHEAD_HORIZONTAL_VELOC;
+	}
+
+	// freq
+	if (properties.find("Frequency") != properties.end()) {
+		freq = stof(properties.find("Frequency")->second);
+	}
+	else {
+		freq = MEDUSAHEAD_FREQUENCY;
+	}
+
+	auto medusaHead = new MedusaHead(status,direction,pos, hVeloc, ampl, freq);
+
+	medusaHead->init();
+
+	return medusaHead;
+}
+
+BaseObject * ObjectFactory::getSpawner(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	GVector2 pos;
+	int dir, num, width, height;
+	eID type;
+	float time;
+	bool oneperone;
+
+	pos.x = stoi(properties["X"]) + 32;
+	pos.y = stoi(properties["Y"]) - 32;
+	width = stoi(properties["Width"]);
+	height = stoi(properties["Height"]);
+
+	// type
+	if (properties.find("type") != properties.end()) {
+		type = (eID)(stoi(properties.find("type")->second));
+	}
+	else {
+		type = eID::MEDUSAHEAD;
+	}
+
+	// dir
+	if (properties.find("direction") != properties.end()) {
+		dir = stoi(properties.find("direction")->second);
+	}
+	else {
+		dir = -1;
+	}
+
+	// time
+	if (properties.find("time") != properties.end()) {
+		time = stof(properties.find("time")->second);
+	}
+	else {
+		time = 1000.0f;
+	}
+
+	// num
+	if (properties.find("number") != properties.end()) {
+		num = stoi(properties.find("number")->second);
+	}
+	else {
+		num = -1;
+	}
+
+	// one per one
+	if (properties.find("oneperone") != properties.end()) {
+		auto v = properties.find("oneperone")->second;
+		if (v == "true") {
+			oneperone = true;
+		}
+		else {
+			oneperone = false;
+		}
+	}
+	else {
+		oneperone = false;
+	}
+
+	// max num
+	int maxNum = 2;
+	if (properties.find("maxNumber") != properties.end()) {
+		maxNum = stoi(properties.find("maxNumber")->second);
+	}
+
+	auto spawner = new ObjectSpawner(pos, width, height, type, dir, time, num);
+	spawner->setOnePerOne(oneperone);
+	spawner->setMaxNumber(maxNum);
+	spawner->init();
+
+	return spawner;
 }
 
 BaseObject * ObjectFactory::getDoor(xml_node node) {

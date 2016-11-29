@@ -2,11 +2,12 @@
 
 #include "BaseObject.h"
 #include "Animation.h"
+#include "StopWatch.h"
 
-#define SPEED_ANIMATION			0.07f
+#define SPEED_ANIMATION			0.08f
 class Burning : public BaseObject {
 public:
-	Burning(int type);
+	Burning(int type = 1,GVector2 pos = GVector2Zero);
 	~Burning();
 
 	void init();
@@ -19,4 +20,5 @@ public:
 private:
 	Animation* _animation;
 	int _type;
+	StopWatch _animationStopWatch;
 };
