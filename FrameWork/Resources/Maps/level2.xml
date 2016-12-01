@@ -367,56 +367,8 @@
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
-    <Item Id="3" Name="stair1" X="2800" Y="81" Width="13" Height="16">
-      <ActiveBound X="2800" Y="81" Width="13" Height="16" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="3" Name="stair2" X="2815" Y="97" Width="17" Height="25">
-      <ActiveBound X="2815" Y="97" Width="17" Height="25" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="3" Name="stair3" X="2831" Y="113" Width="18" Height="23">
-      <ActiveBound X="2831" Y="113" Width="18" Height="23" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="3" Name="stair4" X="2849" Y="127" Width="15" Height="27">
-      <ActiveBound X="2849" Y="127" Width="15" Height="27" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="3" Name="stair5" X="2865" Y="144" Width="15" Height="32">
-      <ActiveBound X="2865" Y="144" Width="15" Height="32" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="3" Name="stair6" X="2881" Y="161" Width="16" Height="30">
-      <ActiveBound X="2881" Y="161" Width="16" Height="30" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="3" Name="stair7" X="2897" Y="176" Width="15" Height="31">
-      <ActiveBound X="2897" Y="176" Width="15" Height="31" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="3" Name="stair8" X="2912" Y="190" Width="17" Height="30">
-      <ActiveBound X="2912" Y="190" Width="17" Height="30" />
-      <Params>
-        <Elem Key="stairDirection" Value="1" />
-      </Params>
-    </Item>
-    <Item Id="2" Name="land1" X="2908" Y="189" Width="97" Height="4">
-      <ActiveBound X="2912" Y="189" Width="97" Height="4" />
+    <Item Id="2" Name="land1" X="2905" Y="189" Width="97" Height="4">
+      <ActiveBound X="2905" Y="189" Width="97" Height="4" />
       <Params>
         <Elem Key="physicBodyDirection" Value="1" />
       </Params>
@@ -589,8 +541,8 @@
         <Elem Key="canJumpDown" Value="0" />
       </Params>
     </Item>
-    <Item Id="2" Name="land2" X="2600" Y="251" Width="274" Height="20">
-      <ActiveBound X="2600" Y="251" Width="274" Height="20" />
+    <Item Id="2" Name="land2" X="2600" Y="251" Width="280" Height="14">
+      <ActiveBound X="2600" Y="251" Width="280" Height="14" />
       <Params>
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
@@ -788,6 +740,12 @@
     </Item>
     <Item Id="3" Name="stair36" X="1730" Y="865" Width="19" Height="32">
       <ActiveBound X="1730" Y="865" Width="19" Height="32" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair1" X="2886" Y="192" Width="25" Height="5">
+      <ActiveBound X="2886" Y="192" Width="25" Height="5" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>

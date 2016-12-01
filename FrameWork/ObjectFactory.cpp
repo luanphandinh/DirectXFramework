@@ -202,6 +202,7 @@ BaseObject* ObjectFactory::getStair(xml_node node)
 	int x, y, width, height;
 	eDirection direction;
 	eStairDirection stairDirection;
+	bool canUpStair;
 
 	x = stoi(properties["X"]);
 	y = stoi(properties["Y"]);
@@ -227,7 +228,17 @@ BaseObject* ObjectFactory::getStair(xml_node node)
 		stairDirection = eStairDirection::LEFTBOTTOM_TO_RIGHTTOP;
 	}
 
-	auto stair = new Stair(x, y, width, height, direction,stairDirection);
+	if (properties.find("canUpStair") != properties.end())
+	{
+		canUpStair = (bool)(stoi(properties.find("canUpStair")->second));
+	}
+	else
+	{
+		canUpStair = true;
+	}
+
+
+	auto stair = new Stair(x, y, width, height, direction, stairDirection, canUpStair);
 	stair->init();
 
 	return stair;

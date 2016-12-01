@@ -66,7 +66,7 @@ void Land::release()
 
 GVector2 Land::getPosition()
 {
-	return GVector2(_bound.left, _bound.right);
+	return GVector2(_bound.left, _bound.top);
 }
 
 void Land::setPosition(GVector2 position)

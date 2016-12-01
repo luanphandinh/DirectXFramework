@@ -1,0 +1,4 @@
+frame_name	left	top	right	bottom origin.x origin.y
+whip_01		224	6	256	30	0.75	0.375
+whip_02		127	4	159	23	0.75	0.421		
+whip_03		0	8	60	14	0.1333	-0.33333

@@ -28,8 +28,8 @@ _NAMESPACE_FRAMEWORK_BEGIN
 #define GRAVITY 900
 #define SIMON_JUMP_VELOCITY 380
 // Sửa phần lên cầu thang cho hết sida
-#define SIMON_UPSTAIR_VELOCITY_X 82
-#define SIMON_UPSTAIR_VELOCITY_Y 136
+#define SIMON_UPSTAIR_VELOCITY_X 46.8
+#define SIMON_UPSTAIR_VELOCITY_Y 48
 #define REVIVE_TIME 2000
 
 [event_receiver(native)]
@@ -128,6 +128,7 @@ private:
 
 	bool _canJumpDown;
 	bool _canOnStair;
+	bool _canUpStair;
 	int _whipLevel;
 	//Sử dụng để animation hitting khi có stopwatch
 	bool _isHitting;
@@ -154,6 +155,7 @@ private:
 	BaseObject* _preObject;
 	// reset các thuộc tính lại giá trị ban đầu.
 	void resetValues();
+	void setPositionInStair(Stair* stair);
 };
 _NAMESPACE_FRAMEWORK_END
 
