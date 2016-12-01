@@ -19,8 +19,8 @@ bool PlayScene::init()
 	simon->init();
 	simon->setPosition(2700, 100);//v1
 	//simon->setPosition(2300, 638);//v2
-	simon->setPosition(700, 640);//v3
-	//this->_simon = simon;
+	//simon->setPosition(700, 640);//v3
+	this->_simon = simon;
 
 	_listControlObject.push_back(simon);
 	_listObject.push_back(_simon);
