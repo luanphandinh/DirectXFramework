@@ -48,29 +48,29 @@ bool PlayScene::init()
 	_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
 
 	//========================TESTING===========================//
-	_testItem = new BaseObject*[15];
-	_testItem[0] = new HeartItem(GVector2(2700, 200),eItemID::LARGEHEART);
-	_testItem[1] = new WhipUpgrade(GVector2(200, 300));
-	for (int i = 2; i < 4; i++)
-	{
-		_testItem[i] = new MoneyBag(GVector2(2700 + i * 20, 300));
-	}
-	for (int i = 4; i < 7; i++)
-	{
-		_testItem[i] = new MoneyBag(GVector2(2750 + i * 20, 200));
-	}
-	for (int i = 7; i < 10; i++)
-	{
-		_testItem[i] = new HeartItem(GVector2(2700 + i * 20, 300));
-	}
-	_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
-	_testItem[11] = new ThrowingAxe(GVector2(2750, 200), eItemType::DROP, eDirection::LEFT);
-	_testItem[12] = new Boomerang(GVector2(2780, 200), eItemType::DROP, eDirection::LEFT);
-	_testItem[13] = new HolyWater(GVector2(2600, 200), eItemType::DROP, eDirection::LEFT);
-	for (int i = 0; i < 14; i++)
-	{
-		ItemManager::insertItem((Item*)_testItem[i]);
-	}
+	//_testItem = new BaseObject*[15];
+	//_testItem[0] = new HeartItem(GVector2(2700, 200),eItemID::LARGEHEART);
+	//_testItem[1] = new WhipUpgrade(GVector2(200, 300));
+	//for (int i = 2; i < 4; i++)
+	//{
+	//	_testItem[i] = new MoneyBag(GVector2(2700 + i * 20, 300));
+	//}
+	//for (int i = 4; i < 7; i++)
+	//{
+	//	_testItem[i] = new MoneyBag(GVector2(2750 + i * 20, 200));
+	//}
+	//for (int i = 7; i < 10; i++)
+	//{
+	//	_testItem[i] = new HeartItem(GVector2(2700 + i * 20, 300));
+	//}
+	//_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
+	//_testItem[11] = new ThrowingAxe(GVector2(2750, 200), eItemType::DROP, eDirection::LEFT);
+	//_testItem[12] = new Boomerang(GVector2(2780, 200), eItemType::DROP, eDirection::LEFT);
+	//_testItem[13] = new HolyWater(GVector2(2600, 200), eItemType::DROP, eDirection::LEFT);
+	//for (int i = 0; i < 14; i++)
+	//{
+	//	ItemManager::insertItem((Item*)_testItem[i]);
+	//}
 	
 	// Scenario here
 	//auto scenarioDoorMoveViewport = new Scenario("DoorViewport");

@@ -53,6 +53,10 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite[eID::BURNING] = sp;
 	this->loadSpriteInfo(eID::BURNING, "Resources//Images//burning_animation.txt");
 
+	//WHIP
+	sp = new Sprite(spriteHandler, L"Resources//Images//whip.png");
+	this->_listSprite[eID::WHIP] = sp;
+	this->loadSpriteInfo(eID::WHIP, "Resources//Images//whip_info.txt");
 	//sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	//sp->setOrigin(GVector2(0.0f, 0.0f));
 	//this->_listSprite[eID::MAPSTAGE1] = sp;

@@ -81,30 +81,30 @@ void Simon::init()
 
 
 	_animations[eStatus::HITTING] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "whip_normal_01", "whip_normal_02", "whip_normal_03","normal", NULL);
+	_animations[eStatus::HITTING]->addFrameRect(eID::SIMON, "throw_item_01", "throw_item_02", "throw_item_03","normal", NULL);
 
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON, "whip_stair_up_01", "whip_stair_up_02", "whip_stair_up_03", "up_stair_01", NULL);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP]->addFrameRect(eID::SIMON, "throw_item_stair_up_01", "throw_item_stair_up_02", "throw_item_stair_up_03", "up_stair_01", NULL);
 
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "whip_stair_down_01", "whip_stair_down_02", "whip_stair_down_03", "down_stair_01", NULL);
+	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "throw_item_stair_down_01", "throw_item_stair_down_02", "throw_item_stair_down_03", "down_stair_01", NULL);
 
 	_animations[eStatus::HITTING | eStatus::SITTING] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON, "whip_sit_01", "whip_sit_02", "whip_sit_03", "sit", NULL);
 
-	_whipLevel = 1;
+	//_whipLevel = 1;
 
-	_animations[eStatus::HITTING | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::HITTING | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_normal_lv1_01", "whip_normal_lv1_02", "whip_normal_lv1_03", "normal", NULL);
+	//_animations[eStatus::HITTING | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	//_animations[eStatus::HITTING | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_normal_lv1_01", "whip_normal_lv1_02", "whip_normal_lv1_03", "normal", NULL);
 
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_stair_up_lv1_01", "whip_stair_up_lv1_02", "whip_stair_up_lv1_03", "up_stair_01", NULL);
+	//_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	//_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_UP | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_stair_up_lv1_01", "whip_stair_up_lv1_02", "whip_stair_up_lv1_03", "up_stair_01", NULL);
 
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_stair_down_lv1_01", "whip_stair_down_lv1_02", "whip_stair_down_lv1_03", "down_stair_01", NULL);
+	//_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	//_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_stair_down_lv1_01", "whip_stair_down_lv1_02", "whip_stair_down_lv1_03", "down_stair_01", NULL);
 
-	_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_sit_lv1_01", "whip_sit_lv1_02", "whip_sit_lv1_03", "sit", NULL);
+	//_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1] = new Animation(_sprite, 0.1f);
+	//_animations[eStatus::HITTING | eStatus::SITTING | eStatus::LEVEL1]->addFrameRect(eID::SIMON, "whip_sit_lv1_01", "whip_sit_lv1_02", "whip_sit_lv1_03", "sit", NULL);
 
 	_animations[eStatus::THROWING_ITEM] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::THROWING_ITEM]->addFrameRect(eID::SIMON, "throw_item_01", "throw_item_02", "throw_item_03", "normal", NULL);
@@ -132,6 +132,11 @@ void Simon::init()
 	_isThrowing = false;
 	//Tạo lifeUI
 	
+	_whip = new Whip();
+	_whip->init();
+	_whip->setTracker(this);
+	//_whipAnimation
+
 }
 
 void Simon::resetValues() {
@@ -157,6 +162,8 @@ void Simon::update(float deltatime)
 
 	_animations[_currentAnimationIndex]->update(deltatime);
 
+	_whip->update(deltatime);
+
 	//update component list
 	// update component để sau cùng để sửa bên trên sau đó nó cập nhật đúng
 	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
@@ -168,6 +175,9 @@ void Simon::update(float deltatime)
 void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
+
+	_whip->draw(spriteHandle, viewport);
+		
 }
 
 void Simon::release()
@@ -709,6 +719,8 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	if (this == otherObject)
 		return 0.0f;
 
+	this->_whip->checkCollision(otherObject, dt);
+
 	//Lấy collision body của simon ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
@@ -767,7 +779,6 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				//this->_canUpStair = stair->canUpStair();
 				if (this->isInStatus(eStatus::SITTING))
 				{
-					
 					this->removeStatus(eStatus::SITTING);
 					this->addStatus(eStatus::DOWNSTAIR);
 					setPositionInStair(stair);
@@ -777,7 +788,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			else _canOnStair = false;
 			//Nếu như va chạm hướng top,và trừ cái trường hợp mà simon đang trong trạng thái nhảy mà rớt xuống 
 			//với vận tốc mà > -200
-			if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
+			if (direction == eDirection::TOP && !(this->getVelocity().y >-100 && this->isInStatus(eStatus::JUMPING)))
 			{
 				//vận tốc 200 hướng xuống => cho trường hợp nhảy từ dưới lên
 				//xử lý đặc biệt,collision body update position bt ko được
@@ -787,6 +798,10 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				{
 					collisionBody->updateTargetPosition(otherObject, direction, false, GVector2(moveX, moveY));
 				}
+			/*	if (_preObject != nullptr && _preObject->getId()== eID::STAIR)
+				{
+					setPositionInLand((Land*)otherObject);
+				}*/
 				//Gán trạng thái gravity thành shallow vector trọng lực bằng 0,vật ko rớt xuống mà 
 				//chỉ di chuyển sang ngang hoặc nhảy lên
 				enableGravity(false);
@@ -800,6 +815,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			//Va chạm với wall
 			else if (((direction == eDirection::LEFT) 
 				|| (direction == eDirection::RIGHT)) && !this->isInStatus(eStatus::STANDINGONSTAIR)
+				&& !this->isInStatus(eStatus::UPSTAIR)
 				&& (!this->isInStatus(eStatus::JUMPING) || (this->isInStatus(eStatus::JUMPING) && !_canJumpDown)))
 			{
 				//vì khi có va chạm thì vật vẫn còn di chuyển
@@ -819,7 +835,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 					auto move = (Movement*)this->_componentList["Movement"];
 					move->setVelocity(GVector2(0,-400));
 				}
-				enableGravity(false);
+				//enableGravity(false);
 				_preObject = otherObject;
 			}
 		}
@@ -914,10 +930,10 @@ void  Simon::updateCurrentAnimateIndex()
 			_currentAnimationIndex = eStatus::HITTING;
 		}
 
-		if (_whipLevel == 1)
+		/*if (_whipLevel == 1)
 		{
 			_currentAnimationIndex = eStatus(_currentAnimationIndex | eStatus::LEVEL1);
-		}
+		}*/
 
 		if (!_isHitting)
 		{
@@ -945,6 +961,7 @@ void  Simon::updateCurrentAnimateIndex()
 		if (!_isThrowing)
 		{
 			_animations[_currentAnimationIndex]->restart();
+			_whip->restart();
 			_isThrowing = true;
 		}
 	}
@@ -1031,6 +1048,17 @@ void Simon::setPositionInStair(Stair* stair)
 	}
 }
 
+void Simon::setPositionInLand(Land* land)
+{
+	auto landPos = land->getPosition();
+	auto newPos = GVector2(this->getPositionX(),this->getPositionY() + 30);
+	this->setPosition(newPos);
+}
+
+Whip* Simon::getWhip()
+{
+	return this->_whip;
+}
 
 void Simon::forceMoveRight() {
 	onKeyPressed(new KeyEventArg(DIK_RIGHT));

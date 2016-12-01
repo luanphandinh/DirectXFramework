@@ -68,6 +68,7 @@ enum eID
 	//icon in gamestatusboard
 	LIFE_ICON = 51,
 	BLANK = 52,
+	WHIP = 53,
 };
 
 enum eItemID

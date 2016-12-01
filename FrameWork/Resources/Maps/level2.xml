@@ -367,8 +367,8 @@
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
-    <Item Id="2" Name="land1" X="2905" Y="189" Width="97" Height="4">
-      <ActiveBound X="2905" Y="189" Width="97" Height="4" />
+    <Item Id="2" Name="land1" X="2902" Y="189" Width="97" Height="4">
+      <ActiveBound X="2902" Y="189" Width="97" Height="4" />
       <Params>
         <Elem Key="physicBodyDirection" Value="1" />
       </Params>
@@ -483,10 +483,10 @@
         <Elem Key="direction" Value="-1" />
       </Params>
     </Item>
-    <Item Id="2" Name="land11" X="1088" Y="701" Width="62" Height="26">
-      <ActiveBound X="1088" Y="701" Width="62" Height="26" />
+    <Item Id="2" Name="land11" X="1088" Y="701" Width="62" Height="25">
+      <ActiveBound X="1088" Y="701" Width="62" Height="25" />
       <Params>
-        <Elem Key="physicBodyDirection" Value="1|2|4|8" />
+        <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
     <Item Id="2" Name="land12" X="642" Y="636" Width="444" Height="7">

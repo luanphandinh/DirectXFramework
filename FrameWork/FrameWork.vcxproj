@@ -135,6 +135,7 @@
     <ClInclude Include="utils.h" />
     <ClInclude Include="Viewport.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="Whip.h" />
     <ClInclude Include="WhipUpgrade.h" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +201,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="Viewport.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="Whip.cpp" />
     <ClCompile Include="WhipUpgrade.cpp" />
   </ItemGroup>
   <ItemGroup>

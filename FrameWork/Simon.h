@@ -11,17 +11,7 @@
 #include"SceneManager.h"
 #include"LifeUI.h"
 #include"ActiveWeapon.h"
-//========================TESTING===========================//
-
-#include"ItemManager.h"
-#include"HeartItem.h"
-#include"WhipUpgrade.h"
-#include"MoneyBag.h"
-#include"Sword.h"
-#include"ThrowingAxe.h"
-#include"Boomerang.h"
-#include"HolyWater.h"
-//========================TESTING===========================//
+#include"Whip.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 126
 
@@ -104,6 +94,7 @@ public:
 	*/
 	void getHitted();
 	int getDamage();
+	Whip* getWhip();
 	void enableGravity(bool);
 
 	float getMovingSpeed();
@@ -123,6 +114,8 @@ public:
 private:
 	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
+	Whip* _whip;
+	Animation* _whipAnimation;
 
 	float _movingSpeed;
 
@@ -156,6 +149,7 @@ private:
 	// reset các thuộc tính lại giá trị ban đầu.
 	void resetValues();
 	void setPositionInStair(Stair* stair);
+	void setPositionInLand(Land* land);
 };
 _NAMESPACE_FRAMEWORK_END
 

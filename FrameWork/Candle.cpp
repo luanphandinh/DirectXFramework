@@ -1,5 +1,6 @@
 ﻿#include "Candle.h"
 #include"ItemManager.h"
+#include"Simon.h"
 
 Candle::Candle(GVector2 pos,eItemID _dropItemId) :BaseObject(eID::CANDLE)
 {
@@ -64,20 +65,20 @@ void Candle::release()
 
 float Candle::checkCollision(BaseObject* otherObject, float dt)
 {
-	//Lấy collision body của item ra để checkCollision
-	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
-	eID otherObjectID = otherObject->getId();
-	eDirection direction;
-	if (otherObjectID != eID::SIMON) return 0.0f;
-	//if ((otherObjectID == eID::LAND)
-	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
-	if (otherObjectID == eID::SIMON)
-	{
-		if (otherObjectID == eID::SIMON && otherObject->isInStatus(eStatus::HITTING)
-			&& collisionBody->checkCollision(otherObject, direction, dt, false))
-		{
-			this->setStatus(eStatus::BURST);
-		}
-	}
+	////Lấy collision body của item ra để checkCollision
+	//auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+	//eID otherObjectID = otherObject->getId();
+	//eDirection direction;
+	//if (otherObjectID != eID::SIMON) return 0.0f;
+	////if ((otherObjectID == eID::LAND)
+	////	&& collisionBody->checkCollision(otherObject, direction, dt, false))
+	//if (otherObjectID == eID::SIMON)
+	//{
+	//	if (otherObjectID == eID::SIMON && otherObject->isInStatus(eStatus::HITTING)
+	//		&& collisionBody->checkCollision((BaseObject*)(((Simon*)otherObject)->getWhip()), direction, dt, false))
+	//	{
+	//		this->setStatus(eStatus::BURST);
+	//	}
+	//}
 	return 0.0f;
 }

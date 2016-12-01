@@ -124,7 +124,7 @@
                 <Objects>land1 candle01 </Objects>
               </QNode>
               <QNode Id="197429" Level="7" X="3000" Y="1344" Width="24" Height="24">
-                <Objects>land1 wall1 </Objects>
+                <Objects>wall1 </Objects>
               </QNode>
               <QNode Id="197431" Level="7" X="3000" Y="1368" Width="24" Height="24">
                 <Objects>wall0 </Objects>

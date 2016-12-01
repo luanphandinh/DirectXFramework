@@ -40,7 +40,7 @@ void Land::update(float deltaTime)
 
 void Land::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
-
+	return;
 	RECT r;
 	auto pos = viewport->getPositionInViewport(new GVector3(getPositionX(), getPositionY(), 0));
 	r.top = max(pos.y, 1);
