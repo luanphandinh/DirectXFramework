@@ -1026,7 +1026,7 @@ void Simon::setPositionInStair(Stair* stair)
 	}
 	if (this->isInStatus(eStatus::DOWNSTAIR))
 	{
-		auto newPos = GVector2(stairPos.x, stairPos.y);
+		auto newPos = GVector2(stairPos.x - 3, stairPos.y);
 		this->setPosition(newPos);
 	}
 }
