@@ -1,8 +1,9 @@
 ﻿#include "HolyWater.h"
-
+#include"BaseEnemy.h"
 
 HolyWater::HolyWater(GVector2 startPosition, eItemType type, eDirection dir) : Weapon(startPosition, type, dir, eItemID::HOLYWATER)
 {
+	_damage = 2;
 }
 
 
@@ -93,28 +94,43 @@ void HolyWater::initWeaponComponent()
 	gravity->setGravity(GVector2(0, -600));
 }
 
-float HolyWater::checkCollision(BaseObject* otherObject, float dt)
+float HolyWater::checkCollisionWeapon(BaseObject* otherObject, float dt)
 {
-	if (_type == eItemType::DROP)
+	//Lấy collision body của item ra để checkCollision
+	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+	eID otherObjectID = otherObject->getId();
+	eDirection direction;
+	//if (otherObjectID != eID::LAND) return 0.0f;
+	//if ((otherObjectID == eID::LAND)
+	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
+	if (collisionBody->checkCollision(otherObject, direction, dt, false))
 	{
-		Weapon::checkCollision(otherObject, dt);
-	}
-	else
-	if (_type == eItemType::PICKED_UP)
-	{
-		//Lấy collision body của item ra để checkCollision
-		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
-		eID otherObjectID = otherObject->getId();
-		eDirection direction;
-		if (otherObjectID != eID::LAND) return 0.0f;
-		//if ((otherObjectID == eID::LAND)
-		//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
-		if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
+		auto object = _listColliding.find(otherObject);
+		switch (otherObjectID)
 		{
+		case LAND:
 			this->stop();
 			this->setStatus(eStatus::BURST);
+			break;
+		case CANDLE:
+			//otherObject->setStatus(eStatus::BURST);
+			break;
+		case SPEARKNIGHT:
+			if (this->isInStatus(eStatus::BURST))
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+				_listColliding[otherObject] = true;
+			}
+			break;
+		case BAT:
+			otherObject->setStatus(eStatus::BURST);
+			break;
+		case MEDUSAHEAD:
+			break;
+		default:
+			break;
 		}
-
 	}
 	return 0.0f;
 }

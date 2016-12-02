@@ -3,7 +3,7 @@
 #include"Animation.h"
 #include"StopWatch.h"
 #include"define.h"
-#define HOLYWATER_SPEED GVector2(150,150)
+#define HOLYWATER_SPEED GVector2(250,150)
 class HolyWater : public Weapon
 {
 public:
@@ -15,7 +15,7 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
 
-	virtual float checkCollision(BaseObject* object, float dt) override;
+	virtual float checkCollisionWeapon(BaseObject* object, float dt) override;
 
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
