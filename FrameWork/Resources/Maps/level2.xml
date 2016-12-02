@@ -687,5 +687,11 @@
         <Elem Key="DropItemId" Value="1" />
       </Params>
     </Item>
+    <Item Id="5" Name="flyLand01" X="2051" Y="1022" Width="187" Height="20">
+      <ActiveBound X="2051" Y="1022" Width="187" Height="20" />
+    </Item>
+    <Item Id="5" Name="flyLand02" X="2306" Y="1023" Width="190" Height="21">
+      <ActiveBound X="2306" Y="1023" Width="190" Height="21" />
+    </Item>
   </Objects>
 </Tilesmap>

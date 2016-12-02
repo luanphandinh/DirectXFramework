@@ -12,6 +12,7 @@ void FlyLand::init() {
 	this->_sprite->setScale(SCALE_FACTOR);
 	this->_sprite->setPosition(_rightPosition);
 	this->_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::FLYLAND, "normal"));
+	_sprite->setOrigin(GVector2(0.5f, 1.0f));
 
 	Movement* movement = new Movement(GVector2Zero, FLYLAND_HORIZONTAL_VELOC, _sprite);
 	CollisionBody* collisionBody = new CollisionBody(this);
