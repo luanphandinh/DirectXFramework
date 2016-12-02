@@ -268,10 +268,24 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		this->removeStatus(eStatus::FALLING);
 		this->addStatus(eStatus::UPSTAIR);
 		break;
+		//========================TESTING===========================//
+	case DIK_E:
+		swapWeapon();
+		break;
+		//========================TESTING===========================//
 	default:
 		break;
 	}
 }
+//========================TESTING===========================//
+void Simon::swapWeapon()
+{
+	int id = (int)ActiveWeapon::getItemID();
+	if (id == 11) id = 7;
+	else id += 1;
+	ActiveWeapon::setItemID((eItemID)id);
+}
+//========================TESTING===========================//
 /*
 Event for event_reciever
 */

@@ -150,6 +150,8 @@ private:
 	void resetValues();
 	void setPositionInStair(Stair* stair);
 	void setPositionInLand(Land* land);
+
+	void swapWeapon();
 };
 _NAMESPACE_FRAMEWORK_END
 

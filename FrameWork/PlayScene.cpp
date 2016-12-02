@@ -80,7 +80,8 @@ bool PlayScene::init()
 
 
 	//========================TESTING===========================//
-	
+	ActiveWeapon::setItemID((eItemID)7);
+	HeartCounter::plusHeart(50);
 	//=====================TESTING==========================//
 	return true;
 }
