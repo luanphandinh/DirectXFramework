@@ -1,9 +1,9 @@
-#include "Sword.h"
-
+﻿#include "Sword.h"
+#include"PlayScene.h"
 
 Sword::Sword(GVector2 startPosition, eItemType type, eDirection dir) :Weapon(startPosition,type,dir,eItemID::SWORD)
 {
-	_damage = 3;
+	_damage = 1;
 }
 
 
@@ -30,7 +30,12 @@ void Sword::init()
 void Sword::update(float deltatime)
 {
 	Weapon::update(deltatime);
-	if (abs(this->getPositionX() - this->_startPosition.x) > SWORD_DISTANCE.x)
+
+	Viewport* viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+
+	GVector2 viewportPosition = viewport->getPositionWorld();
+
+	if (this->getPositionX() < viewportPosition.x || this->getPositionX() > viewportPosition.x + WINDOW_WIDTH)
 		this->setStatus(eStatus::DESTROY);
 }
 
@@ -66,24 +71,33 @@ float Sword::checkCollision(BaseObject* otherObject, float dt)
 	}
 	else if (_type == eItemType::PICKED_UP)
 	{
-		/*auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+		//Lấy collision body của item ra để checkCollision
+		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 		eID otherObjectID = otherObject->getId();
 		eDirection direction;
-		if (otherObjectID == eID::SPEARKNIGHT)
+		if (otherObjectID == eID::SIMON || otherObjectID == eID::LAND
+			|| otherObjectID == eID::STAIR) return 0.0f;
+
+		if (collisionBody->checkCollision(otherObject, direction, dt, false))
 		{
-			if (collisionBody->checkCollision(otherObject, direction, dt, false))
+			switch (otherObjectID)
 			{
-				this->setStatus(eStatus::DESTROY);
+			case CANDLE:
+				otherObject->setStatus(eStatus::BURST);
+				break;
+			case SPEARKNIGHT:
+				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+				break;
+			case BAT:
+				otherObject->setStatus(eStatus::BURST);
+				break;
+			case MEDUSAHEAD:
+				break;
+			default:
+				break;
 			}
+			this->setStatus(eStatus::DESTROY);
 		}
-		else
-		if (otherObjectID == eID::SIMON)
-		{
-			if (collisionBody->checkCollision(otherObject, direction, dt, false))
-			{
-				HeartCounter::plusHeart(10);
-			}
-		}*/
 	}
 	return 0.0f;
 }

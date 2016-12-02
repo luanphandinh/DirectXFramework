@@ -17,9 +17,9 @@ bool PlayScene::init()
 {
 	auto simon = new Simon();
 	simon->init();
-	simon->setPosition(2700, 100);//v1
+	//simon->setPosition(2700, 100);//v1
 	//simon->setPosition(2300, 638);//v2
-	//simon->setPosition(700, 640);//v3
+	simon->setPosition(700, 640);//v3
 	this->_simon = simon;
 
 	_listControlObject.push_back(simon);
@@ -28,7 +28,7 @@ bool PlayScene::init()
 	_director = new Level2Director();
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V1);
+	_director->setCurrentViewport(V3);
 	_viewport = _director->getViewport();
 	//=====================TESTING==========================//
 	_itemManager = new ItemManager();

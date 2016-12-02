@@ -99,8 +99,8 @@ float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 {
 	eID otherObjectID = otherObject->getId();
 	//Chỉ kiểm tra va chạm cho simon và land
-	if (otherObjectID != eID::SIMON && otherObjectID != eID::LAND)
-		return 0.0f;
+	//if (otherObjectID == eID:: && otherObjectID != eID::LAND)
+	//	return 0.0f;
 
 	for (Item* item : _listItem)
 	{
