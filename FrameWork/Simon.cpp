@@ -416,6 +416,7 @@ void Simon::updateStatus(float deltatime)
 		return;
 	}
 
+	trackFlyLandPosition(deltatime);
 	//_isHitted = false;
 
 	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT && (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR)
@@ -682,6 +683,14 @@ void Simon::getHitted()
 			GameStatusBoard::getInstance()->getSimonLifeUI()->getHPNumber() - 1);
 	}
 }
+
+void Simon::trackFlyLandPosition(float deltatime)
+{
+	if (_trackedFlyLand == nullptr) return;
+	auto flyLandVeloc = _trackedFlyLand->getVelocity();
+	auto newPos = GVector2(flyLandVeloc.x * deltatime / 1000,0);
+	this->setPosition(this->getPosition() + newPos);;
+}
 #pragma endregion
 
 GVector2 Simon::getVelocity()
@@ -772,6 +781,11 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				//if (_preObject != nullptr && _preObject->getId() == eID::LAND) return 0.0f;
 			}
 
+			if (otherObjectID == eID::FLYLAND)
+			{
+				_trackedFlyLand = otherObject;
+			}
+
 			//Nếu va chạm với câu thang thì cho phép simon đứng trên cầu thang,nếu ko thì false
 			if (otherObjectID == eID::STAIR)
 			{
@@ -854,6 +868,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			//collisionBody->checkCollision(otherObject, dt, false);
 			if (_preObject->getId() == eID::STAIR) return 0.0f;
 			_preObject = nullptr;
+			_trackedFlyLand = nullptr;
 
 			//Nếu vật đi hết land cũ
 			//thì gán gravity lại thành falling
