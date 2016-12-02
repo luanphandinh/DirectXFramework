@@ -2,10 +2,14 @@
 #include"BaseObject.h"
 #include"Animation.h"
 #include"CollisionBody.h"
+#include"Weapon.h"
 class Whip : public BaseObject
 {
 public:
-	Whip(int level = 0);
+	/*
+		Tạm thời để cái level thành 1cho dễ test
+	*/
+	Whip(int level = 1);
 	~Whip();
 	void setTracker(BaseObject* simon);
 	//Các hàm bắt buộc override từ lớp baseobject
@@ -15,13 +19,13 @@ public:
 	void release() override;
 
 	void restart();
-	void isHitting();
+	bool isHitting();
 
 	virtual float checkCollision(BaseObject* object, float dt);
 private:
 	//level của whip
 	int _level;
-	Animation* _animation;
+	map<int, Animation*> _animations;
 	BaseObject* _simon;
 	map<string, IComponent*> _componentList;
 };

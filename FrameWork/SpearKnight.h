@@ -51,5 +51,5 @@ private:
 	eStatus _currentAnimateIndex;
 	void updateCurrentAnimateIndex();
 	StopWatch*	_burstStopWatch;
-
+	void getHitted();
 };

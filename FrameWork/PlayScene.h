@@ -16,6 +16,7 @@
 
 #include"Sword.h"
 #include"ThrowingAxe.h"
+#include"Whip.h"
 using namespace std;
 _USING_FRAMEWORK
 
@@ -77,6 +78,7 @@ private:
 	//vector<BaseObject*>* _mapTestObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
+	BaseObject* _whip;
 	//==========================TEST=========================//
 };
 

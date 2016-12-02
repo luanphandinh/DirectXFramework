@@ -149,7 +149,7 @@ void PlayScene::update(float deltaTime)
 
 	//[Bước 5]
 	_activeObject.insert(_activeObject.end(), _listObject.begin(), _listObject.end());
-
+	
 	//[Bước 6]
 	for (BaseObject* obj : _activeObject)
 	{

@@ -501,8 +501,8 @@
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
-    <Item Id="6" Name="candle0" X="2713" Y="187" Width="21" Height="22">
-      <ActiveBound X="2713" Y="187" Width="21" Height="22" />
+    <Item Id="6" Name="candle0" X="2713" Y="183" Width="21" Height="22">
+      <ActiveBound X="2713" Y="183" Width="21" Height="22" />
       <Params>
         <Elem Key="DropItemId" Value="9" />
       </Params>

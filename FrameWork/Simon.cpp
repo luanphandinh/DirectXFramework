@@ -90,7 +90,7 @@ void Simon::init()
 	_animations[eStatus::HITTING | eStatus::STANDINGONSTAIR_DOWN]->addFrameRect(eID::SIMON, "throw_item_stair_down_01", "throw_item_stair_down_02", "throw_item_stair_down_03", "down_stair_01", NULL);
 
 	_animations[eStatus::HITTING | eStatus::SITTING] = new Animation(_sprite, 0.12f);
-	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON, "whip_sit_01", "whip_sit_02", "whip_sit_03", "sit", NULL);
+	_animations[eStatus::HITTING | eStatus::SITTING]->addFrameRect(eID::SIMON, "whip_sit_001", "whip_sit_002", "whip_sit_003", "sit", NULL);
 
 	//_whipLevel = 1;
 
@@ -135,6 +135,7 @@ void Simon::init()
 	_whip = new Whip();
 	_whip->init();
 	_whip->setTracker(this);
+	//ItemManager::insertItem((Item*)_whip);
 	//_whipAnimation
 
 }
@@ -250,6 +251,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 			this->hitting();
 		}
 		this->addStatus(eStatus::HITTING);
+		_whip->restart();
 		_isHitting = false;
 		break;
 	case DIK_Z:
@@ -376,6 +378,7 @@ void Simon::updateStatus(float deltatime)
 
 		if (_hittingStopWatch->isStopWatch(280))
 		{
+			//_whip->restart();
 			this->removeStatus(eStatus::HITTING);
 			SAFE_DELETE(_hittingStopWatch);
 			this->removeStatus(eStatus::UPSTAIR);
@@ -389,7 +392,7 @@ void Simon::updateStatus(float deltatime)
 			_throwItemStopWatch = new StopWatch();
 		}
 
-		if (_throwItemStopWatch->isStopWatch(280))
+		if (_throwItemStopWatch->isStopWatch(220))
 		{
 			this->removeStatus(eStatus::THROWING_ITEM);
 			SAFE_DELETE(_throwItemStopWatch);
@@ -938,6 +941,7 @@ void  Simon::updateCurrentAnimateIndex()
 		if (!_isHitting)
 		{
 			_animations[_currentAnimationIndex]->restart();
+			//_whip->restart();
 			_isHitting = true;
 		}
 	}
@@ -961,7 +965,7 @@ void  Simon::updateCurrentAnimateIndex()
 		if (!_isThrowing)
 		{
 			_animations[_currentAnimationIndex]->restart();
-			_whip->restart();
+			//_whip->restart();
 			_isThrowing = true;
 		}
 	}

@@ -9,6 +9,7 @@ Candle::Candle(GVector2 pos,eItemID _dropItemId) :BaseObject(eID::CANDLE)
 	this->setStatus(eStatus::NORMAL);
 	this->_dropItemId = _dropItemId;
 	this->setScale(SCALE_FACTOR);
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 Candle::~Candle()
@@ -75,7 +76,7 @@ float Candle::checkCollision(BaseObject* otherObject, float dt)
 	//if (otherObjectID == eID::SIMON)
 	//{
 	//	if (otherObjectID == eID::SIMON && otherObject->isInStatus(eStatus::HITTING)
-	//		&& collisionBody->checkCollision((BaseObject*)(((Simon*)otherObject)->getWhip()), direction, dt, false))
+	//		&& collisionBody->checkCollision(otherObject, direction, dt, false))
 	//	{
 	//		this->setStatus(eStatus::BURST);
 	//	}

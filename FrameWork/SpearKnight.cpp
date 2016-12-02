@@ -323,3 +323,8 @@ void SpearKnight::die() {
 	//this->setStatus(eStatus::DESTROY);
 }
 
+
+void SpearKnight::getHitted()
+{
+
+}
