@@ -11,14 +11,11 @@ public:
 	void update(float deltatime) override;
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
-
-	virtual float checkCollision(BaseObject* object, float dt) override;
-
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
 
 protected:
-	int		_damage;
 	GVector2 _distance;
+	
 };
 

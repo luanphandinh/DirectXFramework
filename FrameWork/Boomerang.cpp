@@ -79,19 +79,3 @@ void Boomerang::initWeaponComponent()
 	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Boomerang::onCollisionBegin);
 }
 
-void Boomerang::onCollisionBegin(CollisionEventArg* collision_arg)
-{
-	
-}
-
-float Boomerang::checkCollision(BaseObject* otherObject, float dt)
-{
-	if (_type == eItemType::DROP)
-	{
-		Weapon::checkCollision(otherObject, dt);
-	}
-	else if (_type == eItemType::PICKED_UP)
-	{
-	}
-	return 0.0f;
-}

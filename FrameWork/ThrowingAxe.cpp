@@ -1,8 +1,9 @@
-#include "ThrowingAxe.h"
-
+﻿#include "ThrowingAxe.h"
+#include "BaseEnemy.h"
 
 ThrowingAxe::ThrowingAxe(GVector2 startPosition, eItemType type, eDirection dir) : Weapon(startPosition, type, dir, eItemID::AXE)
 {
+	_damage = 2;
 }
 
 
@@ -56,13 +57,4 @@ void ThrowingAxe::initWeaponComponent()
 
 	RotateMovement* rotateMovement = new RotateMovement(_sprite);
 	_componentList["RotateMovement"] = rotateMovement;
-}
-
-float ThrowingAxe::checkCollision(BaseObject* otherObject, float dt)
-{
-	if (_type == eItemType::DROP)
-	{
-		Weapon::checkCollision(otherObject, dt);
-	}
-	return 0.0f;
 }

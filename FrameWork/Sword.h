@@ -13,7 +13,7 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
 
-	virtual float checkCollision(BaseObject* object, float dt) override;
+	virtual float checkCollisionWeapon(BaseObject* object, float dt) override;
 
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;

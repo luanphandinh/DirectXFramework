@@ -63,41 +63,34 @@ void Sword::initWeaponComponent()
 	gravity->setGravity(GVector2(0, 0));
 }
 
-float Sword::checkCollision(BaseObject* otherObject, float dt)
+float Sword::checkCollisionWeapon(BaseObject* otherObject, float dt)
 {
-	if (_type == eItemType::DROP)
-	{
-		Weapon::checkCollision(otherObject, dt);
-	}
-	else if (_type == eItemType::PICKED_UP)
-	{
-		//Lấy collision body của item ra để checkCollision
-		auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
-		eID otherObjectID = otherObject->getId();
-		eDirection direction;
-		if (otherObjectID == eID::SIMON || otherObjectID == eID::LAND
-			|| otherObjectID == eID::STAIR) return 0.0f;
+	//Lấy collision body của item ra để checkCollision
+	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+	eID otherObjectID = otherObject->getId();
+	eDirection direction;
+	if (otherObjectID == eID::SIMON || otherObjectID == eID::LAND
+		|| otherObjectID == eID::STAIR) return 0.0f;
 
-		if (collisionBody->checkCollision(otherObject, direction, dt, false))
+	if (collisionBody->checkCollision(otherObject, direction, dt, false))
+	{
+		switch (otherObjectID)
 		{
-			switch (otherObjectID)
-			{
-			case CANDLE:
-				otherObject->setStatus(eStatus::BURST);
-				break;
-			case SPEARKNIGHT:
-				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
-				break;
-			case BAT:
-				otherObject->setStatus(eStatus::BURST);
-				break;
-			case MEDUSAHEAD:
-				break;
-			default:
-				break;
-			}
-			this->setStatus(eStatus::DESTROY);
+		case CANDLE:
+			otherObject->setStatus(eStatus::BURST);
+			break;
+		case SPEARKNIGHT:
+			((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+			break;
+		case BAT:
+			otherObject->setStatus(eStatus::BURST);
+			break;
+		case MEDUSAHEAD:
+			break;
+		default:
+			break;
 		}
+		this->setStatus(eStatus::DESTROY);
 	}
 	return 0.0f;
 }

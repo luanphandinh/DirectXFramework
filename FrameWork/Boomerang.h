@@ -14,14 +14,10 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
 
-	virtual float checkCollision(BaseObject* object, float dt) override;
-
-	virtual void onCollisionBegin(CollisionEventArg* collision_arg) override;
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
 
 private:
-	int		_damage;
 	GVector2 _distance;
 	bool	_isFliedBack;
 };

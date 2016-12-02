@@ -1,5 +1,5 @@
 ﻿#include "Weapon.h"
-
+#include"BaseEnemy.h"
 
 Weapon::Weapon(GVector2 startPosition, eItemType type, eDirection dir,eItemID id) :Item(startPosition,type)
 {
@@ -55,7 +55,47 @@ GVector2 Weapon::initVeloc(GVector2 speed)
 
 float Weapon::checkCollision(BaseObject* otherObject, float dt)
 {
-	return Item::checkCollision(otherObject, dt);
+	if (this->_type == eItemType::DROP)
+		Item::checkCollision(otherObject, dt);
+	else this->checkCollisionWeapon(otherObject, dt);
+	return 0.0f;
+}
+
+float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
+{
+	//Lấy collision body của item ra để checkCollision
+	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
+	eID otherObjectID = otherObject->getId();
+	eDirection direction;
+	if (otherObjectID == eID::SIMON || otherObjectID == eID::LAND
+		|| otherObjectID == eID::STAIR) return 0.0f;
+	//if ((otherObjectID == eID::LAND)
+	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
+	if (collisionBody->checkCollision(otherObject, direction, dt, false))
+	{
+		auto object = _listColliding.find(otherObject);
+		switch (otherObjectID)
+		{
+		case CANDLE:
+			otherObject->setStatus(eStatus::BURST);
+			break;
+		case SPEARKNIGHT:
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+				_listColliding[otherObject] = true;
+			}
+			break;
+		case BAT:
+			otherObject->setStatus(eStatus::BURST);
+			break;
+		case MEDUSAHEAD:
+			break;
+		default:
+			break;
+		}
+	}
+	return 0.0f;
 }
 
 void Weapon::pickedUp()

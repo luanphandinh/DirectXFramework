@@ -35,7 +35,12 @@ public:
 	/*
 		kiểm tra va chạm
 	*/
-	virtual float checkCollision(BaseObject* object, float dt) override = 0;
+	virtual float checkCollision(BaseObject* object, float dt) override;
+	/*
+		Kiểm tra va chạm cho các vũ khí,nếu lớp con có cách va chạm khác
+		với lớp weapon này thì có thể override
+	*/
+	virtual float checkCollisionWeapon(BaseObject* object, float dt);
 	/*
 		dùng cho các lớp con để khởi tạo các component riêng
 	*/
@@ -43,6 +48,8 @@ public:
 
 	virtual void pickedUp() override;
 protected:
+	int _damage;
 	eDirection	_direction;
+	map<BaseObject*, bool> _listColliding;
 };
 
