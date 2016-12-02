@@ -25,8 +25,10 @@ public:
 private:
 	//level của whip
 	int _level;
+	int _damage = 1;
 	map<int, Animation*> _animations;
 	BaseObject* _simon;
 	map<string, IComponent*> _componentList;
+	map<BaseObject*, bool> _listColliding;
 };
 

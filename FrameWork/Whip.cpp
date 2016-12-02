@@ -1,10 +1,12 @@
 ﻿#include "Whip.h"
 #include"Simon.h"
 #include"PlayScene.h"
+#include"BaseEnemy.h"
 
 Whip::Whip(int level) :BaseObject(eID::WHIP)
 {
 	this->_level = level;
+	_damage = 1;
 }
 
 
@@ -48,6 +50,7 @@ void Whip::release()
 void Whip::restart()
 {
 	_animations[_level]->restart();
+	_listColliding.clear();
 }
 
 void Whip::setTracker(BaseObject* simon)
@@ -72,13 +75,18 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
 	if (collisionBody->checkCollision(otherObject, direction, dt, false) && this->isHitting())
 	{
+		auto object = _listColliding.find(otherObject);
 		switch (otherObjectID)
 		{
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURST);
 			break;
 		case SPEARKNIGHT:
-			otherObject->setStatus(eStatus::BURST);
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+				_listColliding[otherObject] = true;
+			}
 			break;
 		case BAT:
 			otherObject->setStatus(eStatus::BURST);

@@ -9,7 +9,7 @@
 using namespace std;
 
 #define SPEARKNIGHT_SPEED 50
-#define SPEARKNIGHT_HITPOINT 48
+#define SPEARKNIGHT_HITPOINT 3
 #define SPEARKNIGHT_SCORE 100
 
 class SpearKnight : public BaseEnemy {

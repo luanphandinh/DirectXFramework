@@ -204,7 +204,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 	{
 	case DIK_W:
 	case DIK_S:
-		if (!this->isInStatus(eStatus::SITTING) && !this->isInStatus(eStatus::STANDINGONSTAIR))
+		if (!this->isInStatus(eStatus::STANDINGONSTAIR))
 		{
 			//Nếu đang ngồi hoặc di chuyển thì cho phép nhảy
 			//Chỉ add trạng thái nhảy vào thôi
@@ -1032,10 +1032,11 @@ void Simon::getWeapon()
 
 	ItemManager::generateWeapon(_itemID, startPos,dir, eItemType::PICKED_UP);
 }
-int Simon::getDamage()
-{
-	return 6;
-}
+
+//int Simon::getDamage()
+//{
+//	return 6;
+//}
 
 void Simon::setPositionInStair(Stair* stair)
 {
