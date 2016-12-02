@@ -23,7 +23,7 @@ public:
 	GVector2 getVelocity() override;
 
 	IComponent* getComponent(string componentName);
-	RECT getBounding() override;
+	//RECT getBounding() override;
 
 private:
 	map<string, IComponent*> _listComponent;

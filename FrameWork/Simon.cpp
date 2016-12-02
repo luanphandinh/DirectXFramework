@@ -743,18 +743,8 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	eID otherObjectID = otherObject->getId();
 	eDirection direction;
 
-	//Nếu đang đứng trên cầu thang mà đánh va chạm với land thì return
-	if ((otherObjectID == eID::LAND && this->isInStatus(eStatus::STANDINGONSTAIR) && this->isInStatus(eStatus::HITTING)
-		&& _preObject != nullptr && _preObject->getId() == eID::STAIR))
-	{
-		this->hitting();
-		//auto gravity = (Gravity*)this->_componentList["Gravity"];
-		//gravity->setStatus(eGravityStatus::SHALLOWED);
-		return 0.0f;
-	}
-
 	//Kiểm tra va chạm với land
-	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR)
+	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR || otherObjectID == eID::FLYLAND)
 	{
 		/* 
 			Với LAND : Nếu simon ko nằm trong cả 2 trang thái là nhảy vả rớt,đang nhảy hoặc rớt từ trên xuống
@@ -768,8 +758,9 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 		if (
 			(
 			(!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
+			|| (!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::FLYLAND)
 			 //||	(this->isInStatus(eStatus::SITTING) && otherObjectID == eID::STAIR)
-			 || (((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::SITTING))) && otherObjectID == eID::STAIR)
+			 || ((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::SITTING)) && otherObjectID == eID::STAIR)
 			)
 			&& collisionBody->checkCollision(otherObject, direction, dt, false)
 			)
@@ -805,7 +796,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			else _canOnStair = false;
 			//Nếu như va chạm hướng top,và trừ cái trường hợp mà simon đang trong trạng thái nhảy mà rớt xuống 
 			//với vận tốc mà > -200
-			if (direction == eDirection::TOP && !(this->getVelocity().y >-100 && this->isInStatus(eStatus::JUMPING)))
+			if (direction == eDirection::TOP && !(this->getVelocity().y > 0 && this->isInStatus(eStatus::JUMPING)))
 			{
 				//vận tốc 200 hướng xuống => cho trường hợp nhảy từ dưới lên
 				//xử lý đặc biệt,collision body update position bt ko được

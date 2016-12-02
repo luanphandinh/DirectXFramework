@@ -25,16 +25,16 @@ void FlyLand::update(float deltaTime) {
 	if (this->getStatus() == eStatus::DESTROY)
 		return;
 
-	this->checkPosition();
-	if (this->getStatus() == eStatus::WAITING) {
-		if (true) {
-			auto simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	//this->checkPosition();
+	//if (this->getStatus() == eStatus::WAITING) {
+	//	if (true) {
+	//		auto simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 
-			simon->setPositionX(this->getPositionX());
-			if (simon->isInStatus(MOVING_LEFT) || simon->isInStatus(MOVING_RIGHT))
-				this->setStatus(RUNNING);
-		}
-	}
+	//		simon->setPositionX(this->getPositionX());
+	//		if (simon->isInStatus(MOVING_LEFT) || simon->isInStatus(MOVING_RIGHT))
+	//			this->setStatus(RUNNING);
+	//	}
+	//}
 
 	GVector2 position = this->getPosition();
 	if (position.x < _leftPosition.x) {
@@ -81,33 +81,9 @@ IComponent * FlyLand::getComponent(string componentName) {
 	return it->second;
 }
 
-RECT FlyLand::getBounding() {
-	return RECT();
-}
+//RECT FlyLand::getBounding() {
+//	return RECT();
+//}
 
 void FlyLand::checkPosition() {
-	auto viewport = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
-	auto simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	RECT screenBound = viewport->getBounding();
-	GVector2 position = this->getPosition();
-	GVector2 viewportposition = viewport->getPositionWorld();
-	if (position.x > screenBound.right || BaseObject::getBounding().top < viewportposition.y - WINDOW_HEIGHT) {
-		this->setStatus(eStatus::DESTROY);
-	}
-	if (isRectangleIntersected(simon->getBounding(), this->getBounding())) {
-		// Nếu giao nhau
-		if (position.y < simon->getPositionY()) {
-			//Nếu y của land nhỏ hơn y của simon ->setwait
-			this->setStatus(eStatus::WAITING);
-		}
-		if (simon->isInStatus(MOVING_LEFT) || simon->isInStatus(MOVING_RIGHT) || 
-			simon->isInStatus(eStatus::JUMPING) || simon->isInStatus(eStatus::FALLING)) {
-			this->setStatus(NORMAL);
-		}
-	}
-	else {
-		if (this->getStatus() != eStatus::DESTROY) {
-			this->setStatus(NORMAL);
-		}
-	}
 }
