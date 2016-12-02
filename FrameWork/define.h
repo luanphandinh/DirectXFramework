@@ -124,6 +124,7 @@ enum eStatus
 	BURST = (1 << 25),
 	ISHITTED = (1 << 26),
 	PICKUPITEM = (1 << 27),
+	FREEZE = (1 << 28),
 };
 
 enum eStairDirection

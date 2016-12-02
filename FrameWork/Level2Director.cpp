@@ -138,7 +138,6 @@ void Level2Director::passDoorScene(float deltatime, bool & isFinish)
 	//}
 	if (xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660) {
 		door->setStatus(OPENING);
-		((Simon*)_simon)->forceMoveLeft();
 		_flagMoveSimonPassDoor = true;
 	}
 	else if (xSimon < 1950 && ySimon < 700 && ySimon>660 && _flagMoveSimonPassDoor) {
@@ -146,7 +145,9 @@ void Level2Director::passDoorScene(float deltatime, bool & isFinish)
 		door->setStatus(CLOSING);
 		_flagMoveSimonPassDoor = false;
 	}
-	
+
+	if (_flagMoveSimonPassDoor)
+		((Simon*)_simon)->forceMoveLeft();
 }
 
 void Level2Director::moveViewportPassDoor(float deltatime, bool & finish) {
@@ -156,8 +157,12 @@ void Level2Director::moveViewportPassDoor(float deltatime, bool & finish) {
 
 	
 	if (_currentViewport != eLevel2Viewport::V2 || !((xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660))) return;
-	if(xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660)
+	if (xSimon < 2100 && xSimon>2070 && ySimon < 700 && ySimon>660)
+	{
+		_simon->setFreeze(true);
 		_flagMoveViewportPassDoor = true;
+	}
+		
 
 	GVector2 boundSize = this->getCurrentViewportBound();
 
@@ -186,10 +191,11 @@ void Level2Director::moveViewportPassDoor2(float deltatime, bool & finish)
 
 	// dịch screen từ từ sang TRÁI, speed = vs speed simon
 	current_position.x -= SIMON_MOVING_SPEED * deltatime / 1000;
-
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	if (current_position.x < boundSize.x - WINDOW_WIDTH) {
 		current_position.x = boundSize.x - WINDOW_WIDTH;
 		_flagMoveViewportPassDoor2 = false;
+		_simon->setFreeze(false);
 	}
 
 	_viewport->setPositionWorld(current_position);

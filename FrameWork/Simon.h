@@ -111,6 +111,7 @@ public:
 	void unforceMoveLeft();
 	void forceJump();
 	void unforceJump();
+	void setFreeze(bool freeze);
 private:
 	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;
@@ -122,7 +123,8 @@ private:
 	bool _canJumpDown;
 	bool _canOnStair;
 	bool _canUpStair;
-	int _whipLevel;
+	//Nếu simon bị đóng băng thì ko cho phép bàn phím được hoạt động
+	bool _isFreezed;
 	//Sử dụng để animation hitting khi có stopwatch
 	bool _isHitting;
 	//Sử dụng để animation throwing khi có stopwatch

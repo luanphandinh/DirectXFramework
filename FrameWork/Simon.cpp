@@ -194,7 +194,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 {
 	if (this->isInStatus(eStatus::DYING))
 		return;
-
+	if (_isFreezed) return;
 	//if (_hittingStopWatch != nullptr || _reviveStopWatch != nullptr)
 	//	return;
 	if (_isHitted)
@@ -1086,16 +1086,30 @@ Whip* Simon::getWhip()
 }
 
 void Simon::forceMoveRight() {
-	onKeyPressed(new KeyEventArg(DIK_RIGHT));
+	//onKeyPressed(new KeyEventArg(DIK_RIGHT));
+	if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING))
+	{
+		this->removeStatus(eStatus::MOVING_LEFT);
+		this->removeStatus(eStatus::SITTING);
+		this->addStatus(eStatus::MOVING_RIGHT);
+	}
 }
 void Simon::unforceMoveRight() {
-	onKeyReleased(new KeyEventArg(DIK_RIGHT));
+	//onKeyReleased(new KeyEventArg(DIK_RIGHT));
+	this->removeStatus(eStatus::MOVING_RIGHT);
 }
 void Simon::forceMoveLeft() {
-	onKeyPressed(new KeyEventArg(DIK_LEFT));
+	/*onKeyPressed(new KeyEventArg(DIK_LEFT));*/
+	if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING))
+	{
+		this->removeStatus(eStatus::MOVING_RIGHT);
+		this->removeStatus(eStatus::SITTING);
+		this->addStatus(eStatus::MOVING_LEFT);
+	}
 }
 void Simon::unforceMoveLeft() {
-	onKeyReleased(new KeyEventArg(DIK_LEFT));
+	//onKeyReleased(new KeyEventArg(DIK_LEFT));
+	this->removeStatus(eStatus::MOVING_LEFT);
 }
 void Simon::forceJump() {
 	onKeyPressed(new KeyEventArg(DIK_X));
@@ -1106,4 +1120,10 @@ void Simon::unforceJump() {
 void Simon::removeGravity() {
 	auto graivity = (Gravity*)(this->_componentList.find("Gravity")->second);
 	graivity->setGravity(GVector2Zero);
+}
+
+void Simon::setFreeze(bool freeze)
+{
+	if (_isFreezed != freeze)
+		_isFreezed = freeze;
 }
