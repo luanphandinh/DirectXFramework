@@ -517,7 +517,7 @@ BaseObject* ObjectFactory::getCandle(xml_node node)
 	width = stoi(properties["Width"]);
 	height = stoi(properties["Height"]);
 
-	GVector2 pos = GVector2(x + width/2,y + height/2);
+	GVector2 pos = GVector2(x + width/2,y - height/2);
 	_dropItemId = (eItemID)stoi(properties["DropItemId"]);
 
 	auto candle = new Candle(pos,_dropItemId);

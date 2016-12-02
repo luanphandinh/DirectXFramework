@@ -124,7 +124,6 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 	switch (id)
 	{
 	case SMALLHEART:
-		break;
 	case LARGEHEART:
 		item = new HeartItem(pos, id);
 		break;
