@@ -1,9 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <QNode Id="0" Level="0" X="0" Y="0" Width="3072" Height="3072">
   <QNode Id="0" Level="1" X="0" Y="0" Width="1536" Height="1536">
-    <QNode Id="0" Level="2" X="0" Y="0" Width="768" Height="768" />
+    <QNode Id="0" Level="2" X="0" Y="0" Width="768" Height="768">
+      <QNode Id="0" Level="3" X="0" Y="0" Width="384" Height="384" />
+      <QNode Id="256" Level="3" X="384" Y="0" Width="384" Height="384" />
+      <QNode Id="768" Level="3" X="384" Y="384" Width="384" Height="384">
+        <QNode Id="768" Level="4" X="384" Y="384" Width="192" Height="192">
+          <QNode Id="768" Level="5" X="384" Y="384" Width="96" Height="96" />
+          <QNode Id="769" Level="5" X="480" Y="384" Width="96" Height="96">
+            <Objects>land77 </Objects>
+          </QNode>
+          <QNode Id="771" Level="5" X="480" Y="480" Width="96" Height="96">
+            <Objects>land76 </Objects>
+          </QNode>
+          <QNode Id="770" Level="5" X="384" Y="480" Width="96" Height="96">
+            <Objects>land75 land76 stair74 </Objects>
+          </QNode>
+        </QNode>
+        <QNode Id="66304" Level="4" X="576" Y="384" Width="192" Height="192">
+          <Objects>land77 </Objects>
+        </QNode>
+        <QNode Id="197376" Level="4" X="576" Y="576" Width="192" Height="192">
+          <Objects>land70 </Objects>
+        </QNode>
+        <QNode Id="131840" Level="4" X="384" Y="576" Width="192" Height="192">
+          <Objects>land70 </Objects>
+        </QNode>
+      </QNode>
+      <QNode Id="512" Level="3" X="0" Y="384" Width="384" Height="384">
+        <QNode Id="512" Level="4" X="0" Y="384" Width="192" Height="192">
+          <Objects>land72 </Objects>
+        </QNode>
+        <QNode Id="66048" Level="4" X="192" Y="384" Width="192" Height="192">
+          <Objects>stair74 </Objects>
+        </QNode>
+        <QNode Id="197120" Level="4" X="192" Y="576" Width="192" Height="192">
+          <Objects>land71 land70 stair73 </Objects>
+        </QNode>
+        <QNode Id="131584" Level="4" X="0" Y="576" Width="192" Height="192">
+          <Objects>land72 land70 </Objects>
+        </QNode>
+      </QNode>
+    </QNode>
     <QNode Id="16" Level="2" X="768" Y="0" Width="768" Height="768">
-      <Objects>land65 </Objects>
+      <QNode Id="16" Level="3" X="768" Y="0" Width="384" Height="384" />
+      <QNode Id="272" Level="3" X="1152" Y="0" Width="384" Height="384" />
+      <QNode Id="784" Level="3" X="1152" Y="384" Width="384" Height="384">
+        <QNode Id="784" Level="4" X="1152" Y="384" Width="192" Height="192">
+          <Objects>land77 stair79 </Objects>
+        </QNode>
+        <QNode Id="66320" Level="4" X="1344" Y="384" Width="192" Height="192">
+          <Objects>land77 land78 </Objects>
+        </QNode>
+        <QNode Id="197392" Level="4" X="1344" Y="576" Width="192" Height="192">
+          <Objects>land65 land67 land68 </Objects>
+        </QNode>
+        <QNode Id="131856" Level="4" X="1152" Y="576" Width="192" Height="192">
+          <Objects>land68 </Objects>
+        </QNode>
+      </QNode>
+      <QNode Id="528" Level="3" X="768" Y="384" Width="384" Height="384">
+        <QNode Id="528" Level="4" X="768" Y="384" Width="192" Height="192">
+          <Objects>land77 </Objects>
+        </QNode>
+        <QNode Id="66064" Level="4" X="960" Y="384" Width="192" Height="192">
+          <Objects>land77 </Objects>
+        </QNode>
+        <QNode Id="197136" Level="4" X="960" Y="576" Width="192" Height="192">
+          <Objects>land68 land69 land70 </Objects>
+        </QNode>
+        <QNode Id="131600" Level="4" X="768" Y="576" Width="192" Height="192">
+          <Objects>land70 </Objects>
+        </QNode>
+      </QNode>
     </QNode>
     <QNode Id="48" Level="2" X="768" Y="768" Width="768" Height="768">
       <QNode Id="48" Level="3" X="768" Y="768" Width="384" Height="384">

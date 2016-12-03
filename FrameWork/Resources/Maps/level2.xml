@@ -705,5 +705,85 @@
         <Elem Key="direction" Value="-1" />
       </Params>
     </Item>
+    <Item Id="2" Name="land67" X="1347" Y="927" Width="60" Height="105">
+      <ActiveBound X="1347" Y="927" Width="60" Height="105" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="15" />
+        <Elem Key="canJumpDown" Value="0" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land68" X="1023" Y="831" Width="329" Height="6">
+      <ActiveBound X="1023" Y="831" Width="329" Height="6" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land69" X="1014" Y="893" Width="11" Height="66">
+      <ActiveBound X="1014" Y="893" Width="11" Height="66" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="8" />
+        <Elem Key="canJumpDown" Value="0" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land71" X="258" Y="927" Width="59" Height="6">
+      <ActiveBound X="258" Y="927" Width="59" Height="6" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="15" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land72" X="48" Y="1150" Width="13" Height="256">
+      <ActiveBound X="48" Y="1150" Width="13" Height="256" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="8" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land70" X="63" Y="893" Width="957" Height="6">
+      <ActiveBound X="63" Y="893" Width="957" Height="6" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land75" X="386" Y="991" Width="60" Height="5">
+      <ActiveBound X="386" Y="991" Width="60" Height="5" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land76" X="449" Y="1021" Width="62" Height="14">
+      <ActiveBound X="449" Y="1021" Width="62" Height="14" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="15" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land77" X="515" Y="1086" Width="956" Height="10">
+      <ActiveBound X="515" Y="1086" Width="956" Height="10" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land78" X="1471" Y="1150" Width="10" Height="59">
+      <ActiveBound X="1471" Y="1150" Width="10" Height="59" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="4" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair79" X="1312" Y="1095" Width="15" Height="6">
+      <ActiveBound X="1312" Y="1095" Width="15" Height="6" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair73" X="320" Y="932" Width="24" Height="3">
+      <ActiveBound X="320" Y="932" Width="24" Height="3" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair74" X="370" Y="994" Width="21" Height="5">
+      <ActiveBound X="370" Y="994" Width="21" Height="5" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
   </Objects>
 </Tilesmap>
