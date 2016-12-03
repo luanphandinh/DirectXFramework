@@ -3,7 +3,7 @@
 Door::Door(eStatus status, GVector2 pos, int direction) :BaseObject(eID::DOOR){
 	_sprite = SpriteManager::getInstance()->getSprite(eID::DOOR);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
-
+	this->setOrigin(GVector2(0.0f, 1.0f));
 	this->setStatus(status);
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);

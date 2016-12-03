@@ -1,5 +1,5 @@
 frame_name	left	top	right	bottom
-normal		2	0	10	48	0.5 0.5
-open_01		2	0	10	48	0.5 0.5
-open_02		23	0	39	48	0.27 0.5
-open_03		48	0	88	48	0.15 0.5
+normal		2	0	10	48	0.5 1.0
+open_01		2	0	10	48	0.5 1.0
+open_02		23	0	39	48	0.27 1.0
+open_03		48	0	88	48	0.15 1.0

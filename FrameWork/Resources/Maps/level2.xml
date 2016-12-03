@@ -477,12 +477,6 @@
         <Elem Key="canJumpDown" Value="0" />
       </Params>
     </Item>
-    <Item Id="4" Name="door0" X="2054" Y="736" Width="20" Height="96">
-      <ActiveBound X="1981" Y="736" Width="96" Height="96" />
-      <Params>
-        <Elem Key="direction" Value="-1" />
-      </Params>
-    </Item>
     <Item Id="2" Name="land11" X="1088" Y="701" Width="62" Height="25">
       <ActiveBound X="1088" Y="701" Width="62" Height="25" />
       <Params>
@@ -692,6 +686,24 @@
     </Item>
     <Item Id="5" Name="flyLand02" X="2306" Y="1023" Width="190" Height="21">
       <ActiveBound X="2306" Y="1023" Width="190" Height="21" />
+    </Item>
+    <Item Id="4" Name="door0" X="2066" Y="737" Width="9" Height="96">
+      <ActiveBound X="2066" Y="737" Width="9" Height="96" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land65" X="1408" Y="958" Width="255" Height="9">
+      <ActiveBound X="1408" Y="958" Width="255" Height="9" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="15" />
+      </Params>
+    </Item>
+    <Item Id="4" Name="door1" X="1552" Y="1058" Width="16" Height="95">
+      <ActiveBound X="1552" Y="1058" Width="16" Height="95" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
     </Item>
   </Objects>
 </Tilesmap>

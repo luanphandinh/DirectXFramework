@@ -25,5 +25,9 @@ private:
 	bool _flagMoveViewportPassDoor;
 	bool _flagMoveSimonPassDoor;
 	bool _flagMoveViewportPassDoor2;
+	BaseObject* _simon;
+	BaseObject* _trackedDoor;
+	bool checkPosition();
+	bool isPassedDoor();
 };
 

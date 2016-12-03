@@ -169,6 +169,7 @@ enum eLevel2Viewport
 	V2 = 2,
 	V3 = 3,
 	V4 = 4,
+	V5 = 5,
 };
 
 #define _NAMESPACE_FRAMEWORK_END	}

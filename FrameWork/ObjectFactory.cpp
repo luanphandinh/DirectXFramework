@@ -461,9 +461,9 @@ BaseObject * ObjectFactory::getDoor(xml_node node) {
 	y = stoi(properties["Y"]);
 	int width = activebound.attribute("Width").as_int();
 	//hack :v
-	x += 8;
+	/*x += 8;
 	width -= 64;
-	y -= 48;
+	y -= 48;*/
 	if (properties.find("status") != properties.end()) {
 		status = (eStatus)(stoi(properties.find("status")->second));
 	}

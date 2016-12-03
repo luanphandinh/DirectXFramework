@@ -2,7 +2,9 @@
 <QNode Id="0" Level="0" X="0" Y="0" Width="3072" Height="3072">
   <QNode Id="0" Level="1" X="0" Y="0" Width="1536" Height="1536">
     <QNode Id="0" Level="2" X="0" Y="0" Width="768" Height="768" />
-    <QNode Id="16" Level="2" X="768" Y="0" Width="768" Height="768" />
+    <QNode Id="16" Level="2" X="768" Y="0" Width="768" Height="768">
+      <Objects>land65 </Objects>
+    </QNode>
     <QNode Id="48" Level="2" X="768" Y="768" Width="768" Height="768">
       <QNode Id="48" Level="3" X="768" Y="768" Width="384" Height="384">
         <Objects>land11 land12 spearKnight3 </Objects>
@@ -37,7 +39,7 @@
       </QNode>
       <QNode Id="516" Level="3" X="1536" Y="384" Width="384" Height="384">
         <QNode Id="516" Level="4" X="1536" Y="384" Width="192" Height="192">
-          <Objects>land24 </Objects>
+          <Objects>land24 door1 </Objects>
         </QNode>
         <QNode Id="66052" Level="4" X="1728" Y="384" Width="192" Height="192">
           <Objects>land24 </Objects>
@@ -46,7 +48,7 @@
           <Objects>land14 land15 stair05 </Objects>
         </QNode>
         <QNode Id="131588" Level="4" X="1536" Y="576" Width="192" Height="192">
-          <Objects>stair05 </Objects>
+          <Objects>stair05 land65 </Objects>
         </QNode>
       </QNode>
     </QNode>
@@ -230,16 +232,16 @@
       <QNode Id="292" Level="3" X="1920" Y="768" Width="384" Height="384">
         <QNode Id="292" Level="4" X="1920" Y="768" Width="192" Height="192">
           <QNode Id="292" Level="5" X="1920" Y="768" Width="96" Height="96">
-            <Objects>door0 medusaHeadSpawner0 c57 </Objects>
+            <Objects>medusaHeadSpawner0 c57 </Objects>
           </QNode>
           <QNode Id="293" Level="5" X="2016" Y="768" Width="96" Height="96">
-            <Objects>door0 medusaHeadSpawner0 </Objects>
+            <Objects>medusaHeadSpawner0 door0 </Objects>
           </QNode>
           <QNode Id="295" Level="5" X="2016" Y="864" Width="96" Height="96">
             <Objects>land10 door0 </Objects>
           </QNode>
           <QNode Id="294" Level="5" X="1920" Y="864" Width="96" Height="96">
-            <Objects>land10 door0 </Objects>
+            <Objects>land10 </Objects>
           </QNode>
         </QNode>
         <QNode Id="65828" Level="4" X="2112" Y="768" Width="192" Height="192">
