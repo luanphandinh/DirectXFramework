@@ -103,6 +103,7 @@ void Level2Director::switchViewport()
 			this->setCurrentViewport(V4);
 			_objTracker->setPosition(1666, 830);
 		}
+
 		break;
 	case eLevel2Viewport::V4:
 		if (pos.y < 810 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR)) {
@@ -134,7 +135,7 @@ bool Level2Director::checkPosition()
 	int xSimon = _simon->getPositionX();
 	int ySimon = _simon->getPositionY();
 	GVector2 doorPos = _trackedDoor->getPosition();
-	if ((xSimon < doorPos.x + 40 && xSimon > doorPos.x /*&& ySimon < doorPos.y && ySimon> doorPos.y - 50*/))
+	if ((xSimon < doorPos.x + 40 && xSimon > doorPos.x && ySimon < doorPos.y && ySimon> doorPos.y - 100))
 	{
 		return true;
 	}
@@ -204,7 +205,7 @@ void Level2Director::moveViewportPassDoor(float deltatime, bool & finish) {
 	//int ySimon = _simon->getPositionY();
 
 	
-	if ((_currentViewport != eLevel2Viewport::V4 && _currentViewport != eLevel2Viewport::V2) || !checkPosition()) return;
+	if (!checkPosition()) return;
 	if (checkPosition())
 	{
 		_simon->setFreeze(true);
@@ -244,6 +245,8 @@ void Level2Director::moveViewportPassDoor2(float deltatime, bool & finish)
 		current_position.x = boundSize.x - WINDOW_WIDTH;
 		_flagMoveViewportPassDoor2 = false;
 		_simon->setFreeze(false);
+		_trackedDoor->setStatus(eStatus::DESTROY);
+		_trackedDoor = nullptr;
 	}
 
 	_viewport->setPositionWorld(current_position);
