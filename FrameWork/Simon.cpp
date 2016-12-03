@@ -1115,7 +1115,9 @@ void Simon::forceJump() {
 	onKeyPressed(new KeyEventArg(DIK_X));
 }
 void Simon::unforceJump() {
-	onKeyReleased(new KeyEventArg(DIK_X));
+	//gán vector move với move speed âm vì đi ngược trục x
+	auto move = (Movement*)this->_componentList["Movement"];
+	move->setVelocity(GVector2(0,-300));
 }
 void Simon::removeGravity() {
 	auto graivity = (Gravity*)(this->_componentList.find("Gravity")->second);

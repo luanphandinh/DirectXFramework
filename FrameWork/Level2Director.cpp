@@ -208,6 +208,8 @@ void Level2Director::moveViewportPassDoor(float deltatime, bool & finish) {
 	if (!checkPosition()) return;
 	if (checkPosition())
 	{
+		((Simon*)_simon)->unforceMoveLeft();
+		((Simon*)_simon)->unforceJump();
 		_simon->setFreeze(true);
 		_flagMoveViewportPassDoor = true;
 	}
