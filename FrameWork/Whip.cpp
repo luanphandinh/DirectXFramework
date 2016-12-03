@@ -82,6 +82,7 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURST);
 			break;
+		case DRAGON:
 		case SPEARKNIGHT:
 			if (object == _listColliding.end() || object._Ptr == nullptr)
 			{

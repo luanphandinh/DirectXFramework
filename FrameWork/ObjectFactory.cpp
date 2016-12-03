@@ -125,6 +125,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case BRICK:
 		return getBrick(node);
 		break;
+	case DRAGON:
+		return getDragon(node);
+		break;
 	case STAIR_LEFTBOTTOM_RIGHTTOP:
 		break;
 	case STAIR_RIGHTBOTTOM_LEFTTOP:
@@ -544,6 +547,28 @@ BaseObject* ObjectFactory::getBrick(xml_node node)
 	auto brick = new Brick(pos);
 	brick->init();
 	return brick;
+}
+
+BaseObject* ObjectFactory::getDragon(xml_node node)
+{
+	auto properties = ObjectFactory::getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y, width, height;
+	eItemID	_dropItemId;
+
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+	width = stoi(properties["Width"]);
+	height = stoi(properties["Height"]);
+
+	GVector2 pos = GVector2(x + width / 2, y - height / 2);
+	
+
+	auto dragon = new Dragon(pos);
+	dragon->init();
+	return dragon;
 }
 
 map<string, string> ObjectFactory::getObjectProperties(xml_node node)

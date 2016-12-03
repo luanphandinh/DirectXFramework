@@ -86,6 +86,7 @@
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="Door.h" />
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="EmptyObject.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Burning.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="EmptyObject.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="FlyLand.cpp" />

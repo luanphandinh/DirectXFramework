@@ -62,6 +62,11 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite[eID::BROKENBRICK] = sp;
 	this->loadSpriteInfo(eID::BROKENBRICK, "Resources//Images//brokenbrick_animation.txt");
 
+	//DRAGON
+	sp = new Sprite(spriteHandler, L"Resources//Images//dragon.png");
+	this->_listSprite[eID::DRAGON] = sp;
+	this->loadSpriteInfo(eID::DRAGON, "Resources//Images//dragon_animation.txt");
+
 	//WHIP
 	sp = new Sprite(spriteHandler, L"Resources//Images//whip.png");
 	this->_listSprite[eID::WHIP] = sp;

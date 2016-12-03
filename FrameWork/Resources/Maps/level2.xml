@@ -791,5 +791,11 @@
     <Item Id="7" Name="object81" X="3007" Y="257" Width="35" Height="31">
       <ActiveBound X="3007" Y="257" Width="35" Height="31" />
     </Item>
+    <Item Id="54" Name="dragon0" X="462" Y="1111" Width="48" Height="83">
+      <ActiveBound X="462" Y="1111" Width="48" Height="83" />
+    </Item>
+    <Item Id="54" Name="dragon01" X="608" Y="1158" Width="36" Height="66">
+      <ActiveBound X="608" Y="1158" Width="36" Height="66" />
+    </Item>
   </Objects>
 </Tilesmap>

@@ -70,6 +70,7 @@ enum eID
 	LIFE_ICON = 51,
 	BLANK = 52,
 	WHIP = 53,
+	DRAGON = 54,
 };
 
 enum eItemID

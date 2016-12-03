@@ -3,22 +3,35 @@
   <QNode Id="0" Level="1" X="0" Y="0" Width="1536" Height="1536">
     <QNode Id="0" Level="2" X="0" Y="0" Width="768" Height="768">
       <QNode Id="0" Level="3" X="0" Y="0" Width="384" Height="384" />
-      <QNode Id="256" Level="3" X="384" Y="0" Width="384" Height="384" />
+      <QNode Id="256" Level="3" X="384" Y="0" Width="384" Height="384">
+        <Objects>dragon01 </Objects>
+      </QNode>
       <QNode Id="768" Level="3" X="384" Y="384" Width="384" Height="384">
         <QNode Id="768" Level="4" X="384" Y="384" Width="192" Height="192">
-          <QNode Id="768" Level="5" X="384" Y="384" Width="96" Height="96" />
+          <QNode Id="768" Level="5" X="384" Y="384" Width="96" Height="96">
+            <Objects>dragon0 </Objects>
+          </QNode>
           <QNode Id="769" Level="5" X="480" Y="384" Width="96" Height="96">
-            <Objects>land77 </Objects>
+            <Objects>land77 dragon0 </Objects>
           </QNode>
           <QNode Id="771" Level="5" X="480" Y="480" Width="96" Height="96">
-            <Objects>land76 </Objects>
+            <Objects>land76 dragon0 </Objects>
           </QNode>
           <QNode Id="770" Level="5" X="384" Y="480" Width="96" Height="96">
-            <Objects>land75 land76 stair74 </Objects>
+            <QNode Id="770" Level="6" X="384" Y="480" Width="48" Height="48" />
+            <QNode Id="771" Level="6" X="432" Y="480" Width="48" Height="48">
+              <Objects>land76 dragon0 </Objects>
+            </QNode>
+            <QNode Id="771" Level="6" X="432" Y="528" Width="48" Height="48">
+              <Objects>land75 land76 </Objects>
+            </QNode>
+            <QNode Id="770" Level="6" X="384" Y="528" Width="48" Height="48">
+              <Objects>land75 stair74 </Objects>
+            </QNode>
           </QNode>
         </QNode>
         <QNode Id="66304" Level="4" X="576" Y="384" Width="192" Height="192">
-          <Objects>land77 </Objects>
+          <Objects>land77 dragon01 </Objects>
         </QNode>
         <QNode Id="197376" Level="4" X="576" Y="576" Width="192" Height="192">
           <Objects>land70 </Objects>
