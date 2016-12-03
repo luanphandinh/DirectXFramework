@@ -142,7 +142,7 @@ void Simon::init()
 
 void Simon::resetValues() {
 	this->setScale(SCALE_FACTOR);
-
+	this->_isFreezed = false;
 	_preObject = nullptr;
 
 	_movingSpeed = SIMON_MOVING_SPEED;
@@ -753,7 +753,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	eDirection direction;
 
 	//Kiểm tra va chạm với land
-	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR || otherObjectID == eID::FLYLAND)
+	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR || otherObjectID == eID::FLYLAND || otherObjectID == eID::BRICK)
 	{
 		/* 
 			Với LAND : Nếu simon ko nằm trong cả 2 trang thái là nhảy vả rớt,đang nhảy hoặc rớt từ trên xuống
@@ -766,7 +766,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 		*/
 		if (
 			(
-			(!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::LAND)
+			(!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && (otherObjectID == eID::LAND || otherObjectID == eID::BRICK))
 			|| (!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::FLYLAND)
 			 //||	(this->isInStatus(eStatus::SITTING) && otherObjectID == eID::STAIR)
 			 || ((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::SITTING)) && otherObjectID == eID::STAIR)
@@ -784,6 +784,12 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			if (otherObjectID == eID::FLYLAND)
 			{
 				_trackedFlyLand = otherObject;
+			}
+
+			if (otherObjectID == eID::BRICK)
+			{
+				if (otherObject->isInStatus(eStatus::BURST))
+					return 0.0f;
 			}
 
 			//Nếu va chạm với câu thang thì cho phép simon đứng trên cầu thang,nếu ko thì false

@@ -95,6 +95,8 @@ void Level2Director::switchViewport()
 		if (pos.x < this->getCurrentViewportBound().x) 
 		{
 			this->setCurrentViewport(V3);
+			this->_reviveViewport = V3;
+			this->setRevivePosition(GVector2(1950,700));
 		}
 		break;
 	case eLevel2Viewport::V3:
@@ -115,6 +117,8 @@ void Level2Director::switchViewport()
 		if (pos.x < this->getCurrentViewportBound().x)
 		{
 			this->setCurrentViewport(V5);
+			this->_reviveViewport = V5;
+			this->setRevivePosition(GVector2(1450, 1000));
 		}
 		break;
 	default:
