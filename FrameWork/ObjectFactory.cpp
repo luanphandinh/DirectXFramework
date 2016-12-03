@@ -122,6 +122,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case CANDLE:
 		return getCandle(node);
 		break;
+	case BRICK:
+		return getBrick(node);
+		break;
 	case STAIR_LEFTBOTTOM_RIGHTTOP:
 		break;
 	case STAIR_RIGHTBOTTOM_LEFTTOP:
@@ -525,6 +528,24 @@ BaseObject* ObjectFactory::getCandle(xml_node node)
 	return candle;
 }
 
+BaseObject* ObjectFactory::getBrick(xml_node node)
+{
+	auto properties = ObjectFactory::getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y;
+
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+
+	GVector2 pos = GVector2(x , y );
+
+	auto brick = new Brick(pos);
+	brick->init();
+	return brick;
+}
+
 map<string, string> ObjectFactory::getObjectProperties(xml_node node)
 {
 	map<string, string> properties;
@@ -545,3 +566,5 @@ map<string, string> ObjectFactory::getObjectProperties(xml_node node)
 
 	return properties;
 }
+
+

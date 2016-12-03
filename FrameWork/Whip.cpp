@@ -78,6 +78,7 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 		auto object = _listColliding.find(otherObject);
 		switch (otherObjectID)
 		{
+		case BRICK:
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURST);
 			break;

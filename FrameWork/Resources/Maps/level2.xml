@@ -785,5 +785,11 @@
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
+    <Item Id="7" Name="object80" X="2814" Y="97" Width="31" Height="31">
+      <ActiveBound X="2814" Y="97" Width="31" Height="31" />
+    </Item>
+    <Item Id="7" Name="object81" X="3007" Y="257" Width="35" Height="31">
+      <ActiveBound X="3007" Y="257" Width="35" Height="31" />
+    </Item>
   </Objects>
 </Tilesmap>

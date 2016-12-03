@@ -193,6 +193,9 @@
     <ClCompile Include="Whip.cpp">
       <Filter>Source Files\Objects\Items\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -389,6 +392,9 @@
     </ClInclude>
     <ClInclude Include="Whip.h">
       <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

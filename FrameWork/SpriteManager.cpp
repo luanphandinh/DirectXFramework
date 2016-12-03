@@ -53,6 +53,15 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite[eID::BURNING] = sp;
 	this->loadSpriteInfo(eID::BURNING, "Resources//Images//burning_animation.txt");
 
+	//BRICK
+	sp = new Sprite(spriteHandler, L"Resources//Images//brick.png");
+	this->_listSprite[eID::BRICK] = sp;
+	this->loadSpriteInfo(eID::BRICK, "Resources//Images//brick_animation.txt");
+
+	sp = new Sprite(spriteHandler, L"Resources//Images//brokenbrick.png");
+	this->_listSprite[eID::BROKENBRICK] = sp;
+	this->loadSpriteInfo(eID::BROKENBRICK, "Resources//Images//brokenbrick_animation.txt");
+
 	//WHIP
 	sp = new Sprite(spriteHandler, L"Resources//Images//whip.png");
 	this->_listSprite[eID::WHIP] = sp;
