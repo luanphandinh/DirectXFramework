@@ -59,7 +59,7 @@ enum eID
 	SPEARKNIGHT = 35,
 	BAT = 36,
 	MEDUSAHEAD = 37,
-	BURNING= 38,
+	HITEFFECT= 38,
 	SPAWNER=39,
 
 	//stage
@@ -87,6 +87,7 @@ enum eItemID
 	BOORMERANG = 9,
 	HOLYWATER = 10,
 	STOPWATCH = 11,
+	DRAGON_FIRE = 12,
 };
 
 //status cho nhân vật

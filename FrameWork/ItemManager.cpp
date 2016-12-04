@@ -112,6 +112,11 @@ float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 		else
 		{
 			item->checkCollision(otherObject, dt);
+			for (Item* passiveItem : _listItem)
+			{
+				if (passiveItem->getId() != eItemID::NOITEM) continue;
+				item->checkCollision(passiveItem, dt);
+			}
 		}
 	}
 

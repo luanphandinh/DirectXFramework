@@ -87,9 +87,10 @@
     <ClInclude Include="Director.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Dragon.h" />
+    <ClInclude Include="DragonFire.h" />
     <ClInclude Include="EmptyObject.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="Burning.h" />
+    <ClInclude Include="HitEffect.h" />
     <ClInclude Include="FlyLand.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameStatusBoard.h" />
@@ -148,7 +149,7 @@
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="Burning.cpp" />
+    <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />
     <ClCompile Include="CollisionBody.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Dragon.cpp" />
+    <ClCompile Include="DragonFire.cpp" />
     <ClCompile Include="EmptyObject.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="FlyLand.cpp" />

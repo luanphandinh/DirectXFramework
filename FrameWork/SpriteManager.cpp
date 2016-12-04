@@ -50,8 +50,8 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 
 	// BURNING
 	sp = new Sprite(spriteHandler, L"Resources//Images//burning.png");
-	this->_listSprite[eID::BURNING] = sp;
-	this->loadSpriteInfo(eID::BURNING, "Resources//Images//burning_animation.txt");
+	this->_listSprite[eID::HITEFFECT] = sp;
+	this->loadSpriteInfo(eID::HITEFFECT, "Resources//Images//burning_animation.txt");
 
 	//BRICK
 	sp = new Sprite(spriteHandler, L"Resources//Images//brick.png");

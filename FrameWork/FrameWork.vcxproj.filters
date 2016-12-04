@@ -178,9 +178,6 @@
     <ClCompile Include="Candle.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Burning.cpp">
-      <Filter>Source Files\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectSpawner.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
@@ -198,6 +195,12 @@
     </ClCompile>
     <ClCompile Include="Dragon.cpp">
       <Filter>Source Files\Objects\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="DragonFire.cpp">
+      <Filter>Source Files\Objects\Items\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="HitEffect.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -381,9 +384,6 @@
     <ClInclude Include="Candle.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Burning.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectSpawner.h">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
@@ -401,6 +401,12 @@
     </ClInclude>
     <ClInclude Include="Dragon.h">
       <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="DragonFire.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="HitEffect.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

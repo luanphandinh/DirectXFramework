@@ -118,3 +118,14 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 	}
 	return 0.0f;
 }
+
+eItemID Item::getItemId()
+{
+	return _itemId;
+}
+
+void Item::setItemId(eItemID itemId)
+{
+	if (_itemId != itemId)
+		_itemId = itemId;
+}

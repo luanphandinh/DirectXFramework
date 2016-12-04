@@ -5,7 +5,7 @@
 #include "BaseEnemy.h"
 #include "Simon.h"
 #include "StopWatch.h"
-#include "Burning.h"
+#include "HitEffect.h"
 using namespace std;
 
 #define SPEARKNIGHT_SPEED 50

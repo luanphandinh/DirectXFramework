@@ -1,21 +1,21 @@
 ﻿
 
-#include "Burning.h"
+#include "HitEffect.h"
 /*
- * Burning dùng để tạo vụ nổ, đám cháy khi nhân vật hoặc đối tượng chết.
+ * HitEffect dùng để tạo vụ nổ, đám cháy khi nhân vật hoặc đối tượng chết.
  * hiện tại có 2 kiểu nổ. (xem hình resource)
- * lớp nào chứa Burning nhớ quản lý huỷ đối tương này
+ * lớp nào chứa HitEffect nhớ quản lý huỷ đối tương này
 */
-Burning::Burning(int type,GVector2 pos) : BaseObject(eID::BURNING) {
+HitEffect::HitEffect(int type,GVector2 pos) : BaseObject(eID::HITEFFECT) {
 	this->_type = type;
-	this->_sprite = SpriteManager::getInstance()->getSprite(eID::BURNING);
+	this->_sprite = SpriteManager::getInstance()->getSprite(eID::HITEFFECT);
 	this->setPosition(pos);
 }
 
-Burning::~Burning() {}
+HitEffect::~HitEffect() {}
 
 
-void Burning::init() {
+void HitEffect::init() {
 	this->setScale(SCALE_FACTOR);
 
 	this->setStatus(eStatus::NORMAL);
@@ -23,14 +23,14 @@ void Burning::init() {
 	this->_animation = new Animation(this->_sprite, SPEED_ANIMATION);
 
 	if (this->_type == 1) {
-		this->_animation->addFrameRect(eID::BURNING, "explode",NULL);
+		this->_animation->addFrameRect(eID::HITEFFECT, "explode", NULL);
 	}
 	else {
-		this->_animation->addFrameRect(eID::BURNING, "burn_01","burn_02","burn_03",NULL);
+		this->_animation->addFrameRect(eID::HITEFFECT, "explode", "burn_01", "burn_02", "burn_03", NULL);
 	}
 }
 
-void Burning::update(float deltatime) {
+void HitEffect::update(float deltatime) {
 	if (this->getStatus() != eStatus::NORMAL)
 		return;
 	this->_animation->update(deltatime);
@@ -43,20 +43,20 @@ void Burning::update(float deltatime) {
 	}
 }
 
-void Burning::setPosition(GVector2 position) {
+void HitEffect::setPosition(GVector2 position) {
 	this->_sprite->setPosition(position);
 }
 
-void Burning::setTimeAnimated(float time) {
+void HitEffect::setTimeAnimated(float time) {
 	this->_animation->setTimeAnimate(time);
 }
 
-void Burning::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport) {
+void HitEffect::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport) {
 	if (this->getStatus() != eStatus::NORMAL)
 		return;
 	this->_animation->draw(spriteHandle, viewport);
 }
-void Burning::release() {
+void HitEffect::release() {
 	SAFE_DELETE(this->_sprite);
 	SAFE_DELETE(_animation);
 }

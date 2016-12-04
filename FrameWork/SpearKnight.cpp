@@ -121,7 +121,7 @@ void SpearKnight::update(float deltatime) {
 	if (this->getStatus() == eStatus::BURST) {
 		if (_burning == nullptr) {
 			auto pos = this->getPosition();
-			_burning = new Burning(2, pos);
+			_burning = new HitEffect(2, pos);
 			_burning->init();
 		}
 		else {

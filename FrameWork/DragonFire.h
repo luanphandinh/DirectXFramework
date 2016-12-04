@@ -2,13 +2,13 @@
 #include"Weapon.h"
 #include"Animation.h"
 #include"StopWatch.h"
-#include"define.h"
-#define HOLYWATER_SPEED GVector2(250,150)
-class HolyWater : public Weapon
+#include"HitEffect.h"
+#define DRAGON_FIRE_SPEED GVector2(200,0)
+class DragonFire : public Weapon
 {
 public:
-	HolyWater(GVector2 startPosition, eItemType type, eDirection dir = eDirection::NONE);
-	~HolyWater();
+	DragonFire(GVector2 startPos,eDirection dir);
+	~DragonFire();
 
 	void init() override;
 	void update(float deltatime) override;
@@ -19,9 +19,8 @@ public:
 
 	//virtual float checkCollision(BaseObject* object, float dt) override;
 	virtual void initWeaponComponent() override;
-protected:
-	Animation*	_burstAnimation;
-	Animation*	_throwAnimation;
+private:
+	HitEffect*	_hitEffect;
 	StopWatch*	_burstStopWatch;
 };
 

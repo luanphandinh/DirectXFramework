@@ -5,10 +5,10 @@
 #include "StopWatch.h"
 
 #define SPEED_ANIMATION			0.08f
-class Burning : public BaseObject {
+class HitEffect : public BaseObject {
 public:
-	Burning(int type = 1,GVector2 pos = GVector2Zero);
-	~Burning();
+	HitEffect(int type = 1, GVector2 pos = GVector2Zero);
+	~HitEffect();
 
 	void init();
 	void update(float deltatime);

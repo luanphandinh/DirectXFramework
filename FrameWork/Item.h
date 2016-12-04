@@ -47,6 +47,8 @@ public:
 		Hàm này sẽ do các lớp con kế thừa xuống và xử lý
 	*/
 	virtual void pickedUp() = 0;
+	eItemID getItemId();
+	void setItemId(eItemID itemId);
 protected:
 	GVector2	_startPosition;
 	eItemType	_type;
