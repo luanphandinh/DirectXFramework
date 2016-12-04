@@ -225,8 +225,11 @@ void Ghost::updateHiding() {
 		&&ythis<y+10&&ythis>y) {
 		this->setStatus(FLYINGUP);
 	}*/
-	if (objectBound.right < this->getBounding().left-100&&objectBound.top>this->getBounding().bottom) {
-	this->setStatus(FLYINGUP);
+	if (this->getDirection() == -1&&objectBound.right < this->getBounding().left - 100 && objectBound.top>this->getBounding().bottom) {
+		this->setStatus(FLYINGUP);
+	}
+	else if (this->getDirection() == 1 && objectBound.left > this->getBounding().right + 100 && objectBound.top>this->getBounding().bottom) {
+		this->setStatus(FLYINGUP);
 	}
 	else {
 		this->setStatus(HIDING);
