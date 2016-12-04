@@ -258,8 +258,8 @@ BaseObject * ObjectFactory::getBat(xml_node node) {
 	int x, y, direction;
 	eStatus status;
 
-	x = stoi(properties["X"]);
-	y = stoi(properties["Y"]);
+	x = stoi(properties["X"])+8;
+	y = stoi(properties["Y"])-16;
 
 	if (properties.find("status") != properties.end()) {
 		status = (eStatus)(stoi(properties.find("status")->second));

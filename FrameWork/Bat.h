@@ -56,7 +56,8 @@ private:
 	bool		_verticalflag;
 
 	int hack;
-
+	bool _isHitted;
+	StopWatch* _stopWatch;
 	void checkIfOutOfScreen();
 	void updateHanging();
 

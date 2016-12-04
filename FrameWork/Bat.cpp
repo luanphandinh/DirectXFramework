@@ -74,7 +74,7 @@ void Bat::init() {
 	_animations[DYING] = new Animation(_sprite, 0.15f);
 	_animations[DYING]->addFrameRect(eID::BAT, NULL);
 
-
+	_stopWatch = new StopWatch();
 	//*Test
 	//this->setPosition(GVector2(300, 200));
 	this->setStatus(eStatus::HANGING);
@@ -140,8 +140,12 @@ void Bat::changeDirection() {
 }
 
 void Bat::flyingDown() {
+	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	RECT objectBound = objectTracker->getBounding();
+	auto viewportTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT vpBound = viewportTracker->getBounding();
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(movement->getVelocity().x, -50));
+	movement->setVelocity(GVector2(movement->getVelocity().x, -(vpBound.top-objectBound.top)/2));
 }
 
 void Bat::fly() {
@@ -173,8 +177,6 @@ void Bat::onCollisionBegin(CollisionEventArg* collision_event) {
 	{
 		if (collision_event->_otherObject->isInStatus(eStatus::DYING) == false) {
 			collision_event->_otherObject->setStatus(eStatus::DYING);
-			//* need to add die() for simon
-			//((Simon*)collision_event->_otherObject)->die();
 		}
 		break;
 	}
@@ -187,11 +189,7 @@ void Bat::onCollisionEnd(CollisionEventArg* collision_event) {
 	if (this->getStatus() == eStatus::DESTROY)
 		return;
 	eID objectID = collision_event->_otherObject->getId();
-	switch (objectID) {
-	case eID::LAND:
-	default:
-		break;
-	}
+
 }
 
 
@@ -204,30 +202,28 @@ float Bat::checkCollision(BaseObject * object, float dt) {
 	eID objectId = object->getId();
 	eDirection direction;
 
-	/*if (objectId == eID::LAND) {
-		if (collisionBody->checkCollision(object, direction, dt)) {
-			if (direction == eDirection::TOP && this->getVelocity().y < 0) {
-				auto gravity = (Gravity*)this->_listComponent["Gravity"];
-				auto movement = (Movement*)this->_listComponent["Movement"];
-				movement->setVelocity(GVector2(movement->getVelocity().x, 0));
-				gravity->setStatus(eGravityStatus::SHALLOWED);
+	if (objectId == eID::SIMON) {
+		if (collisionBody->checkCollision(object, direction, dt, false)) {
+			auto movement = (Movement*)this->_listComponent["Movement"];
 
-				this->setStatus(eStatus::WALKING);
-				prevObject = object;
+			if (object->isInStatus(eStatus::HITTING)) {
+				if (_stopWatch->isStopWatch(200)) {
+					this->_animations[this->getStatus()]->enableFlashes(true);
+					_animations[this->getStatus()]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));
+				}
+				this->dropHitpoint(1);
+				_isHitted = true;
+			}
+			else {
+				((Simon*)object)->getHitted();
+				this->_animations[this->getStatus()]->enableFlashes(false);
+				_isHitted = false;
 			}
 		}
-		else if (prevObject == object) {
-			auto gravity = (Gravity*)this->_listComponent["Gravity"];
-			gravity->setStatus(eGravityStatus::FALLING_DOWN);
 
-			prevObject = nullptr;
-		}
+		return 0.0f;
 	}
-	else {
 
-		collisionBody->checkCollision(object, dt, false);
-
-	}*/
 	collisionBody->checkCollision(object, dt, false);
 
 	return 0.0f;
