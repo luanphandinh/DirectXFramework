@@ -1,5 +1,6 @@
 ﻿#include "DragonFire.h"
 #include "Simon.h"
+#include"Whip.h"
 
 DragonFire::DragonFire(GVector2 startPos, eDirection dir) : Weapon(startPos, eItemType::PICKED_UP, dir, eItemID::DRAGON_FIRE)
 {
@@ -18,6 +19,7 @@ void DragonFire::init()
 	_sprite->setOrigin(GVector2(0.5, 0.5));
 	_sprite->setScale(SCALE_FACTOR);
 	Weapon::initCommonComponent();
+	this->setPhysicBodySide(eDirection::ALL);
 	initWeaponComponent();
 }
 
@@ -88,7 +90,8 @@ float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
 	eDirection direction;
-	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR) return 0.0f;
+	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR || otherObjectID == eID::DRAGON
+		) return 0.0f;
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
 	if (collisionBody->checkCollision(otherObject, direction, dt, false))
@@ -98,7 +101,11 @@ float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 			this->setStatus(eStatus::BURST);
 			((Simon*)otherObject)->getHitted();
 		}
-		else if (otherObjectID == eID::WHIP)
+		else if (otherObjectID == eID::WHIP && ((Whip*)otherObject)->isHitting())
+		{
+			this->setStatus(eStatus::BURST);
+		}
+		else if (otherObjectID == eID::ITEM)
 		{
 			this->setStatus(eStatus::BURST);
 		}

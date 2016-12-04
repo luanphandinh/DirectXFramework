@@ -1088,7 +1088,10 @@ void Simon::setPositionInLand(Land* land)
 
 BaseObject* Simon::getWhip()
 {
+	if (!this->isInStatus(eStatus::HITTING))
+		_whip->restart();
 	return this->_whip;
+	
 }
 
 void Simon::forceMoveRight() {

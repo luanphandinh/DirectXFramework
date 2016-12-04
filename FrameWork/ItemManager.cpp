@@ -8,6 +8,7 @@
 #include"HolyWater.h"
 #include"Sword.h"
 #include"DragonFire.h"
+#include"PlayScene.h"
 
 list<Item*> ItemManager::_listItem;
 
@@ -113,14 +114,16 @@ float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 		else
 		{
 			item->checkCollision(otherObject, dt);
-			/*if (item->getItemId() == eItemID::DRAGON_FIRE)
+			if (item->getItemId() == eItemID::DRAGON_FIRE)
 			{
 				for (Item* otherItem : _listItem)
 				{
 					if (otherItem->getItemId() == eItemID::DRAGON_FIRE) continue;
 					item->checkCollision(otherItem, dt);
 				}
-			}*/
+				/*auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+				_simon->getWhip()->checkCollision(item,dt);*/
+			}
 		}
 	}
 

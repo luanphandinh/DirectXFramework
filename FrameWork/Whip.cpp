@@ -22,6 +22,7 @@ void Whip::init()
 	_animations[1]->addFrameRect(eID::WHIP, "whip_01", "whip_02", "whip_03", "whip_03", NULL);
 	auto collisionBody = new CollisionBody(this);
 	_componentList.insert(pair<string, IComponent*>("CollisionBody", collisionBody));
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 void Whip::update(float deltatime) 
@@ -84,6 +85,7 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 		auto object = _listColliding.find(otherObject);
 		switch (otherObjectID)
 		{
+		case ITEM:
 		case BRICK:
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURST);

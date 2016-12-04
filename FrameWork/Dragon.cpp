@@ -96,7 +96,7 @@ void Dragon::fire()
 		_fireStopWatch = new StopWatch();
 	}
 
-	if (_fireStopWatch->isStopWatch(1000))
+	if (_fireStopWatch->isStopWatch(1500))
 	{
 		ItemManager::generateWeapon(eItemID::DRAGON_FIRE,this->getPosition() + GVector2(0,10),_direction);
 		SAFE_DELETE(_fireStopWatch);

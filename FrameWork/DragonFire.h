@@ -3,7 +3,7 @@
 #include"Animation.h"
 #include"StopWatch.h"
 #include"HitEffect.h"
-#define DRAGON_FIRE_SPEED GVector2(150,0)
+#define DRAGON_FIRE_SPEED GVector2(120,0)
 class DragonFire : public Weapon
 {
 public:
