@@ -13,6 +13,8 @@
 #include"Candle.h"
 #include"Brick.h"
 #include"Dragon.h"
+#include"Spike.h"
+
 class ObjectFactory
 {
 public:
@@ -29,6 +31,8 @@ private:
 	static BaseObject* getSpearKnight(xml_node node);
 	static BaseObject* getMedusaHead(xml_node node);
 	static BaseObject* getSpawner(xml_node node);
+	static BaseObject* getSpike(xml_node node);
+
 
 	static BaseObject* getDoor(xml_node node);
 	static BaseObject* getFlyLand(xml_node node);

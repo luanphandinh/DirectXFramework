@@ -49,6 +49,8 @@ enum eID
 	CANDLE = 6,
 	BRICK = 7,
 	BROKENBRICK = 8,
+	SPIKE = 9,
+
 	STAIR_LEFTBOTTOM_RIGHTTOP = 13,
 	STAIR_RIGHTBOTTOM_LEFTTOP = 14,
 	//Throwable weapon
@@ -131,6 +133,11 @@ enum eStatus
 	ISHITTED = (1 << 26),
 	PICKUPITEM = (1 << 27),
 	FREEZE = (1 << 28),
+
+	SPIKE_FALLING_01=(1<<29),
+	SPIKE_FALLING_02 = (1 << 30),
+	SPIKE_FALLING_03 = (1 << 31),
+
 };
 
 enum eStairDirection

@@ -71,6 +71,12 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	sp = new Sprite(spriteHandler, L"Resources//Images//whip.png");
 	this->_listSprite[eID::WHIP] = sp;
 	this->loadSpriteInfo(eID::WHIP, "Resources//Images//whip_info.txt");
+
+	// SPIKE
+	sp = new Sprite(spriteHandler, L"Resources//Images//spike.png");
+	this->_listSprite[eID::SPIKE] = sp;
+	this->loadSpriteInfo(eID::SPIKE, "Resources//Images//spike_animation.txt");
+
 	//sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	//sp->setOrigin(GVector2(0.0f, 0.0f));
 	//this->_listSprite[eID::MAPSTAGE1] = sp;

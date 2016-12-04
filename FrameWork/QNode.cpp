@@ -153,7 +153,7 @@ void QNode::fetchActiveObject(RECT bound)
 {
 	//Đầu tiên cần kiểm tra xem vùng bound ta cần lấy object
 	//Có nằm trong,giao,hoặc chứa bound của QNode hay ko
-	if (isContains(this->_bound, bound) || isRectangleIntersected(this->_bound, bound) || isContains(bound, this->_bound))
+	if (isContains(this->_bound, bound) || isRectangleIntersectedInTopLeft(this->_bound, bound) || isContains(bound, this->_bound))
 	{
 		//Nếu là node lá thì tiến hành kiểm tra chèn object vào 
 		//static ActiveObject nếu ko thì bắt đầu kiểm tra con của nó

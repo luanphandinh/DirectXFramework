@@ -507,6 +507,33 @@ BaseObject * ObjectFactory::getFlyLand(xml_node node) {
 	return flyLand;
 }
 
+BaseObject * ObjectFactory::getSpike(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y;
+	eStatus status;
+
+	xml_node activebound = node.child("ActiveBound");
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+	//hack :v
+	/*x += 8;
+	width -= 64;
+	y -= 48;*/
+	if (properties.find("status") != properties.end()) {
+		status = (eStatus)(stoi(properties.find("status")->second));
+	}
+	else {
+		status = eStatus::WAITING;
+	}
+
+	auto spike = new Spike(status, GVector2(x, y));
+	spike->init();
+
+	return spike;
+}
 
 
 BaseObject* ObjectFactory::getCandle(xml_node node)
