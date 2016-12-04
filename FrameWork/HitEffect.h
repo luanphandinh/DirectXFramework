@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "StopWatch.h"
 
-#define SPEED_ANIMATION			0.08f
+#define SPEED_ANIMATION			0.12f
 class HitEffect : public BaseObject {
 public:
 	HitEffect(int type = 1, GVector2 pos = GVector2Zero);

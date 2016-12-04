@@ -1,5 +1,8 @@
 #include "BaseEnemy.h"
-BaseEnemy::BaseEnemy(eID id) : BaseObject(id) {}
+BaseEnemy::BaseEnemy(eID id) : BaseObject(id) 
+{
+}
+
 BaseEnemy::~BaseEnemy() {}
 int BaseEnemy::getHitpoint() {
 	return _hitpoint;

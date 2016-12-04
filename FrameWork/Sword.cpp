@@ -70,7 +70,7 @@ float Sword::checkCollisionWeapon(BaseObject* otherObject, float dt)
 	eID otherObjectID = otherObject->getId();
 	eDirection direction;
 	if (otherObjectID == eID::SIMON || otherObjectID == eID::LAND
-		|| otherObjectID == eID::STAIR) return 0.0f;
+		|| otherObjectID == eID::STAIR || otherObjectID == eID::WHIP) return 0.0f;
 
 	if (collisionBody->checkCollision(otherObject, direction, dt, false))
 	{

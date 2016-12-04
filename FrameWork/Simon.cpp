@@ -355,13 +355,15 @@ void Simon::updateStatus(float deltatime)
 		{
 			_isHittedStopWatch = new StopWatch();
 			//Nhân với trừ 1 để nhảy ngược lại
-			auto move = (Movement*)this->_componentList["Movement"];
-			move->setVelocity(GVector2((-1) * _movingSpeed * (this->getScale().x / SCALE_FACTOR), this->getVelocity().y + 300));
-			auto gravity = (Gravity*)this->_componentList["Gravity"];
-			gravity->setStatus(eGravityStatus::FALLING_DOWN);
+			if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(UPSTAIR) || !this->isInStatus(DOWNSTAIR))
+			{
+				auto move = (Movement*)this->_componentList["Movement"];
+				move->setVelocity(GVector2((-1) * _movingSpeed * (this->getScale().x / SCALE_FACTOR), this->getVelocity().y + 300));
+				auto gravity = (Gravity*)this->_componentList["Gravity"];
+				gravity->setStatus(eGravityStatus::FALLING_DOWN);
+			}
 		}
 	
-
 		if (_isHittedStopWatch->isStopWatch(200))
 		{
 			_isHitted = false;

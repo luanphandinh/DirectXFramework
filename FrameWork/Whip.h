@@ -3,6 +3,7 @@
 #include"Animation.h"
 #include"CollisionBody.h"
 #include"Weapon.h"
+#include"HitEffect.h"
 class Whip : public BaseObject
 {
 public:
@@ -30,5 +31,6 @@ private:
 	BaseObject* _simon;
 	map<string, IComponent*> _componentList;
 	map<BaseObject*, bool> _listColliding;
+	HitEffect* _hitEffect;
 };
 

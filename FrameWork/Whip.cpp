@@ -23,6 +23,7 @@ void Whip::init()
 	auto collisionBody = new CollisionBody(this);
 	_componentList.insert(pair<string, IComponent*>("CollisionBody", collisionBody));
 	this->setPhysicBodySide(eDirection::ALL);
+	//_hitEffect = new HitEffect(1, this->getPosition());
 }
 
 void Whip::update(float deltatime) 
@@ -34,6 +35,29 @@ void Whip::update(float deltatime)
 		this->setPosition(_simon->getPosition());
 	if (_simon->isInStatus(eStatus::HITTING))
 		_animations[_level]->update(deltatime);
+
+	if (_listColliding.size() == 0)
+	{
+		SAFE_DELETE(_hitEffect);
+		_hitEffect = nullptr;
+	}
+	else
+	for (auto it = _listColliding.begin(); it != _listColliding.end(); ++it)
+	{
+		if (_hitEffect == nullptr) {
+			auto pos = ((BaseObject*)(it->first))->getPosition();
+			_hitEffect = new HitEffect(1, pos);
+			_hitEffect->init();
+		}
+		else {
+			_hitEffect->setPosition(((BaseObject*)(it->first))->getPosition());
+			_hitEffect->update(deltatime);
+			if (_hitEffect->getStatus() == eStatus::DESTROY) {
+				SAFE_DELETE(_hitEffect);
+				_hitEffect = nullptr;
+			}
+		}
+	}
 
 }
 
@@ -48,6 +72,10 @@ void Whip::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 		//	this->setPosition(_simon->getPosition());
 		_animations[_level]->draw(spriteHandler, viewport);
 	}
+
+	if (_hitEffect != nullptr)
+		_hitEffect->draw(spriteHandler, viewport);
+
 }
 
 void Whip::release() 
@@ -85,7 +113,6 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 		auto object = _listColliding.find(otherObject);
 		switch (otherObjectID)
 		{
-		case ITEM:
 		case BRICK:
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURST);

@@ -18,7 +18,7 @@ bool PlayScene::init()
 	auto simon = new Simon();
 	simon->init();
 	simon->setPosition(2700, 100);//v1
-	simon->setPosition(2300, 638);//v2
+	//simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
 	simon->setPosition(200, 1000);//v5
