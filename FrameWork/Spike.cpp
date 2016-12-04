@@ -1,33 +1,52 @@
 ﻿#include "Spike.h"
 #include "PlayScene.h"
-Spike::Spike(eStatus status, GVector2 pos) :BaseObject(eID::SPIKE) {
+Spike::Spike(eSpikeState state, GVector2 pos) :BaseObject(eID::SPIKE) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SPIKE);
-	_sprite->setFrameRect(0, 0, 32.0f, 32.0f);
-	// rớt xuống
-	GVector2 v(0, 0);
-	GVector2 a(0, 0);
-	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
-	this->setStatus(status);
+	_sprite->setFrameRect(0, 0, 64.0f, 64.0f);
+
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
-	this->setScaleX(SCALE_FACTOR);
 
 	_stopWatch = new StopWatch();
+	switch (state) {
+	case SPIKE_FALLING_01:
+		spikeState=FALLING_01;
+		break;
+	case SPIKE_FALLING_02:
+		spikeState = FALLING_02;
+		break;
+	case SPIKE_FALLING_03:
+		spikeState = FALLING_03;
+		break;
+	default:
+		break;
+	}
+
+	/*this->spikeState = status;*/
+
 }
 
 Spike::~Spike() {}
 
 void Spike::init() {
-	_animations[eStatus::WAITING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::WAITING] = new Animation(_sprite, 0.15f);
 	_animations[eStatus::WAITING]->addFrameRect(eID::SPIKE, "normal", NULL);
+
 	// spike dài nhất :đang test
-	_animations[eStatus::SPIKE_FALLING_01] = new Animation(_sprite, 0.5f);
-	_animations[eStatus::SPIKE_FALLING_01]->addFrameRect(eID::SPIKE, "fall_02", "fall_03", "fall_04", "fall_05", "fall_06", "fall_07", "fall_08", "fall_07",
+	_animations[eStatus::FALLING_01] = new Animation(_sprite, 0.15f);
+	_animations[eStatus::FALLING_01]->addFrameRect(eID::SPIKE, "fall_02", "fall_03", "fall_04", "fall_05", "fall_06", "fall_07", "fall_08", "fall_07",
+		"fall_06", "fall_05", "fall_04", "fall_03", "fall_02", "fall_01", NULL);
+
+	// vừa vừa :v
+	_animations[eStatus::FALLING_02] = new Animation(_sprite, 0.15f);
+	_animations[eStatus::FALLING_02]->addFrameRect(eID::SPIKE, "fall_02", "fall_03", "fall_04", "fall_05", "fall_06", "fall_07",
 		"fall_06", "fall_05", "fall_04", "fall_03", "fall_02", "fall_01", NULL);
 
 	// spike ngắn nhất
-	/*_animations[FALLING_02] = new Animation(_sprite, 0.5f);
-	_animations[FALLING_02]->addFrameRect(eID::SPIKE, "fall_02", "fall_03", "fall_04", "fall_03", "fall_02", "fall_01", NULL);*/
+	_animations[eStatus::FALLING_03] = new Animation(_sprite, 0.15f);
+	_animations[eStatus::FALLING_03]->addFrameRect(eID::SPIKE, "fall_02", "fall_03", "fall_04", "fall_05", "fall_06",  "fall_05", "fall_04",
+		"fall_03", "fall_02", "fall_01", NULL);
+	
 
 	//*Test
 	//this->setPosition(GVector2(300, 200));
@@ -45,31 +64,57 @@ void Spike::update(float deltaTime) {
 		this->updateWaiting();
 		return;
 	}
-	//else {
 
-	//if ((this->getStatus() == eStatus::FALLING_01) && _animations[_currentAnimateIndex]->getIndex() == 6) {
-	//	auto movement = (Movement*)this->_listComponent["Movement"];
-	//	movement->setVelocity(GVector2(0, SPEED_RETURN));
-
-	//}
 
 	for (auto it : _listComponent) {
 		it.second->update(deltaTime);
 	}
 
 	if (this->getStatus() != DESTROY) {
-		/*this->updateCurrentAnimateIndex();
-
-		_animations[_currentAnimateIndex]->update(deltaTime);*/
 		_animations[this->getStatus()]->update(deltaTime);
 
-	}
 
-	/*}*/
+		switch (this->getStatus()) {
+		case FALLING_01:
+			if (_animations[this->getStatus()]->getIndex() >= 6) {
+				_animations[this->getStatus()]->setTimeAnimate(0.45f);
+			}
+			else {
+				_animations[this->getStatus()]->setTimeAnimate(0.15f);
+			}
+			break;
+		case FALLING_02:
+			if (_animations[this->getStatus()]->getIndex() >= 5) {
+				_animations[this->getStatus()]->setTimeAnimate(0.45f);
+			}
+			else {
+				_animations[this->getStatus()]->setTimeAnimate(0.15f);
+			}
+			break;
+		case FALLING_03:
+			if (_animations[this->getStatus()]->getIndex() >= 4) {
+				_animations[this->getStatus()]->setTimeAnimate(0.45f);
+			}
+			else {
+				_animations[this->getStatus()]->setTimeAnimate(0.15f);
+			}
+			break;
+		default:
+			break;
+		}
+		// Loại dài nhất, lúc nó fall thì nhanh, return thì chậm
+		/*if ((this->getStatus() == eStatus::SPIKE_FALLING_01) && _animations[this->getStatus()]->getIndex() >= 6) {
+			_animations[this->getStatus()]->setTimeAnimate(0.5f);
+
+		}
+		else {
+			_animations[this->getStatus()]->setTimeAnimate(0.1f);
+
+		}*/
+	}
 }
 
 void Spike::draw(LPD3DXSPRITE spriteHandler, Viewport *viewport) {
-	//_animations[_currentAnimateIndex]->draw(spriteHandler, viewport);
 	_animations[this->getStatus()]->draw(spriteHandler, viewport);
 
 }
@@ -107,16 +152,6 @@ IComponent * Spike::getComponent(string componentName) {
 	return _listComponent.find(componentName)->second;
 }
 
-void Spike::updateCurrentAnimateIndex() {
-
-
-	if (this->isInStatus(eStatus::WAITING)) {
-		_currentAnimateIndex = eStatus::WAITING;
-	}
-	if (_currentAnimateIndex & eStatus::SPIKE_FALLING_01) {
-		_currentAnimateIndex = eStatus::SPIKE_FALLING_01;
-	}
-}
 
 void Spike::updateWaiting() {
 	auto viewport = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
@@ -127,8 +162,8 @@ void Spike::updateWaiting() {
 	}
 	else {
 		// cạnh phải spike >cạnh trái view-->falling
-		if (this->getBounding().right > screenBound.left) {
-			this->setStatus(eStatus::SPIKE_FALLING_01);
+		if (this->getBounding().left < screenBound.right) {
+			this->setStatus(spikeState);
 		}
 	}
 }

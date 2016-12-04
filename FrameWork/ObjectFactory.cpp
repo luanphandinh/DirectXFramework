@@ -125,6 +125,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case BRICK:
 		return getBrick(node);
 		break;
+		case SPIKE:
+			return getSpike(node);
+			break;
 	case DRAGON:
 		return getDragon(node);
 		break;
@@ -513,23 +516,24 @@ BaseObject * ObjectFactory::getSpike(xml_node node) {
 		return nullptr;
 
 	int x, y;
-	eStatus status;
+	//eStatus status;
+	eSpikeState state;
 
 	xml_node activebound = node.child("ActiveBound");
-	x = stoi(properties["X"]);
+	x = stoi(properties["X"])+32;
 	y = stoi(properties["Y"]);
 	//hack :v
 	/*x += 8;
 	width -= 64;
 	y -= 48;*/
-	if (properties.find("status") != properties.end()) {
-		status = (eStatus)(stoi(properties.find("status")->second));
+	if (properties.find("state") != properties.end()) {
+		state = (eSpikeState)(stoi(properties.find("state")->second));
 	}
 	else {
-		status = eStatus::WAITING;
+		state = eSpikeState::SPIKE_FALLING_01;
 	}
 
-	auto spike = new Spike(status, GVector2(x, y));
+	auto spike = new Spike(state, GVector2(x, y));
 	spike->init();
 
 	return spike;

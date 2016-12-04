@@ -15,7 +15,7 @@ public:
 	@pos: Vị trí
 	@x, y: tọa độ của pos
 	*/
-	Spike(eStatus status, GVector2 pos);
+	Spike(eSpikeState state, GVector2 pos);
 	~Spike();
 
 	void init();
@@ -39,5 +39,7 @@ private:
 	void updateCurrentAnimateIndex();
 	void updateWaiting();
 	int _hack;
+
+	eStatus spikeState;
 };
 

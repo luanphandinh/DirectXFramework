@@ -74,7 +74,7 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 
 	// SPIKE
 	sp = new Sprite(spriteHandler, L"Resources//Images//spike.png");
-	this->_listSprite[eID::SPIKE] = sp;
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::SPIKE, sp));
 	this->loadSpriteInfo(eID::SPIKE, "Resources//Images//spike_animation.txt");
 
 	//sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");

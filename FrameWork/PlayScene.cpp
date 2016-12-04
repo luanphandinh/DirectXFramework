@@ -161,7 +161,7 @@ void PlayScene::update(float deltaTime)
 		//}
 		//không cần xét va chạm cho các trường hợp này
 			if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND || obj->getId() == eID::BRICK || 
-			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
+			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR || obj->getId() == eID::SPIKE)
 			continue;	
 		// check mấy con như knight vs land đồ :v
 		for (BaseObject* passiveobj : _activeObject) {

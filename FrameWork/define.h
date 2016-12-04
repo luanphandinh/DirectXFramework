@@ -134,9 +134,9 @@ enum eStatus
 	PICKUPITEM = (1 << 27),
 	FREEZE = (1 << 28),
 
-	SPIKE_FALLING_01=(1<<29),
-	SPIKE_FALLING_02 = (1 << 30),
-	SPIKE_FALLING_03 = (1 << 31),
+	FALLING_01 = 0,
+	FALLING_02 = 1,
+	FALLING_03 = 2,
 
 };
 
@@ -173,6 +173,12 @@ enum eDirection
 	LEFT	=		4,
 	RIGHT	=		8,
 	ALL		= (TOP | BOTTOM | LEFT | RIGHT),
+};
+
+enum eSpikeState {
+	SPIKE_FALLING_01 = 0,
+	SPIKE_FALLING_02 = 1,
+	SPIKE_FALLING_03 = 2,
 };
 
 enum eLevel2Viewport
