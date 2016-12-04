@@ -21,6 +21,11 @@ public:
 	void moveViewportPassDoor(float deltatime, bool & finish);
 	//Di chuyển viewport từ từ cho mất cái cửa
 	void moveViewportPassDoor2(float deltatime, bool & finish);
+
+	/*
+		Xử lý cho các special item xuất hiện
+	*/
+	void crownShowUp(float deltatime, bool & finish);
 private:
 	bool _flagMoveViewportPassDoor;
 	bool _flagMoveSimonPassDoor;

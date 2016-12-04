@@ -9,6 +9,7 @@
 #include"Sword.h"
 #include"DragonFire.h"
 #include"PlayScene.h"
+#include"Crown.h"
 
 list<Item*> ItemManager::_listItem;
 
@@ -139,6 +140,7 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 	case LARGEHEART:
 		item = new HeartItem(pos, id);
 		break;
+	case MONEYBAG_SPECIAL:
 	case MONEYBAGPURPLE:
 	case MONEYBAGRED:
 	case MOENYBAGWHITE:
@@ -160,6 +162,9 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 		item = new HolyWater(pos, type);
 		break;
 	case STOPWATCH:
+		break;
+	case CROWN:
+		item = new Crown(pos, id);
 		break;
 	default:
 		break;

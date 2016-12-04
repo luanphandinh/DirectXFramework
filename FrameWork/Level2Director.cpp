@@ -1,6 +1,6 @@
 ﻿#include "Level2Director.h"
 #include "PlayScene.h"
-
+#include"ItemManager.h"
 Level2Director::Level2Director() : Director()
 {
 	_reviveViewport = eLevel2Viewport::V1;
@@ -26,12 +26,16 @@ void Level2Director::init()
 	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::moveViewportPassDoor2);
 	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::passDoorScene);
 	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::moveViewportPassDoor);
+
+	auto scenarioSpecialItem = new Scenario("crownShowUp");
+	__hook(&Scenario::update, scenarioSpecialItem, &Level2Director::crownShowUp);
 	
 	_flagMoveSimonPassDoor = false;
 	_flagMoveViewportPassDoor = false;
 	_flagMoveViewportPassDoor2 = false;
+	//_scenarioManager->insertScenario(scenarioSpecialItem);
 	_scenarioManager->insertScenario(scenarioPassDoor);
-
+	
 
 }
 void Level2Director::update(float deltaTime) 
@@ -125,7 +129,7 @@ void Level2Director::switchViewport()
 		break;
 	}
 }
-
+#pragma region passdoor
 bool Level2Director::checkPosition()
 {
 	if (_trackedDoor == nullptr)
@@ -256,4 +260,20 @@ void Level2Director::moveViewportPassDoor2(float deltatime, bool & finish)
 	}
 
 	_viewport->setPositionWorld(current_position);
+}
+
+#pragma endregion 
+
+
+void Level2Director::crownShowUp(float deltatime, bool & finish)
+{
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xSimon = _simon->getPositionX();
+	int ySimon = _simon->getPositionY();
+	if (xSimon > 3010 && xSimon < 3050 && ySimon > 192 && ySimon < 260)
+	{
+		ItemManager::generateItem(eItemID::CROWN, GVector2(2900, 350));
+		//finish = true;
+	}
+	
 }
