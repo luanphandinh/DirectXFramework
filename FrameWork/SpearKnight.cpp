@@ -75,7 +75,7 @@ void SpearKnight::draw(LPD3DXSPRITE spritehandle, Viewport* viewport) {
 
 	if (_burning != NULL)
 		_burning->draw(spritehandle, viewport);
-	if (this->getStatus() == eStatus::DESTROY || this->getStatus() == eStatus::BURST)
+	if (this->getStatus() == eStatus::DESTROY || this->getStatus() == eStatus::BURN)
 		return;
 
 	_animations[_currentAnimateIndex]->draw(spritehandle, viewport);
@@ -114,11 +114,11 @@ void SpearKnight::update(float deltatime) {
 	}
 
 	if (this->getStatus() == eStatus::DYING) {
-			this->setStatus(eStatus::BURST);
+			this->setStatus(eStatus::BURN);
 	}
 
 	// Bị nướng
-	if (this->getStatus() == eStatus::BURST) {
+	if (this->getStatus() == eStatus::BURN) {
 		if (_burning == nullptr) {
 			auto pos = this->getPosition();
 			_burning = new HitEffect(2, pos);
@@ -189,7 +189,7 @@ void SpearKnight::onCollisionEnd(CollisionEventArg* collision_event) {
 
 float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	if (this->getStatus() == eStatus::DESTROY || 
-		this->isInStatus(eStatus::DYING ) || this->isInStatus(eStatus::BURST))
+		this->isInStatus(eStatus::DYING ) || this->isInStatus(eStatus::BURN))
 		return 0.0f;
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];

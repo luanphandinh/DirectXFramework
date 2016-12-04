@@ -77,14 +77,14 @@ float Sword::checkCollisionWeapon(BaseObject* otherObject, float dt)
 		switch (otherObjectID)
 		{
 		case CANDLE:
-			otherObject->setStatus(eStatus::BURST);
+			otherObject->setStatus(eStatus::BURN);
 			break;
 		case DRAGON:
 		case SPEARKNIGHT:
 			((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
 			break;
 		case BAT:
-			otherObject->setStatus(eStatus::BURST);
+			otherObject->setStatus(eStatus::BURN);
 			break;
 		case MEDUSAHEAD:
 			break;

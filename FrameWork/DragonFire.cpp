@@ -30,7 +30,7 @@ void DragonFire::update(float deltatime)
 
 	checkPosition();
 
-	if (this->getStatus() == eStatus::BURST)
+	if (this->getStatus() == eStatus::BURN)
 	{
 		if (_hitEffect == nullptr)
 		{
@@ -89,7 +89,7 @@ void DragonFire::release()
 
 float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 {
-	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURST)) return 0.0f;
+	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURN)) return 0.0f;
 	//Lấy collision body của item ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
@@ -102,16 +102,16 @@ float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 	{
 		if (otherObjectID == eID::SIMON)
 		{
-			this->setStatus(eStatus::BURST);
+			this->setStatus(eStatus::BURN);
 			((Simon*)otherObject)->getHitted();
 		}
 		else if (otherObjectID == eID::WHIP && ((Whip*)otherObject)->isHitting())
 		{
-			this->setStatus(eStatus::BURST);
+			this->setStatus(eStatus::BURN);
 		}
 		else if (otherObjectID == eID::ITEM)
 		{
-			this->setStatus(eStatus::BURST);
+			this->setStatus(eStatus::BURN);
 		}
 	}
 	return 0.0f;

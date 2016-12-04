@@ -58,7 +58,7 @@ void MedusaHead::update(float deltaTime) {
 	}
 	else {
 
-		/*this->checkIfOutOfScreen();*/
+		this->checkIfOutOfScreen();
 		for (auto component : _listComponent) {
 
 			component.second->update(deltaTime);
@@ -83,16 +83,71 @@ void MedusaHead::release() {
 	SAFE_DELETE(this->_sprite);
 }
 
-void MedusaHead::onCollisionBegin(CollisionEventArg *) {
-
+void MedusaHead::onCollisionBegin(CollisionEventArg *collision_event) {
+	eID objectID = collision_event->_otherObject->getId();
+	switch (objectID) {
+	case eID::SIMON:
+	{
+		if (collision_event->_otherObject->isInStatus(eStatus::DYING) == false) {
+			collision_event->_otherObject->setStatus(eStatus::DYING);
+		}
+		break;
+	}
+	default:
+		break;
+	}
 }
 
-void MedusaHead::onCollisionEnd(CollisionEventArg *) {
-
+void MedusaHead::onCollisionEnd(CollisionEventArg *collision_event) {
+	if (this->getStatus() == eStatus::DESTROY)
+		return;
+	eID objectID = collision_event->_otherObject->getId();
+	switch (objectID) {
+	case eID::LAND:
+	default:
+		break;
+	}
 }
 
-float MedusaHead::checkCollision(BaseObject *, float) {
-	return 0.0f;
+float MedusaHead::checkCollision(BaseObject *object, float deltaTime) {
+	if (this->getStatus() == eStatus::DESTROY ||
+		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::BURN))
+		return 0.0f;
+
+	if (this->getStatus() == eStatus::DESTROY ||
+		this->isInStatus(eStatus::DYING))
+		return 0.0f;
+
+	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
+	eID objectId = object->getId();
+	eDirection direction;
+
+	if (objectId == eID::SIMON) {
+		if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
+			auto movement = (Movement*)this->_listComponent["Movement"];
+
+			if (object->isInStatus(eStatus::HITTING)) {
+				// bị chớp
+				//if (_stopWatch == nullptr) _stopWatch = new StopWatch();
+				if (_stopWatch->isStopWatch(200)) {
+					this->_animations[this->getStatus()]->enableFlashes(true);
+					_animations[this->getStatus()]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));
+					//movement->setVelocity(GVector2(0, 0));
+				}
+
+				this->dropHitpoint(1);
+				_isHitted = true;
+			}
+			else {
+				((Simon*)object)->getHitted();
+				//movement->setVelocity(GVector2(movement->getVelocity().x, 0));
+				this->_animations[this->getStatus()]->enableFlashes(false);
+				_isHitted = false;
+			}
+		}
+
+		return 0.0f;
+	}
 }
 
 void MedusaHead::die() {
@@ -108,6 +163,7 @@ IComponent * MedusaHead::getComponent(string) {
 	return nullptr;
 }
 
+// Ko giết nó, để nó bay ra khỏi view thì hủy luôn
 void MedusaHead::checkIfOutOfScreen() {
 	if (this->getStatus() != eStatus::NORMAL)
 		return;
@@ -116,7 +172,7 @@ void MedusaHead::checkIfOutOfScreen() {
 	GVector2 position = this->getPosition();
 
 	if (position.x > screenBound.right) {
-		this->setStatus(eStatus::FLYING);
+		this->setStatus(eStatus::DESTROY);
 	}
 }
 

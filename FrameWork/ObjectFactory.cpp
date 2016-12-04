@@ -289,7 +289,7 @@ BaseObject * ObjectFactory::getSpearKnight(xml_node node) {
 	int x, y, direction;
 	eStatus status;
 
-	x = stoi(properties["X"]);
+	x = stoi(properties["X"])+32;
 	y = stoi(properties["Y"]);
 
 	if (properties.find("status") != properties.end()) {
@@ -322,7 +322,7 @@ BaseObject * ObjectFactory::getMedusaHead(xml_node node) {
 	GVector2 pos, hVeloc, ampl;
 	float freq;
 
-	pos.x = stoi(properties["X"]);
+	pos.x = stoi(properties["X"])+32;
 	pos.y = stoi(properties["Y"]);
 	// status
 	if (properties.find("status") != properties.end()) {
@@ -390,7 +390,7 @@ BaseObject * ObjectFactory::getSpawner(xml_node node) {
 	bool oneperone;
 
 	pos.x = stoi(properties["X"]) + 32;
-	pos.y = stoi(properties["Y"]) - 32;
+	pos.y = stoi(properties["Y"]) + 32;
 	width = stoi(properties["Width"]);
 	height = stoi(properties["Height"]);
 
@@ -415,7 +415,7 @@ BaseObject * ObjectFactory::getSpawner(xml_node node) {
 		time = stof(properties.find("time")->second);
 	}
 	else {
-		time = 1000.0f;
+		time = 2000.0f;
 	}
 
 	// num
@@ -423,7 +423,7 @@ BaseObject * ObjectFactory::getSpawner(xml_node node) {
 		num = stoi(properties.find("number")->second);
 	}
 	else {
-		num = -1;
+		num = 5;
 	}
 
 	// one per one

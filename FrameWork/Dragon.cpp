@@ -43,11 +43,11 @@ void Dragon::update(float deltatime)
 	fire();
 
 	if (this->getHitpoint() <= 0) {
-		this->setStatus(eStatus::BURST);
+		this->setStatus(eStatus::BURN);
 	}
 
 	// Bị nướng
-	if (this->getStatus() == eStatus::BURST) {
+	if (this->getStatus() == eStatus::BURN) {
 		if (_burning == nullptr) {
 			auto pos = this->getPosition();
 			_burning = new HitEffect(2, pos);
@@ -108,7 +108,7 @@ void Dragon::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
 	if (_burning != NULL)
 		_burning->draw(spriteHandler, viewport);
-	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURST))
+	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURN))
 		return;
 	_sprite->render(spriteHandler, viewport);
 }

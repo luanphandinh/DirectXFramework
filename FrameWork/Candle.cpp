@@ -22,8 +22,8 @@ void Candle::init()
 	_animations[NORMAL] = new Animation(_sprite,0.12);
 	_animations[NORMAL]->addFrameRect(eID::ITEM, "candle_01", "candle_02", NULL);
 
-	_animations[BURST] = new Animation(_sprite, 0.12);
-	_animations[BURST]->addFrameRect(eID::ITEM, "candle_burst", "explosion_03", NULL);
+	_animations[BURN] = new Animation(_sprite, 0.12);
+	_animations[BURN]->addFrameRect(eID::ITEM, "candle_burst", "explosion_03", NULL);
 
 	auto collisionBody = new CollisionBody(this);
 	_componentList.insert(pair<string, IComponent*>("CollisionBody", collisionBody));
@@ -34,7 +34,7 @@ void Candle::init()
 void Candle::update(float deltaTime) 
 {
 	eStatus status = this->getStatus();
-	if (status == eStatus::BURST)
+	if (status == eStatus::BURN)
 	{
 		if (_burstStopWatch == nullptr)
 		{
@@ -43,7 +43,7 @@ void Candle::update(float deltaTime)
 
 		if (_burstStopWatch->isStopWatch(200))
 		{
-			this->removeStatus(eStatus::BURST);
+			this->removeStatus(eStatus::BURN);
 			SAFE_DELETE(_burstStopWatch);
 			this->setStatus(eStatus::DESTROY);
 			ItemManager::generateItem(_dropItemId, this->getPosition());

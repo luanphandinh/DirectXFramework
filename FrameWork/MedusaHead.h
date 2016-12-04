@@ -50,6 +50,9 @@ private:
 	GVector2	_amplitude;
 	float		_frequence;
 
+	bool _isHitted;
+	StopWatch* _stopWatch;
+
 	// bay ra khỏi view sẽ chết? nếu muốn thì set trong update
 	void checkIfOutOfScreen();
 

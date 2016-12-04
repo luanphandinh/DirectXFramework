@@ -114,7 +114,7 @@ void Brick::init()
 void Brick::update(float deltatime)  
 {
 	if (this->isInStatus(eStatus::DESTROY)) return;
-	if (!this->isInStatus(eStatus::BURST)) return;
+	if (!this->isInStatus(eStatus::BURN)) return;
 	for (BrokenBrick* item : _brokens)
 	{
 		if (item == nullptr)
@@ -153,7 +153,7 @@ void Brick::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
 	if (this->isInStatus(eStatus::DESTROY)) return;
 
-	if (!this->isInStatus(eStatus::BURST))
+	if (!this->isInStatus(eStatus::BURN))
 	{
 		_sprite->render(spriteHandler, viewport);
 		return;

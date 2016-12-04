@@ -115,7 +115,7 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 		{
 		case BRICK:
 		case CANDLE:
-			otherObject->setStatus(eStatus::BURST);
+			otherObject->setStatus(eStatus::BURN);
 			break;
 		case DRAGON:
 		case SPEARKNIGHT:
@@ -126,7 +126,7 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 			}
 			break;
 		case BAT:
-			otherObject->setStatus(eStatus::BURST);
+			otherObject->setStatus(eStatus::BURN);
 			break;
 		case MEDUSAHEAD:
 			break;

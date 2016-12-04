@@ -33,7 +33,7 @@ void HolyWater::init()
 void HolyWater::update(float deltatime)
 {
 
-	if (this->isInStatus(eStatus::BURST))
+	if (this->isInStatus(eStatus::BURN))
 	{
 		if (_burstStopWatch == nullptr)
 		{
@@ -42,7 +42,7 @@ void HolyWater::update(float deltatime)
 
 		if (_burstStopWatch->isStopWatch(1000))
 		{
-			this->removeStatus(eStatus::BURST);
+			this->removeStatus(eStatus::BURN);
 			SAFE_DELETE(_burstStopWatch);
 			this->setStatus(eStatus::DESTROY);
 		}
@@ -50,7 +50,7 @@ void HolyWater::update(float deltatime)
 	else
 		Weapon::update(deltatime);
 
-	if (this->isInStatus(eStatus::BURST))
+	if (this->isInStatus(eStatus::BURN))
 	{
 		_burstAnimation->update(deltatime);
 	}
@@ -66,7 +66,7 @@ void HolyWater::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 	}
 	else if (_type == eItemType::PICKED_UP)
 	{
-		if (this->isInStatus(eStatus::BURST))
+		if (this->isInStatus(eStatus::BURN))
 		{
 			_burstAnimation->draw(spriteHandler, viewport);
 		}
@@ -110,13 +110,13 @@ float HolyWater::checkCollisionWeapon(BaseObject* otherObject, float dt)
 		{
 		case LAND:
 			this->stop();
-			this->setStatus(eStatus::BURST);
+			this->setStatus(eStatus::BURN);
 			break;
 		case CANDLE:
 			//otherObject->setStatus(eStatus::BURST);
 			break;
 		case SPEARKNIGHT:
-			if (this->isInStatus(eStatus::BURST))
+			if (this->isInStatus(eStatus::BURN))
 			if (object == _listColliding.end() || object._Ptr == nullptr)
 			{
 				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
@@ -124,7 +124,7 @@ float HolyWater::checkCollisionWeapon(BaseObject* otherObject, float dt)
 			}
 			break;
 		case BAT:
-			otherObject->setStatus(eStatus::BURST);
+			otherObject->setStatus(eStatus::BURN);
 			break;
 		case MEDUSAHEAD:
 			break;

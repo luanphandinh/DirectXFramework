@@ -790,7 +790,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 
 			if (otherObjectID == eID::BRICK)
 			{
-				if (otherObject->isInStatus(eStatus::BURST))
+				if (otherObject->isInStatus(eStatus::BURN))
 					return 0.0f;
 			}
 
