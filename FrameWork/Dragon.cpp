@@ -13,6 +13,7 @@ Dragon::Dragon(GVector2 pos) : BaseEnemy(eID::DRAGON)
 	this->setPhysicBodySide(eDirection::ALL);
 	this->setHitpoint(DRAGON_HP);
 	_isStand = false;
+	_direction = eDirection::LEFT;
 }
 
 
@@ -39,6 +40,7 @@ void Dragon::update(float deltatime)
 		return;
 
 	updateDirection();
+	fire();
 
 	if (this->getHitpoint() <= 0) {
 		this->setStatus(eStatus::BURST);
@@ -72,6 +74,7 @@ void Dragon::updateDirection()
 	auto _simomPos = _simon->getPosition();
 	if (_simomPos.x < this->getPosition().x)
 	{
+		_direction = eDirection::LEFT;
 		if (this->getScale().x > 0)
 			return;
 		this->setScaleX(this->getScale().x * (-1));
@@ -79,9 +82,25 @@ void Dragon::updateDirection()
 	else
 	if (_simomPos.x > this->getPosition().x)
 	{
+		_direction = eDirection::RIGHT;
 		if (this->getScale().x < 0)
 			return;
 		this->setScaleX(this->getScale().x * (-1));
+	}
+}
+
+void Dragon::fire()
+{
+	if (_fireStopWatch == nullptr)
+	{
+		_fireStopWatch = new StopWatch();
+	}
+
+	if (_fireStopWatch->isStopWatch(1000))
+	{
+		ItemManager::generateWeapon(eItemID::DRAGON_FIRE,this->getPosition() + GVector2(0,10),_direction);
+		SAFE_DELETE(_fireStopWatch);
+		_fireStopWatch = nullptr;
 	}
 }
 

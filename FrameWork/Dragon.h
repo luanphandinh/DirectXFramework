@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include"BaseEnemy.h"
 #include"define.h"
+#include"StopWatch.h"
+#include"ItemManager.h"
 #define DRAGON_HP 5
 class Dragon : public BaseEnemy
 {
@@ -14,10 +16,13 @@ public:
 	void release() override;
 	virtual float checkCollision(BaseObject* object, float dt);
 	void updateDirection();
+	void fire();
 private:
 	map<string, IComponent*> _listComponent;
 	bool _isStand;
+	eDirection _direction;
 	//Dùng để animation hủy  enemy 
 	BaseObject *_burning;
+	StopWatch* _fireStopWatch;
 };
 

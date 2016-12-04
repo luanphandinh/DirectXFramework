@@ -1086,7 +1086,7 @@ void Simon::setPositionInLand(Land* land)
 	this->setPosition(newPos);
 }
 
-Whip* Simon::getWhip()
+BaseObject* Simon::getWhip()
 {
 	return this->_whip;
 }

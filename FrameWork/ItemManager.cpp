@@ -7,6 +7,7 @@
 #include"WhipUpgrade.h"
 #include"HolyWater.h"
 #include"Sword.h"
+#include"DragonFire.h"
 
 list<Item*> ItemManager::_listItem;
 
@@ -112,11 +113,14 @@ float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 		else
 		{
 			item->checkCollision(otherObject, dt);
-			for (Item* passiveItem : _listItem)
+			/*if (item->getItemId() == eItemID::DRAGON_FIRE)
 			{
-				if (passiveItem->getId() != eItemID::NOITEM) continue;
-				item->checkCollision(passiveItem, dt);
-			}
+				for (Item* otherItem : _listItem)
+				{
+					if (otherItem->getItemId() == eItemID::DRAGON_FIRE) continue;
+					item->checkCollision(otherItem, dt);
+				}
+			}*/
 		}
 	}
 
@@ -179,6 +183,9 @@ void ItemManager::generateWeapon(eItemID id, GVector2 startPos, eDirection dir, 
 		break;
 	case eItemID::HOLYWATER:
 		item = new HolyWater(startPos, eItemType::PICKED_UP, dir);
+		break;
+	case eItemID::DRAGON_FIRE:
+		item = new DragonFire(startPos, dir);
 		break;
 	default:
 		break;

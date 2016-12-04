@@ -94,7 +94,7 @@ public:
 	*/
 	void getHitted();
 	//int getDamage();
-	Whip* getWhip();
+	BaseObject* getWhip();
 	void enableGravity(bool);
 
 	float getMovingSpeed();

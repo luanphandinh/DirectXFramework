@@ -26,19 +26,25 @@ void Whip::init()
 
 void Whip::update(float deltatime) 
 {
+	_sprite->setScale(_simon->getSprite()->getScale());
+	if (_simon->isInStatus(eStatus::SITTING))
+		this->setPosition(_simon->getPosition() - GVector2(0, 7));
+	else
+		this->setPosition(_simon->getPosition());
 	if (_simon->isInStatus(eStatus::HITTING))
 		_animations[_level]->update(deltatime);
+
 }
 
 void Whip::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
 	if (_simon->isInStatus(eStatus::HITTING))
 	{
-		_sprite->setScale(_simon->getSprite()->getScale());
-		if (_simon->isInStatus(eStatus::SITTING))
-			this->setPosition(_simon->getPosition() - GVector2(0,7));
-		else
-			this->setPosition(_simon->getPosition());
+		//_sprite->setScale(_simon->getSprite()->getScale());
+		//if (_simon->isInStatus(eStatus::SITTING))
+		//	this->setPosition(_simon->getPosition() - GVector2(0,7));
+		//else
+		//	this->setPosition(_simon->getPosition());
 		_animations[_level]->draw(spriteHandler, viewport);
 	}
 }

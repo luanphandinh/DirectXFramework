@@ -26,6 +26,8 @@ void DragonFire::update(float deltatime)
 	if (this->getStatus() == DESTROY)
 		return;
 
+	checkPosition();
+
 	if (this->getStatus() == eStatus::BURST) {
 		if (_hitEffect == nullptr) {
 			auto pos = this->getPosition();
@@ -43,6 +45,16 @@ void DragonFire::update(float deltatime)
 	for (auto it : _componentList) {
 		it.second->update(deltatime);
 	}
+}
+
+void DragonFire::checkPosition()
+{
+	Viewport* viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
+
+	GVector2 viewportPosition = viewport->getPositionWorld();
+
+	if (this->getPositionX() < viewportPosition.x || this->getPositionX() > viewportPosition.x + WINDOW_WIDTH)
+		this->setStatus(eStatus::DESTROY);
 }
 
 void DragonFire::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport) 
@@ -71,7 +83,7 @@ void DragonFire::release()
 
 float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 {
-	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURST)) return 0.0f;
+	//if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURST)) return 0.0f;
 	//Lấy collision body của item ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
@@ -85,6 +97,10 @@ float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 		{
 			this->setStatus(eStatus::BURST);
 			((Simon*)otherObject)->getHitted();
+		}
+		else if (otherObjectID == eID::WHIP)
+		{
+			this->setStatus(eStatus::BURST);
 		}
 	}
 	return 0.0f;
