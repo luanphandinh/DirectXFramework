@@ -205,6 +205,9 @@
     <ClCompile Include="Crown.cpp">
       <Filter>Source Files\Objects\Items\Special</Filter>
     </ClCompile>
+    <ClCompile Include="Spike.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -413,6 +416,9 @@
     </ClInclude>
     <ClInclude Include="Crown.h">
       <Filter>Header Files\Objects\Items\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Spike.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
