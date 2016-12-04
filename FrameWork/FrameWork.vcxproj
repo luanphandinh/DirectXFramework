@@ -82,6 +82,7 @@
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CastlevaniaGame.h" />
     <ClInclude Include="CollisionBody.h" />
+    <ClInclude Include="Crown.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Director.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Crown.cpp" />
     <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />

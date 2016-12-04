@@ -88,6 +88,9 @@ enum eItemID
 	HOLYWATER = 10,
 	STOPWATCH = 11,
 	DRAGON_FIRE = 12,
+	CROWN = 13,
+	MONEYBAG_SPECIAL = 14,
+	MONEYCHEST = 15,
 };
 
 //status cho nhân vật

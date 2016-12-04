@@ -30,13 +30,16 @@ void DragonFire::update(float deltatime)
 
 	checkPosition();
 
-	if (this->getStatus() == eStatus::BURST) {
-		if (_hitEffect == nullptr) {
+	if (this->getStatus() == eStatus::BURST)
+	{
+		if (_hitEffect == nullptr)
+		{
 			auto pos = this->getPosition();
 			_hitEffect = new HitEffect(2, pos);
 			_hitEffect->init();
 		}
-		else {
+		else 
+		{
 			_hitEffect->update(deltatime);
 			if (_hitEffect->getStatus() == eStatus::DESTROY) {
 				this->setStatus(eStatus::DESTROY);
@@ -44,7 +47,8 @@ void DragonFire::update(float deltatime)
 		}
 	}
 
-	for (auto it : _componentList) {
+	for (auto it : _componentList) 
+	{
 		it.second->update(deltatime);
 	}
 }
@@ -85,7 +89,7 @@ void DragonFire::release()
 
 float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 {
-	//if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURST)) return 0.0f;
+	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURST)) return 0.0f;
 	//Lấy collision body của item ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
@@ -119,6 +123,9 @@ void DragonFire::initWeaponComponent()
 	if (_type != eItemType::PICKED_UP) return;
 
 	GVector2 veloc = this->initVeloc(DRAGON_FIRE_SPEED);
+
+	if (_direction == eDirection::LEFT)
+		this->setScaleX(this->getScale().x * (-1));
 
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(veloc);

@@ -118,7 +118,7 @@ float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 			{
 				for (Item* otherItem : _listItem)
 				{
-					if (otherItem->getItemId() == eItemID::DRAGON_FIRE) continue;
+					if (otherItem->getItemId() == eItemID::DRAGON_FIRE || otherItem == item) continue;
 					item->checkCollision(otherItem, dt);
 				}
 				/*auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();

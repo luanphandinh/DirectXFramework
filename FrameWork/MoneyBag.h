@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 #include"Item.h"
 #include"Score.h"
+#include"Animation.h"
 class MoneyBag : public Item
 {
 public:
@@ -15,5 +16,8 @@ public:
 	virtual void pickedUp() override;
 private:
 	eMoneyBagItemType _moneyBagType;
+
+	//Dùng riêng cho trường hợp túi tiêng loại special 1000 point
+	map<eItemID,Animation*> _animations;
 };
 

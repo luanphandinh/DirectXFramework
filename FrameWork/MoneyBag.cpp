@@ -19,21 +19,24 @@ void MoneyBag::init()
 	//_moneyBagType = (eMoneyBagItemType)type;
 
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
-
+	Animation* animation = new Animation(_sprite, 0.12f);
 	switch (_itemId)
 	{
 	case eItemID::MONEYBAGRED:
-		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "red_money_bag"));
+		animation->addFrameRect(eID::ITEM, "red_money_bag", NULL);
 		break;
 	case eItemID::MONEYBAGPURPLE:
-		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "purple_money_bag"));
+		animation->addFrameRect(eID::ITEM, "purple_money_bag", NULL);
 		break;
 	case eItemID::MOENYBAGWHITE:
-		_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "white_money_bag"));
+		animation->addFrameRect(eID::ITEM, "white_money_bag", NULL);
 		break;
+	case eItemID::MONEYBAG_SPECIAL:
+		animation->addFrameRect(eID::ITEM, "red_money_bag", "purple_money_bag", "white_money_bag",NULL);
 	default:
 		break;
 	}
+	_animations[_itemId] = animation;
 	Item::initCommonComponent();
 }
 
@@ -44,12 +47,15 @@ void MoneyBag::update(float deltatime)
 
 void MoneyBag::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
-	Item::draw(spriteHandler, viewport);
+	if (this->isInStatus(eStatus::DESTROY))
+		return;
+	_animations[_itemId]->draw(spriteHandler, viewport);
 }
 
 void MoneyBag::release()
 {
 	Item::release();
+	_animations.clear();
 }
 
 void MoneyBag::pickedUp()
@@ -64,6 +70,9 @@ void MoneyBag::pickedUp()
 		break;
 	case eItemID::MOENYBAGWHITE:
 		Score::plusScore(700);
+		break;
+	case eItemID::MONEYBAG_SPECIAL:
+		Score::plusScore(1000);
 		break;
 	default:
 		break;
