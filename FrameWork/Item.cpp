@@ -104,13 +104,13 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
 	if (otherObjectID == eID::LAND || otherObjectID == eID::SIMON)
+	if (collisionBody->checkCollision(otherObject, direction, dt, false))
 	{
-		if (otherObjectID == eID::LAND && collisionBody->checkCollision(otherObject, direction, dt, false))
+		if (otherObjectID == eID::LAND)
 		{
 			this->stop();
 		}
-		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING)
-			&& collisionBody->checkCollision(otherObject, direction, dt, false))
+		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING))
 		{
 			if (this->getVelocity().y != 0) return 0.0f;
 			this->pickedUp();

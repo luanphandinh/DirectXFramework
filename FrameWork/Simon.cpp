@@ -418,7 +418,7 @@ void Simon::updateStatus(float deltatime)
 		return;
 	}
 
-	//trackFlyLandPosition(deltatime);
+	trackFlyLandPosition(deltatime);
 	//_isHitted = false;
 
 	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT && (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR)

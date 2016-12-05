@@ -16,8 +16,8 @@ bool PlayScene::init()
 {
 	auto simon = new Simon();
 	simon->init();
-	//simon->setPosition(2700, 100);//v1
-	//simon->setPosition(2300, 638);//v2
+	simon->setPosition(2700, 100);//v1
+	simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(200, 1000);//v5
@@ -161,7 +161,7 @@ void PlayScene::update(float deltaTime)
 		//}
 		//không cần xét va chạm cho các trường hợp này
 			if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND || obj->getId() == eID::BRICK || 
-			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR || obj->getId() == eID::SPIKE)
+			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
 			continue;	
 		// check mấy con như knight vs land đồ :v
 		for (BaseObject* passiveobj : _activeObject) {

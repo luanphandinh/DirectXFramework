@@ -88,7 +88,13 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 			}
 			break;
 		case BAT:
-			otherObject->setStatus(eStatus::BURN);
+		case GHOST:
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+				_listColliding[otherObject] = true;
+			}
+			break;
 			break;
 		case MEDUSAHEAD:
 			break;

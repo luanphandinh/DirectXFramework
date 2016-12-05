@@ -55,6 +55,9 @@ void Spike::init() {
 
 	_stopWatch = new StopWatch();
 	_hack = 0;
+
+	CollisionBody* collisionBody = new CollisionBody(this);
+	_listComponent["CollisionBody"] = collisionBody;
 }
 
 void Spike::update(float deltaTime) {
@@ -139,7 +142,22 @@ void Spike::onCollisionEnd(CollisionEventArg *) {
 
 }
 
-float Spike::checkCollision(BaseObject *, float) {
+float Spike::checkCollision(BaseObject * otherObject, float dt){
+	//Lấy collision body của item ra để checkCollision
+	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
+	eID otherObjectID = otherObject->getId();
+	eDirection direction;
+	if (otherObjectID != eID::SIMON ) return 0.0f;
+	//if ((otherObjectID == eID::LAND)
+	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
+	if (collisionBody->checkCollision(otherObject, direction, dt, false))
+	{
+		if (otherObjectID == eID::SIMON)
+		{
+			//this->setStatus(eStatus::BURN);
+			((Simon*)otherObject)->getHitted();
+		}
+	}
 	return 0.0f;
 }
 
