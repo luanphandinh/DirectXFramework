@@ -1,4 +1,4 @@
-#include "Ghost.h"
+﻿#include "Ghost.h"
 #include "PlayScene.h"
 
 Ghost::Ghost(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::GHOST) {
@@ -13,6 +13,7 @@ Ghost::Ghost(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::GHOST
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
 	this->_direction = direction;
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 Ghost::~Ghost() {
@@ -50,11 +51,34 @@ void Ghost::init() {
 	_sprite->drawBounding(false);
 
 	this->hack = 0;
+	this->setHitpoint(1);
 }
 
 void Ghost::update(float deltaTime) {
 	if (this->getStatus() == eStatus::DESTROY)
 		return;
+
+	if (this->getHitpoint() <= 0) {
+		this->setStatus(eStatus::BURN);
+	}
+
+	// Bị nướng
+	if (this->getStatus() == eStatus::BURN) {
+		if (_burning == nullptr) {
+			auto pos = this->getPosition();
+			_burning = new HitEffect(2, pos);
+			_burning->init();
+		}
+		else {
+			_burning->update(deltaTime);
+			if (_burning->getStatus() == eStatus::DESTROY) {
+				this->setStatus(eStatus::DESTROY);
+			}
+		}
+		return;
+	}
+
+
 	if (this->getStatus() == eStatus::HIDING) {
 		this->updateHiding();
 		return;
@@ -78,7 +102,9 @@ void Ghost::update(float deltaTime) {
 }
 
 void Ghost::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
-	if (this->getStatus() == eStatus::DESTROY) return;
+	if (_burning != nullptr)
+		_burning->draw(spritehandle, viewport);
+	if (this->getStatus() == eStatus::DESTROY || this->isInStatus(eStatus::BURN)) return;
 	if (this->getStatus() == eStatus::FLYING || this->getStatus() == eStatus::FLYINGUP)
 		_animations[this->getStatus()]->draw(spritehandle, viewport);
 
@@ -128,20 +154,25 @@ float Ghost::checkCollision(BaseObject *object, float deltaTime) {
 	if (objectId == eID::SIMON) {
 		if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
 			auto movement = (Movement*)this->_listComponent["Movement"];
-
-			if (object->isInStatus(eStatus::HITTING)) {
+		/*
+			Phần check collision thằng simon ko liên quan nữa nha
+			Chuyển hết sang cho cái roi nó check rồi,chỉ check lúc đụng simon thì cho simon getHitted()
+			với mất máu thôi
+		*/
+		
+		/*	if (object->isInStatus(eStatus::HITTING)) {
 				if (_stopWatch->isStopWatch(200)) {
 					this->_animations[this->getStatus()]->enableFlashes(true);
 					_animations[this->getStatus()]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));
 				}
 				this->dropHitpoint(1);
 				_isHitted = true;
-			}
-			else {
+			}*/
+			//else {
 				((Simon*)object)->getHitted();
 				//this->_animations[this->getStatus()]->enableFlashes(false);
-				_isHitted = false;
-			}
+				//_isHitted = false;
+			//}
 		}
 
 		return 0.0f;

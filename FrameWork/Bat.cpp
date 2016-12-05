@@ -11,6 +11,7 @@ Bat::Bat(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::BAT) {
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 Bat::Bat(eStatus status, float x, float y, int direction) :
@@ -81,10 +82,14 @@ void Bat::init() {
 	_sprite->drawBounding(false);
 
 	this->hack = 0;
+
+	this->setHitpoint(1);
 }
 
 void Bat::draw(LPD3DXSPRITE spritehandle, Viewport* viewport) {
-
+	if (_burning != nullptr)
+		_burning->draw(spritehandle, viewport);
+	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURN)) return;
 	_animations[this->getStatus()]->draw(spritehandle, viewport);
 
 }
@@ -96,7 +101,7 @@ void Bat::release() {
 	_listComponent.clear();
 
 	//SAFE_DELETE(this->_loopwatch);
-	SAFE_DELETE(this->_sprite);
+	//SAFE_DELETE(this->_sprite);
 }
 
 IComponent* Bat::getComponent(string componentName) {
@@ -107,6 +112,28 @@ void Bat::update(float deltaTime) {
 
 	if (this->getStatus() == eStatus::DESTROY)
 		return;
+
+	if (this->getHitpoint() <= 0) {
+		this->setStatus(eStatus::BURN);
+	}
+
+	// Bị nướng
+	if (this->getStatus() == eStatus::BURN) {
+		if (_burning == nullptr) {
+			auto pos = this->getPosition();
+			_burning = new HitEffect(2, pos);
+			_burning->init();
+		}
+		else {
+			_burning->update(deltaTime);
+			if (_burning->getStatus() == eStatus::DESTROY) {
+				this->setStatus(eStatus::DESTROY);
+			}
+		}
+		return;
+	}
+
+
 	if (this->getStatus() == eStatus::HANGING) {
 		this->updateHanging();
 		return;
@@ -218,26 +245,30 @@ float Bat::checkCollision(BaseObject * object, float dt) {
 	if (objectId == eID::SIMON) {
 		if (collisionBody->checkCollision(object, direction, dt, false)) {
 			auto movement = (Movement*)this->_listComponent["Movement"];
-
-			if (object->isInStatus(eStatus::HITTING)) {
-				if (_stopWatch->isStopWatch(200)) {
-					this->_animations[this->getStatus()]->enableFlashes(true);
-					_animations[this->getStatus()]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));
-				}
-				this->dropHitpoint(1);
-				_isHitted = true;
-			}
-			else {
+			/*
+				Phần check collision thằng simon ko liên quan nữa nha
+				Chuyển hết sang cho cái roi nó check rồi,chỉ check lúc đụng simon thì cho simon getHitted()
+				với mất máu thôi
+			*/
+			//if (object->isInStatus(eStatus::HITTING)) {
+			//	if (_stopWatch->isStopWatch(200)) {
+			//		//this->_animations[this->getStatus()]->enableFlashes(true);
+			//		//_animations[this->getStatus()]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));
+			//	}
+			//	this->dropHitpoint(1);
+			//	//_isHitted = true;
+			//}
+			//else {
 				((Simon*)object)->getHitted();
-				this->_animations[this->getStatus()]->enableFlashes(false);
-				_isHitted = false;
-			}
+				//this->_animations[this->getStatus()]->enableFlashes(false);
+				//_isHitted = false;
+			//}
 		}
 
 		return 0.0f;
 	}
 
-	collisionBody->checkCollision(object, dt, false);
+	//collisionBody->checkCollision(object, dt, false);
 
 	return 0.0f;
 

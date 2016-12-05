@@ -60,5 +60,5 @@ private:
 	StopWatch* _stopWatch;
 	void checkIfOutOfScreen();
 	void updateHanging();
-
+	BaseObject *_burning;
 };

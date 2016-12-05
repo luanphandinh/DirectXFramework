@@ -49,4 +49,5 @@ private:
 	void checkIfOutOfScreen();
 	void updateHiding();
 	int _direction;
+	BaseObject *_burning;
 };
