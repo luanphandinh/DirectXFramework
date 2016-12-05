@@ -126,7 +126,7 @@ void Spike::release() {
 	_listComponent.clear();
 
 	//SAFE_DELETE(this->_loopwatch);
-	SAFE_DELETE(this->_sprite);
+	//SAFE_DELETE(this->_sprite);
 	SAFE_DELETE(this->_stopWatch);
 
 }

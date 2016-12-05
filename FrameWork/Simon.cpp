@@ -795,7 +795,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			}
 
 			//Nếu va chạm với câu thang thì cho phép simon đứng trên cầu thang,nếu ko thì false
-			if (otherObjectID == eID::STAIR)
+			if (otherObjectID == eID::STAIR && _preObject != nullptr)
 			{
 				//if (_preObject != nullptr)
 				if (_preObject != nullptr && _preObject->getId() == eID::STAIR) return 0.0f;

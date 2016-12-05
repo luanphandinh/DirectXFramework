@@ -72,12 +72,15 @@ void Ghost::update(float deltaTime) {
 		for (auto component : _listComponent) {
 			component.second->update(deltaTime);
 		}
-		_animations[this->getStatus()]->update(deltaTime);
+		if (this->getStatus() == eStatus::FLYING || this->getStatus() == eStatus::FLYINGUP)
+			_animations[this->getStatus()]->update(deltaTime);
 	}
 }
 
 void Ghost::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
-	_animations[this->getStatus()]->draw(spritehandle, viewport);
+	if (this->getStatus() == eStatus::DESTROY) return;
+	if (this->getStatus() == eStatus::FLYING || this->getStatus() == eStatus::FLYINGUP)
+		_animations[this->getStatus()]->draw(spritehandle, viewport);
 
 }
 
@@ -88,7 +91,7 @@ void Ghost::release() {
 	_listComponent.clear();
 
 	//SAFE_DELETE(this->_loopwatch);
-	SAFE_DELETE(this->_sprite);
+	//SAFE_DELETE(this->_sprite);
 }
 
 void Ghost::onCollisionBegin(CollisionEventArg *collision_event) {
@@ -136,7 +139,7 @@ float Ghost::checkCollision(BaseObject *object, float deltaTime) {
 			}
 			else {
 				((Simon*)object)->getHitted();
-				this->_animations[this->getStatus()]->enableFlashes(false);
+				//this->_animations[this->getStatus()]->enableFlashes(false);
 				_isHitted = false;
 			}
 		}
