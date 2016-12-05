@@ -73,6 +73,7 @@ enum eID
 	BLANK = 52,
 	WHIP = 53,
 	DRAGON = 54,
+	GHOST = 55,
 };
 
 enum eItemID
@@ -134,10 +135,13 @@ enum eStatus
 	PICKUPITEM = (1 << 27),
 	FREEZE = (1 << 28),
 
-	FALLING_01 = 0,
-	FALLING_02 = 1,
-	FALLING_03 = 2,
-
+	//FALLING_01 = 0,
+	//FALLING_02 = 1,
+	//FALLING_03 = 2,
+	FALLING_01 = (1 << 29),
+	FALLING_02 = (1 << 30),
+	FALLING_03 = (1 << 31),
+	FLYINGUP= (1 << 32),
 };
 
 enum eStairDirection

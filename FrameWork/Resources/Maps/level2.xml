@@ -827,5 +827,14 @@
         <Elem Key="state" Value="1" />
       </Params>
     </Item>
+    <Item Id="55" Name="ghost0" X="680" Y="910" Width="32" Height="32">
+      <ActiveBound X="680" Y="910" Width="32" Height="32" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
+    </Item>
+    <Item Id="55" Name="ghost1" X="950" Y="1100" Width="32" Height="32">
+      <ActiveBound X="950" Y="1100" Width="32" Height="32" />
+    </Item>
   </Objects>
 </Tilesmap>

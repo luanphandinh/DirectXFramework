@@ -91,6 +91,7 @@
     <ClInclude Include="DragonFire.h" />
     <ClInclude Include="EmptyObject.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="HitEffect.h" />
     <ClInclude Include="FlyLand.h" />
     <ClInclude Include="Game.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Crown.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastlevaniaGame.cpp" />

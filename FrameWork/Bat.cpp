@@ -252,6 +252,6 @@ void Bat::die() {
 	Gravity *gravity = (Gravity*)this->getComponent("Gravity");
 	gravity->setStatus(eGravityStatus::SHALLOWED);
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(0, 200));
+	movement->setVelocity(GVector2(0, -200));
 }
 

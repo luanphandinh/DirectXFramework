@@ -34,7 +34,7 @@
           <Objects>land77 dragon01 spike2 </Objects>
         </QNode>
         <QNode Id="197376" Level="4" X="576" Y="576" Width="192" Height="192">
-          <Objects>land70 spike2 </Objects>
+          <Objects>land70 spike2 ghost0 </Objects>
         </QNode>
         <QNode Id="131840" Level="4" X="384" Y="576" Width="192" Height="192">
           <Objects>land70 </Objects>
@@ -74,10 +74,21 @@
       </QNode>
       <QNode Id="528" Level="3" X="768" Y="384" Width="384" Height="384">
         <QNode Id="528" Level="4" X="768" Y="384" Width="192" Height="192">
-          <Objects>land77 spike0 spike1 </Objects>
+          <QNode Id="528" Level="5" X="768" Y="384" Width="96" Height="96">
+            <Objects>land77 </Objects>
+          </QNode>
+          <QNode Id="529" Level="5" X="864" Y="384" Width="96" Height="96">
+            <Objects>land77 ghost1 </Objects>
+          </QNode>
+          <QNode Id="531" Level="5" X="864" Y="480" Width="96" Height="96">
+            <Objects>spike0 spike1 </Objects>
+          </QNode>
+          <QNode Id="530" Level="5" X="768" Y="480" Width="96" Height="96">
+            <Objects>spike1 </Objects>
+          </QNode>
         </QNode>
         <QNode Id="66064" Level="4" X="960" Y="384" Width="192" Height="192">
-          <Objects>land77 spike0 </Objects>
+          <Objects>land77 spike0 ghost1 </Objects>
         </QNode>
         <QNode Id="197136" Level="4" X="960" Y="576" Width="192" Height="192">
           <QNode Id="197136" Level="5" X="960" Y="576" Width="96" Height="96">
