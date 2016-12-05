@@ -35,6 +35,7 @@ void Whip::update(float deltatime)
 		this->setPosition(_simon->getPosition());
 	if (_simon->isInStatus(eStatus::HITTING))
 		_animations[_level]->update(deltatime);
+	else this->restart();
 
 	if (_listColliding.size() == 0)
 	{
@@ -44,17 +45,20 @@ void Whip::update(float deltatime)
 	else
 	for (auto it = _listColliding.begin(); it != _listColliding.end(); ++it)
 	{
-		if (_hitEffect == nullptr) {
-			auto pos = ((BaseObject*)(it->first))->getPosition();
-			_hitEffect = new HitEffect(1, pos);
-			_hitEffect->init();
-		}
-		else {
-			_hitEffect->setPosition(((BaseObject*)(it->first))->getPosition());
-			_hitEffect->update(deltatime);
-			if (_hitEffect->getStatus() == eStatus::DESTROY) {
-				SAFE_DELETE(_hitEffect);
-				_hitEffect = nullptr;
+//		if (((BaseObject*)(it->first)) != nullptr && !((BaseObject*)(it->first))->isInStatus(eStatus::BURN))
+		{
+			if (_hitEffect == nullptr) {
+				auto pos = ((BaseObject*)(it->first))->getPosition();
+				_hitEffect = new HitEffect(1, pos);
+				_hitEffect->init();
+			}
+			else {
+				_hitEffect->setPosition(((BaseObject*)(it->first))->getPosition());
+				_hitEffect->update(deltatime);
+				if (_hitEffect->getStatus() == eStatus::DESTROY) {
+					SAFE_DELETE(_hitEffect);
+					_hitEffect = nullptr;
+				}
 			}
 		}
 	}
@@ -108,7 +112,9 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 		||otherObjectID == eID::STAIR) return 0.0f;
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
-	if (collisionBody->checkCollision(otherObject, direction, dt, false) && this->isHitting())
+	if (collisionBody->checkCollision(otherObject, direction, dt, false) && this->isHitting() 
+		/*&& !otherObject->isInStatus(eStatus::BURN)
+		&& !otherObject->isInStatus(eStatus::DESTROY)*/)
 	{
 		auto object = _listColliding.find(otherObject);
 		switch (otherObjectID)

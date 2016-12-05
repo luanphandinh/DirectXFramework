@@ -115,16 +115,16 @@ float ItemManager::checkCollision(BaseObject * otherObject, float dt)
 		else
 		{
 			item->checkCollision(otherObject, dt);
-			if (item->getItemId() == eItemID::DRAGON_FIRE)
-			{
-				for (Item* otherItem : _listItem)
-				{
-					if (otherItem->getItemId() == eItemID::DRAGON_FIRE || otherItem == item) continue;
-					item->checkCollision(otherItem, dt);
-				}
-				/*auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-				_simon->getWhip()->checkCollision(item,dt);*/
-			}
+			//if (item->getItemId() == eItemID::DRAGON_FIRE)
+			//{
+			//	for (Item* otherItem : _listItem)
+			//	{
+			//		if (otherItem->getItemId() == eItemID::DRAGON_FIRE || otherItem == item) continue;
+			//		item->checkCollision(otherItem, dt);
+			//	}
+			//	/*auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+			//	_simon->getWhip()->checkCollision(item,dt);*/
+			//}
 		}
 	}
 

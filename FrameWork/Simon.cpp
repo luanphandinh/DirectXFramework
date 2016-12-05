@@ -163,7 +163,7 @@ void Simon::update(float deltatime)
 
 	_animations[_currentAnimationIndex]->update(deltatime);
 
-	_whip->update(deltatime);
+	//_whip->update(deltatime);
 
 	//update component list
 	// update component để sau cùng để sửa bên trên sau đó nó cập nhật đúng
@@ -177,7 +177,7 @@ void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 {
 	_animations[_currentAnimationIndex]->draw(spriteHandle, viewport);
 
-	_whip->draw(spriteHandle, viewport);
+	//_whip->draw(spriteHandle, viewport);
 		
 }
 
@@ -212,7 +212,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_RIGHT:
-		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING))
+		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING) || !this->isInStatus(eStatus::UPSTAIR))
 		{
 			this->removeStatus(eStatus::MOVING_LEFT);
 			this->removeStatus(eStatus::SITTING);
@@ -220,7 +220,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_LEFT:
-		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING))
+		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING) || !this->isInStatus(eStatus::UPSTAIR))
 		{
 			this->removeStatus(eStatus::MOVING_RIGHT);
 			this->removeStatus(eStatus::SITTING);
@@ -255,6 +255,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		_isHitting = false;
 		break;
 	case DIK_Z:
+		if (_throwItemStopWatch != nullptr) break;
 		this->removeStatus(eStatus::HITTING);
 		if (ActiveWeapon::isAvailable())
 		{
@@ -263,7 +264,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_UP:
-		if (this->isInStatus(eStatus::FALLING)) break;
+		if (this->isInStatus(eStatus::FALLING) || this->isInStatus(eStatus::MOVING_LEFT) || this->isInStatus(eStatus::MOVING_RIGHT)) break;
 		this->removeStatus(eStatus::DOWNSTAIR);
 		this->removeStatus(eStatus::FALLING);
 		this->addStatus(eStatus::UPSTAIR);
@@ -747,7 +748,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 	if (this == otherObject)
 		return 0.0f;
 
-	this->_whip->checkCollision(otherObject, dt);
+	//this->_whip->checkCollision(otherObject, dt);
 
 	//Lấy collision body của simon ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
@@ -1090,7 +1091,7 @@ void Simon::setPositionInLand(Land* land)
 
 BaseObject* Simon::getWhip()
 {
-	if (!this->isInStatus(eStatus::HITTING))
+	//if (!this->isInStatus(eStatus::HITTING))
 		_whip->restart();
 	return this->_whip;
 	

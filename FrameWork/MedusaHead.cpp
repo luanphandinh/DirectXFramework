@@ -52,6 +52,28 @@ void MedusaHead::update(float deltaTime) {
 
 	if (this->getStatus() == eStatus::DESTROY)
 		return;
+
+	if (this->getHitpoint() <= 0) {
+		this->setStatus(eStatus::BURN);
+	}
+
+	// Bị nướng
+	if (this->getStatus() == eStatus::BURN) {
+		if (_burning == nullptr) {
+			auto pos = this->getPosition();
+			_burning = new HitEffect(2, pos);
+			_burning->init();
+		}
+		else {
+			_burning->update(deltaTime);
+			if (_burning->getStatus() == eStatus::DESTROY) {
+				this->setStatus(eStatus::DESTROY);
+			}
+		}
+		return;
+	}
+
+
 	if (this->getStatus() == eStatus::HIDING) {
 		this->updateHiding();
 		return;
@@ -70,6 +92,9 @@ void MedusaHead::update(float deltaTime) {
 }
 
 void MedusaHead::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport) {
+	if (_burning != nullptr)
+		_burning->draw(spriteHandler, viewport);
+	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURN)) return;
 	_animations[this->getStatus()]->draw(spriteHandler, viewport);
 
 }
@@ -121,29 +146,32 @@ float MedusaHead::checkCollision(BaseObject *object, float deltaTime) {
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
+	if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
+		if (objectId == eID::SIMON) {
+		
+			//auto movement = (Movement*)this->_listComponent["Movement"];
 
-	if (objectId == eID::SIMON) {
-		if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
-			auto movement = (Movement*)this->_listComponent["Movement"];
-
-			if (object->isInStatus(eStatus::HITTING)) {
+			//if (object->isInStatus(eStatus::HITTING)) {
 				// bị chớp
 				//if (_stopWatch == nullptr) _stopWatch = new StopWatch();
-				if (_stopWatch->isStopWatch(200)) {
+				/*if (_stopWatch->isStopWatch(200)) {
 					this->_animations[this->getStatus()]->enableFlashes(true);
-					_animations[this->getStatus()]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));
+					_animations[this->getStatus()]->setColorFlash(D3DXCOLOR(1.0f, 0.5f, 0.5f, 1));*/
 					//movement->setVelocity(GVector2(0, 0));
-				}
+				//}
 
-				this->dropHitpoint(1);
-				_isHitted = true;
-			}
-			else {
+				/*this->dropHitpoint(1);
+				_isHitted = true;*/
+			//}
+			//else {
 				((Simon*)object)->getHitted();
 				//movement->setVelocity(GVector2(movement->getVelocity().x, 0));
-				this->_animations[this->getStatus()]->enableFlashes(false);
+			/*	this->_animations[this->getStatus()]->enableFlashes(false);
 				_isHitted = false;
-			}
+			}*/
+		}
+		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting()) {
+			this->setStatus(eStatus::BURN);
 		}
 
 		return 0.0f;

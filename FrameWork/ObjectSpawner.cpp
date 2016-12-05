@@ -82,7 +82,7 @@ void ObjectSpawner::release() {
 }
 
 float ObjectSpawner::checkCollision(BaseObject * object, float dt) {
-	if (object->getId() != eID::LAND && object->getId() != eID::SIMON) {
+	if (object->getId() != eID::LAND && object->getId() != eID::SIMON && object->getId() != eID::WHIP) {
 		return 0.0f;
 	}
 

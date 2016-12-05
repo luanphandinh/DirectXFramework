@@ -12,7 +12,7 @@
 // TEST VALUE
 #define START_POSITION			GVector2(600.0f, 300.0f)	// vị trí khởi tạo
 #define MEDUSAHEAD_HORIZONTAL_VELOC		GVector2(100.0f, 0.0f)		// vận tốc ngang
-#define MEDUSAHEAD_FREQUENCY		0.9f						// tần số
+#define MEDUSAHEAD_FREQUENCY		0.7f						// tần số
 #define MEDUSAHEAD_AMPLITUDE		GVector2(0, 64.0f)			// biên độ
 class MedusaHead : public BaseEnemy {
 public:
@@ -58,5 +58,6 @@ private:
 
 	// nếu view chưa tới chỗ nó thì nó ko bay
 	void updateHiding();
+	BaseObject *_burning;
 
 };

@@ -17,19 +17,20 @@ bool PlayScene::init()
 	auto simon = new Simon();
 	simon->init();
 	simon->setPosition(2700, 100);//v1
-	simon->setPosition(2300, 638);//v2
+	//simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
-	simon->setPosition(1666, 1000);//v4
+	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(200, 1000);//v5
 	this->_simon = simon;
 	
 	_listControlObject.push_back(simon);
 	_listObject.push_back(_simon);
+	_listObject.push_back(((Simon*)_simon)->getWhip());
 
 	_director = new Level2Director();
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V4);
+	_director->setCurrentViewport(V1);
 	_viewport = _director->getViewport();
 	//=====================TESTING==========================//
 	_itemManager = new ItemManager();
@@ -174,7 +175,7 @@ void PlayScene::update(float deltaTime)
 	if (_itemManager != nullptr)
 	{
 		//_itemManager->checkCollision(_simon, deltaTime);
-		_itemManager->checkCollision(((Simon*)_simon)->getWhip(), deltaTime);
+		//_itemManager->checkCollision(((Simon*)_simon)->getWhip(), deltaTime);
 		_itemManager->update(deltaTime);
 	}
 	//[Bước 7]
