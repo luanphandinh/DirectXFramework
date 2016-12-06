@@ -175,7 +175,7 @@ BaseObject* ObjectFactory::getLand(xml_node node)
 
 	int x, y, width, height;
 	eDirection direction;
-	bool canJumpDown;
+	bool canJumpDown,checkWithStair;
 
 	x = stoi(properties["X"]);
 	y = stoi(properties["Y"]);
@@ -200,8 +200,13 @@ BaseObject* ObjectFactory::getLand(xml_node node)
 	{
 		canJumpDown = true;
 	}
-
-	auto land = new Land(x, y, width, height, direction);
+	if (properties.find("checkWithStair") != properties.end()) {
+		checkWithStair = (bool)(stoi(properties.find("checkWithStair")->second));
+	}
+	else {
+		checkWithStair = false;
+	}
+	auto land = new Land(x, y, width, height, checkWithStair, direction);
 	land->init();
 	land->enableJump(canJumpDown);
 

@@ -1,7 +1,7 @@
 ﻿#include "Land.h"
 
 
-Land::Land(int x, int y, int width, int height, eDirection physicalBodyDirection) :BaseObject(eID::LAND)
+Land::Land(int x, int y, int width, int height,bool checkable, eDirection physicalBodyDirection) :BaseObject(eID::LAND)
 {
 	this->_bound.left = x;
 	this->_bound.top = y;
@@ -10,7 +10,7 @@ Land::Land(int x, int y, int width, int height, eDirection physicalBodyDirection
 	setPhysicBodySide(physicalBodyDirection);
 
 	_canJump = false;
-
+	_checkable = checkable;
 	_surface = nullptr;
 
 	//create surface
@@ -185,4 +185,8 @@ void Land::setZIndex(float z)
 float Land::getZIndex()
 {
 	return 1.0f;
+}
+
+bool Land::checkable() {
+	return _checkable;
 }

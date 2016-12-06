@@ -367,8 +367,8 @@
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
-    <Item Id="2" Name="land1" X="2902" Y="189" Width="140" Height="4">
-      <ActiveBound X="2902" Y="189" Width="140" Height="4" />
+    <Item Id="2" Name="land1" X="2910" Y="189" Width="140" Height="4">
+      <ActiveBound X="2910" Y="189" Width="140" Height="4" />
       <Params>
         <Elem Key="physicBodyDirection" Value="1" />
       </Params>
@@ -437,6 +437,7 @@
       <ActiveBound X="2600" Y="251" Width="280" Height="14" />
       <Params>
         <Elem Key="physicBodyDirection" Value="15" />
+        <Elem Key="checkWithStair" Value="1" />
       </Params>
     </Item>
     <Item Id="2" Name="land6" X="2626" Y="573" Width="61" Height="26">
@@ -468,6 +469,7 @@
       <ActiveBound X="2784" Y="638" Width="160" Height="14" />
       <Params>
         <Elem Key="physicBodyDirection" Value="15" />
+        <Elem Key="checkWithStair" Value="1" />
       </Params>
     </Item>
     <Item Id="2" Name="wall4" X="2753" Y="604" Width="30" Height="93">
@@ -785,9 +787,6 @@
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
-    <Item Id="7" Name="bricktest" X="2814" Y="97" Width="31" Height="31">
-      <ActiveBound X="2814" Y="97" Width="31" Height="31" />
-    </Item>
     <Item Id="7" Name="brick0" X="3008" Y="257" Width="32" Height="32">
       <ActiveBound X="3008" Y="257" Width="32" Height="32" />
     </Item>
@@ -836,13 +835,14 @@
     <Item Id="55" Name="ghost1" X="950" Y="1100" Width="32" Height="32">
       <ActiveBound X="950" Y="1100" Width="32" Height="32" />
     </Item>
-    <Item Id="2" Name="land78" X="2978" Y="1276" Width="29" Height="8">
-      <ActiveBound X="2978" Y="1276" Width="29" Height="8" />
+    <Item Id="2" Name="land78" X="2973" Y="1276" Width="29" Height="8">
+      <ActiveBound X="2973" Y="1276" Width="29" Height="8" />
     </Item>
     <Item Id="2" Name="land79" X="1984" Y="1311" Width="957" Height="10">
       <ActiveBound X="1984" Y="1311" Width="957" Height="10" />
       <Params>
         <Elem Key="physicBodyDirection" Value="15" />
+        <Elem Key="checkWithStair" Value="1" />
       </Params>
     </Item>
     <Item Id="2" Name="land80" X="1538" Y="1275" Width="447" Height="2">
@@ -854,8 +854,8 @@
         <Elem Key="physicBodyDirection" Value="4" />
       </Params>
     </Item>
-    <Item Id="3" Name="stair75" X="2960" Y="1275" Width="16" Height="8">
-      <ActiveBound X="2960" Y="1275" Width="16" Height="8" />
+    <Item Id="3" Name="stair75" X="2960" Y="1280" Width="16" Height="8">
+      <ActiveBound X="2960" Y="1280" Width="16" Height="8" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
       </Params>

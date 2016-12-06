@@ -144,7 +144,8 @@ void Ghost::onCollisionEnd(CollisionEventArg *collision_event) {
 
 float Ghost::checkCollision(BaseObject *object, float deltaTime) {
 	if (this->getStatus() == eStatus::DESTROY ||
-		this->isInStatus(eStatus::DYING))
+		this->isInStatus(eStatus::DYING) ||
+		this->isInStatus(eStatus::HIDING))
 		return 0.0f;
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];

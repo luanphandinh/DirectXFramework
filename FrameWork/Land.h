@@ -4,7 +4,7 @@
 class Land :public BaseObject
 {
 public:
-	Land(int x,int y,int width,int height,eDirection physicalBodyDirection);
+	Land(int x,int y,int width,int height,bool checkable,eDirection physicalBodyDirection);
 	~Land();
 
 	//implement inherited methods from baseObject
@@ -22,7 +22,7 @@ public:
 
 	void enableJump(bool enable);
 	bool canJump();
-
+	bool checkable();
 protected:
 	bool _canJump;
 	LPDIRECT3DSURFACE9 _surface;
@@ -49,6 +49,8 @@ protected:
 
 	void setZIndex(float z) override;
 	float getZIndex() override;
+	bool _checkable;
+	
 #pragma endregion
 private:
 	// Hình chữ nhật bao lấy land.

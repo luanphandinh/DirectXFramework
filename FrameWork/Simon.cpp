@@ -781,6 +781,10 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			{
 				auto land = (Land*)otherObject;
 				_canJumpDown = land->canJump();
+				if (this->isInStatus(STANDINGONSTAIR) || this->isInStatus(UPSTAIR)) 
+				{
+					if (land->checkable()) return 0.0f;
+				}
 				//if (_preObject != nullptr && _preObject->getId() == eID::LAND) return 0.0f;
 			}
 
