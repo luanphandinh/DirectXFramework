@@ -586,6 +586,7 @@
       <ActiveBound X="2945" Y="580" Width="26" Height="7" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
+        <Elem Key="canUpStair" Value="0" />
       </Params>
     </Item>
     <Item Id="3" Name="stair04" X="607" Y="709" Width="15" Height="4">
@@ -598,6 +599,7 @@
       <ActiveBound X="1712" Y="863" Width="19" Height="6" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
+        <Elem Key="canUpStair" Value="0" />
       </Params>
     </Item>
     <Item Id="6" Name="candle02" X="2840" Y="367" Width="12" Height="14">
@@ -786,6 +788,7 @@
       <ActiveBound X="370" Y="994" Width="21" Height="5" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
+        <Elem Key="canUpStair" Value="0" />
       </Params>
     </Item>
     <Item Id="7" Name="brick0" X="3008" Y="257" Width="32" Height="32">
@@ -836,8 +839,8 @@
     <Item Id="55" Name="ghost1" X="950" Y="1100" Width="32" Height="32">
       <ActiveBound X="950" Y="1100" Width="32" Height="32" />
     </Item>
-    <Item Id="2" Name="land78" X="2973" Y="1276" Width="29" Height="8">
-      <ActiveBound X="2973" Y="1276" Width="29" Height="8" />
+    <Item Id="2" Name="land78" X="2970" Y="1276" Width="32" Height="8">
+      <ActiveBound X="2970" Y="1276" Width="32" Height="8" />
     </Item>
     <Item Id="2" Name="land79" X="1984" Y="1311" Width="957" Height="10">
       <ActiveBound X="1984" Y="1311" Width="957" Height="10" />
@@ -859,6 +862,7 @@
       <ActiveBound X="2948" Y="1280" Width="16" Height="8" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
+        <Elem Key="canUpStair" Value="0" />
       </Params>
     </Item>
     <Item Id="35" Name="spearKnight4" X="2506" Y="958" Width="34" Height="64">

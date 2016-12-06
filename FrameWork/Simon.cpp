@@ -772,7 +772,7 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 			(!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && (otherObjectID == eID::LAND || otherObjectID == eID::BRICK))
 			|| (!this->isInStatus(eStatus(eStatus::JUMPING | eStatus::FALLING)) && otherObjectID == eID::FLYLAND)
 			 //||	(this->isInStatus(eStatus::SITTING) && otherObjectID == eID::STAIR)
-			 || ((isInStatus(eStatus::UPSTAIR) || isInStatus(eStatus::SITTING)) && otherObjectID == eID::STAIR)
+			 || (((isInStatus(eStatus::UPSTAIR) && ((Stair*)otherObject)->canUpStair()) || isInStatus(eStatus::SITTING)) && otherObjectID == eID::STAIR)
 			)
 			&& collisionBody->checkCollision(otherObject, direction, dt, false)
 			)
@@ -817,10 +817,18 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				//}
 				//else 
 				//{
-				if (this->isInStatus(eStatus::UPSTAIR)) 
+				if (this->isInStatus(eStatus::UPSTAIR) && stair->canUpStair())
 				{
 					setPositionInStair(stair);
 				}
+				//else
+				//{
+				//		this->removeStatus(STANDINGONSTAIR);
+				//		this->removeStatus(UPSTAIR);
+				//		this->removeStatus(DOWNSTAIR);
+				//		//this->addStatus(FALLING);
+				//		return 0.0f;
+				//}
 
 				//this->_canUpStair = stair->canUpStair();
 				if (this->isInStatus(eStatus::SITTING)) 
