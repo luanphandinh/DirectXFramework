@@ -807,18 +807,30 @@ float Simon::checkCollision(BaseObject* otherObject, float dt)
 				auto stair = (Stair*)otherObject;
 				_canOnStair = stair->canStandOnStair();
 				_stairDirection = stair->getStairDirection();
-				if (this->isInStatus(eStatus::UPSTAIR))
+				//if (!stair->canUpStair()) 
+				//{
+				//	this->removeStatus(STANDINGONSTAIR);
+				//	this->removeStatus(UPSTAIR);
+				//	this->removeStatus(DOWNSTAIR);
+				//	this->addStatus(FALLING);
+				//	//return 0.0f;
+				//}
+				//else 
+				//{
+				if (this->isInStatus(eStatus::UPSTAIR)) 
 				{
 					setPositionInStair(stair);
 				}
+
 				//this->_canUpStair = stair->canUpStair();
-				if (this->isInStatus(eStatus::SITTING))
+				if (this->isInStatus(eStatus::SITTING)) 
 				{
 					this->removeStatus(eStatus::SITTING);
 					this->addStatus(eStatus::DOWNSTAIR);
 					setPositionInStair(stair);
 					this->addStatus(eStatus::STANDINGONSTAIR);
 				}
+				//}
 			}
 			else _canOnStair = false;
 			//Nếu như va chạm hướng top,và trừ cái trường hợp mà simon đang trong trạng thái nhảy mà rớt xuống 

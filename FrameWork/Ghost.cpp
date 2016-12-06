@@ -29,9 +29,6 @@ void Ghost::init() {
 	auto collisionBody = new CollisionBody(this);
 	_listComponent["CollisionBody"] = collisionBody;
 
-	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Ghost::onCollisionBegin);
-	__hook(&CollisionBody::onCollisionEnd, collisionBody, &Ghost::onCollisionEnd);
-
 	_animations[eStatus::HIDING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::HIDING]->addFrameRect(eID::GHOST, NULL);
 
@@ -120,27 +117,7 @@ void Ghost::release() {
 	//SAFE_DELETE(this->_sprite);
 }
 
-void Ghost::onCollisionBegin(CollisionEventArg *collision_event) {
-	eID objectID = collision_event->_otherObject->getId();
-	switch (objectID) {
-	case eID::SIMON:
-	{
-		if (collision_event->_otherObject->isInStatus(eStatus::DYING) == false) {
-			collision_event->_otherObject->setStatus(eStatus::DYING);
-		}
-		break;
-	}
-	default:
-		break;
-	}
-}
 
-void Ghost::onCollisionEnd(CollisionEventArg *collision_event) {
-	if (this->getStatus() == eStatus::DESTROY)
-		return;
-	eID objectID = collision_event->_otherObject->getId();
-
-}
 
 float Ghost::checkCollision(BaseObject *object, float deltaTime) {
 	if (this->getStatus() == eStatus::DESTROY ||

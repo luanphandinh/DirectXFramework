@@ -60,8 +60,6 @@ void Bat::init() {
 	auto collisionBody = new CollisionBody(this);
 	_listComponent["CollisionBody"] = collisionBody;
 
-	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Bat::onCollisionBegin);
-	__hook(&CollisionBody::onCollisionEnd, collisionBody, &Bat::onCollisionEnd);
 
 	_animations[eStatus::HANGING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::HANGING]->addFrameRect(eID::BAT, "normal", NULL);
@@ -207,28 +205,6 @@ void Bat::updateHanging() {
 	else {
 		this->setStatus(HANGING);
 	}
-
-}
-
-void Bat::onCollisionBegin(CollisionEventArg* collision_event) {
-	eID objectID = collision_event->_otherObject->getId();
-	switch (objectID) {
-	case eID::SIMON:
-	{
-		if (collision_event->_otherObject->isInStatus(eStatus::DYING) == false) {
-			collision_event->_otherObject->setStatus(eStatus::DYING);
-		}
-		break;
-	}
-	default:
-		break;
-	}
-}
-
-void Bat::onCollisionEnd(CollisionEventArg* collision_event) {
-	if (this->getStatus() == eStatus::DESTROY)
-		return;
-	eID objectID = collision_event->_otherObject->getId();
 
 }
 

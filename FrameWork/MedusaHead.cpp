@@ -30,9 +30,6 @@ void MedusaHead::init() {
 	auto collisionBody = new CollisionBody(this);
 	_listComponent["CollisionBody"] = collisionBody;
 
-	__hook(&CollisionBody::onCollisionBegin, collisionBody, &MedusaHead::onCollisionBegin);
-	__hook(&CollisionBody::onCollisionEnd, collisionBody, &MedusaHead::onCollisionEnd);
-
 	_animations[eStatus::HIDING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::HIDING]->addFrameRect(eID::MEDUSAHEAD, "normal", NULL);
 
@@ -106,32 +103,6 @@ void MedusaHead::release() {
 	_listComponent.clear();
 
 	SAFE_DELETE(this->_sprite);
-}
-
-void MedusaHead::onCollisionBegin(CollisionEventArg *collision_event) {
-	eID objectID = collision_event->_otherObject->getId();
-	switch (objectID) {
-	case eID::SIMON:
-	{
-		if (collision_event->_otherObject->isInStatus(eStatus::DYING) == false) {
-			collision_event->_otherObject->setStatus(eStatus::DYING);
-		}
-		break;
-	}
-	default:
-		break;
-	}
-}
-
-void MedusaHead::onCollisionEnd(CollisionEventArg *collision_event) {
-	if (this->getStatus() == eStatus::DESTROY)
-		return;
-	eID objectID = collision_event->_otherObject->getId();
-	switch (objectID) {
-	case eID::LAND:
-	default:
-		break;
-	}
 }
 
 float MedusaHead::checkCollision(BaseObject *object, float deltaTime) {

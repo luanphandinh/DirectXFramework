@@ -49,9 +49,6 @@ void SpearKnight::init() {
 	auto collisionBody = new CollisionBody(this);
 	_listComponent["CollisionBody"] = collisionBody;
 
-	__hook(&CollisionBody::onCollisionBegin, collisionBody, &SpearKnight::onCollisionBegin);
-	__hook(&CollisionBody::onCollisionEnd, collisionBody, &SpearKnight::onCollisionEnd);
-
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::NORMAL]->addFrameRect(eID::SPEARKNIGHT, "normal", NULL);
 
@@ -156,34 +153,6 @@ void SpearKnight::changeDirection() {
 	_sprite->setScaleX(-this->getScale().x);
 	Movement *movement = (Movement*)this->getComponent("Movement");
 	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
-}
-
-void SpearKnight::onCollisionBegin(CollisionEventArg* collision_event) {
-	eID objectID = collision_event->_otherObject->getId();
-	switch (objectID) {
-	case eID::SIMON:
-	{
-		if (collision_event->_otherObject->isInStatus(eStatus::DYING) == false) {
-			collision_event->_otherObject->setStatus(eStatus::DYING);
-			//* need to add die() for simon
-			//((Simon*)collision_event->_otherObject)->die();
-		}
-		break;
-	}
-	default:
-		break;
-	}
-}
-
-void SpearKnight::onCollisionEnd(CollisionEventArg* collision_event) {
-	if (this->getStatus() == eStatus::DESTROY)
-		return;
-	eID objectID = collision_event->_otherObject->getId();
-	switch (objectID) {
-	case eID::LAND:
-	default:
-		break;
-	}
 }
 
 
