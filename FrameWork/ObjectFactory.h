@@ -15,6 +15,7 @@
 #include"Dragon.h"
 #include"Spike.h"
 #include"Ghost.h"
+#include"Medusa.h"
 
 class ObjectFactory
 {
@@ -34,7 +35,7 @@ private:
 	static BaseObject* getSpawner(xml_node node);
 	static BaseObject* getSpike(xml_node node);
 	static BaseObject* getGhost(xml_node node);
-
+	static BaseObject* getMedusa(xml_node node);
 
 	static BaseObject* getDoor(xml_node node);
 	static BaseObject* getFlyLand(xml_node node);

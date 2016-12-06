@@ -125,6 +125,20 @@ void Level2Director::switchViewport()
 			this->setRevivePosition(GVector2(1450, 1000));
 		}
 		break;
+	case eLevel2Viewport::V5:
+		if (pos.y > 1160 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR)) {
+			//this->setCurrentViewport(V1);
+			this->setCurrentViewport(V6);
+			_objTracker->setPosition(2848, 1184);
+		}
+		break;
+	case eLevel2Viewport::V6:
+		if (pos.x < 2048) {
+			//this->setCurrentViewport(V1);
+			this->setCurrentViewport(V7);
+			//_objTracker->setPosition(2848, 1184);
+		}
+		break;
 	default:
 		break;
 	}

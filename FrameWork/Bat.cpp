@@ -11,7 +11,7 @@ Bat::Bat(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::BAT) {
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
-	this->setPhysicBodySide(eDirection::ALL);
+	
 }
 
 Bat::Bat(eStatus status, float x, float y, int direction) :
@@ -82,7 +82,7 @@ void Bat::init() {
 	_sprite->drawBounding(false);
 
 	this->hack = 0;
-
+	this->setPhysicBodySide(eDirection::ALL);
 	this->setHitpoint(1);
 }
 

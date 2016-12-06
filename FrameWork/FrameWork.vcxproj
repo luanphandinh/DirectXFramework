@@ -111,6 +111,7 @@
     <ClInclude Include="LifeCounter.h" />
     <ClInclude Include="LifeUI.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Medusa.h" />
     <ClInclude Include="MedusaHead.h" />
     <ClInclude Include="MoneyBag.h" />
     <ClInclude Include="ObjectFactory.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="SceneTime.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="Snake.h" />
     <ClInclude Include="SpearKnight.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="Sprite.h" />
@@ -183,6 +185,7 @@
     <ClCompile Include="LifeUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Medusa.cpp" />
     <ClCompile Include="MedusaHead.cpp" />
     <ClCompile Include="MoneyBag.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
@@ -196,6 +199,7 @@
     <ClCompile Include="SceneTime.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SpearKnight.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="Sprite.cpp" />

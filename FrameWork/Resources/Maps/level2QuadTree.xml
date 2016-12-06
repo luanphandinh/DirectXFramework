@@ -123,8 +123,12 @@
   </QNode>
   <QNode Id="4" Level="1" X="1536" Y="0" Width="1536" Height="1536">
     <QNode Id="4" Level="2" X="1536" Y="0" Width="768" Height="768">
-      <QNode Id="4" Level="3" X="1536" Y="0" Width="384" Height="384" />
-      <QNode Id="260" Level="3" X="1920" Y="0" Width="384" Height="384" />
+      <QNode Id="4" Level="3" X="1536" Y="0" Width="384" Height="384">
+        <Objects>land80 medusa </Objects>
+      </QNode>
+      <QNode Id="260" Level="3" X="1920" Y="0" Width="384" Height="384">
+        <Objects>land79 land80 </Objects>
+      </QNode>
       <QNode Id="772" Level="3" X="1920" Y="384" Width="384" Height="384">
         <QNode Id="772" Level="4" X="1920" Y="384" Width="192" Height="192">
           <Objects>land24 flyLand01 </Objects>
@@ -133,10 +137,10 @@
           <Objects>land23 flyLand01 </Objects>
         </QNode>
         <QNode Id="197380" Level="4" X="2112" Y="576" Width="192" Height="192">
-          <Objects>land17 </Objects>
+          <Objects>land17 medusaHead1 medusaHead2 </Objects>
         </QNode>
         <QNode Id="131844" Level="4" X="1920" Y="576" Width="192" Height="192">
-          <Objects>land16 </Objects>
+          <Objects>land16 medusaHead0 </Objects>
         </QNode>
       </QNode>
       <QNode Id="516" Level="3" X="1536" Y="384" Width="384" Height="384">
@@ -155,14 +159,34 @@
       </QNode>
     </QNode>
     <QNode Id="20" Level="2" X="2304" Y="0" Width="768" Height="768">
-      <QNode Id="20" Level="3" X="2304" Y="0" Width="384" Height="384" />
-      <QNode Id="276" Level="3" X="2688" Y="0" Width="384" Height="384" />
+      <QNode Id="20" Level="3" X="2304" Y="0" Width="384" Height="384">
+        <Objects>land79 </Objects>
+      </QNode>
+      <QNode Id="276" Level="3" X="2688" Y="0" Width="384" Height="384">
+        <QNode Id="276" Level="4" X="2688" Y="0" Width="192" Height="192" />
+        <QNode Id="65812" Level="4" X="2880" Y="0" Width="192" Height="192">
+          <Objects>wall7 </Objects>
+        </QNode>
+        <QNode Id="196884" Level="4" X="2880" Y="192" Width="192" Height="192">
+          <QNode Id="196884" Level="5" X="2880" Y="192" Width="96" Height="96">
+            <Objects>land79 stair75 </Objects>
+          </QNode>
+          <QNode Id="196885" Level="5" X="2976" Y="192" Width="96" Height="96">
+            <Objects>land78 wall7 </Objects>
+          </QNode>
+          <QNode Id="196887" Level="5" X="2976" Y="288" Width="96" Height="96" />
+          <QNode Id="196886" Level="5" X="2880" Y="288" Width="96" Height="96" />
+        </QNode>
+        <QNode Id="131348" Level="4" X="2688" Y="192" Width="192" Height="192">
+          <Objects>land79 </Objects>
+        </QNode>
+      </QNode>
       <QNode Id="788" Level="3" X="2688" Y="384" Width="384" Height="384">
         <QNode Id="788" Level="4" X="2688" Y="384" Width="192" Height="192">
           <Objects>land21 land22 </Objects>
         </QNode>
         <QNode Id="66324" Level="4" X="2880" Y="384" Width="192" Height="192">
-          <Objects>land22 wall5 </Objects>
+          <Objects>land22 wall5 spearKnight5 </Objects>
         </QNode>
         <QNode Id="197396" Level="4" X="2880" Y="576" Width="192" Height="192">
           <Objects>land18 wall5 </Objects>
@@ -172,7 +196,18 @@
         </QNode>
       </QNode>
       <QNode Id="532" Level="3" X="2304" Y="384" Width="384" Height="384">
-        <Objects>land18 land20 flyLand02 </Objects>
+        <QNode Id="532" Level="4" X="2304" Y="384" Width="192" Height="192">
+          <Objects>flyLand02 </Objects>
+        </QNode>
+        <QNode Id="66068" Level="4" X="2496" Y="384" Width="192" Height="192">
+          <Objects>land20 spearKnight6 </Objects>
+        </QNode>
+        <QNode Id="197140" Level="4" X="2496" Y="576" Width="192" Height="192">
+          <Objects>land18 spearKnight4 </Objects>
+        </QNode>
+        <QNode Id="131604" Level="4" X="2304" Y="576" Width="192" Height="192">
+          <Objects>land18 </Objects>
+        </QNode>
       </QNode>
     </QNode>
     <QNode Id="52" Level="2" X="2304" Y="768" Width="768" Height="768">
@@ -260,10 +295,10 @@
               <Objects>wall1 brick0 </Objects>
             </QNode>
             <QNode Id="66359" Level="6" X="3024" Y="1248" Width="48" Height="48">
-              <Objects>wall1 brick0 wall85 </Objects>
+              <Objects>wall1 brick0 wall6 </Objects>
             </QNode>
             <QNode Id="66359" Level="6" X="3024" Y="1296" Width="48" Height="48">
-              <Objects>brick0 brick1 wall85 </Objects>
+              <Objects>brick0 brick1 wall6 </Objects>
             </QNode>
             <QNode Id="66359" Level="6" X="2976" Y="1296" Width="48" Height="48">
               <Objects>brick0 brick1 </Objects>

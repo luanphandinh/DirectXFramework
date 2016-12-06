@@ -74,6 +74,8 @@ enum eID
 	WHIP = 53,
 	DRAGON = 54,
 	GHOST = 55,
+	MEDUSA = 56,
+	SNAKE = 57,
 };
 
 enum eItemID
@@ -193,6 +195,8 @@ enum eLevel2Viewport
 	V3 = 3,
 	V4 = 4,
 	V5 = 5,
+	V6 = 6,
+	V7 = 7,
 };
 
 #define _NAMESPACE_FRAMEWORK_END	}

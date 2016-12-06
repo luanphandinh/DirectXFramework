@@ -156,6 +156,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case GHOST:
 		return getGhost(node);
 		break;
+	case MEDUSA:
+		return getMedusa(node);
+		break;
 	case MAPSTAGE1:
 		break;
 	case LIFE_ICON:
@@ -571,6 +574,27 @@ BaseObject * ObjectFactory::getGhost(xml_node node) {
 	ghost->init();
 
 	return ghost;
+}
+
+BaseObject * ObjectFactory::getMedusa(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+	int x, y, width, height;
+
+	eStatus status;
+
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+	width = stoi(properties["Width"]);
+	height = stoi(properties["Height"]);
+
+	auto pos = GVector2(x + width/2, y - height/2);
+
+	auto medusa = new Medusa(pos);
+	medusa->init();
+
+	return medusa;
 }
 
 
