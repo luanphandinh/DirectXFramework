@@ -20,7 +20,7 @@ bool PlayScene::init()
 	//simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
-	simon->setPosition(1000, 1100);//v5
+	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(1948, 1324);//v6
 	this->_simon = simon;
 	
@@ -31,7 +31,7 @@ bool PlayScene::init()
 	_director = new Level2Director();
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V5);
+	_director->setCurrentViewport(V1);
 	_viewport = _director->getViewport();
 	//=====================TESTING==========================//
 	_itemManager = new ItemManager();

@@ -53,6 +53,7 @@ protected:
 	GVector2	_startPosition;
 	eItemType	_type;
 	eItemID		_itemId;
+	BaseObject* _preObject;
 	map<string, IComponent*> _componentList;
 };
 

@@ -33,7 +33,6 @@ void Item::initCommonComponent()
 	auto collisionBody = new CollisionBody(this);
 	_componentList.insert(pair<string, IComponent*>("CollisionBody", collisionBody));
 
-	__hook(&CollisionBody::onCollisionBegin, collisionBody, &Item::onCollisionBegin);
 }
 
 GVector2 Item::initVeloc(GVector2 speed)
@@ -103,17 +102,20 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 	if (otherObjectID != eID::LAND && otherObjectID != eID::SIMON) return 0.0f;
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
-	if (otherObjectID == eID::LAND || otherObjectID == eID::SIMON)
 	if (collisionBody->checkCollision(otherObject, direction, dt, false))
 	{
 		if (otherObjectID == eID::LAND)
 		{
 			this->stop();
 		}
-		else if (otherObjectID == eID::SIMON && !otherObject->isInStatus(eStatus::HITTING))
+		else if (otherObjectID == eID::SIMON)
 		{
-			if (this->getVelocity().y != 0) return 0.0f;
-			this->pickedUp();
+			//if (collisionBody->isAABB(this->getBounding(),otherObject->getBounding()));
+			//if (this->getVelocity().y != 0) return 0.0f;
+			int distanceX = abs(this->getPositionX() - otherObject->getPositionX());
+			int distanceY = abs(this->getPositionY() - otherObject->getPositionY());
+			if (GVector2(distanceX, distanceY) < GVector2(5,5))
+				this->pickedUp();
 		}
 	}
 	return 0.0f;
