@@ -212,7 +212,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_RIGHT:
-		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING) || !this->isInStatus(eStatus::UPSTAIR))
+		if (!this->isInStatus(eStatus::UPSTAIR))
 		{
 			this->removeStatus(eStatus::MOVING_LEFT);
 			this->removeStatus(eStatus::SITTING);
@@ -220,7 +220,7 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		break;
 	case DIK_LEFT:
-		if (!this->isInStatus(eStatus::STANDINGONSTAIR) || !this->isInStatus(eStatus::HITTING) || !this->isInStatus(eStatus::UPSTAIR))
+		if (!this->isInStatus(eStatus::UPSTAIR))
 		{
 			this->removeStatus(eStatus::MOVING_RIGHT);
 			this->removeStatus(eStatus::SITTING);
@@ -422,12 +422,18 @@ void Simon::updateStatus(float deltatime)
 	trackFlyLandPosition(deltatime);
 	//_isHitted = false;
 
-	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT && (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR)
+	if ((this->getStatus() & eStatus::MOVING_LEFT) == eStatus::MOVING_LEFT 
+		&& (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR
+		&& (this->getStatus() & eStatus::JUMPING) != eStatus::JUMPING
+		&& (this->getStatus() & eStatus::HITTING) != eStatus::HITTING)
 	{
 		this->moveLeft();
 	}
 	else
-	if ((this->getStatus() & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT && (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR)
+	if ((this->getStatus() & eStatus::MOVING_RIGHT) == eStatus::MOVING_RIGHT 
+		&& (this->getStatus() & eStatus::STANDINGONSTAIR) != eStatus::STANDINGONSTAIR
+		&& (this->getStatus() & eStatus::JUMPING) != eStatus::JUMPING
+		&& (this->getStatus() & eStatus::HITTING) != eStatus::HITTING)
 	{
 		this->moveRight();
 	}
@@ -451,6 +457,10 @@ void Simon::updateStatus(float deltatime)
 	else if ((this->getStatus() & eStatus::JUMPING) != eStatus::JUMPING)
 	{
 		this->standing();
+	}
+	else if ((this->getStatus() & eStatus::JUMPING) == eStatus::JUMPING)
+	{
+		this->jump();
 	}
 }
 
