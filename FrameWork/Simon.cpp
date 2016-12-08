@@ -235,14 +235,13 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		}
 		else
 		{
+			this->addStatus(eStatus::SITTING);
 			this->removeStatus(eStatus::MOVING_RIGHT);
 			this->removeStatus(eStatus::MOVING_LEFT);
-			this->addStatus(eStatus::SITTING);
 		}
 		break;
 	case DIK_A:
 		if (_hittingStopWatch != nullptr) break;
-		this->removeStatus(eStatus::THROWING_ITEM);
 		this->removeStatus(eStatus::UPSTAIR);
 		this->removeStatus(eStatus::DOWNSTAIR);
 		if (this->isInStatus(eStatus::STANDINGONSTAIR))
@@ -256,7 +255,6 @@ void Simon::onKeyPressed(KeyEventArg* key_event)
 		break;
 	case DIK_Z:
 		if (_throwItemStopWatch != nullptr) break;
-		this->removeStatus(eStatus::HITTING);
 		if (ActiveWeapon::isAvailable())
 		{
 			this->addStatus(eStatus::THROWING_ITEM);
@@ -409,7 +407,7 @@ void Simon::updateStatus(float deltatime)
 			_throwItemStopWatch = new StopWatch();
 		}
 
-		if (_throwItemStopWatch->isStopWatch(220))
+		if (_throwItemStopWatch->isStopWatch(300))
 		{
 			this->removeStatus(eStatus::THROWING_ITEM);
 			SAFE_DELETE(_throwItemStopWatch);
@@ -950,9 +948,7 @@ void  Simon::updateCurrentAnimateIndex()
 	//Nếu đang nhảy hoặc rớt thì animate duy nhất nhảy
 	if ((_currentAnimationIndex & eStatus::FALLING) == eStatus::FALLING)
 	{
-		if (!this->isInStatus(eStatus::STANDINGONSTAIR))
-			_currentAnimationIndex = eStatus::FALLING;
-		
+			_currentAnimationIndex = eStatus::FALLING;	
 	}
 
 	if ((_currentAnimationIndex & eStatus::JUMPING) == eStatus::JUMPING)
