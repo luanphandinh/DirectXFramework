@@ -17,10 +17,11 @@ bool PlayScene::init()
 	auto simon = new Simon();
 	simon->init();
 	simon->setPosition(2700, 100);//v1
-	//simon->setPosition(2300, 638);//v2
+	simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(1000, 1100);//v5
+	//simon->setPosition(300, 1000);//v5
 	//simon->setPosition(1948, 1324);//v6
 	this->_simon = simon;
 	
@@ -31,7 +32,7 @@ bool PlayScene::init()
 	_director = new Level2Director();
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V1);
+	_director->setCurrentViewport(V2);
 	_viewport = _director->getViewport();
 	//=====================TESTING==========================//
 	_itemManager = new ItemManager();
@@ -150,6 +151,14 @@ void PlayScene::update(float deltaTime)
 			continue;
 		_activeObject.push_back(obj->second);
 	}
+	//Lấy item trong object manager ra ngoài để check
+	for (auto item : ItemManager::getListItem())
+	{
+		auto obj = item;
+		if (obj == nullptr)
+			continue;
+		_activeObject.push_back(obj);
+	}
 
 	//[Bước 5]
 	_activeObject.insert(_activeObject.end(), _listObject.begin(), _listObject.end());
@@ -159,12 +168,12 @@ void PlayScene::update(float deltaTime)
 	{
 		//if (_itemManager != nullptr && (obj->getId() == eID::LAND || obj->getId()== eID::SPEARKNIGHT))
 		//{
-			_itemManager->checkCollision(obj, deltaTime);
+			//_itemManager->checkCollision(obj, deltaTime);
 		//}
 		//không cần xét va chạm cho các trường hợp này
-			if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND || obj->getId() == eID::BRICK || 
-			 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
-			continue;	
+		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND || obj->getId() == eID::BRICK || 
+			obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
+		continue;	
 		// check mấy con như knight vs land đồ :v
 		for (BaseObject* passiveobj : _activeObject) {
 			if (passiveobj == nullptr || passiveobj == obj || passiveobj->isInStatus(eStatus::DESTROY))
@@ -173,15 +182,10 @@ void PlayScene::update(float deltaTime)
 		}
 	}
 
-	if (_itemManager != nullptr)
-	{
-		//_itemManager->checkCollision(_simon, deltaTime);
-		//_itemManager->checkCollision(((Simon*)_simon)->getWhip(), deltaTime);
-		_itemManager->update(deltaTime);
-	}
 	//[Bước 7]
 	for (BaseObject* obj : _activeObject)
 	{
+		//if (obj != nullptr)
 		obj->update(deltaTime);
 	}
 
@@ -255,6 +259,11 @@ void PlayScene::destroyObject()
 			//xóa khỏi _mapObject
 			_mapObject.erase(name);
 		}
+	}
+
+	if (_itemManager != nullptr)
+	{
+		_itemManager->update(1);
 	}
 }
 

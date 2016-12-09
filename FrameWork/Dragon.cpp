@@ -1,7 +1,7 @@
 ﻿#include "Dragon.h"
 #include"PlayScene.h"
 #include"Simon.h"
-
+#include"DragonFire.h"
 Dragon::Dragon(GVector2 pos) : BaseEnemy(eID::DRAGON)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::DRAGON);

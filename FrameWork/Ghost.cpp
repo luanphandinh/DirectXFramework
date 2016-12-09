@@ -10,6 +10,7 @@ Ghost::Ghost(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::GHOST
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
 	this->setStatus(status);
 	this->setPosition(pos);
+	
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
 	this->_direction = direction;
@@ -48,7 +49,7 @@ void Ghost::init() {
 	_sprite->drawBounding(false);
 
 	this->hack = 0;
-	this->setHitpoint(1);
+	this->setHitpoint(2);
 }
 
 void Ghost::update(float deltaTime) {

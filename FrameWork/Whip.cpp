@@ -123,23 +123,16 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURN);
 			break;
-		case DRAGON:
-		case SPEARKNIGHT:
-			if (object == _listColliding.end() || object._Ptr == nullptr)
-			{
-				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
-				_listColliding[otherObject] = true;
-			}
-			break;
 		case GHOST:
 		case BAT:
+		case DRAGON:
+		case SPEARKNIGHT:
+		case MEDUSAHEAD:
 			if (object == _listColliding.end() || object._Ptr == nullptr)
 			{
 				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
 				_listColliding[otherObject] = true;
 			}
-			break;
-		case MEDUSAHEAD:
 			break;
 		default:
 			break;

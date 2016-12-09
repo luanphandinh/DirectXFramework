@@ -10,7 +10,7 @@ Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
 	this->setPosition(pos);
 //	this->setScale(1.75f);
-	this->setPhysicBodySide(eDirection::ALL);
+	
 }
 
 Medusa::~Medusa() {}
@@ -42,7 +42,7 @@ void Medusa::init() {
 	this->setPhysicBodySide(eDirection::ALL);
 	this->hack = 0;
 
-	this->setHitpoint(16);
+	this->setHitpoint(1);
 }
 
 void Medusa::update(float deltaTime) {
@@ -53,7 +53,20 @@ void Medusa::update(float deltaTime) {
 		this->setStatus(eStatus::BURN);
 	}
 
-
+	if (this->getStatus() == eStatus::BURN) {
+		if (_burning == nullptr) {
+			auto pos = this->getPosition();
+			_burning = new HitEffect(2, pos);
+			_burning->init();
+		}
+		else {
+			_burning->update(deltaTime);
+			if (_burning->getStatus() == eStatus::DESTROY) {
+				this->setStatus(eStatus::DESTROY);
+			}
+		}
+		return;
+	}
 	//if (this->getStatus() == eStatus::HIDING) {
 	//	this->updateHiding();
 	//	return;
@@ -91,23 +104,28 @@ void Medusa::release() {
 }
 
 float Medusa::checkCollision(BaseObject *object, float deltaTime) {
-	if (this->getStatus() == eStatus::DESTROY ||
-		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::HIDING))
+	if (this->getStatus() == eStatus::DESTROY/* ||*/
+/*		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::HIDING)*/)
 		return 0.0f;
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
-
-	if (objectId == eID::SIMON) {
-		if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
-			auto movement = (Movement*)this->_listComponent["Movement"];
+	if (collisionBody->checkCollision(object, direction, deltaTime, false))
+	{
+		if (objectId == eID::SIMON) 
+		{
 			((Simon*)object)->getHitted();
-
 		}
-		return 0.0f;
+		else if (objectId == eID::ITEM)
+		{
+			this->setStatus(eStatus::BURN);
+		}
+		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting())
+		{
+			this->setStatus(eStatus::DESTROY);
+		}
 	}
-
 	return 0.0f;
 }
 

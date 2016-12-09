@@ -24,5 +24,6 @@ private:
 	//Dùng để animation hủy  enemy 
 	BaseObject *_burning;
 	StopWatch* _fireStopWatch;
+	list<Item*> _listItem;
 };
 

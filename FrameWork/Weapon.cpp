@@ -5,6 +5,7 @@ Weapon::Weapon(GVector2 startPosition, eItemType type, eDirection dir,eItemID id
 {
 	_direction = dir;
 	_itemId = id;
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 
