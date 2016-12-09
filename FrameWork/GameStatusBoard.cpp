@@ -22,9 +22,9 @@ GameStatusBoard* GameStatusBoard::getInstance()
 void GameStatusBoard::init()
 {
 	_simonLifeUI = new LifeUI(SIMONLIFEUI_POSITION,"PLAYER","red_life_icon", 3);
-	_simonLifeUI->setHPNumber(14);
+	_simonLifeUI->setHPNumber(16);
 	_enemyLifeUI = new LifeUI(ENEMYLIFEUI_POSITION, "ENEMY", "yellow_life_icon", 1);
-	_enemyLifeUI->setHPNumber(3);
+	_enemyLifeUI->setHPNumber(16);
 	SceneTime::setTime(300);
 	//tạo surface để vẽ background cho bảng
 	DeviceManager::getInstance()->getDevice()->CreateOffscreenPlainSurface(
@@ -54,7 +54,7 @@ void GameStatusBoard::setEnemyLifeUI(LifeUI* _lifeUI)
 		_enemyLifeUI = _lifeUI;
 }
 
-LifeUI* GameStatusBoard::getEnemyLifeUI(LifeUI* _lifeUI)
+LifeUI* GameStatusBoard::getEnemyLifeUI()
 {
 	return _enemyLifeUI;
 }

@@ -60,9 +60,8 @@ void LifeUI::setHPNumber(int number)
 	if (_hp == number || number > MAX_HP_NUMBER)
 		return;
 
-	if (number < 0)
-		if (_life <= 0)
-			return;
+	if (number < 0 || _life <= 0)
+		number = 0;
 
 	_hp = number;
 	
@@ -90,4 +89,12 @@ void LifeUI::setLifeNumber(int number)
 int LifeUI::getLifeNumber()
 {
 	return _life;
+}
+
+void  LifeUI::dropHitPoint(int _drop)
+{
+	int hp = _hp - _drop;
+	if (hp <= 0)
+		hp = 0;
+	this->setHPNumber(hp);
 }

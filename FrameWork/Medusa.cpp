@@ -1,6 +1,7 @@
 ﻿#include "Medusa.h"
 #include "PlayScene.h"
-
+//#include "GameStatusBoard.h"
+_USING_FRAMEWORK
 Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::MEDUSA);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
@@ -11,7 +12,7 @@ Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 	this->_listComponent.insert(pair<string, IComponent*>("Sinmovement",
 		new SinMovement(MEDUSA_AMPLITUDE, MEDUSA_FREQUENCY, _sprite)));
 	this->setPosition(pos);
-	
+
 //	this->setScale(1.75f);
 	
 }
@@ -46,12 +47,19 @@ void Medusa::init() {
 	this->hack = 0;
 	_isHiding = true;
 	this->setHitpoint(16);
+	
+	_flyingDirection = eDirection::RIGHT;
+
+	GameStatusBoard::getInstance()->getEnemyLifeUI()->setHPNumber(this->getHitpoint());
 }
 
 void Medusa::update(float deltaTime) {
 	if (this->getStatus() == eStatus::DESTROY)
+	{
+		GameStatusBoard::getInstance()->getEnemyLifeUI()->setHPNumber(0);
 		return;
-
+	}
+		
 	if (this->getHitpoint() <= 0) {
 		this->setStatus(eStatus::BURN);
 	}
@@ -76,6 +84,25 @@ void Medusa::update(float deltaTime) {
 		return;
 	}
 
+	GameStatusBoard::getInstance()->getEnemyLifeUI()->setHPNumber(this->getHitpoint());
+
+	if (_isHitted)
+	{
+		if (_getHittedStopWatch == nullptr)
+		{
+			_getHittedStopWatch = new StopWatch();
+		}
+
+		if (_getHittedStopWatch->isStopWatch(150))
+		{
+			_isHitted = false;
+			SAFE_DELETE(_getHittedStopWatch);
+		}
+		return;
+	}
+
+
+	updateDirection();
 	//else {
 	//	if (hack == 30) {
 	//		this->setStatus(FLYING);
@@ -127,14 +154,8 @@ float Medusa::checkCollision(BaseObject *object, float deltaTime) {
 	{
 		if (objectId == eID::SIMON) 
 		{
-			((Simon*)object)->getHitted();
+			((Simon*)object)->getHitted(2);
 		}
-		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting())
-		{
-			this->dropHitpoint(1);
-		}
-
-		
 	}
 	return 0.0f;
 }
@@ -153,10 +174,44 @@ IComponent * Medusa::getComponent(string componentName) {
 
 }
 
-void Medusa::changeDirection() {
-	_sprite->setScaleX(-this->getScale().x);
+void Medusa::getHitted()
+{
+	//Nếu simon chưa bị hit và ko được protected
+	if (_isHitted == false && _getHittedStopWatch == nullptr)
+	{
+		_isHitted = true;
+	}
+}
+
+
+void Medusa::checkPosition()
+{
+
+}
+
+void  Medusa::updateDirection()
+{
+	auto viewportTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT vpBound = viewportTracker->getBounding();
+
+	if (this->getPositionX() > vpBound.right - 100)
+		changeDirection(eDirection::LEFT);
+	else if (this->getPositionX() <  vpBound.left + 100)
+		changeDirection(eDirection::RIGHT);
+}
+
+
+void Medusa::changeDirection(eDirection dir)
+{
+	if (_flyingDirection == dir)
+		return;
+	_flyingDirection = dir;
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
+	
+	if (_flyingDirection == eDirection::RIGHT)
+		movement->setVelocity(MEDUSA_VELOCITY);
+	else if (_flyingDirection == eDirection::LEFT)
+		movement->setVelocity(GVector2(-MEDUSA_VELOCITY.x, MEDUSA_VELOCITY.y));
 }
 
 void Medusa::flyingDown() {
@@ -173,7 +228,8 @@ void Medusa::fly() {
 	movement->setVelocity(GVector2(movement->getVelocity().x, 0));
 }
 
-void Medusa::updateHiding() {
+void Medusa::updateHiding() 
+{
 	// track theo simon
 	if (!_isHiding)  return;
 	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
@@ -187,8 +243,14 @@ void Medusa::updateHiding() {
 		}
 	}
 	
-	if (_hidingStopWatch != nullptr && _hidingStopWatch->isStopWatch(3000))
+	if (_hidingStopWatch != nullptr && _hidingStopWatch->isStopWatch(2000))
 	{
+		if (this->getPositionX() > xTracker)
+		{
+			changeDirection(eDirection::LEFT);
+		}
+		else changeDirection(eDirection::RIGHT);
+
 		this->setStatus(eStatus::FLYING);
 		SAFE_DELETE(_hidingStopWatch);
 		_isHiding = false;

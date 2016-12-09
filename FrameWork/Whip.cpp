@@ -134,6 +134,14 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 				_listColliding[otherObject] = true;
 			}
 			break;
+		case MEDUSA:
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((Medusa*)otherObject)->dropHitpoint(this->_damage);
+				((Medusa*)otherObject)->getHitted();
+				_listColliding[otherObject] = true;
+			}
+			break;
 		default:
 			break;
 		}

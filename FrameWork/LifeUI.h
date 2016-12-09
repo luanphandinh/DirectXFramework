@@ -21,6 +21,8 @@ public:
 
 	void setHPNumber(int HP);
 	int getHPNumber();
+
+	void dropHitPoint(int _drop);
 private:
 	Text* _text;
 	string _spritePath;

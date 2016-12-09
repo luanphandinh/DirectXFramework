@@ -26,7 +26,7 @@ public:
 	float checkCollision(BaseObject*, float);
 	void die();
 	void setPosition(GVector2);
-
+	void getHitted();
 	IComponent* getComponent(string);
 
 private:
@@ -34,9 +34,13 @@ private:
 	map<int, Animation*> _animations;
 	BaseObject* prevObject;
 
-	void changeDirection();
+	void changeDirection(eDirection dir);
+	void updateDirection();
+	void checkPosition();
 	void flyingDown();
 	void fly();
+	
+	bool _isHitted;
 	// Init values
 	GVector2	_beginPosition;
 	GVector2	_horizontalVeloc;
@@ -47,11 +51,13 @@ private:
 	int hack;
 	StopWatch* _stopWatch;
 	StopWatch* _hidingStopWatch;
+	StopWatch* _getHittedStopWatch;
+	StopWatch* _flyAwayStopWatch;
 	bool _isHiding;
 	//void checkIfOutOfScreen();
 	void updateHiding();
 	BaseObject *_burning;
-
+	eDirection _flyingDirection;
 	//
 	vector<BaseObject*> _listObjects;
 

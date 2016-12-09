@@ -92,7 +92,7 @@ public:
 	/*
 		Hàm này được gọi khi enemy va chạm với simon
 	*/
-	void getHitted();
+	void getHitted(int _dropHp = 1);
 	//int getDamage();
 	BaseObject* getWhip();
 	void enableGravity(bool);

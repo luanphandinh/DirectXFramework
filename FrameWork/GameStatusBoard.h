@@ -24,7 +24,7 @@ public:
 	LifeUI* getSimonLifeUI();
 
 	void setEnemyLifeUI(LifeUI* _lifeUI);
-	LifeUI* getEnemyLifeUI(LifeUI* _lifeUI);
+	LifeUI* getEnemyLifeUI();
 
 private:
 	LifeUI*		_simonLifeUI;

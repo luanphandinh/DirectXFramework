@@ -1,5 +1,5 @@
 ﻿#include "Director.h"
-
+#include "GameStatusBoard.h"
 
 Director::Director()
 {
@@ -83,6 +83,7 @@ void Director::updateRevive()
 	}
 
 	LifeCounter::setLife(LifeCounter::getLife() - 1);
+	GameStatusBoard::getInstance()->getSimonLifeUI()->setHPNumber(16);
 
 	if (_reviveViewport != eLevel2Viewport::VNULL)
 		_currentViewport = _reviveViewport;
