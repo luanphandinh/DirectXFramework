@@ -5,9 +5,12 @@
 #include "BaseEnemy.h"
 #include "StopWatch.h"
 
-#define MEDUSA_SPEED 90
-#define MEDUSA_HITPOINT 20
+#define MEDUSA_VELOCITY GVector2(80,0)
+#define MEDUSA_HITPOINT 16
 #define MEDUSA_SCORE 100
+#define MEDUSA_HORIZONTAL_VELOC		GVector2(100.0f, 0.0f)		// vận tốc ngang
+#define MEDUSA_FREQUENCY		1.0f						// tần số
+#define MEDUSA_AMPLITUDE		GVector2(0.0,20.0f)			// biên độ
 
 class Medusa : public BaseEnemy {
 public:

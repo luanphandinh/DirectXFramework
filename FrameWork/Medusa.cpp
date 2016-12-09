@@ -7,7 +7,9 @@ Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 
 	GVector2 v(0, 0);
 	GVector2 a(0, 0);
-	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
+	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, MEDUSA_VELOCITY, this->_sprite)));
+	this->_listComponent.insert(pair<string, IComponent*>("Sinmovement",
+		new SinMovement(MEDUSA_AMPLITUDE, MEDUSA_FREQUENCY, _sprite)));
 	this->setPosition(pos);
 	
 //	this->setScale(1.75f);
@@ -68,8 +70,11 @@ void Medusa::update(float deltaTime) {
 		}
 		return;
 	}
-
-	this->updateHiding();
+	if (this->isInStatus(eStatus::HIDING))
+	{
+		this->updateHiding();
+		return;
+	}
 
 	//else {
 	//	if (hack == 30) {
@@ -89,6 +94,10 @@ void Medusa::update(float deltaTime) {
 	//}
 	if (this->getStatus() == eStatus::FLYING)
 		this->_sprite->setScale(2.0f);
+	for (auto component : _listComponent) 
+	{
+		component.second->update(deltaTime);
+	}
 	_animations[this->getStatus()]->update(deltaTime);
 }
 
