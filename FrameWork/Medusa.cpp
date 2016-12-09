@@ -9,6 +9,7 @@ Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 	GVector2 a(0, 0);
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
 	this->setPosition(pos);
+	
 //	this->setScale(1.75f);
 	
 }
@@ -41,7 +42,7 @@ void Medusa::init() {
 	
 	this->setPhysicBodySide(eDirection::ALL);
 	this->hack = 0;
-
+	_isHiding = true;
 	this->setHitpoint(16);
 }
 
@@ -67,10 +68,9 @@ void Medusa::update(float deltaTime) {
 		}
 		return;
 	}
-	//if (this->getStatus() == eStatus::HIDING) {
-	//	this->updateHiding();
-	//	return;
-	//}
+
+	this->updateHiding();
+
 	//else {
 	//	if (hack == 30) {
 	//		this->setStatus(FLYING);
@@ -85,8 +85,11 @@ void Medusa::update(float deltaTime) {
 	//	for (auto component : _listComponent) {
 	//		component.second->update(deltaTime);
 	//	}
-	//	_animations[this->getStatus()]->update(deltaTime);
+	//	
 	//}
+	if (this->getStatus() == eStatus::FLYING)
+		this->_sprite->setScale(2.0f);
+	_animations[this->getStatus()]->update(deltaTime);
 }
 
 void Medusa::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
@@ -104,8 +107,8 @@ void Medusa::release() {
 }
 
 float Medusa::checkCollision(BaseObject *object, float deltaTime) {
-	if (this->getStatus() == eStatus::DESTROY/* ||*/
-/*		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::HIDING)*/)
+	if (this->getStatus() == eStatus::DESTROY ||
+		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::HIDING))
 		return 0.0f;
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
@@ -163,16 +166,23 @@ void Medusa::fly() {
 
 void Medusa::updateHiding() {
 	// track theo simon
+	if (!_isHiding)  return;
 	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	RECT objectBound = objectTracker->getBounding();
-	int x = objectTracker->getPositionX();
-	int y = objectTracker->getPositionY();
-	int xthis = this->getPositionX();
-	int ythis = this->getBounding().bottom;
-	if (x > xthis&&x < xthis + 250 && y<ythis&&y>ythis - 100) {
-		this->setStatus(FLYINGDOWN);
+	int xTracker = objectTracker->getPositionX();
+	int yTracker = objectTracker->getPositionY();
+	if (this->getPositionX() > xTracker)
+	{
+		if (_hidingStopWatch == nullptr)
+		{
+			_hidingStopWatch = new StopWatch();
+		}
 	}
-	else {
-		this->setStatus(HIDING);
+	
+	if (_hidingStopWatch != nullptr && _hidingStopWatch->isStopWatch(3000))
+	{
+		this->setStatus(eStatus::FLYING);
+		SAFE_DELETE(_hidingStopWatch);
+		_isHiding = false;
 	}
+
 }

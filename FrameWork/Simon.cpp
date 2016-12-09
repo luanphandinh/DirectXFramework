@@ -45,7 +45,7 @@ void Simon::init()
 	_animations[eStatus::NORMAL]->addFrameRect(eID::SIMON, "normal", NULL);
 
 	// sửa lại thứ tự chút 
-	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.12f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::SIMON, "run_02", "run_01", "run_03", NULL);
 	
 	_animations[eStatus::JUMPING] = new Animation(_sprite, 0.1f);
@@ -501,7 +501,7 @@ void Simon::checkPosition()
 void Simon::die()
 {
 	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(-SIMON_MOVING_SPEED * (this->getScale().x / SCALE_FACTOR), SIMON_JUMP_VELOCITY));
+	move->setVelocity(GVector2(-SIMON_JUMP_VELOCITY.x * (this->getScale().x / SCALE_FACTOR), SIMON_JUMP_VELOCITY.y));
 
 	auto g = (Gravity*)this->_componentList["Gravity"];
 	g->setStatus(eGravityStatus::FALLING_DOWN);
@@ -558,7 +558,8 @@ void Simon::jump()
 	this->addStatus(eStatus::JUMPING);
 
 	auto move = (Movement*)this->_componentList["Movement"];
-	move->setVelocity(GVector2(move->getVelocity().x, SIMON_JUMP_VELOCITY));
+	move->setVelocity(GVector2(move->getVelocity().x == 0 ? 0 : SIMON_JUMP_VELOCITY.x * (this->getScale().x / SCALE_FACTOR)
+		, SIMON_JUMP_VELOCITY.y));
 
 	auto gravity = (Gravity*)this->_componentList["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);

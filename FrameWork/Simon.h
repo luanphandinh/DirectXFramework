@@ -13,10 +13,10 @@
 #include"ActiveWeapon.h"
 #include"Whip.h"
 _NAMESPACE_FRAMEWORK_BEGIN
-#define SIMON_MOVING_SPEED 126
+#define SIMON_MOVING_SPEED 120
 
 #define GRAVITY 900
-#define SIMON_JUMP_VELOCITY 380
+#define SIMON_JUMP_VELOCITY GVector2(85,380)
 // Sửa phần lên cầu thang cho hết sida
 #define SIMON_UPSTAIR_VELOCITY_X 46.8
 #define SIMON_UPSTAIR_VELOCITY_Y 48

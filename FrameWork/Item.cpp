@@ -24,7 +24,7 @@ void Item::initCommonComponent()
 
 	GVector2 veloc = this->initVeloc(GVector2(NORMAL_ITEM_SPEED,0));
 
-	auto movement = new Movement(GVector2(0, 0), GVector2(0, 0), _sprite);
+	auto movement = new Movement(GVector2(0, 0), GVector2(0, -20), _sprite);
 	_componentList.insert(pair<string, IComponent*>("Movement", movement));
 
 	Gravity* gravity = new Gravity(GVector2(0, -NORMAL_ITEM_SPEED), movement);

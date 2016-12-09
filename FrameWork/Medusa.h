@@ -43,6 +43,8 @@ private:
 
 	int hack;
 	StopWatch* _stopWatch;
+	StopWatch* _hidingStopWatch;
+	bool _isHiding;
 	//void checkIfOutOfScreen();
 	void updateHiding();
 	BaseObject *_burning;

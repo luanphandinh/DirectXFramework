@@ -45,7 +45,7 @@ void Whip::update(float deltatime)
 	else
 	for (auto it = _listColliding.begin(); it != _listColliding.end(); ++it)
 	{
-//		if (((BaseObject*)(it->first)) != nullptr && !((BaseObject*)(it->first))->isInStatus(eStatus::BURN))
+		if (((BaseObject*)(it->first)) != nullptr && !((BaseObject*)(it->first))->isInStatus(eStatus::BURN))
 		{
 			if (_hitEffect == nullptr) {
 				auto pos = ((BaseObject*)(it->first))->getPosition();
