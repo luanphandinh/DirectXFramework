@@ -12,7 +12,10 @@
 #include"GameStatusBoard.h"
 #include"ActiveWeapon.h"
 #include"Level2Director.h"
+#include"Level3Director.h"
+
 #include"ScenarioManager.h"
+#include"SoundManager.h"
 
 #include"Sword.h"
 #include"ThrowingAxe.h"
@@ -67,15 +70,7 @@ private:
 	ScenarioManager* _directorDoor;
 	ScenarioManager* _directorPassDoor;
 
-	// Tự đi qua cửa
-	void ScenarioPassDoor(float deltatime);
-
-	void doorScene(float dt, bool& finish);
-	// Dịch screen đi gặp cái cửa
-	void ScenarioMoveViewport(float deltatime);
-
 	//==========================TEST=========================//
-	//vector<BaseObject*>* _mapTestObject;
 	BaseObject** _testItem;
 	GameStatusBoard* _gameStatusBoard;
 	BaseObject* _whip;

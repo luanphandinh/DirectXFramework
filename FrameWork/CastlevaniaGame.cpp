@@ -47,4 +47,6 @@ void CastlevaniaGame::draw()
 void CastlevaniaGame::loadResource()
 {
 	SpriteManager::getInstance()->loadResource(_spriteHandler);
+	SoundManager::getInstance()->loadSound(Game::hWindow->getWnd());
+
 }

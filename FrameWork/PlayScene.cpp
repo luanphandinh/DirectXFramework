@@ -16,72 +16,59 @@ bool PlayScene::init()
 {
 	auto simon = new Simon();
 	simon->init();
-	simon->setPosition(2700, 100);//v1
+	/*LEVEL 2 POS*/
+	//simon->setPosition(2700, 100);//v1
 	//simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
-	simon->setPosition(1948, 1324);//v6
+	//simon->setPosition(1948, 1324);//v6
+
+	/*LEVEL 3 POS*/
+	simon->setPosition(4940, 95);//v1
+
+
+
 	this->_simon = simon;
-	
 	_listControlObject.push_back(simon);
 	_listObject.push_back(_simon);
 	_listObject.push_back(((Simon*)_simon)->getWhip());
 
-	_director = new Level2Director();
+
+	/*LEVEL 3 POS*/
+	//_director = new Level2Director();
+	_director = new Level3Director();
+
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V6);
+	_director->setCurrentViewport(V1);
 	_viewport = _director->getViewport();
+
+
 	//=====================TESTING==========================//
 	_itemManager = new ItemManager();
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
-	
-	/*
-		Load QuadTree
-	*/
-	_quadTree = QNode::loadQuadTree("Resources//Maps//level2QuadTree.xml");
-	/*
-		_mapObject sẽ chứa tất cả các object có trong toàn bộ map của game
-	*/
-	map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level2.xml");
+	/*LEVEL 2*/
+	///*
+	//	Load QuadTree
+	//*/
+	//_quadTree = QNode::loadQuadTree("Resources//Maps//level2QuadTree.xml");
+	///*
+	//	_mapObject sẽ chứa tất cả các object có trong toàn bộ map của game
+	//*/
+	//map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level2.xml");
+	//this->_mapObject.insert(maptemp->begin(), maptemp->end());
+	//_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
+	//SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL2);
+
+	/*LEVEL 3*/
+	_quadTree = QNode::loadQuadTree("Resources//Maps//level3QuadTree.xml");
+	map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level3.xml");
 	this->_mapObject.insert(maptemp->begin(), maptemp->end());
-
-	_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
-
-	//========================TESTING===========================//
-	//_testItem = new BaseObject*[15];
-	//_testItem[0] = new HeartItem(GVector2(2700, 200),eItemID::LARGEHEART);
-	//_testItem[1] = new WhipUpgrade(GVector2(200, 300));
-	//for (int i = 2; i < 4; i++)
-	//{
-	//	_testItem[i] = new MoneyBag(GVector2(2700 + i * 20, 300));
-	//}
-	//for (int i = 4; i < 7; i++)
-	//{
-	//	_testItem[i] = new MoneyBag(GVector2(2750 + i * 20, 200));
-	//}
-	//for (int i = 7; i < 10; i++)
-	//{
-	//	_testItem[i] = new HeartItem(GVector2(2700 + i * 20, 300));
-	//}
-	//_testItem[10] = new Sword(GVector2(2650, 200), eItemType::DROP, eDirection::LEFT);
-	//_testItem[11] = new ThrowingAxe(GVector2(2750, 200), eItemType::DROP, eDirection::LEFT);
-	//_testItem[12] = new Boomerang(GVector2(2780, 200), eItemType::DROP, eDirection::LEFT);
-	//_testItem[13] = new HolyWater(GVector2(2600, 200), eItemType::DROP, eDirection::LEFT);
-	//for (int i = 0; i < 14; i++)
-	//{
-	//	ItemManager::insertItem((Item*)_testItem[i]);
-	//}
-	
-	// Scenario here
-	//auto scenarioDoorMoveViewport = new Scenario("DoorViewport");
-	//__hook(&Scenario::update, scenarioDoorMoveViewport, &PlayScene::doorScene);
-	//_directorDoor = new ScenarioManager();
-	//_directorDoor->insertScenario(scenarioDoorMoveViewport);
-
+	_backGround = Map::LoadFromFile("Resources//Maps//level3.xml", eID::LEVEL3);
+	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL3);
 
 	//========================TESTING===========================//
 	ActiveWeapon::setItemID((eItemID)7);
@@ -189,32 +176,6 @@ void PlayScene::update(float deltaTime)
 		obj->update(deltaTime);
 	}
 
-
-	// update scenario here
-	////*** fix later :v
-	//this->ScenarioMoveViewport(deltaTime);
-
-	//for (BaseObject* obj : (*_mapTestObject))
-	//{
-	//	obj->update(deltaTime);
-	//	_simon->checkCollision(obj, deltaTime);
-	//	_itemManager->checkCollision(obj, deltaTime);
-	//	// nếu là mấy cục shit này ko cần check va chạm 
-	//	if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND ||
-	//		 obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
-	//		continue;
-	//	// check mấy con như knight vs land đồ :v
-	//	for (BaseObject* passiveobj : (*_mapTestObject)) {
-	//		if (passiveobj == nullptr || passiveobj == obj || passiveobj->isInStatus(eStatus::DESTROY))
-	//			continue;
-	//		obj->checkCollision(passiveobj, deltaTime);
-	//	}
-	//}
-
-	//_itemManager->checkCollision(_simon, deltaTime);
-	//_simon->update(deltaTime);
-	//_itemManager->update(deltaTime);
-
 	//=====================TESTING==========================//
 }
 
@@ -276,14 +237,6 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	{
 		obj->draw(spriteHandle, _viewport);
 	}
-	//for (BaseObject* obj : (*_mapTestObject))
-	//{
-	//	obj->draw(spriteHandle, _viewport);
-	//}
-
-	
-	
-	//_simon->draw(spriteHandle, _viewport);
 
 	_itemManager->draw(spriteHandle, _viewport);
 
@@ -329,42 +282,3 @@ void PlayScene::updateDirector(float deltaTime)
 }
 
 //=====================TESTING==========================//
-
-#pragma region Pass the door scenario
-//************ Hàng họ để mở cửa :v ************//
-//void PlayScene::doorScene(float dt, bool & finish) {
-//	GVector2 current_position = _viewport->getPositionWorld();
-//	GVector2 worldsize = this->_backGround->getWorldSize();
-//	// dịch screen từ từ sang TRÁI, speed = vs speed simon
-//	current_position.x -= SIMON_MOVING_SPEED * dt / 1000;
-//
-//	_viewport->setPositionWorld(current_position);
-//	if (_simon->getBounding().left > current_position.x) {
-//		GVector2 curPos = _simon->getPosition();
-//		curPos.x = current_position.x + (_simon->getSprite()->getFrameWidth() >> 1);
-//		_simon->setPosition(curPos);
-//	}
-//	finish = false;
-//}
-void PlayScene::ScenarioMoveViewport(float deltatime) {
-	if (_directorDoor == nullptr)
-		return;
-	int xsimon = _simon->getPositionX();
-	int ysimon = _simon->getPositionY();
-	//
-	if (xsimon>2074&&xsimon<=2104&&ysimon>730&&ysimon<740) {
-		flagDoorScenario = true;
-	}
-	if (flagDoorScenario == true) {
-		this->_directorDoor->update(deltatime);
-		if (this->_directorDoor->isFinish() == true) {
-			SAFE_DELETE(_directorDoor);
-		}
-	}
-}
-
-void PlayScene::ScenarioPassDoor(float deltatime) {
-	
-}
-
-#pragma endregion

@@ -1,0 +1,3 @@
+name	pos.x	pos.y	Size.x	Size.y
+1	3584	0	3584	5120
+	

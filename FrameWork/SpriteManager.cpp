@@ -98,6 +98,10 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//level2.xml");
 	sp->setOrigin(GVector2(0.0f, 0.0f));
 	this->_listSprite[eID::LEVEL2] = sp;
+
+	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//level3.xml");
+	sp->setOrigin(GVector2(0.0f, 0.0f));
+	this->_listSprite[eID::LEVEL3] = sp;
 }
 
 //Dùng để load sprite từ file map

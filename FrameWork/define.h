@@ -67,6 +67,7 @@ enum eID
 	//stage
 	MAPSTAGE1 = 40,
 	LEVEL2 = 41,
+	LEVEL3 = 42,
 
 	//icon in gamestatusboard
 	LIFE_ICON = 51,
@@ -197,6 +198,15 @@ enum eLevel2Viewport
 	V5 = 5,
 	V6 = 6,
 	V7 = 7,
+};
+
+
+enum eSoundId {
+	// Nhạc nền level 2
+	BACKGROUND_LEVEL2,	
+	BACKGROUND_LEVEL3,
+
+
 };
 
 #define _NAMESPACE_FRAMEWORK_END	}
