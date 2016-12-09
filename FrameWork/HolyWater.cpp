@@ -1,5 +1,6 @@
 ﻿#include "HolyWater.h"
 #include"BaseEnemy.h"
+#include"Medusa.h"
 
 HolyWater::HolyWater(GVector2 startPosition, eItemType type, eDirection dir) : Weapon(startPosition, type, dir, eItemID::HOLYWATER)
 {
@@ -125,6 +126,14 @@ float HolyWater::checkCollisionWeapon(BaseObject* otherObject, float dt)
 			break;
 		case BAT:
 			otherObject->setStatus(eStatus::BURN);
+			break;
+		case MEDUSA:
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((Medusa*)otherObject)->dropHitpoint(this->_damage);
+				((Medusa*)otherObject)->getHitted();
+				_listColliding[otherObject] = true;
+			}
 			break;
 		case MEDUSAHEAD:
 			break;

@@ -87,6 +87,11 @@ float Sword::checkCollisionWeapon(BaseObject* otherObject, float dt)
 		case BAT:
 			otherObject->setStatus(eStatus::BURN);
 			break;
+		case MEDUSA:
+			((Medusa*)otherObject)->dropHitpoint(this->_damage);
+			((Medusa*)otherObject)->getHitted();
+			_listColliding[otherObject] = true;
+			break;
 		case MEDUSAHEAD:
 			break;
 		default:

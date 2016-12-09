@@ -1,5 +1,6 @@
 ﻿#include "Weapon.h"
 #include"BaseEnemy.h"
+#include"Medusa.h"
 
 Weapon::Weapon(GVector2 startPosition, eItemType type, eDirection dir,eItemID id) :Item(startPosition,type)
 {
@@ -80,6 +81,8 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURN);
 			break;
+		case BAT:
+		case GHOST:
 		case DRAGON:
 		case SPEARKNIGHT:
 			if (object == _listColliding.end() || object._Ptr == nullptr)
@@ -88,14 +91,13 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 				_listColliding[otherObject] = true;
 			}
 			break;
-		case BAT:
-		case GHOST:
+		case MEDUSA:
 			if (object == _listColliding.end() || object._Ptr == nullptr)
 			{
-				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+				((Medusa*)otherObject)->dropHitpoint(this->_damage);
+				((Medusa*)otherObject)->getHitted();
 				_listColliding[otherObject] = true;
 			}
-			break;
 			break;
 		case MEDUSAHEAD:
 			break;
