@@ -42,7 +42,7 @@ void Medusa::init() {
 	this->setPhysicBodySide(eDirection::ALL);
 	this->hack = 0;
 
-	this->setHitpoint(1);
+	this->setHitpoint(16);
 }
 
 void Medusa::update(float deltaTime) {
@@ -117,14 +117,12 @@ float Medusa::checkCollision(BaseObject *object, float deltaTime) {
 		{
 			((Simon*)object)->getHitted();
 		}
-		else if (objectId == eID::ITEM)
-		{
-			this->setStatus(eStatus::BURN);
-		}
 		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting())
 		{
-			this->setStatus(eStatus::DESTROY);
+			this->dropHitpoint(1);
 		}
+
+		
 	}
 	return 0.0f;
 }

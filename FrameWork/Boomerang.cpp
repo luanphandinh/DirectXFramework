@@ -23,6 +23,7 @@ void Boomerang::init()
 	Weapon::initCommonComponent();
 
 	initWeaponComponent();
+	this->setPhysicBodySide(eDirection::ALL);
 }
 
 

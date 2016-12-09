@@ -144,6 +144,10 @@ float MedusaHead::checkCollision(BaseObject *object, float deltaTime) {
 		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting()) {
 			this->setStatus(eStatus::BURN);
 		}
+		else if (objectId == eID::ITEM && ((Item*)object)->getItemType() == eItemType::PICKED_UP)
+		{
+			this->setStatus(eStatus::BURN);
+		}
 
 		return 0.0f;
 	}
