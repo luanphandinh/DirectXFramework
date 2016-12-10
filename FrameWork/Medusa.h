@@ -12,6 +12,12 @@
 #define MEDUSA_FREQUENCY		1.0f						// tần số
 #define MEDUSA_AMPLITUDE		GVector2(0.0,20.0f)			// biên độ
 
+enum eFlyPath {
+	HOLD,
+	MEDIUMDISTANCE,
+	LONGDISTANCE,
+};
+
 class Medusa : public BaseEnemy {
 public:
 
@@ -39,7 +45,9 @@ private:
 	void checkPosition();
 	void flyingDown();
 	void fly();
+	void getFlyPath();
 	void trackSimon();
+	bool checkFlyDown();
 	
 	bool _isHitted;
 	// Init values
@@ -54,10 +62,14 @@ private:
 	StopWatch* _hidingStopWatch;
 	StopWatch* _getHittedStopWatch;
 	StopWatch* _flyingBackStopWatch;
-	StopWatch* _stoppedStopWatch;
+	StopWatch* _flyDownStopWatch;
+	StopWatch* _holdStopWatch;
 	bool _isHiding;
 	bool _isFlyingBack;
-	bool _isStopped;
+	bool _isHold;
+	bool _flyDown;
+	bool _flyUp;
+	eFlyPath _flyPath;
 	GVector2 _flyingBackPos;
 	//void checkIfOutOfScreen();
 	void flyingBack();

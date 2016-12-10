@@ -9,7 +9,7 @@ Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 	GVector2 v(0, 0);
 	GVector2 a(0, 0);
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, MEDUSA_VELOCITY, this->_sprite)));
-	this->_listComponent.insert(pair<string, IComponent*>("Sinmovement",
+	this->_listComponent.insert(pair<string, IComponent*>("SinMovement",
 		new SinMovement(MEDUSA_AMPLITUDE, MEDUSA_FREQUENCY, _sprite)));
 	this->setPosition(pos);
 
@@ -103,22 +103,8 @@ void Medusa::update(float deltaTime) {
 
 
 	updateDirection();
-	//else {
-	//	if (hack == 30) {
-	//		this->setStatus(FLYING);
-	//		this->fly();
-	//	}
-	//	if (this->getStatus() == FLYINGDOWN) {
-	//		hack++;
-	//		this->flyingDown();
-	//	}
 
-	//	//this->checkIfOutOfScreen();
-	//	for (auto component : _listComponent) {
-	//		component.second->update(deltaTime);
-	//	}
-	//	
-	//}
+
 	if (this->getStatus() == eStatus::FLYING)
 		this->_sprite->setScale(2.0f);
 	for (auto component : _listComponent) 
@@ -189,9 +175,19 @@ void Medusa::checkPosition()
 
 }
 
+void Medusa::getFlyPath() 
+{
+	//srand(time(NULL));
+
+	int i = rand() % 3;
+	_flyPath = (eFlyPath)i;
+	//_flyPath = eFlyPath::MEDIUMDISTANCE;
+}
+
 void Medusa::flyingBack()
 {
 	if (_isFlyingBack) return;
+	getFlyPath();
 	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	auto posTracker = objectTracker->getPosition();
 	auto viewportTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
@@ -199,7 +195,20 @@ void Medusa::flyingBack()
 	//Simon nằm bên nữa màn hình bên trái
 	if (_flyingDirection == eDirection::LEFT && ((vpBound.left + (vpBound.right - vpBound.left) / 2)  > posTracker.x))
 	{
-		_flyingBackPos = GVector2(posTracker + GVector2(200, 0));
+		switch (_flyPath) {
+		case eFlyPath::HOLD:
+			_flyingBackPos = GVector2(posTracker + GVector2(10, 0));
+			break;
+		case eFlyPath::MEDIUMDISTANCE:
+			_flyingBackPos = GVector2(posTracker + GVector2(100, 0));
+			break;
+		case eFlyPath::LONGDISTANCE:
+			_flyingBackPos = GVector2(posTracker + GVector2(200, 0));
+			break;
+		default:
+			break;
+		}
+		
 		_isFlyingBack = true;
 		_flyingBackDirection = eDirection::RIGHT;
 	}
@@ -207,7 +216,19 @@ void Medusa::flyingBack()
 	/*((vpBound.right - vpBound.left) / 2 < posTracker.x)*/
 	else if (_flyingDirection == eDirection::RIGHT && ((vpBound.left + (vpBound.right - vpBound.left) / 2) < posTracker.x))
 	{
-		_flyingBackPos = GVector2(posTracker + GVector2(-200, 0));
+		switch (_flyPath) {
+		case eFlyPath::HOLD:
+			_flyingBackPos = GVector2(posTracker + GVector2(-10, 0));
+			break;
+		case eFlyPath::MEDIUMDISTANCE:
+			_flyingBackPos = GVector2(posTracker + GVector2(-100, 0));
+			break;
+		case eFlyPath::LONGDISTANCE:
+			_flyingBackPos = GVector2(posTracker + GVector2(-200, 0));
+			break;
+		default:
+			break;
+		}
 		_isFlyingBack = true;
 		_flyingBackDirection = eDirection::LEFT;
 	}
@@ -230,28 +251,46 @@ void  Medusa::updateDirection()
 			|| (_flyingBackDirection == eDirection::RIGHT && this->getPositionX() > _flyingBackPos.x))
 		{
 			_isFlyingBack = false;
-			_isStopped = true;
+			_isHold = true;
 			SAFE_DELETE(_flyingBackStopWatch);
 		}
 	}
 
-	if (_isStopped)
+	if (_isHold)
 	{
-		if (_stoppedStopWatch == nullptr)
+		if (_holdStopWatch == nullptr)
 		{
 			Movement *movement = (Movement*)this->getComponent("Movement");
 			movement->setVelocity(GVector2Zero);
-			_stoppedStopWatch = new StopWatch();
+			SinMovement *sinMovement = (SinMovement*)this->getComponent("SinMovement");
+			sinMovement->setAmplitude(GVector2Zero);
+			_holdStopWatch = new StopWatch();
 		}
 
-		if (_stoppedStopWatch->isStopWatch(2000))
+		if (_holdStopWatch->isStopWatch(2000))
 		{
 			trackSimon();
-			_isStopped = false;
-			SAFE_DELETE(_stoppedStopWatch);
+			//if (checkFlyDown()) _flyDown = true;
+			_isHold = false;
+			SAFE_DELETE(_holdStopWatch);
 		}
 		return;
 	}
+
+	//if (_flyDown) 
+	//{
+	//	if (_flyDownStopWatch == nullptr) 
+	//	{
+	//		_flyDownStopWatch = new StopWatch();
+	//	}
+
+	//	if (_flyDownStopWatch->isStopWatch(500)) 
+	//	{
+	//		_flyDown = false;
+	//		SAFE_DELETE(_flyDownStopWatch);
+	//	}
+	//	return;
+	//}
 
 	if (this->getPositionX() > vpBound.right - 16)
 		changeDirection(eDirection::LEFT);
@@ -259,6 +298,22 @@ void  Medusa::updateDirection()
 		changeDirection(eDirection::RIGHT);
 }
 
+bool Medusa::checkFlyDown() 
+{
+	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xTracker = objectTracker->getPositionX();
+	int yTracker = objectTracker->getPositionY();
+
+	if (abs(this->getPositionX() - xTracker) < 30 && _flyPath == eFlyPath::HOLD) 
+	{
+		Movement *movement = (Movement*)this->getComponent("Movement");
+		movement->setVelocity(GVector2(0,-100));
+		SinMovement *sinMovement = (SinMovement*)this->getComponent("SinMovement");
+		sinMovement->setAmplitude(GVector2Zero);
+		return true;
+	}
+	return false;
+}
 
 void Medusa::changeDirection(eDirection dir)
 {
@@ -271,6 +326,9 @@ void Medusa::changeDirection(eDirection dir)
 		movement->setVelocity(MEDUSA_VELOCITY);
 	else if (_flyingDirection == eDirection::LEFT)
 		movement->setVelocity(GVector2(-MEDUSA_VELOCITY.x, MEDUSA_VELOCITY.y));
+
+	SinMovement *sinMovement = (SinMovement*)this->getComponent("SinMovement");
+	sinMovement->setAmplitude(MEDUSA_AMPLITUDE);
 }
 
 void Medusa::flyingDown() {
@@ -329,3 +387,5 @@ void Medusa::trackSimon()
 	}
 	else changeDirection(eDirection::RIGHT);
 }
+
+
