@@ -177,7 +177,6 @@ IComponent * Medusa::getComponent(string componentName) {
 
 void Medusa::getHitted()
 {
-	//Nếu simon chưa bị hit và ko được protected
 	if (_isHitted == false && _getHittedStopWatch == nullptr)
 	{
 		_isHitted = true;
@@ -200,7 +199,7 @@ void Medusa::flyingBack()
 	//Simon nằm bên nữa màn hình bên trái
 	if (_flyingDirection == eDirection::LEFT && ((vpBound.left + (vpBound.right - vpBound.left) / 2)  > posTracker.x))
 	{
-		//_flyingBackPos = GVector2(posTracker + GVector2(130, 0));
+		_flyingBackPos = GVector2(posTracker + GVector2(200, 0));
 		_isFlyingBack = true;
 		_flyingBackDirection = eDirection::RIGHT;
 	}
@@ -208,7 +207,7 @@ void Medusa::flyingBack()
 	/*((vpBound.right - vpBound.left) / 2 < posTracker.x)*/
 	else if (_flyingDirection == eDirection::RIGHT && ((vpBound.left + (vpBound.right - vpBound.left) / 2) < posTracker.x))
 	{
-		//_flyingBackPos = GVector2(posTracker + GVector2(-130, 0));
+		_flyingBackPos = GVector2(posTracker + GVector2(-200, 0));
 		_isFlyingBack = true;
 		_flyingBackDirection = eDirection::LEFT;
 	}
@@ -227,10 +226,29 @@ void  Medusa::updateDirection()
 			changeDirection(_flyingBackDirection);
 		}
 
-		if (_flyingBackStopWatch->isStopWatch(500))
+		if ((_flyingBackDirection == eDirection::LEFT && this->getPositionX() < _flyingBackPos.x)
+			|| (_flyingBackDirection == eDirection::RIGHT && this->getPositionX() > _flyingBackPos.x))
 		{
 			_isFlyingBack = false;
+			_isStopped = true;
 			SAFE_DELETE(_flyingBackStopWatch);
+		}
+	}
+
+	if (_isStopped)
+	{
+		if (_stoppedStopWatch == nullptr)
+		{
+			Movement *movement = (Movement*)this->getComponent("Movement");
+			movement->setVelocity(GVector2Zero);
+			_stoppedStopWatch = new StopWatch();
+		}
+
+		if (_stoppedStopWatch->isStopWatch(2000))
+		{
+			trackSimon();
+			_isStopped = false;
+			SAFE_DELETE(_stoppedStopWatch);
 		}
 		return;
 	}
@@ -297,4 +315,17 @@ void Medusa::updateHiding()
 		_isHiding = false;
 	}
 
+}
+
+void Medusa::trackSimon()
+{
+	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xTracker = objectTracker->getPositionX();
+	int yTracker = objectTracker->getPositionY();
+
+	if (this->getPositionX() > xTracker)
+	{
+		changeDirection(eDirection::LEFT);
+	}
+	else changeDirection(eDirection::RIGHT);
 }

@@ -39,6 +39,7 @@ private:
 	void checkPosition();
 	void flyingDown();
 	void fly();
+	void trackSimon();
 	
 	bool _isHitted;
 	// Init values
