@@ -17,16 +17,16 @@ bool PlayScene::init()
 	auto simon = new Simon();
 	simon->init();
 	/*LEVEL 2 POS*/
-	//simon->setPosition(2700, 100);//v1
+	simon->setPosition(2700, 100);//v1
 	//simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
-	//simon->setPosition(1948, 1324);//v6
+	simon->setPosition(1948, 1324);//v6
 
 	/*LEVEL 3 POS*/
-	simon->setPosition(4940, 95);//v1
+	//simon->setPosition(4940, 95);//v1
 
 
 
@@ -37,12 +37,12 @@ bool PlayScene::init()
 
 
 	/*LEVEL 3 POS*/
-	//_director = new Level2Director();
-	_director = new Level3Director();
+	_director = new Level2Director();
+	//_director = new Level3Director();
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V1);
+	_director->setCurrentViewport(V7);
 	_viewport = _director->getViewport();
 
 
@@ -51,24 +51,24 @@ bool PlayScene::init()
 	_gameStatusBoard = GameStatusBoard::getInstance();
 	_gameStatusBoard->init();
 	/*LEVEL 2*/
-	///*
-	//	Load QuadTree
-	//*/
-	//_quadTree = QNode::loadQuadTree("Resources//Maps//level2QuadTree.xml");
-	///*
-	//	_mapObject sẽ chứa tất cả các object có trong toàn bộ map của game
-	//*/
-	//map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level2.xml");
-	//this->_mapObject.insert(maptemp->begin(), maptemp->end());
-	//_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
-	//SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL2);
+	/*
+		Load QuadTree
+	*/
+	_quadTree = QNode::loadQuadTree("Resources//Maps//level2QuadTree.xml");
+	/*
+		_mapObject sẽ chứa tất cả các object có trong toàn bộ map của game
+	*/
+	map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level2.xml");
+	this->_mapObject.insert(maptemp->begin(), maptemp->end());
+	_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
+	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL2);
 
 	/*LEVEL 3*/
-	_quadTree = QNode::loadQuadTree("Resources//Maps//level3QuadTree.xml");
-	map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level3.xml");
-	this->_mapObject.insert(maptemp->begin(), maptemp->end());
-	_backGround = Map::LoadFromFile("Resources//Maps//level3.xml", eID::LEVEL3);
-	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL3);
+	//_quadTree = QNode::loadQuadTree("Resources//Maps//level3QuadTree.xml");
+	//map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level3.xml");
+	//this->_mapObject.insert(maptemp->begin(), maptemp->end());
+	//_backGround = Map::LoadFromFile("Resources//Maps//level3.xml", eID::LEVEL3);
+	//SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL3);
 
 	//========================TESTING===========================//
 	ActiveWeapon::setItemID((eItemID)7);

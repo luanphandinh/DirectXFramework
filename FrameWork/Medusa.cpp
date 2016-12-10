@@ -47,7 +47,7 @@ void Medusa::init() {
 	this->hack = 0;
 	_isHiding = true;
 	this->setHitpoint(16);
-	
+	_isFlyingBack = false;
 	_flyingDirection = eDirection::RIGHT;
 
 	GameStatusBoard::getInstance()->getEnemyLifeUI()->setHPNumber(this->getHitpoint());
@@ -155,6 +155,7 @@ float Medusa::checkCollision(BaseObject *object, float deltaTime) {
 		if (objectId == eID::SIMON) 
 		{
 			((Simon*)object)->getHitted(2);
+			this->flyingBack();
 		}
 	}
 	return 0.0f;
@@ -189,14 +190,54 @@ void Medusa::checkPosition()
 
 }
 
+void Medusa::flyingBack()
+{
+	if (_isFlyingBack) return;
+	auto objectTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	auto posTracker = objectTracker->getPosition();
+	auto viewportTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT vpBound = viewportTracker->getBounding();
+	//Simon nằm bên nữa màn hình bên trái
+	if (_flyingDirection == eDirection::LEFT && ((vpBound.left + (vpBound.right - vpBound.left) / 2)  > posTracker.x))
+	{
+		//_flyingBackPos = GVector2(posTracker + GVector2(130, 0));
+		_isFlyingBack = true;
+		_flyingBackDirection = eDirection::RIGHT;
+	}
+	//Simon nằm bên nữa màn hình bên phải
+	/*((vpBound.right - vpBound.left) / 2 < posTracker.x)*/
+	else if (_flyingDirection == eDirection::RIGHT && ((vpBound.left + (vpBound.right - vpBound.left) / 2) < posTracker.x))
+	{
+		//_flyingBackPos = GVector2(posTracker + GVector2(-130, 0));
+		_isFlyingBack = true;
+		_flyingBackDirection = eDirection::LEFT;
+	}
+}
+
 void  Medusa::updateDirection()
 {
 	auto viewportTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT vpBound = viewportTracker->getBounding();
 
-	if (this->getPositionX() > vpBound.right - 100)
+	if (_isFlyingBack)
+	{
+		if (_flyingBackStopWatch == nullptr)
+		{
+			_flyingBackStopWatch = new StopWatch();
+			changeDirection(_flyingBackDirection);
+		}
+
+		if (_flyingBackStopWatch->isStopWatch(500))
+		{
+			_isFlyingBack = false;
+			SAFE_DELETE(_flyingBackStopWatch);
+		}
+		return;
+	}
+
+	if (this->getPositionX() > vpBound.right - 16)
 		changeDirection(eDirection::LEFT);
-	else if (this->getPositionX() <  vpBound.left + 100)
+	else if (this->getPositionX() <  vpBound.left + 16)
 		changeDirection(eDirection::RIGHT);
 }
 

@@ -52,12 +52,19 @@ private:
 	StopWatch* _stopWatch;
 	StopWatch* _hidingStopWatch;
 	StopWatch* _getHittedStopWatch;
-	StopWatch* _flyAwayStopWatch;
+	StopWatch* _flyingBackStopWatch;
+	StopWatch* _stoppedStopWatch;
 	bool _isHiding;
+	bool _isFlyingBack;
+	bool _isStopped;
+	GVector2 _flyingBackPos;
 	//void checkIfOutOfScreen();
+	void flyingBack();
 	void updateHiding();
 	BaseObject *_burning;
 	eDirection _flyingDirection;
+	eDirection _flyingBackDirection;
+	
 	//
 	vector<BaseObject*> _listObjects;
 
