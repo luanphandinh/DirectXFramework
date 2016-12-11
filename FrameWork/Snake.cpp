@@ -1,4 +1,5 @@
 ﻿#include "Snake.h"
+#include "PlayScene.h"
 
 Snake::Snake(GVector2 pos, eDirection direction) : BaseEnemy(eID::SNAKE) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SNAKE);
@@ -7,7 +8,17 @@ Snake::Snake(GVector2 pos, eDirection direction) : BaseEnemy(eID::SNAKE) {
 		veloc = GVector2(SNAKE_SPEED, 0);
 	else  veloc = GVector2((-1) * SNAKE_SPEED, 0);
 
-	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(GVector2Zero, veloc, this->_sprite)));
+	Movement* movement = new Movement(GVector2Zero, veloc, _sprite);
+	_listComponent["Movement"] = movement;
+
+	Gravity* gravity = new Gravity(GVector2(0, -500), movement);
+	//gravity->setStatus(eGravityStatus::SHALLOWED);
+	_listComponent["Gravity"] = gravity;
+
+	auto collisionBody = new CollisionBody(this);
+	_listComponent["CollisionBody"] = collisionBody;
+
+
 	this->setPosition(pos);
 	_direction = direction;
 	this->setScale(2.0f);
@@ -19,12 +30,6 @@ Snake::~Snake() {}
 void Snake::init() {
 	this->setHitpoint(SNAKE_HITPOINT);
 	this->setScore(SNAKE_SCORE);
-
-	this->_listComponent.insert(pair<string, IComponent*>("Gravity",
-		new Gravity(GVector2(0, -ENEMY_GRAVITY), (Movement*)(this->getComponent("Movement")))));
-
-	auto collisionBody = new CollisionBody(this);
-	_listComponent["CollisionBody"] = collisionBody;
 
 	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::SNAKE, "move_01","move_02", NULL);
@@ -73,11 +78,19 @@ IComponent* Snake::getComponent(string componentName) {
 	return _listComponent.find(componentName)->second;
 }
 
-void Snake::update(float deltatime) {
-
+void Snake::update(float deltatime) 
+{
 
 	if (this->getStatus() == DESTROY)
 		return;
+
+	checkPosition();
+
+	if (this->getStatus() == DYING)
+	{
+		this->die();
+		return;
+	}
 
 	if (this->getHitpoint() <= 0) {
 		this->setStatus(eStatus::BURN);
@@ -115,7 +128,7 @@ float Snake::checkCollision(BaseObject * otherObject, float dt) {
 	eID otherObjectId = otherObject->getId();
 	eDirection direction;
 	
-	if (collisionBody->checkCollision(otherObject, direction, dt))
+	if (collisionBody->checkCollision(otherObject, direction, dt,false))
 	{
 		if (otherObjectId == eID::LAND && direction == eDirection::TOP)
 		{
@@ -127,38 +140,21 @@ float Snake::checkCollision(BaseObject * otherObject, float dt) {
 
 			auto gravity = (Gravity*)this->_listComponent["Gravity"];
 			gravity->setStatus(eGravityStatus::SHALLOWED);
-
-			////
-			//auto move = (Movement*)this->_listComponent["Movement"];
-			//move->setVelocity(GVector2(0, 0));
-			//////
-
-			//_preObject = otherObject;
 		}
-	/*	else if (otherObjectId == eID::SIMON)
+		else if (otherObjectId == eID::LAND && (direction == eDirection::RIGHT || direction == eDirection::LEFT))
+		{
+			this->setStatus(DYING);
+		}
+		else if (otherObjectId == eID::SIMON)
 		{
 			((Simon*)otherObject)->getHitted(1);
+		}
+		else if (otherObjectId == eID::ITEM || (otherObjectId == eID::WHIP && ((Whip*)otherObject)->isHitting()))
+		{
 			this->setStatus(BURN);
 		}
-		else
-		if (otherObjectId == eID::LAND && 
-			((direction & eDirection::RIGHT) == eDirection::RIGHT || (direction & eDirection::LEFT) == eDirection::LEFT))
-		{
-			auto move = (Movement*)this->_listComponent["Movement"];
-			move->setVelocity(GVector2(0, 0));
-			auto gravity = (Gravity*)this->_listComponent["Gravity"];
-			gravity->setStatus(eGravityStatus::FALLING_DOWN);
-			this->setStatus(eStatus::DYING);
-		}*/
 	}
-	//else if (_preObject == otherObject)
-	//{
-	//	_preObject = nullptr;
-
-	//	auto gravity = (Gravity*)this->_listComponent["Gravity"];
-	//	gravity->setStatus(eGravityStatus::FALLING_DOWN);
-	//}
-	//return 0.0f;
+	return 0.0f;
 	
 }
 
@@ -170,3 +166,25 @@ void Snake::updateCurrentAnimateIndex() {
 	}
 }
 
+GVector2 Snake::getVelocity() {
+	auto move = (Movement*)this->_listComponent["Movement"];
+	return move->getVelocity();
+}
+
+void Snake::die()
+{
+	auto movement = (Movement*)this->_listComponent["Movement"];
+	movement->setVelocity(GVector2Zero);
+	auto gravity = (Gravity*)this->_listComponent["Gravity"];
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+}
+
+void Snake::checkPosition()
+{
+	auto viewportTracker = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT vpBound = viewportTracker->getBounding();
+
+	if (this->getPositionX() < vpBound.left || this->getPositionX() > vpBound.right
+		|| this->getPositionY() < vpBound.bottom)
+		this->setStatus(DESTROY);
+}

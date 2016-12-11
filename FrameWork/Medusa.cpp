@@ -115,7 +115,6 @@ void Medusa::update(float deltaTime) {
 	}
 	_animations[this->getStatus()]->update(deltaTime);
 	
-
 	for (auto object : _listObjects)
 	{
 		object->update(deltaTime);
@@ -128,11 +127,6 @@ void Medusa::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
 		_burning->draw(spritehandle, viewport);
 	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURN)) return;
 	_animations[this->getStatus()]->draw(spritehandle, viewport);
-
-	if (_snake != nullptr)
-	{
-		_snake->draw(spritehandle, viewport);
-	}
 
 	for (auto object : _listObjects)
 	{
@@ -152,6 +146,11 @@ float Medusa::checkCollision(BaseObject *object, float deltaTime) {
 		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::HIDING))
 		return 0.0f;
 
+	for (auto childObject : _listObjects)
+	{
+		childObject->checkCollision(object, deltaTime);
+	}
+
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
@@ -164,13 +163,7 @@ float Medusa::checkCollision(BaseObject *object, float deltaTime) {
 		}
 	}
 
-	if (_listObjects.size() > 0)
-	{
-		for (auto object : _listObjects)
-		{
-			object->checkCollision(object,deltaTime);
-		}
-	}
+	
 	return 0.0f;
 }
 
@@ -420,7 +413,7 @@ void Medusa::trackSimon()
 void Medusa::createSnake()
 {
 	//if (_listObjects.size() > 2) return;
-	auto snake = new Snake(this->getPosition(),_flyingDirection);
+	Snake* snake = new Snake(this->getPosition(),_flyingDirection);
 	snake->init();
 	//_snake = snake;
 	_listObjects.push_back(snake);
