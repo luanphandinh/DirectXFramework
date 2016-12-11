@@ -4,6 +4,7 @@
 #include "IComponent.h"
 #include "BaseEnemy.h"
 #include "StopWatch.h"
+#include "Snake.h"
 
 #define MEDUSA_VELOCITY GVector2(80,0)
 #define MEDUSA_HITPOINT 16
@@ -48,7 +49,12 @@ private:
 	void getFlyPath();
 	void trackSimon();
 	bool checkFlyDown();
-	
+
+	void createSnake();
+	void removeSnake();
+	vector<BaseObject*> _listObjects;
+	Snake* _snake;
+
 	bool _isHitted;
 	// Init values
 	GVector2	_beginPosition;
@@ -72,14 +78,12 @@ private:
 	eFlyPath _flyPath;
 	GVector2 _flyingBackPos;
 	//void checkIfOutOfScreen();
+	
 	void flyingBack();
 	void updateHiding();
 	BaseObject *_burning;
 	eDirection _flyingDirection;
 	eDirection _flyingBackDirection;
-	
-	//
-	vector<BaseObject*> _listObjects;
 
 	eID _createType;
 	float _time;

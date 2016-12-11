@@ -1,4 +1,4 @@
 frame_name	left	top	right	bottom
 normal		6	3	23	13	0.5 0.5
-move_01		0	0	15	15	0.5 0.5
+move_01		6	3	23	13	0.5 0.5
 move_02		6	23	23	32	0.5 0.5

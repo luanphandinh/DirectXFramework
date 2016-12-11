@@ -1,5 +1,6 @@
 ﻿#include "Medusa.h"
 #include "PlayScene.h"
+
 //#include "GameStatusBoard.h"
 _USING_FRAMEWORK
 Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
@@ -12,7 +13,7 @@ Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 	this->_listComponent.insert(pair<string, IComponent*>("SinMovement",
 		new SinMovement(MEDUSA_AMPLITUDE, MEDUSA_FREQUENCY, _sprite)));
 	this->setPosition(pos);
-
+	
 //	this->setScale(1.75f);
 	
 }
@@ -107,11 +108,19 @@ void Medusa::update(float deltaTime) {
 
 	if (this->getStatus() == eStatus::FLYING)
 		this->_sprite->setScale(2.0f);
+
 	for (auto component : _listComponent) 
 	{
 		component.second->update(deltaTime);
 	}
 	_animations[this->getStatus()]->update(deltaTime);
+	
+
+	for (auto object : _listObjects)
+	{
+		object->update(deltaTime);
+	}
+	removeSnake();
 }
 
 void Medusa::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
@@ -119,6 +128,16 @@ void Medusa::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
 		_burning->draw(spritehandle, viewport);
 	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURN)) return;
 	_animations[this->getStatus()]->draw(spritehandle, viewport);
+
+	if (_snake != nullptr)
+	{
+		_snake->draw(spritehandle, viewport);
+	}
+
+	for (auto object : _listObjects)
+	{
+		object->draw(spritehandle,viewport);
+	}
 }
 
 void Medusa::release() {
@@ -142,6 +161,14 @@ float Medusa::checkCollision(BaseObject *object, float deltaTime) {
 		{
 			((Simon*)object)->getHitted(2);
 			this->flyingBack();
+		}
+	}
+
+	if (_listObjects.size() > 0)
+	{
+		for (auto object : _listObjects)
+		{
+			object->checkCollision(object,deltaTime);
 		}
 	}
 	return 0.0f;
@@ -272,6 +299,8 @@ void  Medusa::updateDirection()
 			trackSimon();
 			//if (checkFlyDown()) _flyDown = true;
 			_isHold = false;
+			if (_flyPath == eFlyPath::LONGDISTANCE)
+				createSnake();
 			SAFE_DELETE(_holdStopWatch);
 		}
 		return;
@@ -388,4 +417,29 @@ void Medusa::trackSimon()
 	else changeDirection(eDirection::RIGHT);
 }
 
+void Medusa::createSnake()
+{
+	//if (_listObjects.size() > 2) return;
+	auto snake = new Snake(this->getPosition(),_flyingDirection);
+	snake->init();
+	//_snake = snake;
+	_listObjects.push_back(snake);
+}
 
+void Medusa::removeSnake() 
+{
+	for (auto object : _listObjects) 
+	{
+		if (object->getStatus() == eStatus::DESTROY) 
+		{
+			object->release();
+
+			remove(_listObjects.begin(), _listObjects.end(), object);
+			_listObjects.pop_back();
+
+			delete object;
+
+			break;
+		}
+	}
+}
