@@ -1,5 +1,6 @@
 frame_name		left	top		right		bottom
 background		2 		2 		256 		224			0.0 1.0
+start			495		196		608			204			0.0	1.0
 fly_bat_01		276		2		346			58			0.0 1.0
 fly_bat_02		354		2		424			58			0.0 1.0
 fly_bat_03		432		2		502			58			0.0 1.0

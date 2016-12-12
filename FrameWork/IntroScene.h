@@ -22,6 +22,9 @@ private:
 	void onKeyPressed(KeyEventArg* key_event);
 	Viewport* _viewport;
 	Sprite* _okSprite;
+	StopWatch* pendingStopWatch;
+	bool _flash;
+	float delay;
 	bool _ok;
 };
 

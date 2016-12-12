@@ -27,9 +27,13 @@ bool IntroScene::init()
 	_animations["back_ground"] = new Animation(_sprite, 0.1f);
 	_animations["back_ground"]->addFrameRect(eID::INTROSCENE, "background", NULL);
 
+	_animations["start"] = new Animation(_sprite, 0.1f);
+	_animations["start"]->addFrameRect(eID::INTROSCENE, "start", NULL);
 //	_okSprite = new Sprite(, L"Resources//Images//introScene.png");
 
 	_ok = false;
+	_flash = false;
+	delay = 0;
 	return true;
 }
 
@@ -42,19 +46,41 @@ void IntroScene::update(float dt)
 	_animations["fly_bat"]->update(dt);
 	if (_ok)
 	{
-	/*	if (SoundManager::getInstance()->IsPlaying(eSoundId::DESTROY_BRIDGE) == false)
-		{*/
+		if (!_flash && delay > 200)
+		{
+			_flash = true;
+			delay = 0;
+		}
+		else
+		{
+			delay += dt;
+			_flash = false;
+		}
+		if (pendingStopWatch == nullptr)
+		{
+			pendingStopWatch = new StopWatch();
+		}
+
+		if (pendingStopWatch->isStopWatch(1500))
+		{
 			auto play = new PlayScene();
 			SceneManager::getInstance()->replaceScene(play);
 		}
-	//}
+	}
 }
 void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 {
+
 	_sprite->setPosition(GVector2(0, WINDOW_HEIGHT));
 	_animations["back_ground"]->draw(spriteHandle,_viewport);
 	_sprite->setPosition(GVector2(367,254));
 	_animations["fly_bat"]->draw(spriteHandle, _viewport);
+	if (!_flash)
+	{
+		_sprite->setPosition(GVector2(146, 204));
+		_animations["start"]->draw(spriteHandle, _viewport);
+	}
+
 }
 void IntroScene::release()
 {
