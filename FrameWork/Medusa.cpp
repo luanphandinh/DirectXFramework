@@ -287,7 +287,7 @@ void  Medusa::updateDirection()
 			_holdStopWatch = new StopWatch();
 		}
 
-		if (_holdStopWatch->isStopWatch(2000))
+		if (_holdStopWatch->isStopWatch(1200))
 		{
 			trackSimon();
 			//if (checkFlyDown()) _flyDown = true;

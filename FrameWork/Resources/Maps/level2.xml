@@ -842,8 +842,8 @@
     <Item Id="2" Name="land78" X="2970" Y="1276" Width="32" Height="8">
       <ActiveBound X="2970" Y="1276" Width="32" Height="8" />
     </Item>
-    <Item Id="2" Name="land79" X="1984" Y="1311" Width="957" Height="10">
-      <ActiveBound X="1984" Y="1311" Width="957" Height="10" />
+    <Item Id="2" Name="land79" X="1984" Y="1311" Width="957" Height="20">
+      <ActiveBound X="1984" Y="1311" Width="957" Height="20" />
       <Params>
         <Elem Key="physicBodyDirection" Value="15" />
         <Elem Key="checkWithStair" Value="1" />

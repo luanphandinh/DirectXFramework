@@ -6,7 +6,7 @@
 #include "StopWatch.h"
 #include "Snake.h"
 
-#define MEDUSA_VELOCITY GVector2(80,0)
+#define MEDUSA_VELOCITY GVector2(120,0)
 #define MEDUSA_HITPOINT 16
 #define MEDUSA_SCORE 100
 #define MEDUSA_HORIZONTAL_VELOC		GVector2(100.0f, 0.0f)		// vận tốc ngang

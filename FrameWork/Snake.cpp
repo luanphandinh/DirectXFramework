@@ -89,7 +89,7 @@ void Snake::update(float deltatime)
 	if (this->getStatus() == DYING)
 	{
 		this->die();
-		return;
+		//return;
 	}
 
 	if (this->getHitpoint() <= 0) {
@@ -147,7 +147,8 @@ float Snake::checkCollision(BaseObject * otherObject, float dt) {
 		}
 		else if (otherObjectId == eID::SIMON)
 		{
-			((Simon*)otherObject)->getHitted(1);
+			((Simon*)otherObject)->getHitted(1);	
+			this->setStatus(eStatus::DYING);
 		}
 		else if (otherObjectId == eID::ITEM || (otherObjectId == eID::WHIP && ((Whip*)otherObject)->isHitting()))
 		{
@@ -174,9 +175,10 @@ GVector2 Snake::getVelocity() {
 void Snake::die()
 {
 	auto movement = (Movement*)this->_listComponent["Movement"];
-	movement->setVelocity(GVector2Zero);
+	movement->setVelocity(GVector2(0,-200));
 	auto gravity = (Gravity*)this->_listComponent["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+	gravity->setGravity(GVector2(0, -900));
 }
 
 void Snake::checkPosition()

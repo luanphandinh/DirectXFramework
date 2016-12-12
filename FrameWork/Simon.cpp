@@ -503,6 +503,22 @@ void Simon::checkPosition()
 	auto viewport = SceneManager::getInstance()->getCurrentScene()->getViewport();
 	auto viewportPosition = viewport->getPositionWorld();
 
+	float simonPositionX = this->getPositionX();
+	auto halfWidth = this->getSprite()->getFrameWidth() * this->getOrigin().x;
+	//Không cho đi vượt quá cạnh trái
+	if (halfWidth + simonPositionX - _movingSpeed * 0.33 < viewportPosition.x)
+	{
+		this->setPositionX(simonPositionX + halfWidth);
+		return;
+	}
+
+	halfWidth = this->getSprite()->getFrameWidth() * this->getOrigin().x;
+	//Không cho đi vượt quá cạnh phải
+	if (halfWidth + simonPositionX > viewportPosition.x + WINDOW_WIDTH) {
+		this->setPositionX(simonPositionX - halfWidth);
+		return;
+	}
+
 	if (this->getPositionY() < viewportPosition.y - WINDOW_HEIGHT)
 	{
 		if (_status != eStatus::DYING)
