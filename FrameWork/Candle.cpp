@@ -61,7 +61,8 @@ void Candle::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 
 void Candle::release() 
 {
-
+	SAFE_DELETE(_burstStopWatch);
+	SAFE_DELETE(_sprite);
 }
 
 float Candle::checkCollision(BaseObject* otherObject, float dt)

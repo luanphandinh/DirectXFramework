@@ -120,6 +120,7 @@ void Dragon::release()
 		_burning->release();
 		SAFE_DELETE(_burning);
 	}
+	SAFE_DELETE(_sprite);
 }
 
 

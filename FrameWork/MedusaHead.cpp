@@ -101,7 +101,9 @@ void MedusaHead::release() {
 		delete component.second;
 	}
 	_listComponent.clear();
-
+	if (_burning != nullptr)
+		_burning->release();
+	SAFE_DELETE(_burning);
 	SAFE_DELETE(this->_sprite);
 }
 
@@ -116,6 +118,8 @@ float MedusaHead::checkCollision(BaseObject *object, float deltaTime) {
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
+	if (objectId != eID::SIMON && objectId != eID::WHIP && objectId != eID::ITEM)
+		return 0.0f;
 	eDirection direction;
 	if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
 		if (objectId == eID::SIMON) {

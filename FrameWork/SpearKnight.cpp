@@ -164,7 +164,7 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
-
+	if (objectId != eID::LAND && objectId != eID::SIMON) return 0.0f;
 	if (objectId == eID::LAND) {
 		if (collisionBody->checkCollision(object, direction, dt)) {
 			if (direction == eDirection::TOP && this->getVelocity().y < 0) {

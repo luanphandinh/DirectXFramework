@@ -97,9 +97,10 @@ void Bat::release() {
 		delete component.second;
 	}
 	_listComponent.clear();
-
+	if (_burning != nullptr)
+		_burning->release();
 	//SAFE_DELETE(this->_loopwatch);
-	//SAFE_DELETE(this->_sprite);
+	SAFE_DELETE(this->_sprite);
 }
 
 IComponent* Bat::getComponent(string componentName) {
@@ -217,7 +218,7 @@ float Bat::checkCollision(BaseObject * object, float dt) {
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
-
+	if (objectId != eID::SIMON) return 0.0f;
 	if (objectId == eID::SIMON) {
 		if (collisionBody->checkCollision(object, direction, dt, false)) {
 			auto movement = (Movement*)this->_listComponent["Movement"];

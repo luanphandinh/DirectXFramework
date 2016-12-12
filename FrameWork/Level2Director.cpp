@@ -42,6 +42,14 @@ void Level2Director::update(float deltaTime)
 {
 	updateScenario(deltaTime);
 	updateViewport();
+	//auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	//int xSimon = _simon->getPositionX();
+	//int ySimon = _simon->getPositionY();
+	//if (xSimon > 3010 && xSimon < 3050 && ySimon > 192 && ySimon < 260)
+	//{
+	//	ItemManager::generateItem(eItemID::CROWN, GVector2(2900, 350));
+	//	//finish = true;
+	//}
 }
 
 void Level2Director::updateScenario(float deltaTime)

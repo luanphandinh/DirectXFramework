@@ -23,7 +23,7 @@ bool PlayScene::init()
 	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
-	simon->setPosition(1948, 1324);//v6
+	//simon->setPosition(2500, 1324);//v6
 
 	/*LEVEL 3 POS*/
 	//simon->setPosition(4940, 95);//v1
@@ -42,7 +42,7 @@ bool PlayScene::init()
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V7);
+	_director->setCurrentViewport(V1);
 	_viewport = _director->getViewport();
 
 
@@ -118,8 +118,8 @@ void PlayScene::update(float deltaTime)
 	// left right không đổi dù hệ top-left hay hệ bot-left
 	screen.left = viewport_in_transform.left;
 	screen.right = viewport_in_transform.right;
-	screen.top = this->_backGround->getWorldSize().y - viewport_position.y;
-	screen.bottom = screen.top + _viewport->getHeight();
+	screen.top = this->_backGround->getWorldSize().y - viewport_position.y + 70;
+	screen.bottom = screen.top + /*_viewport->getHeight()*/ 310;
 
 	//[Bước 1]
 	this->destroyObject();
@@ -159,7 +159,7 @@ void PlayScene::update(float deltaTime)
 		//}
 		//không cần xét va chạm cho các trường hợp này
 		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND || obj->getId() == eID::BRICK || 
-			obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR)
+			obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR )
 		continue;	
 		// check mấy con như knight vs land đồ :v
 		for (BaseObject* passiveobj : _activeObject) {
@@ -288,6 +288,7 @@ void PlayScene::updateDirector(float deltaTime)
 {
 	_director->update(deltaTime);
 	_viewport = _director->getViewport();
+
 }
 
 //=====================TESTING==========================//

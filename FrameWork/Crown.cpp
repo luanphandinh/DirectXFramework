@@ -17,12 +17,12 @@ void Crown::init()
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
 	_animation = new Animation(_sprite, 0.08f);
 	_animation->addFrameRect(eID::ITEM, "crown_01", "crown_02", NULL);
-	Item::initCommonComponent();
+	//Item::initCommonComponent();
 }
 
 void Crown::update(float deltatime)
 {
-	Item::update(deltatime);
+	//Item::update(deltatime);
 	_animation->update(deltatime);
 }
 
@@ -46,3 +46,7 @@ void Crown::pickedUp()
 	//this->setStatus(eStatus::DESTROY);
 }
 
+float Crown::checkCollision(BaseObject* object, float dt)
+{
+	return 0.0f;
+}

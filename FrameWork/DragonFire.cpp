@@ -94,8 +94,7 @@ float DragonFire::checkCollisionWeapon(BaseObject* otherObject, float dt)
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
 	eDirection direction;
-	if (otherObjectID == eID::LAND || otherObjectID == eID::STAIR || otherObjectID == eID::DRAGON
-		) return 0.0f;
+	if (otherObjectID != eID::SIMON && otherObjectID != eID::WHIP && otherObjectID != eID::ITEM) return 0.0f;
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
 	if (collisionBody->checkCollision(otherObject, direction, dt, false))

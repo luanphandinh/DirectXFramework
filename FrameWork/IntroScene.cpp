@@ -84,6 +84,8 @@ void IntroScene::draw(LPD3DXSPRITE spriteHandle)
 }
 void IntroScene::release()
 {
-
+	SAFE_DELETE(_viewport);
+	SAFE_DELETE(_sprite);
+	_animations.clear();
 }
 

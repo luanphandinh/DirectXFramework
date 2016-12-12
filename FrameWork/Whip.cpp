@@ -56,6 +56,7 @@ void Whip::update(float deltatime)
 				_hitEffect->setPosition(((BaseObject*)(it->first))->getPosition());
 				_hitEffect->update(deltatime);
 				if (_hitEffect->getStatus() == eStatus::DESTROY) {
+					_hitEffect->release();
 					SAFE_DELETE(_hitEffect);
 					_hitEffect = nullptr;
 				}
@@ -84,6 +85,7 @@ void Whip::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 
 void Whip::release() 
 {
+	SAFE_DELETE(_sprite);
 }
 
 void Whip::restart()

@@ -11,7 +11,7 @@ public:
 	void update(float deltatime) override;
 	void draw(LPD3DXSPRITE, Viewport*) override;
 	void release() override;
-
+	virtual float checkCollision(BaseObject* object, float dt);
 	virtual void pickedUp() override;
 private:
 	Animation* _animation;
