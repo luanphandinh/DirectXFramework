@@ -31,8 +31,8 @@ void LifeCounter::setLife(int value)
 void LifeCounter::draw(LPD3DXSPRITE spriteHandler)
 {
 	if (_lifeText == nullptr)
-		_lifeText = new Text(L"Arial", "P-", LIFE_POSITION.x, LIFE_POSITION.y, 21);
-	_lifeText->setText("P-" + formatScoreString(2, to_string(LifeCounter::getLife())));
+		_lifeText = new Text(L"Arial", "P-", LIFE_POSITION.x, LIFE_POSITION.y);
+	_lifeText->setText("P -" + formatScoreString(2, to_string(LifeCounter::getLife())));
 	_lifeText->draw();
 }
 

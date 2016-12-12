@@ -94,6 +94,10 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	//sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	//sp->setOrigin(GVector2(0.0f, 0.0f));
 	//this->_listSprite[eID::MAPSTAGE1] = sp;
+	//IntroScene
+	sp = new Sprite(spriteHandler, L"Resources//Images//introScene.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::INTROSCENE, sp));
+	this->loadSpriteInfo(eID::INTROSCENE, "Resources//Images//introSceneInfo.txt");
 
 	sp = loadXMLDoc(spriteHandler, L"Resources//Maps//level2.xml");
 	sp->setOrigin(GVector2(0.0f, 0.0f));

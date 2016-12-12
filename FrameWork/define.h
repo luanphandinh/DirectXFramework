@@ -68,6 +68,7 @@ enum eID
 	MAPSTAGE1 = 40,
 	LEVEL2 = 41,
 	LEVEL3 = 42,
+	INTROSCENE = 43,
 
 	//icon in gamestatusboard
 	LIFE_ICON = 51,

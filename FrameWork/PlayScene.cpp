@@ -246,6 +246,15 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 
 void PlayScene::release()
 {
+	for (auto object : _listObject)
+	{
+		object->release();
+		SAFE_DELETE(object);
+	}
+	_backGround->release();
+	SAFE_DELETE(_backGround);
+	SAFE_DELETE(_director);
+	//SAFE_DELETE(_quadTree);
 
 }
 

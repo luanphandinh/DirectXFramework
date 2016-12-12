@@ -8,7 +8,7 @@
 #include"LifeCounter.h"
 #include"ActiveWeapon.h"
 #define SIMONLIFEUI_POSITION GVector2(20, 23)
-#define ENEMYLIFEUI_POSITION GVector2(20, 46)
+#define ENEMYLIFEUI_POSITION GVector2(20, 40)
 class GameStatusBoard
 {
 public:

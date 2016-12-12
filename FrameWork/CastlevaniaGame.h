@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "SceneManager.h"
 #include "PlayScene.h"
+#include "IntroScene.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {

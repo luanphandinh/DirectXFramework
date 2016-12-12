@@ -156,6 +156,7 @@ private:
 	BaseObject* _trackedFlyLand;
 
 	void swapWeapon();
+	void unhookInputEvent();
 };
 _NAMESPACE_FRAMEWORK_END
 

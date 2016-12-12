@@ -105,6 +105,7 @@
     <ClInclude Include="HolyWater.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputController.h" />
+    <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Land.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="HolyWater.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputController.cpp" />
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Land.cpp" />

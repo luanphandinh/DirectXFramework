@@ -120,7 +120,7 @@ void Game::release()
 {
 	_deviceManager->release();
 	_gameTime->release();
-	_input->release();
+	//_input->release();
 }
 
 void Game::draw()

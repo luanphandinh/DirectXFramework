@@ -196,9 +196,33 @@ void Simon::draw(LPD3DXSPRITE spriteHandle, Viewport* viewport)
 
 void Simon::release()
 {
+	for (auto it = _animations.begin(); it != _animations.end(); it++)
+	{
+		SAFE_DELETE(it->second);
+	}
+	_animations.clear();
 
+	for (auto it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		SAFE_DELETE(it->second);
+	}
+	_componentList.clear();
+
+	SAFE_DELETE(_sprite);
+	SAFE_DELETE(_stopWatch);
+	SAFE_DELETE(_reviveStopWatch);
+	SAFE_DELETE(_protectStopWatch);
+	SAFE_DELETE(_hittingStopWatch);
+	SAFE_DELETE(_throwItemStopWatch);
+	SAFE_DELETE(_isHittedStopWatch);
+	this->unhookInputEvent();
 }
 
+void Simon::unhookInputEvent()
+{
+	if (_input != nullptr)
+		__unhook(_input);
+}
 
 /*
 Event for event_reciever
@@ -404,7 +428,7 @@ void Simon::updateStatus(float deltatime)
 			_hittingStopWatch = new StopWatch();
 		}
 
-		if (_hittingStopWatch->isStopWatch(280))
+		if (_hittingStopWatch->isStopWatch(350))
 		{
 			//_whip->restart();
 			this->removeStatus(eStatus::HITTING);
@@ -420,7 +444,7 @@ void Simon::updateStatus(float deltatime)
 			_throwItemStopWatch = new StopWatch();
 		}
 
-		if (_throwItemStopWatch->isStopWatch(300))
+		if (_throwItemStopWatch->isStopWatch(400))
 		{
 			this->removeStatus(eStatus::THROWING_ITEM);
 			SAFE_DELETE(_throwItemStopWatch);
@@ -1121,7 +1145,7 @@ void Simon::setPositionInStair(Stair* stair)
 	}
 	if (this->isInStatus(eStatus::DOWNSTAIR))
 	{
-		auto newPos = GVector2(stairPos.x - 3, stairPos.y);
+		auto newPos = GVector2(stairPos.x - 10, stairPos.y);
 		this->setPosition(newPos);
 	}
 }

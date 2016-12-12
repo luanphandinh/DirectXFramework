@@ -1,6 +1,6 @@
 #pragma once
 #include"Text.h"
-#define LIFE_POSITION GVector2(320,46)
+#define LIFE_POSITION GVector2(320,40)
 class LifeCounter
 {
 public:

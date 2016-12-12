@@ -26,7 +26,7 @@ int Score::getScore()
 void Score::draw(LPD3DXSPRITE spriteHandler)
 {
 	if (_scoreText == nullptr)
-		_scoreText  = new Text(L"Arial", "SCORE-", SCORE_POSITION.x, SCORE_POSITION.y, 21);
+		_scoreText  = new Text(L"Arial", "SCORE-", SCORE_POSITION.x, SCORE_POSITION.y);
 	_scoreText->setText("SCORE-" + formatScoreString(6, to_string(Score::getScore())));
 	_scoreText->draw();
 }

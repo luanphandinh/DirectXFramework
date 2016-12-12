@@ -28,7 +28,7 @@ int SceneTime::getTime()
 void SceneTime::draw(LPD3DXSPRITE spriteHandler)
 {
 	if (_sceneTimeText == nullptr)
-		_sceneTimeText = new Text(L"Arial", "SCORE-", TIME_POSITION.x, TIME_POSITION.y, 21);
+		_sceneTimeText = new Text(L"Arial", "SCORE-", TIME_POSITION.x, TIME_POSITION.y);
 
 	_sceneTimeText->setText("TIME  " + formatScoreString(4, to_string(_sceneTime - (int)(GameTime::getInstance()->getTotalGameTime() / 1000))));
 	_sceneTimeText->draw();

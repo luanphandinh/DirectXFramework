@@ -16,13 +16,16 @@ CastlevaniaGame::CastlevaniaGame(HINSTANCE hInstance, LPWSTR title) :Game(hInsta
 void CastlevaniaGame::init()
 {
 	Game::init();
-
-	SceneManager::getInstance()->addScene(new PlayScene());
+	SceneManager::getInstance()->addScene(new IntroScene());
+	//SceneManager::getInstance()->addScene(new PlayScene());
 }
 
 void CastlevaniaGame::release()
 {
-	SceneManager::getInstance()->release();
+	Game::release();
+
+	// release game
+	SceneManager::getInstance()->clearScenes();
 }
 
 void CastlevaniaGame::updateInput(float deltaTime)

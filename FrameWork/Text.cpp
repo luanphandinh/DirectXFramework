@@ -8,7 +8,7 @@ Text::Text(LPCWSTR fontName, string text, float x, float y, int fontSize)
 	_position.x = x;
 	_position.y = y;
 
-	_fontWeight = FW_NORMAL;
+	_fontWeight = FW_BOLD;
 	_italic = false;
 	_fontHeight = fontSize;
 	_textAlign = DT_LEFT | DT_NOCLIP;

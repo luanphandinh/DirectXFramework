@@ -50,6 +50,7 @@ void SceneManager::release()
 	{
 		_scenes.back()->release();
 		SAFE_DELETE(_scenes.back());
+		_scenes.pop_back();
 	}
 }
 

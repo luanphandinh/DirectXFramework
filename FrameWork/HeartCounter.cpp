@@ -39,11 +39,14 @@ void HeartCounter::draw(LPD3DXSPRITE spriteHandler)
 	}
 
 	if (_heartText == nullptr)
-		_heartText = new Text(L"Arial", "", HEARTTEXT_POSITION.x + _heartSprite->getFrameWidth()
-		, HEARTTEXT_POSITION.y, 21);
+		_heartText = new Text(L"Arial", "", HEARTTEXT_POSITION.x + _heartSprite->getFrameWidth() + 1
+		, HEARTTEXT_POSITION.y);
 	
 	_heartText->draw();
 	
 	_heartText->setText("-" + formatScoreString(2, to_string(HeartCounter::getHeart())));
 	_heartSprite->render(spriteHandler);
 }
+;
+
+
