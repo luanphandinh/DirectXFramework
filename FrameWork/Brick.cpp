@@ -77,7 +77,12 @@ void BrokenBrick::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 
 void BrokenBrick::release() 
 {
+	for (auto component : _componentList) {
+		delete component.second;
+	}
+	_componentList.clear();
 
+	SAFE_DELETE(this->_sprite);
 }
 #pragma endregion
 
@@ -177,6 +182,9 @@ void Brick::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 
 void Brick::release()  
 {
+	for (auto object : _brokens) {
+			object->release();
+	}
 	_brokens.clear();
 }
 #pragma endregion
