@@ -12,6 +12,7 @@
 #include"LifeUI.h"
 #include"ActiveWeapon.h"
 #include"Whip.h"
+#include"SoundManager.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 #define SIMON_MOVING_SPEED 120
 

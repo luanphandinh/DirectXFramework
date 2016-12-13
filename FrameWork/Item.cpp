@@ -90,7 +90,7 @@ void Item::stop()
 
 void Item::pickedUp()
 {
-
+	SoundManager::getInstance()->Play(eSoundId::COLLECTITEM);
 }
 
 float Item::checkCollision(BaseObject* otherObject, float dt)
@@ -110,11 +110,11 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 		}
 		else if (otherObjectID == eID::SIMON)
 		{
-			//if (collisionBody->isAABB(this->getBounding(),otherObject->getBounding()));
-			//if (this->getVelocity().y != 0) return 0.0f;
-			int distanceX = abs(this->getPositionX() - otherObject->getPositionX());
-			int distanceY = abs(this->getPositionY() - otherObject->getPositionY());
-			if (GVector2(distanceX, distanceY) < GVector2(5,5))
+			if (collisionBody->isAABB(this->getBounding(), otherObject->getBounding()));
+				if (this->getVelocity().y != 0) return 0.0f;
+			//int distanceX = abs(this->getPositionX() - otherObject->getPositionX());
+			//int distanceY = abs(this->getPositionY() - otherObject->getPositionY());
+			//if (GVector2(distanceX, distanceY) < GVector2(5,5))
 				this->pickedUp();
 		}
 	}

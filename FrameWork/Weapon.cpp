@@ -80,6 +80,7 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 		{
 		case CANDLE:
 			otherObject->setStatus(eStatus::BURN);
+			SoundManager::getInstance()->Play(eSoundId::HIT);
 			break;
 		case BAT:
 		case GHOST:
@@ -90,6 +91,7 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
 				_listColliding[otherObject] = true;
 			}
+			SoundManager::getInstance()->Play(eSoundId::HIT);
 			break;
 		case MEDUSA:
 			if (object == _listColliding.end() || object._Ptr == nullptr)
@@ -98,6 +100,7 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 				((Medusa*)otherObject)->getHitted();
 				_listColliding[otherObject] = true;
 			}
+			SoundManager::getInstance()->Play(eSoundId::HIT);
 			break;
 		case MEDUSAHEAD:
 			break;
@@ -110,6 +113,7 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 
 void Weapon::pickedUp()
 {
+	Item::pickedUp();
 	ActiveWeapon::setItemID(this->_itemId);
 	this->setStatus(eStatus::DESTROY);
 }

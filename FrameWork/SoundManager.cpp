@@ -22,6 +22,27 @@ void SoundManager::loadSound(HWND hWnd) {
 
 	sound = LoadSound("Resources//Sound//06-wicked-child.wav");
 	_listSound[eSoundId::BACKGROUND_LEVEL3] = sound;
+
+	sound = LoadSound("Resources//Sound//Game_Start_Prologue.wav");
+	_listSound[eSoundId::BACKGROUND_MENU] = sound;
+
+	sound = LoadSound("Resources//Sound//usingwhip.wav");
+	_listSound[eSoundId::USINGWHIP] = sound;
+
+	sound = LoadSound("Resources//Sound//hit.wav");
+	_listSound[eSoundId::HIT] = sound;
+
+	sound = LoadSound("Resources//Sound//opendoor.wav");
+	_listSound[eSoundId::OPENDOOR] = sound;
+
+	sound = LoadSound("Resources//Sound//collectweapon.wav");
+	_listSound[eSoundId::COLLECTITEM] = sound;
+
+	sound = LoadSound("Resources//Sound//collectweapon.wav");
+	_listSound[eSoundId::COLLECTWEAPON] = sound;
+		
+	sound = LoadSound("Resources//Sound//");
+	//_listSound[eSoundId::USINGWHIP] = sound;
 }
 
 bool SoundManager::IsPlaying(eSoundId soundid) {

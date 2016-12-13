@@ -60,6 +60,7 @@ void MoneyBag::release()
 
 void MoneyBag::pickedUp()
 {
+	Item::pickedUp();
 	switch (_itemId)
 	{
 	case eItemID::MONEYBAGRED:

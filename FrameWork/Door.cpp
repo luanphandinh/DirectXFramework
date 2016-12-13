@@ -67,6 +67,11 @@ void Door::release() {
 	SAFE_DELETE(this->_sprite);
 }
 
+void Door::open() {
+	SoundManager::getInstance()->Play(eSoundId::OPENDOOR);
+	this->setStatus(eStatus::OPENING);
+}
+
 void Door::setPosition(GVector2 pos) {
 	_sprite->setPosition(pos);
 

@@ -25,7 +25,7 @@ public:
 	//void onCollisionBegin(CollisionEventArg*);
 	//void onCollisionEnd(CollisionEventArg*);
 	//float checkCollision(BaseObject*, float);
-
+	void open();
 	void setPosition(GVector2);
 	IComponent* getComponent(string);
 

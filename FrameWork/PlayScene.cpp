@@ -17,8 +17,8 @@ bool PlayScene::init()
 	auto simon = new Simon();
 	simon->init();
 	/*LEVEL 2 POS*/
-	simon->setPosition(2700, 100);//v1
-	//simon->setPosition(2300, 638);//v2
+	//simon->setPosition(2700, 100);//v1
+	simon->setPosition(2300, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(1000, 1100);//v5
@@ -42,7 +42,7 @@ bool PlayScene::init()
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V1);
+	_director->setCurrentViewport(V2);
 	_viewport = _director->getViewport();
 
 

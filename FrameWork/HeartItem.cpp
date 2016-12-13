@@ -50,6 +50,7 @@ void HeartItem::release()
 
 void HeartItem::pickedUp()
 {
+	Item::pickedUp();
 	switch (_itemId)
 	{
 	case eItemID::SMALLHEART:

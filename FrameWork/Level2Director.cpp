@@ -220,7 +220,7 @@ void Level2Director::passDoorScene(float deltatime, bool & isFinish)
 	//	this->setStatus(CLOSING);
 	//}
 	if (checkPosition()) {
-		_trackedDoor->setStatus(OPENING);
+		((Door*)_trackedDoor)->open();
 		_flagMoveSimonPassDoor = true;
 	}
 	if (_flagMoveSimonPassDoor)

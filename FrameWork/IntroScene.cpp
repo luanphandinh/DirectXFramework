@@ -30,7 +30,7 @@ bool IntroScene::init()
 	_animations["start"] = new Animation(_sprite, 0.1f);
 	_animations["start"]->addFrameRect(eID::INTROSCENE, "start", NULL);
 //	_okSprite = new Sprite(, L"Resources//Images//introScene.png");
-
+	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_MENU);
 	_ok = false;
 	_flash = false;
 	delay = 0;
@@ -87,5 +87,6 @@ void IntroScene::release()
 	SAFE_DELETE(_viewport);
 	SAFE_DELETE(_sprite);
 	_animations.clear();
+	SoundManager::getInstance()->Stop(eSoundId::BACKGROUND_MENU);
 }
 

@@ -137,6 +137,7 @@ void Simon::init()
 	_whip->setTracker(this);
 	//ItemManager::insertItem((Item*)_whip);
 	//_whipAnimation
+	
 
 }
 
@@ -426,14 +427,16 @@ void Simon::updateStatus(float deltatime)
 		if (_hittingStopWatch == nullptr)
 		{
 			_hittingStopWatch = new StopWatch();
+			SoundManager::getInstance()->Play(eSoundId::USINGWHIP);
 		}
-
+		
 		if (_hittingStopWatch->isStopWatch(350))
 		{
 			//_whip->restart();
 			this->removeStatus(eStatus::HITTING);
 			SAFE_DELETE(_hittingStopWatch);
 			this->removeStatus(eStatus::UPSTAIR);
+			SoundManager::getInstance()->Stop(eSoundId::USINGWHIP);
 		}
 		return;
 	}else
