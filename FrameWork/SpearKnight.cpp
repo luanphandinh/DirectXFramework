@@ -129,6 +129,8 @@ void SpearKnight::update(float deltatime) {
 		}
 	}
 
+
+
 	for (auto it : _listComponent) {
 		it.second->update(deltatime);
 	}

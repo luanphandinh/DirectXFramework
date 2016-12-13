@@ -40,8 +40,14 @@ void SoundManager::loadSound(HWND hWnd) {
 
 	sound = LoadSound("Resources//Sound//collectweapon.wav");
 	_listSound[eSoundId::COLLECTWEAPON] = sound;
-		
-	sound = LoadSound("Resources//Sound//");
+	
+
+	sound = LoadSound("Resources//Sound//Boss_Battle_Poison_Mind.wav");
+	_listSound[eSoundId::BOSSMEDUSA] = sound;
+	
+	sound = LoadSound("Resources//Sound//hitcannon.wav");
+	_listSound[eSoundId::HITCANNON] = sound;
+	//sound = LoadSound("Resources//Sound//");
 	//_listSound[eSoundId::USINGWHIP] = sound;
 }
 

@@ -142,6 +142,7 @@ void Medusa::release() {
 		_burning->release();
 	SAFE_DELETE(_burning);
 	_listComponent.clear();
+	SoundManager::getInstance()->Stop(eSoundId::BOSSMEDUSA);
 }
 
 float Medusa::checkCollision(BaseObject *object, float deltaTime) {
@@ -396,6 +397,8 @@ void Medusa::updateHiding()
 
 		this->setStatus(eStatus::FLYING);
 		SAFE_DELETE(_hidingStopWatch);
+		SoundManager::getInstance()->Stop(eSoundId::BACKGROUND_LEVEL2);
+		SoundManager::getInstance()->PlayLoop(eSoundId::BOSSMEDUSA);
 		_isHiding = false;
 	}
 

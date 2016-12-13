@@ -6,12 +6,16 @@ ObjectSpawner::ObjectSpawner(GVector2 position, int width, int height, eID type,
 	_time = time;
 	_number = number;
 
-	_stopWatch = new StopWatch();
+	//_stopWatch = new StopWatch();
 
 	_direction = direction;
 	_isOnePerOne = false;
 
 	_maxObject = 3;
+	this->_bound.left = position.x;
+	this->_bound.top = position.y;
+	this->_bound.bottom = _bound.top - height;
+	this->_bound.right = _bound.left + width;
 
 }
 
@@ -23,9 +27,16 @@ void ObjectSpawner::init() {
 
 void ObjectSpawner::update(float deltatime) {
 	auto vpBounding = SceneManager::getInstance()->getCurrentScene()->getViewport()->getBounding();
-
+	//this->_direction == 1 && this->getPositionX() > vpBounding.left&&this->getPositionY() - 70>vpBounding.bottom
 	// check coi đi tới chưa, chưa tới mới tạo
-	if (this->getPositionX() > vpBounding.left) {
+	//
+	if (isRectangleIntersectedInDescartes(this->getBounding(), vpBounding)) {
+		//bool b = );
+		if (_stopWatch == nullptr) {
+			_time = 0;
+			_stopWatch = new StopWatch();
+		}
+		else _time = 3000;
 		if (_stopWatch->isStopWatch(_time)) {
 			if (_number != -1 && _counter < _number) {
 				_counter++;
@@ -41,6 +52,7 @@ void ObjectSpawner::update(float deltatime) {
 			}
 		}		
 	}
+
 	//else if (this->getPositionX() <= vpBounding.left || this->getPositionY() <= vpBounding.bottom) {
 	//	// Trong màn hình rồi thì huỷ luôn
 	//	// qua luôn rồi thì hủy
@@ -125,7 +137,7 @@ void ObjectSpawner::deleteObject() {
 }
 
 RECT ObjectSpawner::getBounding() {
-	return RECT();
+	return this->_bound;
 }
 
 vector<BaseObject*> ObjectSpawner::getObjects() {

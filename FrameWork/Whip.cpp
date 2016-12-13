@@ -128,7 +128,6 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 			break;
 		case GHOST:
 		case BAT:
-		case DRAGON:
 		case SPEARKNIGHT:
 		case MEDUSAHEAD:
 			if (object == _listColliding.end() || object._Ptr == nullptr)
@@ -137,6 +136,13 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 				_listColliding[otherObject] = true;
 			}
 			SoundManager::getInstance()->Play(eSoundId::HIT);
+			break;
+		case DRAGON:
+			if (object == _listColliding.end() || object._Ptr == nullptr) {
+				((BaseEnemy*)otherObject)->dropHitpoint(this->_damage);
+				_listColliding[otherObject] = true;
+			}
+			SoundManager::getInstance()->Play(eSoundId::HITCANNON);
 			break;
 		case MEDUSA:
 			if (object == _listColliding.end() || object._Ptr == nullptr)

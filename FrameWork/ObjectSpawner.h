@@ -58,6 +58,7 @@ private:
 
 	int _direction;
 	bool _isOnePerOne;
+	RECT _bound;
 
 };
 

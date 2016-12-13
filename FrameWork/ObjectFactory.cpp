@@ -404,7 +404,7 @@ BaseObject * ObjectFactory::getSpawner(xml_node node) {
 	bool oneperone;
 
 	pos.x = stoi(properties["X"]) + 32;
-	pos.y = stoi(properties["Y"]) + 32;
+	pos.y = stoi(properties["Y"]) ;
 	width = stoi(properties["Width"]);
 	height = stoi(properties["Height"]);
 
@@ -429,7 +429,7 @@ BaseObject * ObjectFactory::getSpawner(xml_node node) {
 		time = stof(properties.find("time")->second);
 	}
 	else {
-		time = 2000.0f;
+		time = 3000.0f;
 	}
 
 	// num
