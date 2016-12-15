@@ -18,6 +18,7 @@ void CastlevaniaGame::init()
 	Game::init();
 	SceneManager::getInstance()->addScene(new IntroScene());
 	//SceneManager::getInstance()->addScene(new PlayScene());
+	//SceneManager::getInstance()->addScene(new GameOverScene());
 }
 
 void CastlevaniaGame::release()

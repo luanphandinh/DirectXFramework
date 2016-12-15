@@ -1,4 +1,5 @@
 ﻿#include "PlayScene.h"
+#include "GameOverScene.h"
 
 PlayScene::PlayScene()
 {
@@ -24,7 +25,6 @@ bool PlayScene::init()
 	simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
 	//simon->setPosition(2500, 1324);//v6
-
 	/*LEVEL 3 POS*/
 	//simon->setPosition(4940, 95);//v1
 
@@ -101,6 +101,13 @@ void PlayScene::update(float deltaTime)
 	}
 	else
 	{
+		if (LifeCounter::getLife() == 0)
+		{
+			//có thể xử lý game over tại đây(để sau này xem thử)
+			auto gameOver = new GameOverScene();
+			SceneManager::getInstance()->replaceScene(gameOver);
+			return;
+		}
 		this->updateRevice();
 	}
 	/*

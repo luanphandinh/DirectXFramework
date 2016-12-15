@@ -1,5 +1,6 @@
 ﻿#include "Director.h"
 #include "GameStatusBoard.h"
+#include "SceneManager.h"
 
 Director::Director()
 {
@@ -76,12 +77,6 @@ void Director::setReviveViewport(eLevel2Viewport viewport)
 
 void Director::updateRevive()
 {
-	if (LifeCounter::getLife() == 0)
-	{
-		//có thể xử lý game over tại đây(để sau này xem thử)
-		return;
-	}
-
 	LifeCounter::setLife(LifeCounter::getLife() - 1);
 	GameStatusBoard::getInstance()->getSimonLifeUI()->setHPNumber(16);
 

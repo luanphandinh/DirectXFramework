@@ -92,6 +92,7 @@
     <ClInclude Include="dxaudio.h" />
     <ClInclude Include="EmptyObject.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="HitEffect.h" />
     <ClInclude Include="FlyLand.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Crown.cpp" />
     <ClCompile Include="dxaudio.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="HitEffect.cpp" />
     <ClCompile Include="Candle.cpp" />

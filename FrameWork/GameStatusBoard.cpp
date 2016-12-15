@@ -15,16 +15,20 @@ GameStatusBoard::~GameStatusBoard()
 GameStatusBoard* GameStatusBoard::getInstance()
 {
 	if (_instance == nullptr)
+	{
 		_instance = new GameStatusBoard();
+		_instance->init();
+	}
 	return _instance;
 }
 
 void GameStatusBoard::init()
 {
-	_simonLifeUI = new LifeUI(SIMONLIFEUI_POSITION,"PLAYER","red_life_icon", 3);
+	_simonLifeUI = new LifeUI(SIMONLIFEUI_POSITION,"PLAYER","red_life_icon", 16);
 	_simonLifeUI->setHPNumber(16);
 	_enemyLifeUI = new LifeUI(ENEMYLIFEUI_POSITION, "ENEMY", "yellow_life_icon", 1);
 	_enemyLifeUI->setHPNumber(16);
+	LifeCounter::setLife(3);
 	SceneTime::setTime(300);
 	//tạo surface để vẽ background cho bảng
 	DeviceManager::getInstance()->getDevice()->CreateOffscreenPlainSurface(
@@ -63,8 +67,10 @@ void GameStatusBoard::draw(LPD3DXSPRITE spriteHandle)
 {
 	drawBlankBackground(spriteHandle);
 
-	_simonLifeUI->draw(spriteHandle, nullptr);
-	_enemyLifeUI->draw(spriteHandle, nullptr);
+	if (_simonLifeUI != nullptr)
+		_simonLifeUI->draw(spriteHandle, nullptr);
+	if (_enemyLifeUI != nullptr)
+		_enemyLifeUI->draw(spriteHandle, nullptr);
 
 	Score::draw(spriteHandle);
 	HeartCounter::draw(spriteHandle);

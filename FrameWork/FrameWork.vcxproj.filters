@@ -40,13 +40,7 @@
     <ClCompile Include="Director.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Level2Director.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScene.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Bat.cpp">
@@ -184,9 +178,6 @@
     <ClCompile Include="Scenario.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="ScenarioManager.cpp">
-      <Filter>Source Files\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Whip.cpp">
       <Filter>Source Files\Objects\Items\Weapon</Filter>
     </ClCompile>
@@ -223,10 +214,22 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Source Files\Framework\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Level2Director.cpp">
+      <Filter>Source Files\Game\Level2</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Source Files\Game\Level2</Filter>
+    </ClCompile>
     <ClCompile Include="Level3Director.cpp">
-      <Filter>Source Files\Game</Filter>
+      <Filter>Source Files\Game\Level3</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenarioManager.cpp">
+      <Filter>Source Files\Game\Scenario</Filter>
     </ClCompile>
     <ClCompile Include="IntroScene.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -271,12 +274,6 @@
       <Filter>Header Files\Framework\Map</Filter>
     </ClInclude>
     <ClInclude Include="Director.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2Director.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScene.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Bat.h">
@@ -429,9 +426,6 @@
     <ClInclude Include="DragonFire.h">
       <Filter>Header Files\Objects\Items\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="HitEffect.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Crown.h">
       <Filter>Header Files\Objects\Items\Special</Filter>
     </ClInclude>
@@ -453,13 +447,25 @@
     <ClInclude Include="dxaudio.h">
       <Filter>Header Files\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Level3Director.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="HeartCounter.h">
       <Filter>Header Files\Objects\GameStatusBoard</Filter>
     </ClInclude>
     <ClInclude Include="IntroScene.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2Director.h">
+      <Filter>Header Files\Game\Level2</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Header Files\Game\Level2</Filter>
+    </ClInclude>
+    <ClInclude Include="Level3Director.h">
+      <Filter>Header Files\Game\Level3</Filter>
+    </ClInclude>
+    <ClInclude Include="HitEffect.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -541,6 +547,21 @@
     </Filter>
     <Filter Include="Source Files\Objects\Items\Weapon">
       <UniqueIdentifier>{b006ded0-c5b5-4c7f-8241-8b50c848f919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Level2">
+      <UniqueIdentifier>{8b945ad8-16b3-48cc-a6e6-2a594a88853d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Level3">
+      <UniqueIdentifier>{346e8216-ff69-4a10-9420-e2f26958effe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game\Scenario">
+      <UniqueIdentifier>{d87c723f-0f3d-4908-9e10-b7a846430768}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Level2">
+      <UniqueIdentifier>{e674e0f4-5333-4b73-9e15-d2a5f1c531a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Level3">
+      <UniqueIdentifier>{30ad23b8-9dcf-4c15-af6a-943e0a226530}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
