@@ -98,12 +98,26 @@ void Dragon::updateDirection()
 
 void Dragon::fire()
 {
+	if (_overHeatedStopWatch == nullptr)
+	{
+		_overHeatedStopWatch = new StopWatch();
+		_isOverHeated = true;
+		_countFire = 0;
+	}
+
+	if (_overHeatedStopWatch->isStopWatch(2000) && _isOverHeated)
+	{
+		_isOverHeated = false;
+	}
+
+	if (_isOverHeated) return;
+
 	if (_fireStopWatch == nullptr)
 	{
 		_fireStopWatch = new StopWatch();
 	}
 
-	if (_fireStopWatch->isStopWatch(1500))
+	if (_fireStopWatch->isStopWatch(500))
 	{
 		//ItemManager::generateWeapon(eItemID::DRAGON_FIRE,this->getPosition() + GVector2(0,10),_direction);
 		DragonFire* _fire = new DragonFire(this->getPosition() + GVector2(0, 10), _direction);
@@ -111,6 +125,9 @@ void Dragon::fire()
 		_listItem.push_back(_fire);
 		SAFE_DELETE(_fireStopWatch);
 		_fireStopWatch = nullptr;
+		_countFire++;
+		if (_countFire == 2)
+			SAFE_DELETE(_overHeatedStopWatch);
 	}
 }
 

@@ -21,9 +21,12 @@ public:
 private:
 	map<string, IComponent*> _listComponent;
 	bool _isStand;
+	bool _isOverHeated;
+	int  _countFire;
 	eDirection _direction;
 	//Dùng để animation hủy  enemy 
 	BaseObject *_burning;
+	StopWatch* _overHeatedStopWatch;
 	StopWatch* _fireStopWatch;
 	vector<DragonFire*> _listItem;
 	void removeFire();
