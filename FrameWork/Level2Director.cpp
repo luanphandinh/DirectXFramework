@@ -25,6 +25,7 @@ void Level2Director::init()
 	//Mấy cái hàm này chạy theo thứ tự từ dưới lên khi gọi updateScenario(deltaTime);
 	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::moveViewportPassDoor2);
 	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::passDoorScene);
+
 	__hook(&Scenario::update, scenarioPassDoor, &Level2Director::moveViewportPassDoor);
 
 	auto scenarioSpecialItem = new Scenario("crownShowUp");

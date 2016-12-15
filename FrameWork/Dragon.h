@@ -3,6 +3,7 @@
 #include"define.h"
 #include"StopWatch.h"
 #include"ItemManager.h"
+#include"DragonFire.h"
 #define DRAGON_HP 5
 class Dragon : public BaseEnemy
 {
@@ -24,6 +25,7 @@ private:
 	//Dùng để animation hủy  enemy 
 	BaseObject *_burning;
 	StopWatch* _fireStopWatch;
-	list<Item*> _listItem;
+	vector<DragonFire*> _listItem;
+	void removeFire();
 };
 

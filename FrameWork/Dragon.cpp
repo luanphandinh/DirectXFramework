@@ -61,11 +61,18 @@ void Dragon::update(float deltatime)
 		}
 	}
 
+	for (auto object : _listItem)
+	{
+		object->update(deltatime);
+	}
+	removeFire();
+
 	if (_isStand) return;
 	for (auto it = _listComponent.begin(); it != _listComponent.end(); it++)
 	{
 		it->second->update(deltatime);
 	}
+
 }
 
 void Dragon::updateDirection()
@@ -98,7 +105,10 @@ void Dragon::fire()
 
 	if (_fireStopWatch->isStopWatch(1500))
 	{
-		ItemManager::generateWeapon(eItemID::DRAGON_FIRE,this->getPosition() + GVector2(0,10),_direction);
+		//ItemManager::generateWeapon(eItemID::DRAGON_FIRE,this->getPosition() + GVector2(0,10),_direction);
+		DragonFire* _fire = new DragonFire(this->getPosition() + GVector2(0, 10), _direction);
+		_fire->init();
+		_listItem.push_back(_fire);
 		SAFE_DELETE(_fireStopWatch);
 		_fireStopWatch = nullptr;
 	}
@@ -111,6 +121,10 @@ void Dragon::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 	if (this->isInStatus(eStatus::DESTROY) || this->isInStatus(eStatus::BURN))
 		return;
 	_sprite->render(spriteHandler, viewport);
+	for (auto object : _listItem)
+	{
+		object->draw(spriteHandler, viewport);
+	}
 }
 
 void Dragon::release()
@@ -130,6 +144,12 @@ float Dragon::checkCollision(BaseObject* otherObject, float dt)
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
 	eDirection direction;
+
+	for (auto object : _listItem)
+	{
+		object->checkCollision(otherObject, dt);
+	}
+
 	if (otherObjectID != eID::LAND && otherObjectID != eID::SIMON) return 0.0f;
 	//if ((otherObjectID == eID::LAND)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
@@ -154,4 +174,22 @@ float Dragon::checkCollision(BaseObject* otherObject, float dt)
 	}
 
 	return 0.0f;
+}
+
+void Dragon::removeFire()
+{
+	for (auto object : _listItem)
+	{
+		if (object->getStatus() == eStatus::DESTROY)
+		{
+			object->release();
+
+			remove(_listItem.begin(), _listItem.end(), object);
+			_listItem.pop_back();
+
+			delete object;
+
+			break;
+		}
+	}
 }
