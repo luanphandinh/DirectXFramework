@@ -52,10 +52,11 @@ private:
 	StopWatch* _stopWatch;
 
 	// bay ra khỏi view sẽ chết? nếu muốn thì set trong update
-	void checkIfOutOfScreen();
+	bool checkIfOutOfScreen();
 
 	// nếu view chưa tới chỗ nó thì nó ko bay
 	void updateHiding();
 	BaseObject *_burning;
+	int _direction;
 
 };

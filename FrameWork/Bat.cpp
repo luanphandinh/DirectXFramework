@@ -132,7 +132,7 @@ void Bat::update(float deltaTime) {
 		return;
 	}
 
-
+	if (this->checkIfOutOfScreen()) return;
 	if (this->getStatus() == eStatus::HANGING) {
 		this->updateHanging();
 		return;
@@ -146,7 +146,7 @@ void Bat::update(float deltaTime) {
 			hack++;
 			this->flyingDown();
 		}
-		this->checkIfOutOfScreen();
+		
 		for (auto component : _listComponent) {
 			component.second->update(deltaTime);
 		}
@@ -180,16 +180,16 @@ void Bat::fly() {
 }
 
 // Ko giết nó, để nó bay ra khỏi view thì hủy luôn
-void Bat::checkIfOutOfScreen() {
-	if (this->getStatus() != eStatus::NORMAL)
-		return;
+bool Bat::checkIfOutOfScreen() {
 	auto viewport = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT screenBound = viewport->getBounding();
 	GVector2 position = this->getPosition();
 
 	if (position.x > screenBound.right) {
 		this->setStatus(eStatus::DESTROY);
+		return true;
 	}
+	return false;
 }
 
 void Bat::updateHanging() {

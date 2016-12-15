@@ -6,6 +6,7 @@ MedusaHead::MedusaHead(eStatus status, int direction, GVector2 pos,
 	/*this->_horizontalVeloc = hVeloc;
 	this->_amplitude = ampl;
 	this->_frequence = freq;*/
+	_direction = direction;
 	if (direction == 1)
 		this->_horizontalVeloc = GVector2(120.0f, 0.0f);
 	else if (direction == -1) 
@@ -74,7 +75,8 @@ void MedusaHead::update(float deltaTime) {
 		}
 		return;
 	}
-
+	if (this->checkIfOutOfScreen())
+		return;
 
 	if (this->getStatus() == eStatus::HIDING) {
 		this->updateHiding();
@@ -82,7 +84,7 @@ void MedusaHead::update(float deltaTime) {
 	}
 	else {
 
-		this->checkIfOutOfScreen();
+		
 		for (auto component : _listComponent) {
 
 			component.second->update(deltaTime);
@@ -176,16 +178,20 @@ IComponent * MedusaHead::getComponent(string) {
 }
 
 // Ko giết nó, để nó bay ra khỏi view thì hủy luôn
-void MedusaHead::checkIfOutOfScreen() {
-	if (this->getStatus() != eStatus::NORMAL)
-		return;
+bool MedusaHead::checkIfOutOfScreen() {
 	auto viewport = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT screenBound = viewport->getBounding();
 	GVector2 position = this->getPosition();
 
-	if (position.x > screenBound.right) {
+	if (position.x > screenBound.right && _direction > 0) {
 		this->setStatus(eStatus::DESTROY);
+		return true;
 	}
+	else if (position.x < screenBound.left && _direction < 0) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+	return false;
 }
 
 void MedusaHead::updateHiding() {

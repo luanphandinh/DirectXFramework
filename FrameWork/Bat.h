@@ -56,7 +56,8 @@ private:
 	int hack;
 	bool _isHitted;
 	StopWatch* _stopWatch;
-	void checkIfOutOfScreen();
+	bool checkIfOutOfScreen();
 	void updateHanging();
 	BaseObject *_burning;
+	int _direction;
 };
