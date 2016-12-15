@@ -3,8 +3,10 @@
 #include"ItemManager.h"
 Level2Director::Level2Director() : Director()
 {
-	_reviveViewport = eLevel2Viewport::V1;
-	_revivePosition = GVector2(2700, 100);
+	/*_reviveViewport = eLevel2Viewport::V1;
+	_revivePosition = GVector2(2700, 100);*/
+	_reviveViewport = eLevel2Viewport::V5;
+	_revivePosition = GVector2(1000, 1000);
 	// -_-  
 	//_revivePosition = GVector2(2300, 638);
 
@@ -305,4 +307,13 @@ void Level2Director::crownShowUp(float deltatime, bool & finish)
 		//finish = true;
 	}
 	
+}
+
+
+void Level2Director::updateRevive()
+{
+	Director::updateRevive();
+	if (SoundManager::getInstance()->IsPlaying(eSoundId::BOSSMEDUSA))
+		SoundManager::getInstance()->Stop(eSoundId::BOSSMEDUSA);
+	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL2);
 }

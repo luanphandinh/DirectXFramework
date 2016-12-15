@@ -40,13 +40,14 @@ public:
 
 	Simon* getSimon();
 	BaseObject* getObject(eID id);
+	void updateRevice();
 private:
 	//Kiểm tra nếu đối tượng ko cần sử dụng nữa thì huỷ
 	void destroyObject();
 	
 	//Danh sách các đối tượng dùng để tạo quadtree
 	map<string, BaseObject*> _mapObject;
-
+	void loadMapObjects();
 	//Danh sách các đối tượng hoạt động rộng không thể đưa vào quadtree
 	vector<BaseObject*> _listObject;
 

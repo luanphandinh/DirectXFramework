@@ -48,7 +48,7 @@ public:
 	void setRevivePosition(GVector2 pos);
 	GVector2 getRevivePosition();
 	void setReviveViewport(eLevel2Viewport viewport);
-	void updateRevive();
+	virtual void updateRevive();
 protected:
 	eID	_currentLevelId;
 	eLevel2Viewport _currentViewport;

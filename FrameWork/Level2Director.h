@@ -26,6 +26,8 @@ public:
 		Xử lý cho các special item xuất hiện
 	*/
 	void crownShowUp(float deltatime, bool & finish);
+
+	void updateRevive() override;
 private:
 	bool _flagMoveViewportPassDoor;
 	bool _flagMoveSimonPassDoor;
