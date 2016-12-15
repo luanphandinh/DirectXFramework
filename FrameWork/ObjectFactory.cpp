@@ -460,7 +460,8 @@ BaseObject * ObjectFactory::getSpawner(xml_node node) {
 		maxNum = stoi(properties.find("maxNumber")->second);
 	}
 
-	auto spawner = new ObjectSpawner(pos, width, height, type, dir, time, num);
+	//auto spawner = new ObjectSpawner(pos, width, height, type, dir, time, num);
+	auto spawner = new ObjectSpawner(pos, width, height, type, dir, time, -1);
 	spawner->setOnePerOne(oneperone);
 	spawner->setMaxNumber(maxNum);
 	spawner->init();

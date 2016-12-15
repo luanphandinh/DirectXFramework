@@ -22,7 +22,6 @@ ObjectSpawner::ObjectSpawner(GVector2 position, int width, int height, eID type,
 ObjectSpawner::~ObjectSpawner() {}
 
 void ObjectSpawner::init() {
-
 }
 
 void ObjectSpawner::update(float deltatime) {
@@ -30,7 +29,8 @@ void ObjectSpawner::update(float deltatime) {
 	//this->_direction == 1 && this->getPositionX() > vpBounding.left&&this->getPositionY() - 70>vpBounding.bottom
 	// check coi đi tới chưa, chưa tới mới tạo
 	//
-	if (isRectangleIntersectedInDescartes(this->getBounding(), vpBounding)) {
+	if (isRectangleIntersectedInDescartes(vpBounding, this->getBounding())
+		&& !isContains(vpBounding, this->getBounding())) {
 		//bool b = );
 		if (_stopWatch == nullptr) {
 			_time = 0;
@@ -46,7 +46,7 @@ void ObjectSpawner::update(float deltatime) {
 					_stopWatch->restart();
 			}
 			else if (_number == -1) {
-				if (_listObjects.size() < _maxObject)
+				//if (_listObjects.size() < _maxObject)
 					_listObjects.push_back(getObject(_createType));
 					_stopWatch->restart();
 			}

@@ -6,14 +6,17 @@ MedusaHead::MedusaHead(eStatus status, int direction, GVector2 pos,
 	/*this->_horizontalVeloc = hVeloc;
 	this->_amplitude = ampl;
 	this->_frequence = freq;*/
-	this->_horizontalVeloc = GVector2(120.0f, 0.0f);
+	if (direction == 1)
+		this->_horizontalVeloc = GVector2(120.0f, 0.0f);
+	else if (direction == -1) 
+		this->_horizontalVeloc = GVector2(-120.0f, 0.0f);
 	this->_amplitude = GVector2(0.0f, 64.0f);
 	this->_frequence = 0.7f;
 	_sprite = SpriteManager::getInstance()->getSprite(eID::MEDUSAHEAD);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(this->_id, "normal"));
 
 	this->_listComponent.insert(pair<string, IComponent*>("Movement",
-		new Movement(GVector2Zero, direction*_horizontalVeloc, _sprite)));
+		new Movement(GVector2Zero, _horizontalVeloc, _sprite)));
 	this->_listComponent.insert(pair<string, IComponent*>("Sinmovement", 
 		new SinMovement(_amplitude, _frequence, _sprite)));
 	

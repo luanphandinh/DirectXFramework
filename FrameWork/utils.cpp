@@ -66,7 +66,7 @@ bool isRectangleIntersectedInDescartes(RECT rect1, RECT rect2) {
 bool isContains(RECT rect1, RECT rect2)
 {
 	float left = rect1.left - rect2.left;
-	float right = rect1.right - rect2.left;
+	float right = rect1.right - rect2.right;
 	float bottom = rect1.bottom - rect2.bottom;
 	float top = rect1.top - rect2.top;
 

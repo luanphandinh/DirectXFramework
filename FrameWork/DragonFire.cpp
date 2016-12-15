@@ -61,7 +61,7 @@ void DragonFire::checkPosition()
 
 	//if (this->getPositionX() < viewportPosition.x || this->getPositionX() > viewportPosition.x + WINDOW_WIDTH)
 	if (!isContains(viewport->getBounding(), this->getBounding()))
-		this->setStatus(eStatus::DESTROY);
+		this->setStatus(eStatus::BURN);
 }
 
 void DragonFire::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport) 

@@ -41,7 +41,6 @@ public:
 	void setMaxNumber(int number);
 	int getMaxNumber();
 
-
 private:
 
 	BaseObject* getObject(eID id);
@@ -59,6 +58,6 @@ private:
 	int _direction;
 	bool _isOnePerOne;
 	RECT _bound;
-
+	LPDIRECT3DSURFACE9 _surface;
 };
 

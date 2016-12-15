@@ -509,8 +509,8 @@
         <Elem Key="DropItemId" Value="2" />
       </Params>
     </Item>
-    <Item Id="39" Name="medusaHeadSpawner0" X="1524" Y="730" Width="30" Height="30">
-      <ActiveBound X="1524" Y="730" Width="400" Height="30" />
+    <Item Id="39" Name="medusaHeadSpawner0" X="1484" Y="730" Width="30" Height="30">
+      <ActiveBound X="1484" Y="730" Width="400" Height="30" />
       <Params>
         <Elem Key="direction" Value="1" />
       </Params>
@@ -889,12 +889,8 @@
     <Item Id="36" Name="bat2" X="281" Y="1089" Width="20" Height="26">
       <ActiveBound X="281" Y="1089" Width="20" Height="26" />
     </Item>
-    <Item Id="39" Name="medusaHeadSpawner1" X="2238" Y="934" Width="33" Height="33">
-      <ActiveBound X="2238" Y="934" Width="33" Height="33" />
-      <Params>
-        <Elem Key="direction" Value="-1" />
-        <Elem Key="number" Value="3" />
-      </Params>
+    <Item Id="39" Name="object101" X="1997" Y="941" Width="48" Height="23">
+      <ActiveBound X="1997" Y="941" Width="48" Height="23" />
     </Item>
   </Objects>
 </Tilesmap>
