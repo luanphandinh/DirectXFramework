@@ -59,5 +59,6 @@ private:
 	bool _isOnePerOne;
 	RECT _bound;
 	LPDIRECT3DSURFACE9 _surface;
+	void updateDirection();
 };
 

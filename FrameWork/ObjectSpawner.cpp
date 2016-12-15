@@ -25,6 +25,7 @@ void ObjectSpawner::init() {
 }
 
 void ObjectSpawner::update(float deltatime) {
+	updateDirection();
 	auto vpBounding = SceneManager::getInstance()->getCurrentScene()->getViewport()->getBounding();
 	//this->_direction == 1 && this->getPositionX() > vpBounding.left&&this->getPositionY() - 70>vpBounding.bottom
 	// check coi đi tới chưa, chưa tới mới tạo
@@ -119,6 +120,15 @@ BaseObject * ObjectSpawner::getObject(eID id) {
 	default:
 		break;
 	}
+}
+
+void  ObjectSpawner::updateDirection()
+{
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	if (this->getPositionX() < _simon->getPositionX())
+		_direction = 1;
+	else if (this->getPositionX() > _simon->getPositionX())
+		_direction = -1;
 }
 
 void ObjectSpawner::deleteObject() {
