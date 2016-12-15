@@ -1,32 +1,24 @@
-﻿#include "PlayScene.h"
+﻿#include "Level3.h"
 #include "GameOverScene.h"
-#include "GameStatusBoard.h"
-PlayScene::PlayScene()
+#include"GameStatusBoard.h"
+Level3::Level3()
 {
 }
 
 
-PlayScene::~PlayScene()
+Level3::~Level3()
 {
 	delete _viewport;
 	_viewport = nullptr;
 }
 
 
-bool PlayScene::init() 
+bool Level3::init()
 {
 	auto simon = new Simon();
 	simon->init();
-	/*LEVEL 2 POS*/
-	//simon->setPosition(2700, 100);//v1
-	//simon->setPosition(2300, 638);//v2
-	//simon->setPosition(700, 640);//v3
-	//simon->setPosition(1666, 1000);//v4
-	simon->setPosition(1000, 1100);//v5
-	//simon->setPosition(300, 1000);//v5
-	//simon->setPosition(2500, 1324);//v6
 	/*LEVEL 3 POS*/
-	//simon->setPosition(4940, 95);//v1
+	simon->setPosition(4940, 95);//v1
 
 
 
@@ -37,12 +29,12 @@ bool PlayScene::init()
 
 
 	/*LEVEL 3 POS*/
-	_director = new Level2Director();
-	//_director = new Level3Director();
+	//_director = new Level2Director();
+	_director = new Level3Director();
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V5);
+	_director->setCurrentViewport(V1);
 	_viewport = _director->getViewport();
 
 
@@ -51,19 +43,13 @@ bool PlayScene::init()
 	GameStatusBoard::getInstance()->init();
 	/*LEVEL 2*/
 	/*
-		Load QuadTree
+	Load QuadTree
 	*/
-	_quadTree = QNode::loadQuadTree("Resources//Maps//level2QuadTree.xml");
-	loadMapObjects();
-	_backGround = Map::LoadFromFile("Resources//Maps//level2.xml", eID::LEVEL2);
-	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL2);
 
 	/*LEVEL 3*/
-	//_quadTree = QNode::loadQuadTree("Resources//Maps//level3QuadTree.xml");
-	//map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level3.xml");
-	//this->_mapObject.insert(maptemp->begin(), maptemp->end());
-	//_backGround = Map::LoadFromFile("Resources//Maps//level3.xml", eID::LEVEL3);
-	//SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL3);
+	_quadTree = QNode::loadQuadTree("Resources//Maps//level3QuadTree.xml");
+	_backGround = Map::LoadFromFile("Resources//Maps//level3.xml", eID::LEVEL3);
+	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL3);
 
 	//========================TESTING===========================//
 	ActiveWeapon::setItemID((eItemID)7);
@@ -71,27 +57,27 @@ bool PlayScene::init()
 	//=====================TESTING==========================//
 	return true;
 }
-void PlayScene::loadMapObjects()
+void Level3::loadMapObjects()
 {
 	_mapObject.clear();
 	/*
 	_mapObject sẽ chứa tất cả các object có trong toàn bộ map của game
 	*/
-	map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level2.xml");
+	map<string, BaseObject*>* maptemp = ObjectFactory::getMapObjectFromFile("Resources//Maps//level3.xml");
 	this->_mapObject.insert(maptemp->begin(), maptemp->end());
 }
 
-void PlayScene::updateRevice()
+void Level3::updateRevice()
 {
 	loadMapObjects();
 }
 
-void PlayScene::updateInput(float dt) 
+void Level3::updateInput(float dt)
 {
 
 }
 
-void PlayScene::update(float deltaTime)
+void Level3::update(float deltaTime)
 {
 	//=====================TESTING==========================//
 	if (_simon->isInStatus(eStatus::DYING) == false)
@@ -110,23 +96,23 @@ void PlayScene::update(float deltaTime)
 		this->updateRevice();
 	}
 	/*
-		Khi vào game thì bản thân các Object sẽ được load toàn bộ và được init() sau đó add vào _mapObject
-		Quá trình game chạy thì những object nào được load lên vùng viewport mới update và checkCollision
+	Khi vào game thì bản thân các Object sẽ được load toàn bộ và được init() sau đó add vào _mapObject
+	Quá trình game chạy thì những object nào được load lên vùng viewport mới update và checkCollision
 
-		Ta có 2 danh sách Object.
-		Một là _listobject chứa các đối tượng hoạt động rộng,không thể đưa vào quadtree
-		Hai là _mapObject chứa tất cả các đối tượng của map
-		Ta có một listObject phụ là activeObject chứa các object sẽ được update,draww ở mỗi frame,được clear ở đầu hàm update.
-		_activeObject chứa các object được lấy ra từ quadtree
+	Ta có 2 danh sách Object.
+	Một là _listobject chứa các đối tượng hoạt động rộng,không thể đưa vào quadtree
+	Hai là _mapObject chứa tất cả các đối tượng của map
+	Ta có một listObject phụ là activeObject chứa các object sẽ được update,draww ở mỗi frame,được clear ở đầu hàm update.
+	_activeObject chứa các object được lấy ra từ quadtree
 
-		Quá trình update gồm các bước:
-			Bước 1	:	Kiểm tra các đối tương hết hiệu lực (Status = Destroy) từ frame trước
-			Bước 2	:	Clear danh sách activeObject của frame trước,chuẩn bị cho vòng lặp mới
-			Bước 3	:	Tìm các tên của đối tượng có trong vùng screen mà quadtree lấy ra được
-			Bước 4	:	Từ danh sách B3,add các đối tượng có tên tương ứng với _mapObject vào activeObject
-			Bước 5	:	Add danh sách các đối tương trong _listOBject vào _activeObject
-			Bước 6	:	Kiểm tra va chạm giữa các activeObject,nếu có n đối tượng,thì có n*n lần kiểm tra
-			Bước 7	:	Update các đối tượng trong _activeObject
+	Quá trình update gồm các bước:
+	Bước 1	:	Kiểm tra các đối tương hết hiệu lực (Status = Destroy) từ frame trước
+	Bước 2	:	Clear danh sách activeObject của frame trước,chuẩn bị cho vòng lặp mới
+	Bước 3	:	Tìm các tên của đối tượng có trong vùng screen mà quadtree lấy ra được
+	Bước 4	:	Từ danh sách B3,add các đối tượng có tên tương ứng với _mapObject vào activeObject
+	Bước 5	:	Add danh sách các đối tương trong _listOBject vào _activeObject
+	Bước 6	:	Kiểm tra va chạm giữa các activeObject,nếu có n đối tượng,thì có n*n lần kiểm tra
+	Bước 7	:	Update các đối tượng trong _activeObject
 	*/
 
 	GVector2 viewport_position = _viewport->getPositionWorld();
@@ -169,18 +155,18 @@ void PlayScene::update(float deltaTime)
 
 	//[Bước 5]
 	_activeObject.insert(_activeObject.end(), _listObject.begin(), _listObject.end());
-	
+
 	//[Bước 6]
 	for (BaseObject* obj : _activeObject)
 	{
 		//if (_itemManager != nullptr && (obj->getId() == eID::LAND || obj->getId()== eID::SPEARKNIGHT))
 		//{
-			//_itemManager->checkCollision(obj, deltaTime);
+		//_itemManager->checkCollision(obj, deltaTime);
 		//}
 		//không cần xét va chạm cho các trường hợp này
-		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND || obj->getId() == eID::BRICK || 
-			obj->getId() == eID::FLYLAND|| obj->getId() == eID::DOOR )
-		continue;	
+		if (obj == nullptr || obj->isInStatus(eStatus::DESTROY) || obj->getId() == eID::LAND || obj->getId() == eID::BRICK ||
+			obj->getId() == eID::FLYLAND || obj->getId() == eID::DOOR)
+			continue;
 		// check mấy con như knight vs land đồ :v
 		for (BaseObject* passiveobj : _activeObject) {
 			if (passiveobj == nullptr || passiveobj == obj || passiveobj->isInStatus(eStatus::DESTROY))
@@ -199,7 +185,7 @@ void PlayScene::update(float deltaTime)
 	//=====================TESTING==========================//
 }
 
-void PlayScene::destroyObject()
+void Level3::destroyObject()
 {
 	for (auto object : _listObject)
 	{
@@ -248,7 +234,7 @@ void PlayScene::destroyObject()
 	}
 }
 
-void PlayScene::draw(LPD3DXSPRITE spriteHandle) 
+void Level3::draw(LPD3DXSPRITE spriteHandle)
 {
 	//=====================TESTING==========================//
 	_backGround->draw(spriteHandle, _viewport);
@@ -264,7 +250,7 @@ void PlayScene::draw(LPD3DXSPRITE spriteHandle)
 	//=====================TESTING==========================//
 }
 
-void PlayScene::release()
+void Level3::release()
 {
 	for (auto object : _listObject)
 	{
@@ -278,17 +264,17 @@ void PlayScene::release()
 
 }
 
-void PlayScene::setViewport(Viewport* viewport)
+void Level3::setViewport(Viewport* viewport)
 {
 	if (viewport != _viewport)
 		_viewport = viewport;
 }
 
-Simon * PlayScene::getSimon() {
+Simon * Level3::getSimon() {
 	return (Simon*)this->_simon;
 }
 
-BaseObject * PlayScene::getObject(eID id) {
+BaseObject * Level3::getObject(eID id) {
 	if (id == eID::SIMON)
 		return getSimon();
 	eID objectID;
@@ -304,7 +290,7 @@ BaseObject * PlayScene::getObject(eID id) {
 }
 
 //=====================TESTING==========================//
-void PlayScene::updateDirector(float deltaTime)
+void Level3::updateDirector(float deltaTime)
 {
 	_director->update(deltaTime);
 	_viewport = _director->getViewport();

@@ -1,7 +1,7 @@
 ﻿#include "Medusa.h"
 #include "PlayScene.h"
 
-//#include "GameStatusBoard.h"
+#include "GameStatusBoard.h"
 _USING_FRAMEWORK
 Medusa::Medusa(GVector2 pos) : BaseEnemy(eID::MEDUSA) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::MEDUSA);

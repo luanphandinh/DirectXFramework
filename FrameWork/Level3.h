@@ -10,7 +10,6 @@
 #include "ItemManager.h"
 #include "ObjectFactory.h"
 #include"ActiveWeapon.h"
-#include"Level2Director.h"
 #include"Level3Director.h"
 
 #include"ScenarioManager.h"
@@ -19,15 +18,11 @@
 #include"Sword.h"
 #include"ThrowingAxe.h"
 #include"Whip.h"
-using namespace std;
-_USING_FRAMEWORK
-
-class PlayScene :
-	public Scene
+class Level3 : public Scene
 {
 public:
-	PlayScene();
-	~PlayScene();
+	Level3();
+	~Level3();
 
 	bool init() override;
 	void updateInput(float dt) override;
@@ -40,10 +35,11 @@ public:
 	Simon* getSimon();
 	BaseObject* getObject(eID id);
 	void updateRevice();
+
 private:
 	//Kiểm tra nếu đối tượng ko cần sử dụng nữa thì huỷ
 	void destroyObject();
-	
+
 	//Danh sách các đối tượng dùng để tạo quadtree
 	map<string, BaseObject*> _mapObject;
 	void loadMapObjects();
@@ -69,6 +65,7 @@ private:
 	bool flagDoorScenario;
 	ScenarioManager* _directorDoor;
 	ScenarioManager* _directorPassDoor;
+
 
 	//==========================TEST=========================//
 	BaseObject** _testItem;

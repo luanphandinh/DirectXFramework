@@ -1,6 +1,6 @@
 #include "GameOverScene.h"
 #include "SoundManager.h"
-//#include "GameStatusBoard.h"
+#include "GameStatusBoard.h"
 #include "PlayScene.h"
 
 GameOverScene::GameOverScene()

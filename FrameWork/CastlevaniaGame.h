@@ -4,6 +4,7 @@
 #include "PlayScene.h"
 #include "IntroScene.h"
 #include "GameOverScene.h"
+#include "Level3.h"
 _NAMESPACE_FRAMEWORK_BEGIN
 class CastlevaniaGame : public Game
 {
