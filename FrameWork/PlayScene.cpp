@@ -20,13 +20,12 @@ bool PlayScene::init()
 	/*LEVEL 2 POS*/
 	//simon->setPosition(2700, 100);//v1
 	//simon->setPosition(2300, 638);//v2
-	//simon->setPosition(700, 640);//v3
+	simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
-	simon->setPosition(1000, 1100);//v5
+	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
 	//simon->setPosition(2500, 1324);//v6
-	/*LEVEL 3 POS*/
-	//simon->setPosition(4940, 95);//v1
+
 
 
 
@@ -35,14 +34,12 @@ bool PlayScene::init()
 	_listObject.push_back(_simon);
 	_listObject.push_back(((Simon*)_simon)->getWhip());
 
-
-	/*LEVEL 3 POS*/
 	_director = new Level2Director();
-	//_director = new Level3Director();
+
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V5);
+	_director->setCurrentViewport(V3);
 	_viewport = _director->getViewport();
 
 

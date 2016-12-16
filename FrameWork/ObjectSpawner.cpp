@@ -30,8 +30,11 @@ void ObjectSpawner::update(float deltatime) {
 	//this->_direction == 1 && this->getPositionX() > vpBounding.left&&this->getPositionY() - 70>vpBounding.bottom
 	// check coi đi tới chưa, chưa tới mới tạo
 	//
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	if (isRectangleIntersectedInDescartes(vpBounding, this->getBounding())
-		&& !isContains(vpBounding, this->getBounding())) {
+		&& !isContains(vpBounding, this->getBounding()) 
+		&& (this->getPositionY() + 20 > _simon->getPositionY())
+		) {
 		//bool b = );
 		if (_stopWatch == nullptr) {
 			_time = 0;
