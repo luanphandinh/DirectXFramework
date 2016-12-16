@@ -119,6 +119,7 @@
     <ClInclude Include="Medusa.h" />
     <ClInclude Include="MedusaHead.h" />
     <ClInclude Include="MoneyBag.h" />
+    <ClInclude Include="MoneyChest.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="ObjectSpawner.h" />
     <ClInclude Include="PlayScene.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Medusa.cpp" />
     <ClCompile Include="MedusaHead.cpp" />
     <ClCompile Include="MoneyBag.cpp" />
+    <ClCompile Include="MoneyChest.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="ObjectSpawner.cpp" />
     <ClCompile Include="PlayScene.cpp" />

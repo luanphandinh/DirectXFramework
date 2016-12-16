@@ -1,27 +1,27 @@
-﻿#include "Crown.h"
+﻿#include "MoneyChest.h"
 
 
-Crown::Crown(GVector2 startPosition, eItemID itemId) :Item(startPosition, eItemType::DROP)
+MoneyChest::MoneyChest(GVector2 startPosition, eItemID itemId) :Item(startPosition, eItemType::DROP)
 {
 	_itemId = itemId;
 }
 
 
-Crown::~Crown()
+MoneyChest::~MoneyChest()
 {
 }
 
 
-void Crown::init()
+void MoneyChest::init()
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
 	_animation = new Animation(_sprite, 0.08f);
-	_animation->addFrameRect(eID::ITEM, "crown_01", "crown_02", NULL);
+	_animation->addFrameRect(eID::ITEM, "money_chest_01", "money_chest_02", NULL);
 	Item::initCommonComponent();
 	_endPosition = this->_startPosition + GVector2(0, 40);
 }
 
-void Crown::update(float deltatime)
+void MoneyChest::update(float deltatime)
 {
 	//Item::update(deltatime);
 	_animation->update(deltatime);
@@ -33,28 +33,28 @@ void Crown::update(float deltatime)
 	this->setPositionY(this->getPositionY() + 100 * deltatime / 1000);
 }
 
-void Crown::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
+void MoneyChest::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
 	if (this->isInStatus(eStatus::DESTROY))
 		return;
 	_animation->draw(spriteHandler, viewport);
 }
 
-void Crown::release()
+void MoneyChest::release()
 {
 	Item::release();
 	SAFE_DELETE(_animation);
 	_animation = nullptr;
 }
 
-void Crown::pickedUp()
+void MoneyChest::pickedUp()
 {
 	Item::pickedUp();
 	Score::plusScore(1000);
 	this->setStatus(eStatus::DESTROY);
 }
 
-float Crown::checkCollision(BaseObject* otherObject, float dt)
+float MoneyChest::checkCollision(BaseObject* otherObject, float dt)
 {
 	//Lấy collision body của item ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];

@@ -39,7 +39,7 @@ private:
 
 	void showUpCrown();
 	bool _isCreatedCrown;
-	void specialMoneyBagShowUp();
-	bool _isCreatedSpecialMoneyBag;
+	void moneyChestShowUp();
+	bool _isCreatedMoneyChest;
 };
 

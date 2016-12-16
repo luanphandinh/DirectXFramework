@@ -10,6 +10,7 @@
 #include"DragonFire.h"
 #include"PlayScene.h"
 #include"Crown.h"
+#include"MoneyChest.h"
 
 list<Item*> ItemManager::_listItem;
 
@@ -159,6 +160,9 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 		break;
 	case CROWN:
 		item = new Crown(pos, id);
+		break;
+	case MONEYCHEST:
+		item = new MoneyChest(pos, id);
 		break;
 	default:
 		break;

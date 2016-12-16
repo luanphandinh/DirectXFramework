@@ -45,7 +45,8 @@ void Level2Director::update(float deltaTime)
 {
 	updateScenario(deltaTime);
 	updateViewport();
-	showUpCrown();
+	showUpCrown(); 
+	moneyChestShowUp();
 	//auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	//int xSimon = _simon->getPositionX();
 	//int ySimon = _simon->getPositionY();
@@ -333,6 +334,25 @@ void Level2Director::showUpCrown()
 		}
 
 		_isCreatedCrown = true;
+		//finish = true;
+	}
+}
+
+
+void Level2Director::moneyChestShowUp()
+{
+	if (_isCreatedMoneyChest) return;
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xSimon = _simon->getPositionX();
+	int ySimon = _simon->getPositionY();
+	if (xSimon > 1080 && xSimon < 1150 && ySimon > 700 && ySimon < 760)
+	{
+		if (!_isCreatedMoneyChest)
+		{
+			ItemManager::generateItem(eItemID::MONEYCHEST, GVector2(1300, 610));
+		}
+
+		_isCreatedMoneyChest = true;
 		//finish = true;
 	}
 }
