@@ -70,7 +70,7 @@ private:
 	bool flagDoorScenario;
 	ScenarioManager* _directorDoor;
 	ScenarioManager* _directorPassDoor;
-
+	bool _switchSence;
 	//==========================TEST=========================//
 	BaseObject** _testItem;
 	BaseObject* _whip;

@@ -18,7 +18,7 @@ bool Level3::init()
 	auto simon = new Simon();
 	simon->init();
 	/*LEVEL 3 POS*/
-	simon->setPosition(4940, 95);//v1
+	simon->setPosition(4940, 195);//v1
 
 
 

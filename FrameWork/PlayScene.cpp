@@ -27,6 +27,7 @@ bool PlayScene::init()
 	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
 	simon->setPosition(2500, 1324);//v6
+	simon->setPosition(1400, 1324);//v6
 
 
 	this->_simon = simon;
@@ -39,7 +40,7 @@ bool PlayScene::init()
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V6);
+	_director->setCurrentViewport(V7);
 	_viewport = _director->getViewport();
 
 
@@ -91,6 +92,12 @@ void PlayScene::updateInput(float dt)
 
 void PlayScene::update(float deltaTime)
 {
+	if (_switchSence)
+	{
+		auto play = new Level3();
+		SceneManager::getInstance()->replaceScene(play);
+		return;
+	}
 	//=====================TESTING==========================//
 	if (_simon->isInStatus(eStatus::DYING) == false)
 	{
@@ -307,14 +314,14 @@ BaseObject * PlayScene::getObject(eID id) {
 void PlayScene::updateDirector(float deltaTime)
 {
 	_director->update(deltaTime);
-	_viewport = _director->getViewport();
+	if (_director != nullptr)
+		_viewport = _director->getViewport();
 }
 
 //=====================TESTING==========================//
 
 void PlayScene::switchScene()
 {
-	auto play = new Level3();
-	SceneManager::getInstance()->replaceScene(play);
+	_switchSence = true;
 }
 

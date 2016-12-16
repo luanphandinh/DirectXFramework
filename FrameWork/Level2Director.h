@@ -53,6 +53,8 @@ private:
 	void caculateScore(float deltatime);
 	bool _isEndLevel;
 	float _delay;
+
+	
 	StopWatch* _switchSceneStopWatch;
 };
 

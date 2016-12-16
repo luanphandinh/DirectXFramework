@@ -378,6 +378,7 @@ void Level2Director::updateEndLevel(float deltatime)
 
 void Level2Director::caculateScore(float deltatime)
 {
+
 	if (SceneTime::getTime() > 0)
 	{
 		int score;
@@ -410,22 +411,24 @@ void Level2Director::caculateScore(float deltatime)
 		_delay += deltatime;
 		return;
 	}
-
+	
 	if (_switchSceneStopWatch == nullptr)
 	{
 		_switchSceneStopWatch = new StopWatch();
 		return;
 	}
 
-	/*if (_switchSceneStopWatch->isStopWatch(2000))
+
+	if (_switchSceneStopWatch->isStopWatch(2000))
 	{
 		((PlayScene*)SceneManager::getInstance()->getCurrentScene())->switchScene();
-	}*/
+	}
+
 }
 
 void Level2Director::release()
 {
-	SAFE_DELETE(_generateCrysballStopWatch);
-	SAFE_DELETE(_switchSceneStopWatch);
-	_listViewportInfo.clear();
+	//SAFE_DELETE(_generateCrysballStopWatch);
+	//SAFE_DELETE(_switchSceneStopWatch);
+	//_listViewportInfo.clear();
 }
