@@ -45,6 +45,7 @@ void Crown::release()
 	Item::release();
 	SAFE_DELETE(_animation);
 	_animation = nullptr;
+	SAFE_DELETE(_sprite);
 }
 
 void Crown::pickedUp()

@@ -1,4 +1,5 @@
 #include "Brick.h"
+#include "ItemManager.h"
 #pragma region BrokenBrick
 BrokenBrick::BrokenBrick(GVector2 pos,eDirection dir):BaseObject(eID::BROKENBRICK)
 {
@@ -87,7 +88,7 @@ void BrokenBrick::release()
 #pragma endregion
 
 #pragma region Brick
-Brick::Brick(GVector2 pos) :BaseObject(eID::BRICK)
+Brick::Brick(GVector2 pos, eItemID dropItemId) :BaseObject(eID::BRICK)
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::BRICK);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::BRICK,"normal"));
@@ -96,6 +97,7 @@ Brick::Brick(GVector2 pos) :BaseObject(eID::BRICK)
 	this->setStatus(eStatus::NORMAL);
 	this->setScale(1.0f);
 	this->setPhysicBodySide(eDirection::ALL);
+	this->_dropItemId = dropItemId;
 }
 Brick::~Brick(){}
 
@@ -118,8 +120,21 @@ void Brick::init()
 
 void Brick::update(float deltatime)  
 {
-	if (this->isInStatus(eStatus::DESTROY)) return;
+	if (this->isInStatus(eStatus::DESTROY))
+	{
+		for (BrokenBrick* item : _brokens)
+		{
+			item->release();
+			_brokens.remove(item);
+			delete item;
+			item = nullptr;
+			break;
+		}
+		return;
+	}
+
 	if (!this->isInStatus(eStatus::BURN)) return;
+
 	for (BrokenBrick* item : _brokens)
 	{
 		if (item == nullptr)
@@ -130,28 +145,21 @@ void Brick::update(float deltatime)
 		else
 		{
 			item->update(deltatime);
-			if (item->getStatus() == eStatus::DESTROY)
-			{
-				item->release();
-				_brokens.remove(item);
-				delete item;
-				item = nullptr;
-				break;
-			}
 		}
 	}
 
 	if (_stopWatch == nullptr)
 	{
 		_stopWatch = new StopWatch();
+		ItemManager::generateItem(_dropItemId, this->getPosition() + GVector2(16,-16));
 		return;
 	}
-
 
 	if (_stopWatch->isStopWatch(2000))
 	{
 		SAFE_DELETE(_stopWatch);
 		this->setStatus(eStatus::DESTROY);
+		
 	}
 }
 void Brick::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)

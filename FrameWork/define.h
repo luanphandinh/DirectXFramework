@@ -98,6 +98,7 @@ enum eItemID
 	CROWN = 13,
 	MONEYBAG_SPECIAL = 14,
 	MONEYCHEST = 15,
+	CHICKEN = 16,
 };
 
 //status cho nhân vật

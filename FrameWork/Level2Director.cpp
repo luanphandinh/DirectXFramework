@@ -3,10 +3,10 @@
 #include"ItemManager.h"
 Level2Director::Level2Director() : Director()
 {
-	/*_reviveViewport = eLevel2Viewport::V1;
-	_revivePosition = GVector2(2700, 100);*/
-	_reviveViewport = eLevel2Viewport::V5;
-	_revivePosition = GVector2(1000, 1000);
+	_reviveViewport = eLevel2Viewport::V1;
+	_revivePosition = GVector2(2700, 100);
+	//_reviveViewport = eLevel2Viewport::V5;
+	//_revivePosition = GVector2(1000, 1000);
 	// -_-  
 	//_revivePosition = GVector2(2300, 638);
 

@@ -33,7 +33,7 @@ public:
 	*/
 	virtual void initCommonComponent();
 
-	GVector2 getVelocity();
+	GVector2 getVelocity() override;
 	eItemType getItemType();
 
 	virtual void onCollisionBegin(CollisionEventArg* collision_arg);

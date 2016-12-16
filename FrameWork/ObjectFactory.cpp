@@ -636,10 +636,16 @@ BaseObject* ObjectFactory::getBrick(xml_node node)
 
 	x = stoi(properties["X"]);
 	y = stoi(properties["Y"]);
-
+	eItemID _dropItemId;
 	GVector2 pos = GVector2(x , y );
-
-	auto brick = new Brick(pos);
+	if (properties.find("DropItemId") != properties.end()) {
+		_dropItemId = (eItemID)stoi(properties["DropItemId"]);
+	}
+	else {
+		_dropItemId = eItemID::NOITEM;
+	}
+	
+	auto brick = new Brick(pos,_dropItemId);
 	brick->init();
 	return brick;
 }

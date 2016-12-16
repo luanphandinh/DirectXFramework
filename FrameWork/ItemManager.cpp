@@ -11,6 +11,7 @@
 #include"PlayScene.h"
 #include"Crown.h"
 #include"MoneyChest.h"
+#include"Chicken.h"
 
 list<Item*> ItemManager::_listItem;
 
@@ -163,6 +164,9 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 		break;
 	case MONEYCHEST:
 		item = new MoneyChest(pos, id);
+		break;
+	case CHICKEN:
+		item = new Chicken(pos, id);
 		break;
 	default:
 		break;

@@ -28,7 +28,7 @@ private:
 class Brick : public BaseObject
 {
 public:
-	Brick(GVector2 pos);
+	Brick(GVector2 pos, eItemID _dropItemId);
 	~Brick();
 
 	//implement inherited methods from baseObject
@@ -40,5 +40,6 @@ private:
 	list<BrokenBrick*> _brokens;
 	StopWatch* _stopWatch;
 	map<string, IComponent*> _componentList;
+	eItemID _dropItemId;
 };
 
