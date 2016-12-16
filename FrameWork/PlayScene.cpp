@@ -65,7 +65,6 @@ bool PlayScene::init()
 	//========================TESTING===========================//
 	ActiveWeapon::setItemID((eItemID)7);
 	HeartCounter::plusHeart(50);
-	_isCreatedCrown = false;
 	//ItemManager::generateItem(eItemID::CROWN, GVector2(2900, 100));
 	//=====================TESTING==========================//
 	return true;
@@ -307,20 +306,6 @@ void PlayScene::updateDirector(float deltaTime)
 {
 	_director->update(deltaTime);
 	_viewport = _director->getViewport();
-	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	int xSimon = _simon->getPositionX();
-	int ySimon = _simon->getPositionY();
-	if (xSimon > 3010 && xSimon < 3050 && ySimon > 192 && ySimon < 260)
-	{
-		if (!_isCreatedCrown)
-		{
-			ItemManager::generateItem(eItemID::CROWN, GVector2(2800, 32));
-		}
-			
-		_isCreatedCrown = true;
-		//finish = true;
-	}
-
 }
 
 //=====================TESTING==========================//

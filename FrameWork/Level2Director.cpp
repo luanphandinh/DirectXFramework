@@ -45,6 +45,7 @@ void Level2Director::update(float deltaTime)
 {
 	updateScenario(deltaTime);
 	updateViewport();
+	showUpCrown();
 	//auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	//int xSimon = _simon->getPositionX();
 	//int ySimon = _simon->getPositionY();
@@ -316,4 +317,22 @@ void Level2Director::updateRevive()
 	if (SoundManager::getInstance()->IsPlaying(eSoundId::BOSSMEDUSA))
 		SoundManager::getInstance()->Stop(eSoundId::BOSSMEDUSA);
 	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL2);
+}
+
+void Level2Director::showUpCrown()
+{
+	if (_isCreatedCrown) return;
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xSimon = _simon->getPositionX();
+	int ySimon = _simon->getPositionY();
+	if (xSimon > 3010 && xSimon < 3050 && ySimon > 192 && ySimon < 260)
+	{
+		if (!_isCreatedCrown)
+		{
+			ItemManager::generateItem(eItemID::CROWN, GVector2(2800, 32));
+		}
+
+		_isCreatedCrown = true;
+		//finish = true;
+	}
 }

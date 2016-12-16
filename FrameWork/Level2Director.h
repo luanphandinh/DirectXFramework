@@ -36,5 +36,10 @@ private:
 	BaseObject* _trackedDoor;
 	bool checkPosition();
 	bool isPassedDoor();
+
+	void showUpCrown();
+	bool _isCreatedCrown;
+	void specialMoneyBagShowUp();
+	bool _isCreatedSpecialMoneyBag;
 };
 
