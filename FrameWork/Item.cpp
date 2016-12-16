@@ -110,7 +110,7 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 		}
 		else if (otherObjectID == eID::SIMON)
 		{
-			if (collisionBody->isAABB(this->getBounding(), otherObject->getBounding()));
+			//if (collisionBody->isAABB(this->getBounding(), otherObject->getBounding()));
 				if (this->getVelocity().y != 0) return 0.0f;
 			//int distanceX = abs(this->getPositionX() - otherObject->getPositionX());
 			//int distanceY = abs(this->getPositionY() - otherObject->getPositionY());

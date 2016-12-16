@@ -235,6 +235,15 @@
     <ClCompile Include="Level3.cpp">
       <Filter>Source Files\Game\Level3</Filter>
     </ClCompile>
+    <ClCompile Include="MoneyChest.cpp">
+      <Filter>Source Files\Objects\Items\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="Chicken.cpp">
+      <Filter>Source Files\Objects\Items\Special</Filter>
+    </ClCompile>
+    <ClCompile Include="CrystalBall.cpp">
+      <Filter>Source Files\Objects\Items\Special</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -473,6 +482,15 @@
     </ClInclude>
     <ClInclude Include="Level3.h">
       <Filter>Header Files\Game\Level3</Filter>
+    </ClInclude>
+    <ClInclude Include="MoneyChest.h">
+      <Filter>Header Files\Objects\Items\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Chicken.h">
+      <Filter>Header Files\Objects\Items\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalBall.h">
+      <Filter>Header Files\Objects\Items\Special</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -81,8 +81,10 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CastlevaniaGame.h" />
+    <ClInclude Include="Chicken.h" />
     <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="Crown.h" />
+    <ClInclude Include="CrystalBall.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Director.h" />
@@ -119,6 +121,7 @@
     <ClInclude Include="Medusa.h" />
     <ClInclude Include="MedusaHead.h" />
     <ClInclude Include="MoneyBag.h" />
+    <ClInclude Include="MoneyChest.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="ObjectSpawner.h" />
     <ClInclude Include="PlayScene.h" />
@@ -160,7 +163,9 @@
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Chicken.cpp" />
     <ClCompile Include="Crown.cpp" />
+    <ClCompile Include="CrystalBall.cpp" />
     <ClCompile Include="dxaudio.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -199,6 +204,7 @@
     <ClCompile Include="Medusa.cpp" />
     <ClCompile Include="MedusaHead.cpp" />
     <ClCompile Include="MoneyBag.cpp" />
+    <ClCompile Include="MoneyChest.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="ObjectSpawner.cpp" />
     <ClCompile Include="PlayScene.cpp" />

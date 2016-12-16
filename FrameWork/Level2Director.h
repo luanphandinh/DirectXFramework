@@ -28,6 +28,14 @@ public:
 	void crownShowUp(float deltatime, bool & finish);
 
 	void updateRevive() override;
+
+	/*
+		end level
+	*/
+	void generateCrystalBall() override;
+	void endLevel() override;
+
+	void release() override;
 private:
 	bool _flagMoveViewportPassDoor;
 	bool _flagMoveSimonPassDoor;
@@ -36,5 +44,17 @@ private:
 	BaseObject* _trackedDoor;
 	bool checkPosition();
 	bool isPassedDoor();
+
+	void showUpCrown();
+	bool _isCreatedCrown;
+	void moneyChestShowUp();
+	bool _isCreatedMoneyChest;
+	void updateEndLevel(float deltatime);
+	void caculateScore(float deltatime);
+	bool _isEndLevel;
+	float _delay;
+
+	
+	StopWatch* _switchSceneStopWatch;
 };
 

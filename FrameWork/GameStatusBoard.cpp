@@ -22,6 +22,11 @@ GameStatusBoard* GameStatusBoard::getInstance()
 	return _instance;
 }
 
+void GameStatusBoard::update(float deltatime)
+{
+	_simonLifeUI->update(deltatime);
+}
+
 void GameStatusBoard::init()
 {
 	_simonLifeUI = new LifeUI(SIMONLIFEUI_POSITION,"PLAYER","red_life_icon", 16);

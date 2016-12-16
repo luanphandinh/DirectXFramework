@@ -2,11 +2,11 @@
 #include"Item.h"
 #include"Score.h"
 #include"Animation.h"
-class Crown : public Item
+class Chicken : public Item
 {
 public:
-	Crown(GVector2 startPosition, eItemID id = eItemID::CROWN);
-	~Crown();
+	Chicken(GVector2 startPosition, eItemID id = eItemID::CHICKEN);
+	~Chicken();
 	void init() override;
 	void update(float deltatime) override;
 	void draw(LPD3DXSPRITE, Viewport*) override;

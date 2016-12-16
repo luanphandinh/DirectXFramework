@@ -201,3 +201,27 @@ void Level3Director::crownShowUp(float deltatime, bool & finish) {
 	}
 
 }
+
+
+void Level3Director::generateCrystalBall()
+{
+	if (_generateCrysballStopWatch == nullptr)
+	{
+		_generateCrysballStopWatch = new StopWatch();
+		return;
+	}
+
+	if (_generateCrysballStopWatch->isStopWatch(2000))
+	{
+		ItemManager::generateItem(eItemID::CRYSTALBALL, GVector2(1800, 1500));
+		SAFE_DELETE(_generateCrysballStopWatch);
+	}
+}
+
+void Level3Director::endLevel()
+{
+
+}
+
+void Level3Director::release()
+{}

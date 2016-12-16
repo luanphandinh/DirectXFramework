@@ -1,6 +1,7 @@
 ﻿#include "PlayScene.h"
 #include "GameOverScene.h"
 #include "GameStatusBoard.h"
+#include "Level3.h"
 PlayScene::PlayScene()
 {
 }
@@ -19,15 +20,14 @@ bool PlayScene::init()
 	simon->init();
 	/*LEVEL 2 POS*/
 	//simon->setPosition(2700, 100);//v1
-	//simon->setPosition(2300, 638);//v2
+	//simon->setPosition(1400, 638);//v2
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
-	simon->setPosition(1000, 1100);//v5
+	//simon->setPosition(2700, 1000);//v4
+	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
-	//simon->setPosition(2500, 1324);//v6
-	/*LEVEL 3 POS*/
-	//simon->setPosition(4940, 95);//v1
-
+	simon->setPosition(2500, 1324);//v6
+	simon->setPosition(1400, 1324);//v6
 
 
 	this->_simon = simon;
@@ -35,14 +35,12 @@ bool PlayScene::init()
 	_listObject.push_back(_simon);
 	_listObject.push_back(((Simon*)_simon)->getWhip());
 
-
-	/*LEVEL 3 POS*/
 	_director = new Level2Director();
-	//_director = new Level3Director();
+
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V5);
+	_director->setCurrentViewport(V7);
 	_viewport = _director->getViewport();
 
 
@@ -68,6 +66,7 @@ bool PlayScene::init()
 	//========================TESTING===========================//
 	ActiveWeapon::setItemID((eItemID)7);
 	HeartCounter::plusHeart(50);
+	//ItemManager::generateItem(eItemID::CROWN, GVector2(2900, 100));
 	//=====================TESTING==========================//
 	return true;
 }
@@ -93,6 +92,12 @@ void PlayScene::updateInput(float dt)
 
 void PlayScene::update(float deltaTime)
 {
+	if (_switchSence)
+	{
+		auto play = new Level3();
+		SceneManager::getInstance()->replaceScene(play);
+		return;
+	}
 	//=====================TESTING==========================//
 	if (_simon->isInStatus(eStatus::DYING) == false)
 	{
@@ -195,6 +200,8 @@ void PlayScene::update(float deltaTime)
 		//if (obj != nullptr)
 		obj->update(deltaTime);
 	}
+
+	GameStatusBoard::getInstance()->update(deltaTime);
 
 	//=====================TESTING==========================//
 }
@@ -307,8 +314,14 @@ BaseObject * PlayScene::getObject(eID id) {
 void PlayScene::updateDirector(float deltaTime)
 {
 	_director->update(deltaTime);
-	_viewport = _director->getViewport();
-
+	if (_director != nullptr)
+		_viewport = _director->getViewport();
 }
 
 //=====================TESTING==========================//
+
+void PlayScene::switchScene()
+{
+	_switchSence = true;
+}
+

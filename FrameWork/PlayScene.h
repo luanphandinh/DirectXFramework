@@ -40,6 +40,7 @@ public:
 	Simon* getSimon();
 	BaseObject* getObject(eID id);
 	void updateRevice();
+	void switchScene();
 private:
 	//Kiểm tra nếu đối tượng ko cần sử dụng nữa thì huỷ
 	void destroyObject();
@@ -69,7 +70,7 @@ private:
 	bool flagDoorScenario;
 	ScenarioManager* _directorDoor;
 	ScenarioManager* _directorPassDoor;
-
+	bool _switchSence;
 	//==========================TEST=========================//
 	BaseObject** _testItem;
 	BaseObject* _whip;

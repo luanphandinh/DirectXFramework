@@ -55,13 +55,10 @@ void Medusa::init() {
 }
 
 void Medusa::update(float deltaTime) {
-	if (this->getStatus() == eStatus::DESTROY)
-	{
-		GameStatusBoard::getInstance()->getEnemyLifeUI()->setHPNumber(0);
-		return;
-	}
+	if (this->getStatus() == eStatus::DESTROY) return;
 		
 	if (this->getHitpoint() <= 0) {
+		GameStatusBoard::getInstance()->getEnemyLifeUI()->setHPNumber(0);
 		this->setStatus(eStatus::BURN);
 	}
 
@@ -75,6 +72,8 @@ void Medusa::update(float deltaTime) {
 			_burning->update(deltaTime);
 			if (_burning->getStatus() == eStatus::DESTROY) {
 				this->setStatus(eStatus::DESTROY);
+				//ItemManager::generateItem(eItemID::CRYSTALBALL, this->getPosition());
+				((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->generateCrystalBall();
 			}
 		}
 		return;
