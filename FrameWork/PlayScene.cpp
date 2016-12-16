@@ -193,6 +193,8 @@ void PlayScene::update(float deltaTime)
 		obj->update(deltaTime);
 	}
 
+	GameStatusBoard::getInstance()->update(deltaTime);
+
 	//=====================TESTING==========================//
 }
 

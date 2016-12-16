@@ -1,5 +1,5 @@
 ﻿#include "Chicken.h"
-
+#include "GameStatusBoard.h"
 
 Chicken::Chicken(GVector2 startPosition, eItemID itemId) :Item(startPosition, eItemType::DROP)
 {
@@ -44,6 +44,7 @@ void Chicken::pickedUp()
 {
 	Item::pickedUp();
 	Score::plusScore(1000);
+	GameStatusBoard::getInstance()->getSimonLifeUI()->gainHitpoint(5);
 	this->setStatus(eStatus::DESTROY);
 }
 

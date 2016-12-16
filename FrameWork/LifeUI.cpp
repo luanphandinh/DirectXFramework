@@ -20,7 +20,6 @@ LifeUI::LifeUI(GVector2 position,string text,string spritePath, int number,int H
 		_listIcons.back()->setPosition(position.x + (_listIcons.back()->getFrameWidth() + GAP) * i, position.y + _text->getFontHeight()/2);
 	}
 
-
 }
 
 
@@ -36,8 +35,32 @@ void LifeUI::init()
 
 void LifeUI::update(float deltatime)
 {
-	
+	if (!_isGainingHitpoint) return;
+	if (_gainHitPoint > 0 && _delay > 200)
+	{
+		_gainHitPoint -= 1;
+		int hp = _hp + 1;
+		this->setHPNumber(hp);
+		_delay = 0;
+	}
+	else if (_gainHitPoint > 0 && _delay < 200)
+	{
+		_delay += deltatime;
+	}
+	else if (_gainHitPoint == 0)
+	{
+		_isGainingHitpoint = false;
+	}
+
 }
+
+
+void LifeUI::gainHitpoint(int hitPoint)
+{
+	_gainHitPoint = hitPoint;
+	_isGainingHitpoint = true;
+}
+
 
 void LifeUI::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {

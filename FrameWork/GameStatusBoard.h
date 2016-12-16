@@ -19,6 +19,7 @@ public:
 
 	void init();
 	void draw(LPD3DXSPRITE spriteHandle);
+	void update(float deltatime);
 
 	void setSimonLifeUI(LifeUI* _lifeUI);
 	LifeUI* getSimonLifeUI();
