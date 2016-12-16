@@ -73,6 +73,7 @@ private:
 	//==========================TEST=========================//
 	BaseObject** _testItem;
 	BaseObject* _whip;
+	bool _isCreatedCrown;
 	//==========================TEST=========================//
 };
 

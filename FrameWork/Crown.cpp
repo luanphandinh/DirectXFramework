@@ -17,13 +17,16 @@ void Crown::init()
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
 	_animation = new Animation(_sprite, 0.08f);
 	_animation->addFrameRect(eID::ITEM, "crown_01", "crown_02", NULL);
-	//Item::initCommonComponent();
+	Item::initCommonComponent();
+	_endPosition = this->_startPosition + GVector2(0, 40);
 }
 
 void Crown::update(float deltatime)
 {
 	//Item::update(deltatime);
 	_animation->update(deltatime);
+	if (this->getPositionY() > _endPosition.y) return;
+	this->setPositionY(this->getPositionY() + 100 * deltatime / 1000);
 }
 
 void Crown::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
@@ -42,11 +45,12 @@ void Crown::release()
 
 void Crown::pickedUp()
 {
-	//Score::plusScore(1000);
-	//this->setStatus(eStatus::DESTROY);
+	Item::pickedUp();
+	Score::plusScore(1000);
+	this->setStatus(eStatus::DESTROY);
 }
 
-float Crown::checkCollision(BaseObject* object, float dt)
-{
-	return 0.0f;
-}
+//float Crown::checkCollision(BaseObject* object, float dt)
+//{
+//	return Item::checkCollision(object, dt);
+//}

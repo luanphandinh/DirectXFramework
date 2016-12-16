@@ -18,9 +18,9 @@ bool PlayScene::init()
 	auto simon = new Simon();
 	simon->init();
 	/*LEVEL 2 POS*/
-	//simon->setPosition(2700, 100);//v1
+	simon->setPosition(2700, 100);//v1
 	//simon->setPosition(2300, 638);//v2
-	simon->setPosition(700, 640);//v3
+	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
@@ -39,7 +39,7 @@ bool PlayScene::init()
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V3);
+	_director->setCurrentViewport(V1);
 	_viewport = _director->getViewport();
 
 
@@ -65,6 +65,8 @@ bool PlayScene::init()
 	//========================TESTING===========================//
 	ActiveWeapon::setItemID((eItemID)7);
 	HeartCounter::plusHeart(50);
+	_isCreatedCrown = false;
+	//ItemManager::generateItem(eItemID::CROWN, GVector2(2900, 100));
 	//=====================TESTING==========================//
 	return true;
 }
@@ -305,6 +307,19 @@ void PlayScene::updateDirector(float deltaTime)
 {
 	_director->update(deltaTime);
 	_viewport = _director->getViewport();
+	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xSimon = _simon->getPositionX();
+	int ySimon = _simon->getPositionY();
+	if (xSimon > 3010 && xSimon < 3050 && ySimon > 192 && ySimon < 260)
+	{
+		if (!_isCreatedCrown)
+		{
+			ItemManager::generateItem(eItemID::CROWN, GVector2(2800, 32));
+		}
+			
+		_isCreatedCrown = true;
+		//finish = true;
+	}
 
 }
 

@@ -341,7 +341,7 @@
             <Objects>bat0 spearKnight0 </Objects>
           </QNode>
           <QNode Id="66103" Level="5" X="2592" Y="1248" Width="96" Height="96">
-            <Objects>spearKnight0 brick0 land2 </Objects>
+            <Objects>spearKnight0 brick00 land2 </Objects>
           </QNode>
           <QNode Id="66102" Level="5" X="2496" Y="1248" Width="96" Height="96" />
         </QNode>
