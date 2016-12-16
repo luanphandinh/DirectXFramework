@@ -1,6 +1,8 @@
 ﻿#include "Level2Director.h"
 #include "PlayScene.h"
-#include"ItemManager.h"
+#include "ItemManager.h"
+#include "GameStatusBoard.h"
+#include "Level3.h"
 Level2Director::Level2Director() : Director()
 {
 	_reviveViewport = eLevel2Viewport::V1;
@@ -47,14 +49,7 @@ void Level2Director::update(float deltaTime)
 	updateViewport();
 	showUpCrown(); 
 	moneyChestShowUp();
-	//auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	//int xSimon = _simon->getPositionX();
-	//int ySimon = _simon->getPositionY();
-	//if (xSimon > 3010 && xSimon < 3050 && ySimon > 192 && ySimon < 260)
-	//{
-	//	ItemManager::generateItem(eItemID::CROWN, GVector2(2900, 350));
-	//	//finish = true;
-	//}
+	updateEndLevel(deltaTime);
 }
 
 void Level2Director::updateScenario(float deltaTime)
@@ -355,4 +350,82 @@ void Level2Director::moneyChestShowUp()
 		_isCreatedMoneyChest = true;
 		//finish = true;
 	}
+}
+
+void Level2Director::generateCrystalBall()
+{
+	if (_generateCrysballStopWatch == nullptr)
+	{
+		_generateCrysballStopWatch = new StopWatch();
+	}
+}
+
+void Level2Director::endLevel()
+{
+	_isEndLevel = true;
+}
+
+void Level2Director::updateEndLevel(float deltatime)
+{
+	if (_generateCrysballStopWatch != nullptr && _generateCrysballStopWatch->isStopWatch(2000))
+	{
+		ItemManager::generateItem(eItemID::CRYSTALBALL, GVector2(1800,1500));
+		SAFE_DELETE(_generateCrysballStopWatch);
+	}
+	if (!_isEndLevel) return;
+	caculateScore(deltatime);
+}
+
+void Level2Director::caculateScore(float deltatime)
+{
+	if (SceneTime::getTime() > 0)
+	{
+		int score;
+		int time = SceneTime::getTime() - 2;
+		score = 2 * 10;
+		if (time < 0)
+		{
+			time = SceneTime::getTime();
+			score = time * 10;
+		}
+		
+		SceneTime::setTime(time);
+		Score::plusScore(score);
+		if (SceneTime::getTime() <= 0)
+			SceneTime::stop(true);
+
+		return;
+	}
+	
+
+	if (HeartCounter::getHeart() > 0 && _delay > 50)
+	{
+		HeartCounter::plusHeart(-1);
+		Score::plusScore(100);
+		_delay = 0;
+		return;
+	}
+	else if (HeartCounter::getHeart() > 0 && _delay < 50)
+	{
+		_delay += deltatime;
+		return;
+	}
+
+	if (_switchSceneStopWatch == nullptr)
+	{
+		_switchSceneStopWatch = new StopWatch();
+		return;
+	}
+
+	/*if (_switchSceneStopWatch->isStopWatch(2000))
+	{
+		((PlayScene*)SceneManager::getInstance()->getCurrentScene())->switchScene();
+	}*/
+}
+
+void Level2Director::release()
+{
+	SAFE_DELETE(_generateCrysballStopWatch);
+	SAFE_DELETE(_switchSceneStopWatch);
+	_listViewportInfo.clear();
 }

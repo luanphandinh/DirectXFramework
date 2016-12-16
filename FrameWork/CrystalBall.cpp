@@ -1,5 +1,6 @@
 ﻿#include "CrystalBall.h"
 #include "GameStatusBoard.h"
+#include "PlayScene.h"
 
 CrystalBall::CrystalBall(GVector2 startPosition, eItemID itemId) :Item(startPosition, eItemType::DROP)
 {
@@ -45,6 +46,8 @@ void CrystalBall::release()
 void CrystalBall::pickedUp()
 {
 	Item::pickedUp();
+	//Score::plusScore(9999);
+	((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->endLevel();
 	this->setStatus(eStatus::DESTROY);
 }
 
@@ -63,7 +66,7 @@ float CrystalBall::checkCollision(BaseObject* otherObject, float dt)
 		{
 			this->stop();
 		}
-		else if (otherObjectID == eID::SIMON)
+		else if (otherObjectID == eID::SIMON && direction != eDirection::TOP)
 		{
 			this->pickedUp();
 		}

@@ -9,9 +9,11 @@ public:
 	~SceneTime();
 	static void setTime(int value);
 	static int getTime();
+	static void stop(bool stop);
 	static void draw(LPD3DXSPRITE spriteHandler);
 private:
 	static int _sceneTime;
 	static Text* _sceneTimeText;
+	static bool _stop;
 };
 

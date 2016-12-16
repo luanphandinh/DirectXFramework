@@ -1,6 +1,7 @@
 ﻿#include "PlayScene.h"
 #include "GameOverScene.h"
 #include "GameStatusBoard.h"
+#include "Level3.h"
 PlayScene::PlayScene()
 {
 }
@@ -310,3 +311,10 @@ void PlayScene::updateDirector(float deltaTime)
 }
 
 //=====================TESTING==========================//
+
+void PlayScene::switchScene()
+{
+	auto play = new Level3();
+	SceneManager::getInstance()->replaceScene(play);
+}
+

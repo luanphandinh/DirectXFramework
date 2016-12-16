@@ -9,7 +9,7 @@ public:
 	~Level3Director();
 
 	void init() override;
-	void Level3Director::update(float deltaTime) override;
+	void update(float deltaTime) override;
 	virtual void updateScenario(float deltaTime) override;
 	virtual void updateViewport() override;
 	void switchViewport();
@@ -25,6 +25,11 @@ public:
 	Xử lý cho các special item xuất hiện
 	*/
 	void crownShowUp(float deltatime, bool & finish);
+
+	void generateCrystalBall() override;
+	void endLevel() override;
+
+	void release() override;
 private:
 	bool _flagMoveViewportPassDoor;
 	bool _flagMoveSimonPassDoor;

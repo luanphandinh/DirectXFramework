@@ -40,6 +40,7 @@ public:
 	virtual void update(float deltaTime) = 0;
 	virtual void updateViewport() = 0;
 	virtual void updateScenario(float deltaTime) = 0;
+	virtual void release() = 0;
 
 	
 	void setCurrentViewport(eLevel2Viewport name);
@@ -49,6 +50,14 @@ public:
 	GVector2 getRevivePosition();
 	void setReviveViewport(eLevel2Viewport viewport);
 	virtual void updateRevive();
+
+
+	/*
+	end level
+	*/
+	virtual void generateCrystalBall() = 0;
+	virtual void endLevel() = 0;
+
 protected:
 	eID	_currentLevelId;
 	eLevel2Viewport _currentViewport;
@@ -63,6 +72,7 @@ protected:
 
 	//ScenarioManager dùng để cập nhật kịch bản cho game,ví dụ như qua của,gặp boss
 	ScenarioManager* _scenarioManager;
+	StopWatch* _generateCrysballStopWatch;
 };
 
 

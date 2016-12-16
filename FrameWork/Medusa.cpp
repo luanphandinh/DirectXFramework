@@ -72,7 +72,8 @@ void Medusa::update(float deltaTime) {
 			_burning->update(deltaTime);
 			if (_burning->getStatus() == eStatus::DESTROY) {
 				this->setStatus(eStatus::DESTROY);
-				ItemManager::generateItem(eItemID::CRYSTALBALL, this->getPosition());
+				//ItemManager::generateItem(eItemID::CRYSTALBALL, this->getPosition());
+				((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->generateCrystalBall();
 			}
 		}
 		return;
