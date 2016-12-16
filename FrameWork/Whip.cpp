@@ -6,7 +6,7 @@
 Whip::Whip(int level) :BaseObject(eID::WHIP)
 {
 	this->_level = level;
-	_damage = 1;
+	_damage = 10;
 }
 
 

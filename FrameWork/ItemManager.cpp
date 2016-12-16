@@ -12,6 +12,7 @@
 #include"Crown.h"
 #include"MoneyChest.h"
 #include"Chicken.h"
+#include"CrystalBall.h"
 
 list<Item*> ItemManager::_listItem;
 
@@ -167,6 +168,9 @@ void ItemManager::generateItem(eItemID id, GVector2 pos, eItemType type)
 		break;
 	case CHICKEN:
 		item = new Chicken(pos, id);
+		break;
+	case CRYSTALBALL:
+		item = new CrystalBall(pos, id);
 		break;
 	default:
 		break;

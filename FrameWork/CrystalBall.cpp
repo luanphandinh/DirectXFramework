@@ -1,54 +1,54 @@
-﻿#include "Chicken.h"
+﻿#include "CrystalBall.h"
 #include "GameStatusBoard.h"
 
-Chicken::Chicken(GVector2 startPosition, eItemID itemId) :Item(startPosition, eItemType::DROP)
+CrystalBall::CrystalBall(GVector2 startPosition, eItemID itemId) :Item(startPosition, eItemType::DROP)
 {
 	_itemId = itemId;
 }
 
 
-Chicken::~Chicken()
+CrystalBall::~CrystalBall()
 {
 }
 
 
-void Chicken::init()
+void CrystalBall::init()
 {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::ITEM);
-	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(eID::ITEM, "chicken"));
+	_animation = new Animation(_sprite, 0.08f);
+	_animation->addFrameRect(eID::ITEM, "crystal_ball_01", "crystal_ball_02", NULL);
 	Item::initCommonComponent();
 	//_endPosition = this->_startPosition + GVector2(0, 40);
-	
+
 }
 
-void Chicken::update(float deltatime)
+void CrystalBall::update(float deltatime)
 {
 	Item::update(deltatime);
+	_animation->update(deltatime);
 	//this->setPositionY(this->getPositionY() + 100 * deltatime / 1000);
 }
 
-void Chicken::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
+void CrystalBall::draw(LPD3DXSPRITE spriteHandler, Viewport* viewport)
 {
 	if (this->isInStatus(eStatus::DESTROY))
 		return;
-	_sprite->render(spriteHandler, viewport);
+	_animation->draw(spriteHandler, viewport);
 }
 
-void Chicken::release()
+void CrystalBall::release()
 {
 	Item::release();
 	SAFE_DELETE(_sprite);
 }
 
-void Chicken::pickedUp()
+void CrystalBall::pickedUp()
 {
 	Item::pickedUp();
-	Score::plusScore(1000);
-	GameStatusBoard::getInstance()->getSimonLifeUI()->gainHitpoint(6);
 	this->setStatus(eStatus::DESTROY);
 }
 
-float Chicken::checkCollision(BaseObject* otherObject, float dt)
+float CrystalBall::checkCollision(BaseObject* otherObject, float dt)
 {
 	//Lấy collision body của item ra để checkCollision
 	auto collisionBody = (CollisionBody*)_componentList["CollisionBody"];

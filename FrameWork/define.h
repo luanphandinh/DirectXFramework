@@ -99,6 +99,7 @@ enum eItemID
 	MONEYBAG_SPECIAL = 14,
 	MONEYCHEST = 15,
 	CHICKEN = 16,
+	CRYSTALBALL = 17,
 };
 
 //status cho nhân vật

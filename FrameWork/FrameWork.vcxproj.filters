@@ -241,6 +241,9 @@
     <ClCompile Include="Chicken.cpp">
       <Filter>Source Files\Objects\Items\Special</Filter>
     </ClCompile>
+    <ClCompile Include="CrystalBall.cpp">
+      <Filter>Source Files\Objects\Items\Special</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -484,6 +487,9 @@
       <Filter>Header Files\Objects\Items\Special</Filter>
     </ClInclude>
     <ClInclude Include="Chicken.h">
+      <Filter>Header Files\Objects\Items\Special</Filter>
+    </ClInclude>
+    <ClInclude Include="CrystalBall.h">
       <Filter>Header Files\Objects\Items\Special</Filter>
     </ClInclude>
   </ItemGroup>

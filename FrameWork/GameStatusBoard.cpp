@@ -30,7 +30,7 @@ void GameStatusBoard::update(float deltatime)
 void GameStatusBoard::init()
 {
 	_simonLifeUI = new LifeUI(SIMONLIFEUI_POSITION,"PLAYER","red_life_icon", 16);
-	_simonLifeUI->setHPNumber(10);
+	_simonLifeUI->setHPNumber(16);
 	_enemyLifeUI = new LifeUI(ENEMYLIFEUI_POSITION, "ENEMY", "yellow_life_icon", 1);
 	_enemyLifeUI->setHPNumber(16);
 	LifeCounter::setLife(3);

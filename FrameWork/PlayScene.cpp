@@ -21,11 +21,11 @@ bool PlayScene::init()
 	//simon->setPosition(2700, 100);//v1
 	//simon->setPosition(1400, 638);//v2
 	//simon->setPosition(700, 640);//v3
-	simon->setPosition(1666, 1000);//v4
-	simon->setPosition(2700, 1000);//v4
+	//simon->setPosition(1666, 1000);//v4
+	//simon->setPosition(2700, 1000);//v4
 	//simon->setPosition(1000, 1100);//v5
 	//simon->setPosition(300, 1000);//v5
-	//simon->setPosition(2500, 1324);//v6
+	simon->setPosition(2500, 1324);//v6
 
 
 	this->_simon = simon;
@@ -38,7 +38,7 @@ bool PlayScene::init()
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V4);
+	_director->setCurrentViewport(V6);
 	_viewport = _director->getViewport();
 
 

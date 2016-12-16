@@ -84,6 +84,7 @@
     <ClInclude Include="Chicken.h" />
     <ClInclude Include="CollisionBody.h" />
     <ClInclude Include="Crown.h" />
+    <ClInclude Include="CrystalBall.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Director.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Chicken.cpp" />
     <ClCompile Include="Crown.cpp" />
+    <ClCompile Include="CrystalBall.cpp" />
     <ClCompile Include="dxaudio.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
