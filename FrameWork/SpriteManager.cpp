@@ -91,6 +91,11 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::SNAKE, sp));
 	this->loadSpriteInfo(eID::SNAKE, "Resources//Images//snake_animation.txt");
 
+	// FLEAMAN
+	sp = new Sprite(spriteHandler, L"Resources//Images//fleaman.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::FLEAMAN, sp));
+	this->loadSpriteInfo(eID::FLEAMAN, "Resources//Images//fleaman_animation.txt");
+
 	//sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	//sp->setOrigin(GVector2(0.0f, 0.0f));
 	//this->_listSprite[eID::MAPSTAGE1] = sp;

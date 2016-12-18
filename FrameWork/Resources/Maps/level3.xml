@@ -388,5 +388,8 @@
         <Elem Key="physicBodyDirection" Value="2" />
       </Params>
     </Item>
+    <Item Id="58" Name="fleaman0" X="4417" Y="190" Width="32" Height="32">
+      <ActiveBound X="4417" Y="190" Width="32" Height="32" />
+    </Item>
   </Objects>
 </Tilesmap>

@@ -78,6 +78,8 @@ enum eID
 	GHOST = 55,
 	MEDUSA = 56,
 	SNAKE = 57,
+
+	FLEAMAN = 58,
 };
 
 enum eItemID

@@ -94,6 +94,7 @@
     <ClInclude Include="dxaudio.h" />
     <ClInclude Include="EmptyObject.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Fleaman.h" />
     <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="HitEffect.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Crown.cpp" />
     <ClCompile Include="CrystalBall.cpp" />
     <ClCompile Include="dxaudio.cpp" />
+    <ClCompile Include="Fleaman.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="HitEffect.cpp" />
