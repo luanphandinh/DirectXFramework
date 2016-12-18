@@ -19,7 +19,7 @@ bool Level3::init()
 	simon->init();
 	/*LEVEL 3 POS*/
 	simon->setPosition(4900, 195);//v1
-
+	simon->setPosition(3900, 300);//v1
 
 
 	this->_simon = simon;
@@ -49,6 +49,7 @@ bool Level3::init()
 	/*LEVEL 3*/
 	_quadTree = QNode::loadQuadTree("Resources//Maps//level3QuadTree.xml");
 	_backGround = Map::LoadFromFile("Resources//Maps//level3.xml", eID::LEVEL3);
+	loadMapObjects();
 	SoundManager::getInstance()->PlayLoop(eSoundId::BACKGROUND_LEVEL3);
 
 	//========================TESTING===========================//
