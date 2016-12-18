@@ -20,7 +20,8 @@ bool Level3::init()
 	/*LEVEL 3 POS*/
 	simon->setPosition(4900, 195);//v1
 	simon->setPosition(3900, 300);//v1
-	simon->setPosition(4736, 600);//v2
+	simon->setPosition(3236, 600);//v2
+	//simon->setPosition(4736, 600);//v3
 
 
 	this->_simon = simon;

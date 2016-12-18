@@ -1,6 +1,8 @@
 ﻿#include "Level3Director.h"
-#include "PlayScene.h"
+#include "Level3.h"
 #include"ItemManager.h"
+#include"Level3.h"
+
 Level3Director::Level3Director() : Director() {
 	_reviveViewport = eLevel2Viewport::V1;
 	_revivePosition = GVector2(4940, 95);
@@ -14,20 +16,20 @@ void Level3Director::init() {
 	_viewport = new Viewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	this->setCurrentViewport(V1);
 
-	//auto scenarioPassDoor = new Scenario("PassDoor");
+	auto scenarioPassDoor = new Scenario("PassDoor");
 	////Mấy cái hàm này chạy theo thứ tự từ dưới lên khi gọi updateScenario(deltaTime);
-	//__hook(&Scenario::update, scenarioPassDoor, &Level3Director::moveViewportPassDoor2);
-	//__hook(&Scenario::update, scenarioPassDoor, &Level3Director::passDoorScene);
-	//__hook(&Scenario::update, scenarioPassDoor, &Level3Director::moveViewportPassDoor);
+	__hook(&Scenario::update, scenarioPassDoor, &Level3Director::moveViewportPassDoor2);
+	__hook(&Scenario::update, scenarioPassDoor, &Level3Director::passDoorScene);
+	__hook(&Scenario::update, scenarioPassDoor, &Level3Director::moveViewportPassDoor);
 
 	//auto scenarioSpecialItem = new Scenario("crownShowUp");
 	//__hook(&Scenario::update, scenarioSpecialItem, &Level3Director::crownShowUp);
 
-	//_flagMoveSimonPassDoor = false;
-	//_flagMoveViewportPassDoor = false;
-	//_flagMoveViewportPassDoor2 = false;
+	_flagMoveSimonPassDoor = false;
+	_flagMoveViewportPassDoor = false;
+	_flagMoveViewportPassDoor2 = false;
 	////_scenarioManager->insertScenario(scenarioSpecialItem);
-	//_scenarioManager->insertScenario(scenarioPassDoor);
+	_scenarioManager->insertScenario(scenarioPassDoor);
 
 
 }
@@ -81,16 +83,24 @@ void Level3Director::switchViewport() {
 			this->setCurrentViewport(V1);
 			_objTracker->setPosition(3780, 382);
 		}
-		if (pos.y > 768 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR)) {
-			//this->setCurrentViewport(V1);
+
+		if (pos.x > this->getCurrentViewportBound().y)
+		{
 			this->setCurrentViewport(V3);
-			_objTracker->setPosition(720, 812);
+			this->_reviveViewport = V3;
 		}
 		break;
 	case eLevel2Viewport::V3:
+		if (pos.y > 768 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR)) {
+			//this->setCurrentViewport(V1);
+			this->setCurrentViewport(V4);
+			_objTracker->setPosition(720, 812);
+		}
+		break;
+	case eLevel2Viewport::V4:
 		if (pos.y < 810 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR)) {
 			//this->setCurrentViewport(V1);
-			this->setCurrentViewport(V2);
+			this->setCurrentViewport(V3);
 			_objTracker->setPosition(4800, 768);
 		}
 		break;
@@ -99,35 +109,40 @@ void Level3Director::switchViewport() {
 	}
 }
 #pragma region passdoor
-bool Level3Director::checkPosition() {
-	if (_trackedDoor == nullptr) {
-		auto door = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getObject(eID::DOOR);
+bool Level3Director::checkPosition()
+{
+	if (_trackedDoor == nullptr)
+	{
+		auto door = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getObject(eID::DOOR);
 		if (door == nullptr)
 			return false;
 		_trackedDoor = door;
 	}
-	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	auto _simon = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	int xSimon = _simon->getPositionX();
 	int ySimon = _simon->getPositionY();
 	GVector2 doorPos = _trackedDoor->getPosition();
-	if ((xSimon < doorPos.x + 30 && xSimon > doorPos.x && ySimon < doorPos.y && ySimon> doorPos.y - 100)) {
+	if ((xSimon < doorPos.x + 30 && xSimon > doorPos.x && ySimon < doorPos.y && ySimon> doorPos.y - 100))
+	{
 		return true;
 	}
 	return false;
 }
 
-bool Level3Director::isPassedDoor() {
-	if (_trackedDoor == nullptr) {
-		auto door = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getObject(eID::DOOR);
+bool Level3Director::isPassedDoor()
+{
+	if (_trackedDoor == nullptr)
+	{
+		auto door = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getObject(eID::DOOR);
 		if (door == nullptr)
 			return false;
 		_trackedDoor = door;
 	}
-	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	int xSimon = _simon->getPositionX();
-	int ySimon = _simon->getPositionY();
+	int xSimon = _objTracker->getPositionX();
+	int ySimon = _objTracker->getPositionY();
 	GVector2 doorPos = _trackedDoor->getPosition();
-	if (xSimon < doorPos.x - 120) {
+	if (xSimon > doorPos.x + 120)
+	{
 		//_trackedDoor = nullptr;
 		return true;
 	}
@@ -135,20 +150,19 @@ bool Level3Director::isPassedDoor() {
 }
 
 
-void Level3Director::passDoorScene(float deltatime, bool & isFinish) {
+void Level3Director::passDoorScene(float deltatime, bool & isFinish)
+{
 	if (_flagMoveViewportPassDoor) return;
 
-	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-
 	if (checkPosition()) {
-		_trackedDoor->setStatus(OPENING);
+		((Door*)_trackedDoor)->open();
 		_flagMoveSimonPassDoor = true;
 	}
 	if (_flagMoveSimonPassDoor)
-		((Simon*)_simon)->forceMoveLeft();
+		((Simon*)_objTracker)->forceMoveLeft();
 
 	if (isPassedDoor() && _flagMoveSimonPassDoor) {
-		((Simon*)_simon)->unforceMoveLeft();
+		((Simon*)_objTracker)->unforceMoveLeft();
 		_trackedDoor->setStatus(CLOSING);
 		_flagMoveSimonPassDoor = false;
 	}
@@ -157,16 +171,13 @@ void Level3Director::passDoorScene(float deltatime, bool & isFinish) {
 }
 
 void Level3Director::moveViewportPassDoor(float deltatime, bool & finish) {
-	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	//int xSimon = _simon->getPositionX();
-	//int ySimon = _simon->getPositionY();
-
-
+	
 	if (!checkPosition()) return;
-	if (checkPosition()) {
-		((Simon*)_simon)->unforceMoveLeft();
-		((Simon*)_simon)->unforceJump();
-		_simon->setFreeze(true);
+	if (checkPosition())
+	{
+		((Simon*)_objTracker)->unforceMoveRight();
+		((Simon*)_objTracker)->unforceJump();
+		((Simon*)_objTracker)->setFreeze(true);
 		_flagMoveViewportPassDoor = true;
 	}
 
@@ -175,30 +186,32 @@ void Level3Director::moveViewportPassDoor(float deltatime, bool & finish) {
 
 	GVector2 current_position = _viewport->getPositionWorld();
 	// dịch screen từ từ sang TRÁI, speed = vs speed simon
-	current_position.x -= SIMON_MOVING_SPEED * deltatime / 1000;
+	current_position.x += SIMON_MOVING_SPEED * deltatime / 1000;
 
-	if (current_position.x < boundSize.x - WINDOW_WIDTH / 2) {
-		current_position.x = boundSize.x - WINDOW_WIDTH / 2;
+	if (current_position.x > boundSize.y + WINDOW_WIDTH / 2)
+	{
+		current_position.x = boundSize.y + WINDOW_WIDTH / 2;
 		_flagMoveViewportPassDoor = false;
 	}
 
 	_viewport->setPositionWorld(current_position);
 }
 
-void Level3Director::moveViewportPassDoor2(float deltatime, bool & finish) {
+void Level3Director::moveViewportPassDoor2(float deltatime, bool & finish)
+{
 	GVector2 current_position = _viewport->getPositionWorld();
 
 	GVector2 boundSize = this->getCurrentViewportBound();
 
-	if ((!_flagMoveSimonPassDoor && !_flagMoveViewportPassDoor && current_position.x < boundSize.x) == false) return;
+	if ((!_flagMoveSimonPassDoor && !_flagMoveViewportPassDoor && current_position.x > boundSize.y) == false) return;
 
 	_flagMoveViewportPassDoor2 = true;
 
 	// dịch screen từ từ sang TRÁI, speed = vs speed simon
-	current_position.x -= SIMON_MOVING_SPEED * deltatime / 1000;
-	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	if (current_position.x < boundSize.x - WINDOW_WIDTH) {
-		current_position.x = boundSize.x - WINDOW_WIDTH;
+	current_position.x += SIMON_MOVING_SPEED * deltatime / 1000;
+	auto _simon = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	if (current_position.x > boundSize.y + WINDOW_WIDTH) {
+		current_position.x = boundSize.y + WINDOW_WIDTH;
 		_flagMoveViewportPassDoor2 = false;
 		_simon->setFreeze(false);
 		_trackedDoor->setStatus(eStatus::DESTROY);
@@ -212,7 +225,7 @@ void Level3Director::moveViewportPassDoor2(float deltatime, bool & finish) {
 
 
 void Level3Director::crownShowUp(float deltatime, bool & finish) {
-	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	auto _simon = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	int xSimon = _simon->getPositionX();
 	int ySimon = _simon->getPositionY();
 	if (xSimon > 3010 && xSimon < 3050 && ySimon > 192 && ySimon < 260) {

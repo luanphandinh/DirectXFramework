@@ -63,10 +63,10 @@
           <Objects>land29 </Objects>
         </QNode>
         <QNode Id="65796" Level="4" X="3520" Y="0" Width="320" Height="320">
-          <Objects>land29 </Objects>
+          <Objects>land29 land30 land31 </Objects>
         </QNode>
         <QNode Id="196868" Level="4" X="3520" Y="320" Width="320" Height="320">
-          <Objects>wall0 land21 </Objects>
+          <Objects>wall0 land21 door1 </Objects>
         </QNode>
         <QNode Id="131332" Level="4" X="3200" Y="320" Width="320" Height="320">
           <Objects>stair06 land20 </Objects>
@@ -104,16 +104,27 @@
     </QNode>
     <QNode Id="20" Level="2" X="3840" Y="0" Width="1280" Height="1280">
       <QNode Id="20" Level="3" X="3840" Y="0" Width="640" Height="640">
-        <Objects>land21 land22 </Objects>
+        <Objects>land21 land22 land32 </Objects>
       </QNode>
       <QNode Id="276" Level="3" X="4480" Y="0" Width="640" Height="640">
-        <QNode Id="276" Level="4" X="4480" Y="0" Width="320" Height="320" />
+        <QNode Id="276" Level="4" X="4480" Y="0" Width="320" Height="320">
+          <QNode Id="276" Level="5" X="4480" Y="0" Width="160" Height="160" />
+          <QNode Id="277" Level="5" X="4640" Y="0" Width="160" Height="160" />
+          <QNode Id="279" Level="5" X="4640" Y="160" Width="160" Height="160">
+            <Objects>land33 land34 land35 </Objects>
+          </QNode>
+          <QNode Id="278" Level="5" X="4480" Y="160" Width="160" Height="160">
+            <Objects>land32 land33 </Objects>
+          </QNode>
+        </QNode>
         <QNode Id="65812" Level="4" X="4800" Y="0" Width="320" Height="320" />
         <QNode Id="196884" Level="4" X="4800" Y="320" Width="320" Height="320">
           <QNode Id="196884" Level="5" X="4800" Y="320" Width="160" Height="160">
-            <Objects>stair09 stair10 </Objects>
+            <Objects>stair09 stair10 land36 </Objects>
           </QNode>
-          <QNode Id="196885" Level="5" X="4960" Y="320" Width="160" Height="160" />
+          <QNode Id="196885" Level="5" X="4960" Y="320" Width="160" Height="160">
+            <Objects>land36 </Objects>
+          </QNode>
           <QNode Id="196887" Level="5" X="4960" Y="480" Width="160" Height="160">
             <Objects>land22 land23 </Objects>
           </QNode>
@@ -133,7 +144,7 @@
           </QNode>
         </QNode>
         <QNode Id="131348" Level="4" X="4480" Y="320" Width="320" Height="320">
-          <Objects>land22 stair08 </Objects>
+          <Objects>land22 stair08 land36 </Objects>
         </QNode>
       </QNode>
       <QNode Id="788" Level="3" X="4480" Y="640" Width="640" Height="640">
