@@ -1159,12 +1159,12 @@ void Simon::setPositionInStair(Stair* stair)
 	{
 		if (_stairDirection == eStairDirection::LEFTBOTTOM_TO_RIGHTTOP)
 		{
-			auto newPos = GVector2(stairPos.x - 10, stairPos.y);
+			auto newPos = GVector2(stairPos.x - 20, stairPos.y);
 			this->setPosition(newPos);
 		}
 		else
 		{
-			auto newPos = GVector2(stairPos.x + 10, stairPos.y);
+			auto newPos = GVector2(stairPos.x + 36, stairPos.y);
 			this->setPosition(newPos);
 		}
 	}
