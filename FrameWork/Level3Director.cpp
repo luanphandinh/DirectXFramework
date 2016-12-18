@@ -34,7 +34,7 @@ void Level3Director::init() {
 
 }
 void Level3Director::update(float deltaTime) {
-	//updateScenario(deltaTime);
+	updateScenario(deltaTime);
 	updateViewport();
 }
 
@@ -103,6 +103,12 @@ void Level3Director::switchViewport() {
 			this->setCurrentViewport(V3);
 			_objTracker->setPosition(4800, 768);
 		}
+		if (pos.x > this->getCurrentViewportBound().y)
+		{
+			this->setCurrentViewport(V5);
+			this->_reviveViewport = V5;
+		}
+
 		break;
 	default:
 		break;
@@ -122,7 +128,7 @@ bool Level3Director::checkPosition()
 	int xSimon = _simon->getPositionX();
 	int ySimon = _simon->getPositionY();
 	GVector2 doorPos = _trackedDoor->getPosition();
-	if ((xSimon < doorPos.x + 30 && xSimon > doorPos.x && ySimon < doorPos.y && ySimon> doorPos.y - 100))
+	if ((xSimon < doorPos.x && xSimon > doorPos.x - 20 && ySimon < doorPos.y && ySimon> doorPos.y - 100))
 	{
 		return true;
 	}
@@ -159,10 +165,10 @@ void Level3Director::passDoorScene(float deltatime, bool & isFinish)
 		_flagMoveSimonPassDoor = true;
 	}
 	if (_flagMoveSimonPassDoor)
-		((Simon*)_objTracker)->forceMoveLeft();
+		((Simon*)_objTracker)->forceMoveRight();
 
 	if (isPassedDoor() && _flagMoveSimonPassDoor) {
-		((Simon*)_objTracker)->unforceMoveLeft();
+		((Simon*)_objTracker)->unforceMoveRight();
 		_trackedDoor->setStatus(CLOSING);
 		_flagMoveSimonPassDoor = false;
 	}
@@ -188,9 +194,9 @@ void Level3Director::moveViewportPassDoor(float deltatime, bool & finish) {
 	// dịch screen từ từ sang TRÁI, speed = vs speed simon
 	current_position.x += SIMON_MOVING_SPEED * deltatime / 1000;
 
-	if (current_position.x > boundSize.y + WINDOW_WIDTH / 2)
+	if (current_position.x > boundSize.y - WINDOW_WIDTH / 2)
 	{
-		current_position.x = boundSize.y + WINDOW_WIDTH / 2;
+		current_position.x = boundSize.y - WINDOW_WIDTH / 2;
 		_flagMoveViewportPassDoor = false;
 	}
 
@@ -203,15 +209,15 @@ void Level3Director::moveViewportPassDoor2(float deltatime, bool & finish)
 
 	GVector2 boundSize = this->getCurrentViewportBound();
 
-	if ((!_flagMoveSimonPassDoor && !_flagMoveViewportPassDoor && current_position.x > boundSize.y) == false) return;
+	if ((!_flagMoveSimonPassDoor && !_flagMoveViewportPassDoor && current_position.x >= boundSize.y - WINDOW_WIDTH/2) == false) return;
 
 	_flagMoveViewportPassDoor2 = true;
 
 	// dịch screen từ từ sang TRÁI, speed = vs speed simon
 	current_position.x += SIMON_MOVING_SPEED * deltatime / 1000;
 	auto _simon = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	if (current_position.x > boundSize.y + WINDOW_WIDTH) {
-		current_position.x = boundSize.y + WINDOW_WIDTH;
+	if (current_position.x > boundSize.y) {
+		current_position.x = boundSize.y;
 		_flagMoveViewportPassDoor2 = false;
 		_simon->setFreeze(false);
 		_trackedDoor->setStatus(eStatus::DESTROY);

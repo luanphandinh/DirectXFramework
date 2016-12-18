@@ -10,7 +10,7 @@
       </QNode>
       <QNode Id="272" Level="3" X="1920" Y="0" Width="640" Height="640">
         <QNode Id="272" Level="4" X="1920" Y="0" Width="320" Height="320">
-          <Objects>land29 </Objects>
+          <Objects>land29 door1 </Objects>
         </QNode>
         <QNode Id="65808" Level="4" X="2240" Y="0" Width="320" Height="320">
           <Objects>land29 </Objects>
@@ -66,7 +66,7 @@
           <Objects>land29 land30 land31 </Objects>
         </QNode>
         <QNode Id="196868" Level="4" X="3520" Y="320" Width="320" Height="320">
-          <Objects>wall0 land21 door1 </Objects>
+          <Objects>wall0 land21 door0 </Objects>
         </QNode>
         <QNode Id="131332" Level="4" X="3200" Y="320" Width="320" Height="320">
           <Objects>stair06 land20 </Objects>

@@ -598,8 +598,11 @@
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
-    <Item Id="4" Name="door1" X="3553" Y="642" Width="13" Height="96">
-      <ActiveBound X="3553" Y="642" Width="13" Height="96" />
+    <Item Id="4" Name="door0" X="3560" Y="642" Width="13" Height="96">
+      <ActiveBound X="3560" Y="642" Width="13" Height="96" />
+    </Item>
+    <Item Id="4" Name="door1" X="2016" Y="1091" Width="12" Height="98">
+      <ActiveBound X="2016" Y="1091" Width="12" Height="98" />
     </Item>
   </Objects>
 </Tilesmap>
