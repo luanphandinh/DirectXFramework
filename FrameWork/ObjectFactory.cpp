@@ -615,13 +615,13 @@ BaseObject * ObjectFactory::getFleaman(xml_node node) {
 	eStatus status;
 
 	x = stoi(properties["X"]) + 32;
-	y = stoi(properties["Y"]);
+	y = stoi(properties["Y"])-16;
 
 	if (properties.find("status") != properties.end()) {
 		status = (eStatus)(stoi(properties.find("status")->second));
 	}
 	else {
-		status = eStatus::NORMAL;
+		status = eStatus::SITTING;
 	}
 
 	if (properties.find("direction") != properties.end()) {

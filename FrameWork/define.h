@@ -150,6 +150,9 @@ enum eStatus
 	FALLING_02 = (1 << 30),
 	FALLING_03 = (1 << 31),
 	FLYINGUP= (1 << 32),
+
+	JUMP=(1<<33),
+	HIGHJUMP=(1<<34),
 };
 
 enum eStairDirection

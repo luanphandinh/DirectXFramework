@@ -1,4 +1,5 @@
 frame_name	left	top	right	bottom
-normal		1	8	17	24	0.5 0.5
+normal_01	1	8	17	24	0.5 0.5
+normal_02	41	8	56	24	0.5 0.5
 run_01		1	8	17	24	0.5 0.5
 run_02		41	8	56	24	0.5 0.5

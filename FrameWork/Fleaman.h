@@ -9,6 +9,8 @@
 using namespace std;
 
 #define FLEAMAN_SPEED 50
+#define FLEAMAN_JUMP_VEL GVector2(85,100)
+#define FLEAMAN_HIGH_JUMP_VEL GVector2(85,200)
 #define FLEAMAN_HITPOINT 3
 #define FLEAMAN_SCORE 100
 
@@ -42,11 +44,16 @@ private:
 	BaseObject *_burning;
 
 	// Vòng lặp thời gian, giúp knight di chuyển qua lại liên tục
-	StopWatch *_loopwatch;
+	StopWatch *_stopWatch;
 	void changeDirection();
 	bool isHitted;
 	eStatus _currentAnimateIndex;
 	void updateCurrentAnimateIndex();
 	StopWatch*	_burstStopWatch;
 	void getHitted();
+
+	bool checkIfOutOfScreen();
+	void updateSitting();
+	void jump();
+	void highJump();
 };

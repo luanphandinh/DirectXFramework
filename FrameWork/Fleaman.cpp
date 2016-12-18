@@ -1,10 +1,14 @@
 ﻿#include "Fleaman.h"
-
+#include "Level3.h"
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <random>
 Fleaman::Fleaman(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::FLEAMAN) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::FLEAMAN);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
 
-	GVector2 v(direction * FLEAMAN_SPEED, 0);
+	GVector2 v(0, 0);
 	GVector2 a(0, 0);
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
 	this->setStatus(status);
@@ -27,22 +31,31 @@ void Fleaman::init() {
 	auto collisionBody = new CollisionBody(this);
 	_listComponent["CollisionBody"] = collisionBody;
 
-	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::NORMAL]->addFrameRect(eID::FLEAMAN, "normal", NULL);
+	_animations[eStatus::SITTING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::SITTING]->addFrameRect(eID::FLEAMAN, "normal_01", "normal_02", NULL);
 
-	_animations[RUNNING] = new Animation(_sprite, 0.15f);
-	_animations[RUNNING]->addFrameRect(eID::FLEAMAN, "run_01", "run_02", NULL);
+	_animations[JUMP] = new Animation(_sprite, 0.15f);
+	_animations[JUMP]->addFrameRect(eID::FLEAMAN, "run_01", "run_02", NULL);
+
+	_animations[HIGHJUMP] = new Animation(_sprite, 0.15f);
+	_animations[HIGHJUMP]->addFrameRect(eID::FLEAMAN, "run_01", "run_02", NULL);
 
 	_animations[DYING] = new Animation(_sprite, 0.15f);
 	_animations[DYING]->addFrameRect(eID::FLEAMAN, NULL);
 
-	_loopwatch = new StopWatch();
+	_stopWatch = new StopWatch();
 
 	//*Test
 	//this->setPosition(GVector2(100,100));
-	this->setStatus(eStatus::NORMAL);
+	this->setStatus(eStatus::SITTING);
 	_sprite->drawBounding(false);
 	this->setPhysicBodySide(eDirection::ALL);
+}
+
+float random_bet_zero_n_one() {
+	static std::default_random_engine generator(time(0));
+	static std::uniform_real_distribution<float> distribution(0.0, 1.0);
+	return distribution(generator);
 }
 
 void Fleaman::update(float deltatime) {
@@ -73,20 +86,17 @@ void Fleaman::update(float deltatime) {
 			}
 		}
 	}
-
-
-
-	for (auto it : _listComponent) {
-		it.second->update(deltatime);
+	if (this->checkIfOutOfScreen()) return;
+	if (this->getStatus() == eStatus::SITTING) {
+		this->updateSitting();
+		return;
 	}
+	else {
 
-	if (this->getStatus() != DESTROY) {
-		//this->updateCurrentAnimateIndex();
-
-		//_animations[_currentAnimateIndex]->update(deltatime);
+		for (auto component : _listComponent) {
+			component.second->update(deltatime);
+		}
 		_animations[this->getStatus()]->update(deltatime);
-
-		
 	}
 }
 
@@ -113,7 +123,7 @@ void Fleaman::release() {
 		this->_burning->release();
 	SAFE_DELETE(this->_burning);
 
-	SAFE_DELETE(this->_loopwatch);
+	SAFE_DELETE(this->_stopWatch);
 	//SAFE_DELETE(this->_stopwatch);
 
 	SAFE_DELETE(this->_sprite);
@@ -136,12 +146,22 @@ float Fleaman::checkCollision(BaseObject *object, float dt) {
 				movement->setVelocity(GVector2(movement->getVelocity().x, 0));
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
-				this->setStatus(eStatus::RUNNING);
+				//this->setStatus(eStatus::JUMP);
 				prevObject = object;
 			}
 			else if (prevObject == object) {
+
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+
+				int chance = rand()%100;
+				if (chance %2==0) {
+					jump();
+				}
+				else {
+					highJump();
+				}
 				gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
 				prevObject = nullptr;
 			}
 		}
@@ -188,10 +208,12 @@ void Fleaman::changeDirection() {
 }
 
 void Fleaman::updateCurrentAnimateIndex() {
-	if (this->isInStatus(eStatus::RUNNING)) {
-		_currentAnimateIndex = eStatus::RUNNING;
+	if (this->isInStatus(eStatus::HIGHJUMP)) {
+		_currentAnimateIndex = eStatus::HIGHJUMP;
 	}
-
+	if (this->isInStatus(eStatus::JUMP)) {
+		_currentAnimateIndex = eStatus::JUMP;
+	}
 	if ((_currentAnimateIndex & eStatus::FALLING) == eStatus::FALLING) {
 		_currentAnimateIndex = eStatus::FALLING;
 	}
@@ -203,5 +225,47 @@ void Fleaman::updateCurrentAnimateIndex() {
 }
 
 void Fleaman::getHitted() {
+}
+
+bool Fleaman::checkIfOutOfScreen() {
+	auto viewport = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT screenBound = viewport->getBounding();
+	GVector2 position = this->getPosition();
+
+	if (position.x > screenBound.right) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+	return false;
+}
+
+void Fleaman::updateSitting() {
+	// track theo simon
+	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	RECT objectBound = objectTracker->getBounding();
+	int xSimon = objectTracker->getPositionX();
+	int ySimon = objectTracker->getPositionY();
+	int xthis = this->getPositionX();
+	int ythis = this->getBounding().bottom;
+	if (xSimon > xthis&&xSimon < xthis + 250 && ySimon<ythis&&ySimon>ythis - 100) {
+		this->setStatus(JUMP);
+	}
+	else {
+		this->setStatus(SITTING);
+	}
+}
+
+void Fleaman::jump() {
+	this->setStatus(eStatus::JUMP);
+
+	auto move = (Movement*)this->_listComponent["Movement"];
+	move->setVelocity(FLEAMAN_JUMP_VEL);
+}
+
+void Fleaman::highJump() {
+	this->setStatus(eStatus::HIGHJUMP);
+
+	auto move = (Movement*)this->_listComponent["Movement"];
+	move->setVelocity(FLEAMAN_HIGH_JUMP_VEL);
 }
 
