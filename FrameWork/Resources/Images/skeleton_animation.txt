@@ -1,0 +1,4 @@
+frame_name	left	top	right	bottom
+normal		0	0	16	31	0.5 0.5
+move_01		0	0	16	31	0.5 0.5
+move_02		40	0	56	32	0.5 0.5

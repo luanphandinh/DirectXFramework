@@ -134,6 +134,7 @@
     <ClInclude Include="SceneTime.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpearKnight.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="SceneTime.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpearKnight.cpp" />

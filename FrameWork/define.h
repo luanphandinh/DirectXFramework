@@ -80,6 +80,7 @@ enum eID
 	SNAKE = 57,
 
 	FLEAMAN = 58,
+	SKELETON = 59,
 };
 
 enum eItemID

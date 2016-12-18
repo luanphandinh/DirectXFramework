@@ -162,6 +162,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case FLEAMAN:
 		return getFleaman(node);
 		break;
+	case SKELETON:
+		return getSkeleton(node);
+		break;
 	case MAPSTAGE1:
 		break;
 	case LIFE_ICON:
@@ -635,6 +638,37 @@ BaseObject * ObjectFactory::getFleaman(xml_node node) {
 	fleaman->init();
 
 	return fleaman;
+}
+
+BaseObject * ObjectFactory::getSkeleton(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y, direction;
+	eStatus status;
+
+	x = stoi(properties["X"]) + 32;
+	y = stoi(properties["Y"]) - 16;
+
+	if (properties.find("status") != properties.end()) {
+		status = (eStatus)(stoi(properties.find("status")->second));
+	}
+	else {
+		status = eStatus::NORMAL;
+	}
+
+	if (properties.find("direction") != properties.end()) {
+		direction = stoi(properties.find("direction")->second);
+	}
+	else {
+		direction = 1;
+	}
+
+	auto skeleton = new Skeleton(status, GVector2(x, y), direction);
+	skeleton->init();
+
+	return skeleton;
 }
 
 

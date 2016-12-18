@@ -391,5 +391,8 @@
     <Item Id="58" Name="fleaman0" X="4417" Y="190" Width="32" Height="32">
       <ActiveBound X="4417" Y="190" Width="32" Height="32" />
     </Item>
+    <Item Id="59" Name="skeleton0" X="3649" Y="219" Width="32" Height="64">
+      <ActiveBound X="3649" Y="219" Width="32" Height="64" />
+    </Item>
   </Objects>
 </Tilesmap>
