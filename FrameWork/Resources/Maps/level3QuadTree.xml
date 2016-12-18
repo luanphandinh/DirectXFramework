@@ -5,10 +5,17 @@
     <QNode Id="16" Level="2" X="1280" Y="0" Width="1280" Height="1280">
       <QNode Id="16" Level="3" X="1280" Y="0" Width="640" Height="640" />
       <QNode Id="272" Level="3" X="1920" Y="0" Width="640" Height="640">
-        <Objects>land9 stair03 </Objects>
+        <Objects>land9 stair03 land11 </Objects>
       </QNode>
       <QNode Id="784" Level="3" X="1920" Y="640" Width="640" Height="640">
-        <Objects>land8 stair01 stair02 </Objects>
+        <QNode Id="784" Level="4" X="1920" Y="640" Width="320" Height="320">
+          <Objects>land8 stair01 stair02 </Objects>
+        </QNode>
+        <QNode Id="66320" Level="4" X="2240" Y="640" Width="320" Height="320">
+          <Objects>land10 </Objects>
+        </QNode>
+        <QNode Id="197392" Level="4" X="2240" Y="960" Width="320" Height="320" />
+        <QNode Id="131856" Level="4" X="1920" Y="960" Width="320" Height="320" />
       </QNode>
       <QNode Id="528" Level="3" X="1280" Y="640" Width="640" Height="640" />
     </QNode>
@@ -17,10 +24,37 @@
   </QNode>
   <QNode Id="4" Level="1" X="2560" Y="0" Width="2560" Height="2560">
     <QNode Id="4" Level="2" X="2560" Y="0" Width="1280" Height="1280">
-      <QNode Id="4" Level="3" X="2560" Y="0" Width="640" Height="640" />
-      <QNode Id="260" Level="3" X="3200" Y="0" Width="640" Height="640" />
+      <QNode Id="4" Level="3" X="2560" Y="0" Width="640" Height="640">
+        <QNode Id="4" Level="4" X="2560" Y="0" Width="320" Height="320" />
+        <QNode Id="65540" Level="4" X="2880" Y="0" Width="320" Height="320" />
+        <QNode Id="196612" Level="4" X="2880" Y="320" Width="320" Height="320">
+          <QNode Id="196612" Level="5" X="2880" Y="320" Width="160" Height="160" />
+          <QNode Id="196613" Level="5" X="3040" Y="320" Width="160" Height="160" />
+          <QNode Id="196615" Level="5" X="3040" Y="480" Width="160" Height="160">
+            <Objects>land16 land17 stair06 </Objects>
+          </QNode>
+          <QNode Id="196614" Level="5" X="2880" Y="480" Width="160" Height="160">
+            <Objects>land13 land16 </Objects>
+          </QNode>
+        </QNode>
+        <QNode Id="131076" Level="4" X="2560" Y="320" Width="320" Height="320">
+          <Objects>stair05 land13 </Objects>
+        </QNode>
+      </QNode>
+      <QNode Id="260" Level="3" X="3200" Y="0" Width="640" Height="640">
+        <QNode Id="260" Level="4" X="3200" Y="0" Width="320" Height="320" />
+        <QNode Id="65796" Level="4" X="3520" Y="0" Width="320" Height="320" />
+        <QNode Id="196868" Level="4" X="3520" Y="320" Width="320" Height="320">
+          <Objects>wall0 land21 </Objects>
+        </QNode>
+        <QNode Id="131332" Level="4" X="3200" Y="320" Width="320" Height="320">
+          <Objects>stair06 land20 </Objects>
+        </QNode>
+      </QNode>
       <QNode Id="772" Level="3" X="3200" Y="640" Width="640" Height="640">
-        <QNode Id="772" Level="4" X="3200" Y="640" Width="320" Height="320" />
+        <QNode Id="772" Level="4" X="3200" Y="640" Width="320" Height="320">
+          <Objects>stair07 land18 land19 </Objects>
+        </QNode>
         <QNode Id="66308" Level="4" X="3520" Y="640" Width="320" Height="320">
           <Objects>land7 wall0 skeleton0 </Objects>
         </QNode>
@@ -36,11 +70,51 @@
         </QNode>
         <QNode Id="131844" Level="4" X="3200" Y="960" Width="320" Height="320" />
       </QNode>
-      <QNode Id="516" Level="3" X="2560" Y="640" Width="640" Height="640" />
+      <QNode Id="516" Level="3" X="2560" Y="640" Width="640" Height="640">
+        <QNode Id="516" Level="4" X="2560" Y="640" Width="320" Height="320">
+          <Objects>land10 land12 stair04 </Objects>
+        </QNode>
+        <QNode Id="66052" Level="4" X="2880" Y="640" Width="320" Height="320">
+          <Objects>land14 land15 </Objects>
+        </QNode>
+        <QNode Id="197124" Level="4" X="2880" Y="960" Width="320" Height="320" />
+        <QNode Id="131588" Level="4" X="2560" Y="960" Width="320" Height="320" />
+      </QNode>
     </QNode>
     <QNode Id="20" Level="2" X="3840" Y="0" Width="1280" Height="1280">
-      <QNode Id="20" Level="3" X="3840" Y="0" Width="640" Height="640" />
-      <QNode Id="276" Level="3" X="4480" Y="0" Width="640" Height="640" />
+      <QNode Id="20" Level="3" X="3840" Y="0" Width="640" Height="640">
+        <Objects>land21 land22 </Objects>
+      </QNode>
+      <QNode Id="276" Level="3" X="4480" Y="0" Width="640" Height="640">
+        <QNode Id="276" Level="4" X="4480" Y="0" Width="320" Height="320" />
+        <QNode Id="65812" Level="4" X="4800" Y="0" Width="320" Height="320" />
+        <QNode Id="196884" Level="4" X="4800" Y="320" Width="320" Height="320">
+          <QNode Id="196884" Level="5" X="4800" Y="320" Width="160" Height="160">
+            <Objects>stair09 stair10 </Objects>
+          </QNode>
+          <QNode Id="196885" Level="5" X="4960" Y="320" Width="160" Height="160" />
+          <QNode Id="196887" Level="5" X="4960" Y="480" Width="160" Height="160">
+            <Objects>land22 land23 </Objects>
+          </QNode>
+          <QNode Id="196886" Level="5" X="4800" Y="480" Width="160" Height="160">
+            <QNode Id="196886" Level="6" X="4800" Y="480" Width="80" Height="80">
+              <Objects>stair09 stair10 land23 </Objects>
+            </QNode>
+            <QNode Id="196887" Level="6" X="4880" Y="480" Width="80" Height="80">
+              <Objects>land23 </Objects>
+            </QNode>
+            <QNode Id="196887" Level="6" X="4880" Y="560" Width="80" Height="80">
+              <Objects>land22 </Objects>
+            </QNode>
+            <QNode Id="196886" Level="6" X="4800" Y="560" Width="80" Height="80">
+              <Objects>land22 </Objects>
+            </QNode>
+          </QNode>
+        </QNode>
+        <QNode Id="131348" Level="4" X="4480" Y="320" Width="320" Height="320">
+          <Objects>land22 stair08 </Objects>
+        </QNode>
+      </QNode>
       <QNode Id="788" Level="3" X="4480" Y="640" Width="640" Height="640">
         <Objects>land0 land1 </Objects>
       </QNode>
