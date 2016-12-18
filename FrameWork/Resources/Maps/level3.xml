@@ -528,5 +528,39 @@
     <Item Id="59" Name="skeleton0" X="3656" Y="227" Width="41" Height="64">
       <ActiveBound X="3656" Y="227" Width="41" Height="64" />
     </Item>
+    <Item Id="2" Name="land24" X="512" Y="927" Width="62" Height="14">
+      <ActiveBound X="512" Y="927" Width="62" Height="14" />
+    </Item>
+    <Item Id="3" Name="stair11" X="573" Y="931" Width="15" Height="6">
+      <ActiveBound X="573" Y="931" Width="15" Height="6" />
+      <Params>
+        <Elem Key="stairDirection" Value="2" />
+        <Elem Key="canUpStair" Value="0" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land25" X="600" Y="928" Width="668" Height="16">
+      <ActiveBound X="600" Y="928" Width="668" Height="16" />
+      <Params>
+        <Elem Key="checkWithStair" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land26" X="1346" Y="928" Width="186" Height="16">
+      <ActiveBound X="1346" Y="928" Width="186" Height="16" />
+    </Item>
+    <Item Id="2" Name="land27" X="1601" Y="928" Width="254" Height="14">
+      <ActiveBound X="1601" Y="928" Width="254" Height="14" />
+    </Item>
+    <Item Id="2" Name="land28" X="1858" Y="957" Width="59" Height="22">
+      <ActiveBound X="1858" Y="957" Width="59" Height="22" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="15" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land29" X="1921" Y="991" Width="1660" Height="25">
+      <ActiveBound X="1921" Y="991" Width="1660" Height="25" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="15" />
+      </Params>
+    </Item>
   </Objects>
 </Tilesmap>
