@@ -391,8 +391,6 @@
     <Item Id="58" Name="fleaman0" X="4417" Y="190" Width="32" Height="32">
       <ActiveBound X="4417" Y="190" Width="32" Height="32" />
     </Item>
-    <Item Id="59" Name="skeleton0" X="3649" Y="219" Width="32" Height="64">
-      <ActiveBound X="3649" Y="219" Width="32" Height="64" />
     <Item Id="3" Name="stair0" X="3892" Y="230" Width="13" Height="4">
       <ActiveBound X="3892" Y="230" Width="13" Height="4" />
       <Params>
@@ -424,6 +422,9 @@
         <Elem Key="stairDirection" Value="1" />
         <Elem Key="canUpStair" Value="0" />
       </Params>
+    </Item>
+    <Item Id="59" Name="skeleton0" X="3654" Y="221" Width="32" Height="64">
+      <ActiveBound X="3654" Y="221" Width="32" Height="64" />
     </Item>
   </Objects>
 </Tilesmap>
