@@ -71,7 +71,7 @@ void Level3Director::switchViewport() {
 	case eLevel2Viewport::V1:
 		if (pos.y > 384 && (Simon*)_objTracker->isInStatus(eStatus::STANDINGONSTAIR)) {
 			this->setCurrentViewport(V2);
-			//_objTracker->setPosition(2800, 432);
+			_objTracker->setPosition(2276, 416);
 		}
 		break;
 	default:

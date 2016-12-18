@@ -393,6 +393,37 @@
     </Item>
     <Item Id="59" Name="skeleton0" X="3649" Y="219" Width="32" Height="64">
       <ActiveBound X="3649" Y="219" Width="32" Height="64" />
+    <Item Id="3" Name="stair0" X="3892" Y="230" Width="13" Height="4">
+      <ActiveBound X="3892" Y="230" Width="13" Height="4" />
+      <Params>
+        <Elem Key="stairDirection" Value="2" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land8" X="2112" Y="478" Width="63" Height="15">
+      <ActiveBound X="2112" Y="478" Width="63" Height="15" />
+    </Item>
+    <Item Id="3" Name="stair01" X="2172" Y="480" Width="20" Height="6">
+      <ActiveBound X="2172" Y="480" Width="20" Height="6" />
+      <Params>
+        <Elem Key="canUpStair" Value="0" />
+        <Elem Key="stairDirection" Value="2" />
+      </Params>
+    </Item>
+    <Item Id="3" Name="stair02" X="2171" Y="481" Width="19" Height="6">
+      <ActiveBound X="2171" Y="481" Width="19" Height="6" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="2" Name="land9" X="2304" Y="608" Width="62" Height="13">
+      <ActiveBound X="2304" Y="608" Width="62" Height="13" />
+    </Item>
+    <Item Id="3" Name="stair03" X="2289" Y="608" Width="17" Height="5">
+      <ActiveBound X="2289" Y="608" Width="17" Height="5" />
+      <Params>
+        <Elem Key="stairDirection" Value="1" />
+        <Elem Key="canUpStair" Value="0" />
+      </Params>
     </Item>
   </Objects>
 </Tilesmap>
