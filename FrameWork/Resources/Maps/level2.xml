@@ -904,5 +904,215 @@
         <Elem Key="DropItemId" Value="16" />
       </Params>
     </Item>
+    <Item Id="6" Name="c104" X="1172" Y="759" Width="23" Height="23">
+      <ActiveBound X="1172" Y="759" Width="23" Height="23" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c105" X="1042" Y="693" Width="21" Height="22">
+      <ActiveBound X="1042" Y="693" Width="21" Height="22" />
+      <Params>
+        <Elem Key="DropItemId" Value="2" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c106" X="916" Y="762" Width="17" Height="24">
+      <ActiveBound X="916" Y="762" Width="17" Height="24" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c107" X="789" Y="682" Width="20" Height="21">
+      <ActiveBound X="789" Y="682" Width="20" Height="21" />
+      <Params>
+        <Elem Key="DropItemId" Value="2" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c108" X="659" Y="760" Width="20" Height="21">
+      <ActiveBound X="659" Y="760" Width="20" Height="21" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c109" X="1680" Y="949" Width="26" Height="24">
+      <ActiveBound X="1680" Y="949" Width="26" Height="24" />
+      <Params>
+        <Elem Key="DropItemId" Value="5" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c110" X="1934" Y="959" Width="20" Height="19">
+      <ActiveBound X="1934" Y="959" Width="20" Height="19" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c111" X="2193" Y="963" Width="22" Height="23">
+      <ActiveBound X="2193" Y="963" Width="22" Height="23" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c112" X="2448" Y="966" Width="16" Height="22">
+      <ActiveBound X="2448" Y="966" Width="16" Height="22" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c113" X="2837" Y="953" Width="16" Height="27">
+      <ActiveBound X="2837" Y="953" Width="16" Height="27" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c114" X="2963" Y="1136" Width="21" Height="25">
+      <ActiveBound X="2963" Y="1136" Width="21" Height="25" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c115" X="2713" Y="1147" Width="15" Height="23">
+      <ActiveBound X="2713" Y="1147" Width="15" Height="23" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c116" X="2579" Y="1146" Width="25" Height="18">
+      <ActiveBound X="2579" Y="1146" Width="25" Height="18" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c117" X="2324" Y="1139" Width="24" Height="20">
+      <ActiveBound X="2324" Y="1139" Width="24" Height="20" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c118" X="2063" Y="1146" Width="19" Height="28">
+      <ActiveBound X="2063" Y="1146" Width="19" Height="28" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c119" X="1811" Y="1140" Width="21" Height="22">
+      <ActiveBound X="1811" Y="1140" Width="21" Height="22" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c120" X="1295" Y="953" Width="14" Height="23">
+      <ActiveBound X="1295" Y="953" Width="14" Height="23" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c121" X="1166" Y="949" Width="15" Height="20">
+      <ActiveBound X="1166" Y="949" Width="15" Height="20" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c122" X="1040" Y="950" Width="14" Height="20">
+      <ActiveBound X="1040" Y="950" Width="14" Height="20" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c123" X="909" Y="952" Width="20" Height="19">
+      <ActiveBound X="909" Y="952" Width="20" Height="19" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c124" X="784" Y="951" Width="22" Height="14">
+      <ActiveBound X="784" Y="951" Width="22" Height="14" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c125" X="652" Y="953" Width="24" Height="13">
+      <ActiveBound X="652" Y="953" Width="24" Height="13" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c126" X="532" Y="950" Width="25" Height="10">
+      <ActiveBound X="532" Y="950" Width="25" Height="10" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c127" X="407" Y="965" Width="20" Height="20">
+      <ActiveBound X="407" Y="965" Width="20" Height="20" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c128" X="274" Y="969" Width="21" Height="19">
+      <ActiveBound X="274" Y="969" Width="21" Height="19" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c129" X="146" Y="1021" Width="23" Height="23">
+      <ActiveBound X="146" Y="1021" Width="23" Height="23" />
+      <Params>
+        <Elem Key="DropItemId" Value="2" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c130" X="2964" Y="1424" Width="21" Height="28">
+      <ActiveBound X="2964" Y="1424" Width="21" Height="28" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c131" X="2834" Y="1424" Width="13" Height="25">
+      <ActiveBound X="2834" Y="1424" Width="13" Height="25" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c132" X="2701" Y="1420" Width="18" Height="22">
+      <ActiveBound X="2701" Y="1420" Width="18" Height="22" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c133" X="2571" Y="1419" Width="26" Height="20">
+      <ActiveBound X="2571" Y="1419" Width="26" Height="20" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c134" X="2446" Y="1422" Width="24" Height="25">
+      <ActiveBound X="2446" Y="1422" Width="24" Height="25" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c135" X="2318" Y="1419" Width="21" Height="18">
+      <ActiveBound X="2318" Y="1419" Width="21" Height="18" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c136" X="2190" Y="1418" Width="21" Height="19">
+      <ActiveBound X="2190" Y="1418" Width="21" Height="19" />
+      <Params>
+        <Elem Key="DropItemId" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="39" Name="medusaspawner5" X="2087" Y="1419" Width="37" Height="23">
+      <ActiveBound X="2087" Y="1419" Width="37" Height="23" />
+    </Item>
+    <Item Id="39" Name="spawner6" X="1857" Y="1114" Width="41" Height="24">
+      <ActiveBound X="1857" Y="1114" Width="41" Height="24" />
+    </Item>
+    <Item Id="6" Name="c139" X="1937" Y="1425" Width="17" Height="22">
+      <ActiveBound X="1937" Y="1425" Width="17" Height="22" />
+      <Params>
+        <Elem Key="DropItemId" Value="2" />
+      </Params>
+    </Item>
   </Objects>
 </Tilesmap>
