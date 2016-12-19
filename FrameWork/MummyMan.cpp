@@ -1,6 +1,7 @@
 ﻿#include "MummyMan.h"
 #include "GameStatusBoard.h"
 #include "Level3.h"
+#include "Bandage.h"
 
 
 MummyMan::MummyMan(GVector2 pos, eDirection direction) : BaseEnemy(eID::MUMMYMAN) 
@@ -63,6 +64,11 @@ void MummyMan::draw(LPD3DXSPRITE spritehandle, Viewport* viewport)
 		return;
 
 	_animations[WALKING]->draw(spritehandle, viewport);
+
+	for (auto object : _listBandages)
+	{
+		object->draw(spritehandle, viewport);
+	}
 
 }
 
@@ -146,11 +152,11 @@ void MummyMan::update(float deltaTime)
 
 	_animations[this->getStatus()]->update(deltaTime);
 
-	//for (auto object : _listObjects)
-	//{
-	//	object->update(deltaTime);
-	//}
-	//removeSnake();
+	for (auto object : _listBandages)
+	{
+		object->update(deltaTime);
+	}
+	removeBandages();
 }
 
 void MummyMan::updateDirection()
@@ -180,6 +186,7 @@ void MummyMan::updateDirection()
 		if (_holdStopWatch == nullptr)
 		{
 			Movement *movement = (Movement*)this->getComponent("Movement");
+			trackSimon();
 			movement->setVelocity(GVector2Zero);
 			_holdStopWatch = new StopWatch();
 		}
@@ -189,8 +196,8 @@ void MummyMan::updateDirection()
 			trackSimon();
 			//if (checkFlyDown()) _flyDown = true;
 			_isHold = false;
-			//if (_flyPath == eFlyPath::LONGDISTANCE)
-			//	createSnake();
+			if (_movingPath == eFlyPath::LONGDISTANCE)
+				createBandages();
 			SAFE_DELETE(_holdStopWatch);
 		}
 		return;
@@ -304,8 +311,8 @@ void MummyMan::updateStatus()
 
 void MummyMan::changeDirection(eDirection dir)
 {
-	if (_direction == dir)
-		return;
+	//if (_direction == dir)
+	//	return;
 	_direction = dir;
 	Movement *movement = (Movement*)this->getComponent("Movement");
 
@@ -337,6 +344,11 @@ float MummyMan::checkCollision(BaseObject * otherObject, float dt)
 	if (this->getStatus() == eStatus::DESTROY ||
 		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::BURN))
 		return 0.0f;
+
+	for (auto childObject : _listBandages)
+	{
+		childObject->checkCollision(otherObject, dt);
+	}
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID otherObjectID = otherObject->getId();
@@ -386,5 +398,33 @@ void MummyMan::getHitted()
 	if (_isHitted == false && _getHittedStopWatch == nullptr)
 	{
 		_isHitted = true;
+	}
+}
+
+
+void MummyMan::createBandages()
+{
+	//if (_listObjects.size() > 2) return;
+	Bandage* bandage = new Bandage(this->getPosition(), _direction);
+	bandage->init();
+	//_snake = snake;
+	_listBandages.push_back(bandage);
+}
+
+void MummyMan::removeBandages()
+{
+	for (auto object : _listBandages)
+	{
+		if (object->getStatus() == eStatus::DESTROY)
+		{
+			object->release();
+
+			remove(_listBandages.begin(), _listBandages.end(), object);
+			_listBandages.pop_back();
+
+			delete object;
+
+			break;
+		}
 	}
 }

@@ -64,7 +64,6 @@ void Snake::release() {
 	}
 	_listComponent.clear();
 
-	SAFE_DELETE(this->_loopwatch);
 	//SAFE_DELETE(this->_stopwatch);
 	if (_burning != nullptr)
 		_burning->release();
@@ -125,7 +124,8 @@ float Snake::checkCollision(BaseObject * otherObject, float dt) {
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID otherObjectId = otherObject->getId();
 	eDirection direction;
-	if (otherObjectId != eID::LAND && otherObjectId != eID::SIMON && eID::ITEM) return 0.0f;
+	if (otherObjectId != eID::LAND && otherObjectId != eID::SIMON && otherObjectId != eID::ITEM
+		&& otherObjectId != eID::WHIP) return 0.0f;
 	if (collisionBody->checkCollision(otherObject, direction, dt,false))
 	{
 		if (otherObjectId == eID::LAND && direction == eDirection::TOP)

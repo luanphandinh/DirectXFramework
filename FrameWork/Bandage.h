@@ -9,15 +9,13 @@
 #include "HitEffect.h"
 using namespace std;
 
-#define SNAKE_SPEED 150
-#define SNAKE_HITPOINT 1
-#define SNAKE_SCORE 100
+#define BANDAGE_SPEED GVector2(150,0)
 
-class Snake : public BaseEnemy {
+class Bandage : public BaseEnemy {
 public:
-	Snake(GVector2 pos, eDirection direction);
+	Bandage(GVector2 pos, eDirection direction);
 
-	~Snake();
+	~Bandage();
 
 	void init();
 	void update(float);
@@ -35,10 +33,8 @@ private:
 	BaseObject *_burning;
 	eDirection _direction;
 	BaseObject* _preObject;
-	void die();
 	void checkPosition();
 	eStatus _currentAnimationIndex;
 	void updateCurrentAnimateIndex();
-
 	StopWatch*	_burstStopWatch;
 };

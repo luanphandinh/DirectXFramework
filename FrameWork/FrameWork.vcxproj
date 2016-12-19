@@ -74,6 +74,7 @@
   <ItemGroup>
     <ClInclude Include="ActiveWeapon.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Bandage.h" />
     <ClInclude Include="BaseEnemy.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Bat.h" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="ActiveWeapon.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Bandage.cpp" />
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Bat.cpp" />

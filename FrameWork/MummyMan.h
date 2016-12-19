@@ -49,7 +49,7 @@ private:
 	/*
 		Hướng di chuyển
 	*/
-	int _direction;
+	eDirection _direction;
 	void trackSimon();
 	void updateDirection();
 	void changeDirection(eDirection dir);
@@ -82,5 +82,9 @@ private:
 	GVector2 _movingBackPos;
 
 	StopWatch*	_burstStopWatch;
+
+	vector<BaseObject*> _listBandages;
+	void createBandages();
+	void removeBandages();
 };
 
