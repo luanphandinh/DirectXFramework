@@ -165,6 +165,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case SKELETON:
 		return getSkeleton(node);
 		break;
+	case MUMMYMAN:
+		return getMummyMan(node);
+		break;
 	case MAPSTAGE1:
 		break;
 	case LIFE_ICON:
@@ -608,6 +611,28 @@ BaseObject * ObjectFactory::getMedusa(xml_node node) {
 
 	return medusa;
 }
+
+BaseObject * ObjectFactory::getMummyMan(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+	int x, y, width, height;
+
+	eStatus status;
+
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+	width = stoi(properties["Width"]);
+	height = stoi(properties["Height"]);
+
+	auto pos = GVector2(x + width / 2, y - height / 2);
+
+	auto mummyMan = new MummyMan(pos,eDirection::LEFT);
+	mummyMan->init();
+
+	return mummyMan;
+}
+
 
 BaseObject * ObjectFactory::getFleaman(xml_node node) {
 	auto properties = getObjectProperties(node);

@@ -117,7 +117,9 @@
             <Objects>land32 land33 </Objects>
           </QNode>
         </QNode>
-        <QNode Id="65812" Level="4" X="4800" Y="0" Width="320" Height="320" />
+        <QNode Id="65812" Level="4" X="4800" Y="0" Width="320" Height="320">
+          <Objects>MummyMan </Objects>
+        </QNode>
         <QNode Id="196884" Level="4" X="4800" Y="320" Width="320" Height="320">
           <QNode Id="196884" Level="5" X="4800" Y="320" Width="160" Height="160">
             <Objects>stair09 stair10 object53 </Objects>

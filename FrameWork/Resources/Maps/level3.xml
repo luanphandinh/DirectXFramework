@@ -598,5 +598,8 @@
     <Item Id="2" Name="object53" X="4610" Y="831" Width="508" Height="25">
       <ActiveBound X="4610" Y="831" Width="508" Height="25" />
     </Item>
+    <Item Id="63" Name="MummyMan" X="4832" Y="927" Width="64" Height="88">
+      <ActiveBound X="4832" Y="927" Width="64" Height="88" />
+    </Item>
   </Objects>
 </Tilesmap>

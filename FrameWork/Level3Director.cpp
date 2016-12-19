@@ -110,6 +110,14 @@ void Level3Director::switchViewport() {
 		}
 
 		break;
+	case eLevel2Viewport::V5:
+		if (pos.x > 4700)
+		{
+			this->setCurrentViewport(V6);
+			this->_reviveViewport = V6;
+		}
+
+		break;
 	default:
 		break;
 	}

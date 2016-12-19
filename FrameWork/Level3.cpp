@@ -22,7 +22,7 @@ bool Level3::init()
 	simon->setPosition(3900, 300);//v1
 	simon->setPosition(3236, 600);//v2
 	//simon->setPosition(4736, 600);//v3
-	simon->setPosition(4500, 1000);//v5
+	simon->setPosition(4900, 900);//v5
 
 
 	this->_simon = simon;
