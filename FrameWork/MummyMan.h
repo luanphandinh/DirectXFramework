@@ -32,7 +32,7 @@ public:
 	float checkCollision(BaseObject*, float) override;
 	GVector2 getVelocity() override;
 	IComponent* getComponent(string);
-
+	void getHitted();
 private:
 	map<string, IComponent*> _listComponent;
 	map<int, Animation*> _animations;
@@ -64,14 +64,18 @@ private:
 	*/
 	bool _isHitted;
 	StopWatch* _getHittedStopWatch;
-	void getHitted();
+	
 
 	/*
 		Khi va chạm vơi simon
 	*/
 	bool _isMovingBack;
 	eDirection _movingBackDirection;
-	void movingBack();
+	/*
+		Nếu gặp phải biên thì fromWall = true
+		gặp phải simon thì fromWall = false
+	*/
+	void movingBack(bool fromWall = false);
 	StopWatch* _movingBackStopWatch;
 
 	bool _isHold;

@@ -1,6 +1,7 @@
 ﻿#include "Weapon.h"
 #include"BaseEnemy.h"
 #include"Medusa.h"
+#include"MummyMan.h"
 
 Weapon::Weapon(GVector2 startPosition, eItemType type, eDirection dir,eItemID id) :Item(startPosition,type)
 {
@@ -98,6 +99,15 @@ float  Weapon::checkCollisionWeapon(BaseObject* otherObject, float dt)
 			{
 				((Medusa*)otherObject)->dropHitpoint(this->_damage);
 				((Medusa*)otherObject)->getHitted();
+				_listColliding[otherObject] = true;
+			}
+			SoundManager::getInstance()->Play(eSoundId::HIT);
+			break;
+		case MUMMYMAN:
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((MummyMan*)otherObject)->dropHitpoint(this->_damage);
+				((MummyMan*)otherObject)->getHitted();
 				_listColliding[otherObject] = true;
 			}
 			SoundManager::getInstance()->Play(eSoundId::HIT);

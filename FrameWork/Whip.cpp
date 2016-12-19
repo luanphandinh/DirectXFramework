@@ -6,7 +6,7 @@
 Whip::Whip(int level) :BaseObject(eID::WHIP)
 {
 	this->_level = level;
-	_damage = 10;
+	_damage = 1;
 }
 
 
@@ -149,6 +149,15 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 			{
 				((Medusa*)otherObject)->dropHitpoint(this->_damage);
 				((Medusa*)otherObject)->getHitted();
+				_listColliding[otherObject] = true;
+			}
+			SoundManager::getInstance()->Play(eSoundId::HIT);
+			break;
+		case MUMMYMAN:
+			if (object == _listColliding.end() || object._Ptr == nullptr)
+			{
+				((MummyMan*)otherObject)->dropHitpoint(this->_damage);
+				((MummyMan*)otherObject)->getHitted();
 				_listColliding[otherObject] = true;
 			}
 			SoundManager::getInstance()->Play(eSoundId::HIT);

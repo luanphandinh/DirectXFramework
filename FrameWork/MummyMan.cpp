@@ -204,9 +204,9 @@ void MummyMan::updateDirection()
 	}
 
 	if (this->getPositionX() > vpBound.right - 16)
-		changeDirection(eDirection::LEFT);
+		movingBack(true);
 	else if (this->getPositionX() <  vpBound.left + 16)
-		changeDirection(eDirection::RIGHT);
+		movingBack(true);
 }
 
 void MummyMan::trackSimon()
@@ -223,53 +223,99 @@ void MummyMan::trackSimon()
 }
 
 
-void MummyMan::movingBack()
+void MummyMan::movingBack(bool fromWall)
 {
-	if (_isMovingBack) return;
+	if (_isMovingBack && !fromWall) return;
 	getMovingPath();
 	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	auto posTracker = objectTracker->getPosition();
 	auto viewportTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT vpBound = viewportTracker->getBounding();
-	//Simon nằm bên nữa màn hình bên trái
-	if (_direction == eDirection::LEFT && ((vpBound.left + (vpBound.right - vpBound.left) / 2)  > posTracker.x))
+	if (!fromWall)
 	{
-		switch (_movingPath) {
-		case eMovingPath::MOVEHOLD:
-			_movingBackPos = GVector2(posTracker + GVector2(10, 0));
-			break;
-		case eMovingPath::MOVEMEDIUMDISTANCE:
-			_movingBackPos = GVector2(posTracker + GVector2(100, 0));
-			break;
-		case eMovingPath::MOVELONGDISTANCE:
-			_movingBackPos = GVector2(posTracker + GVector2(200, 0));
-			break;
-		default:
-			break;
-		}
 
-		_isMovingBack = true;
-		_movingBackDirection = eDirection::RIGHT;
-	}
-	//Simon nằm bên nữa màn hình bên phải
-	/*((vpBound.right - vpBound.left) / 2 < posTracker.x)*/
-	else if (_direction == eDirection::RIGHT && ((vpBound.left + (vpBound.right - vpBound.left) / 2) < posTracker.x))
-	{
-		switch (_movingPath) {
-		case eMovingPath::MOVEHOLD:
-			_movingBackPos = GVector2(posTracker + GVector2(-10, 0));
-			break;
-		case eMovingPath::MOVEMEDIUMDISTANCE:
-			_movingBackPos = GVector2(posTracker + GVector2(-100, 0));
-			break;
-		case eMovingPath::MOVELONGDISTANCE:
-			_movingBackPos = GVector2(posTracker + GVector2(-200, 0));
-			break;
-		default:
-			break;
+		//Simon nằm bên nữa màn hình bên trái
+		if (_direction == eDirection::LEFT && ((vpBound.left + (vpBound.right - vpBound.left) / 2) > posTracker.x))
+		{
+			switch (_movingPath) {
+			case eMovingPath::MOVEHOLD:
+				_movingBackPos = GVector2(posTracker + GVector2(10, 0));
+				break;
+			case eMovingPath::MOVEMEDIUMDISTANCE:
+				_movingBackPos = GVector2(posTracker + GVector2(100, 0));
+				break;
+			case eMovingPath::MOVELONGDISTANCE:
+				_movingBackPos = GVector2(posTracker + GVector2(200, 0));
+				break;
+			default:
+				break;
+			}
+
+			_isMovingBack = true;
+			_movingBackDirection = eDirection::RIGHT;
 		}
-		_isMovingBack = true;
-		_movingBackDirection = eDirection::LEFT;
+		//Simon nằm bên nữa màn hình bên phải
+		/*((vpBound.right - vpBound.left) / 2 < posTracker.x)*/
+		else if (_direction == eDirection::RIGHT && ((vpBound.left + (vpBound.right - vpBound.left) / 2) < posTracker.x))
+		{
+			switch (_movingPath) {
+			case eMovingPath::MOVEHOLD:
+				_movingBackPos = GVector2(posTracker + GVector2(-10, 0));
+				break;
+			case eMovingPath::MOVEMEDIUMDISTANCE:
+				_movingBackPos = GVector2(posTracker + GVector2(-100, 0));
+				break;
+			case eMovingPath::MOVELONGDISTANCE:
+				_movingBackPos = GVector2(posTracker + GVector2(-200, 0));
+				break;
+			default:
+				break;
+			}
+			_isMovingBack = true;
+			_movingBackDirection = eDirection::LEFT;
+		}
+	}
+	else if (fromWall)
+	{
+		auto viewportTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+		RECT vpBound = viewportTracker->getBounding();
+		//Đụng phải biên bên trái của viewport
+		if (_direction == eDirection::LEFT)
+		{
+			switch (_movingPath) {
+			case eMovingPath::MOVEHOLD:
+				_movingBackPos = GVector2(GVector2(vpBound.left, 0) + GVector2(20, 0));
+			case eMovingPath::MOVEMEDIUMDISTANCE:
+				_movingBackPos = GVector2(GVector2(vpBound.left, 0) + GVector2(100, 0));
+				break;
+			case eMovingPath::MOVELONGDISTANCE:
+				_movingBackPos = GVector2(GVector2(vpBound.left, 0) + GVector2(200, 0));
+				break;
+			default:
+				break;
+			}
+
+			_isMovingBack = true;
+			_movingBackDirection = eDirection::RIGHT;
+		}
+		//Đụng phải biên bên phải của viewport
+		else if (_direction == eDirection::RIGHT)
+		{
+			switch (_movingPath) {
+			case eMovingPath::MOVEHOLD:
+				_movingBackPos = GVector2(GVector2(vpBound.right, 0) + GVector2(-20, 0));
+			case eMovingPath::MOVEMEDIUMDISTANCE:
+				_movingBackPos = GVector2(GVector2(vpBound.right,0) + GVector2(-100, 0));
+				break;
+			case eMovingPath::MOVELONGDISTANCE:
+				_movingBackPos = GVector2(GVector2(vpBound.right, 0) + GVector2(-200, 0));
+				break;
+			default:
+				break;
+			}
+			_isMovingBack = true;
+			_movingBackDirection = eDirection::LEFT;
+		}
 	}
 }
 
@@ -286,7 +332,11 @@ void MummyMan::updateStatus()
 	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	int xTracker = objectTracker->getPositionX();
 	int yTracker = objectTracker->getPositionY();
-	if (this->getPositionX() < xTracker)
+
+	auto viewportTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT vpBound = viewportTracker->getBounding();
+
+	if (vpBound.left + WINDOW_WIDTH/2 - 20 <  xTracker && xTracker < vpBound.right - WINDOW_WIDTH/2 + 20)
 	{
 		if (_standingStopWatch == nullptr)
 		{
