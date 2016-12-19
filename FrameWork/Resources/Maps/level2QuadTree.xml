@@ -188,7 +188,7 @@
             <Objects>land78 land79 stair75 </Objects>
           </QNode>
           <QNode Id="196885" Level="5" X="2976" Y="192" Width="96" Height="96">
-            <Objects>land78 wall7 </Objects>
+            <Objects>land78 wall7 stair75 </Objects>
           </QNode>
           <QNode Id="196887" Level="5" X="2976" Y="288" Width="96" Height="96" />
           <QNode Id="196886" Level="5" X="2880" Y="288" Width="96" Height="96" />
@@ -273,7 +273,7 @@
             <Objects>wall3 candle03 </Objects>
           </QNode>
           <QNode Id="65847" Level="5" X="2976" Y="864" Width="96" Height="96">
-            <Objects>land3 wall3 </Objects>
+            <Objects>land3 wall3 stai03 </Objects>
           </QNode>
           <QNode Id="65846" Level="5" X="2880" Y="864" Width="96" Height="96">
             <Objects>land3 land4 stai03 </Objects>

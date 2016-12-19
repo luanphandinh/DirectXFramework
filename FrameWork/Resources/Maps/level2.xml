@@ -569,8 +569,8 @@
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
-    <Item Id="3" Name="stair1" X="2886" Y="192" Width="25" Height="5">
-      <ActiveBound X="2886" Y="192" Width="25" Height="5" />
+    <Item Id="3" Name="stair1" X="2900" Y="192" Width="25" Height="5">
+      <ActiveBound X="2900" Y="192" Width="25" Height="5" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
         <Elem Key="canUpStair" Value="0" />
@@ -582,8 +582,8 @@
         <Elem Key="stairDirection" Value="1" />
       </Params>
     </Item>
-    <Item Id="3" Name="stai03" X="2945" Y="580" Width="26" Height="7">
-      <ActiveBound X="2945" Y="580" Width="26" Height="7" />
+    <Item Id="3" Name="stai03" X="2965" Y="580" Width="26" Height="7">
+      <ActiveBound X="2965" Y="580" Width="26" Height="7" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
         <Elem Key="canUpStair" Value="0" />
@@ -858,8 +858,8 @@
         <Elem Key="physicBodyDirection" Value="4" />
       </Params>
     </Item>
-    <Item Id="3" Name="stair75" X="2948" Y="1280" Width="16" Height="8">
-      <ActiveBound X="2948" Y="1280" Width="16" Height="8" />
+    <Item Id="3" Name="stair75" X="2965" Y="1280" Width="16" Height="8">
+      <ActiveBound X="2965" Y="1280" Width="16" Height="8" />
       <Params>
         <Elem Key="stairDirection" Value="1" />
         <Elem Key="canUpStair" Value="0" />
