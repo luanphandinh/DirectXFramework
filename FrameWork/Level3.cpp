@@ -22,6 +22,7 @@ bool Level3::init()
 	simon->setPosition(3900, 300);//v1
 	simon->setPosition(3236, 600);//v2
 	//simon->setPosition(4736, 600);//v3
+	simon->setPosition(4500, 1000);//v5
 
 
 	this->_simon = simon;
@@ -36,7 +37,7 @@ bool Level3::init()
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V2);
+	_director->setCurrentViewport(V5);
 	_viewport = _director->getViewport();
 
 
@@ -128,7 +129,7 @@ void Level3::update(float deltaTime)
 	screen.left = viewport_in_transform.left;
 	screen.right = viewport_in_transform.right;
 	screen.top = this->_backGround->getWorldSize().y - viewport_position.y + 70;
-	screen.bottom = screen.top + /*_viewport->getHeight()*/ 310;
+	screen.bottom = screen.top + /*_viewport->getHeight()*/ 340;
 
 	//[Bước 1]
 	this->destroyObject();

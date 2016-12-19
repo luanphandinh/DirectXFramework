@@ -81,6 +81,8 @@ enum eID
 
 	FLEAMAN = 58,
 	SKELETON = 59,
+	MUMMYMAN = 63,
+	BANDAGE = 64,
 };
 
 enum eItemID

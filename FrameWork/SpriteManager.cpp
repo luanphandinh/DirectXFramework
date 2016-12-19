@@ -101,6 +101,15 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::SKELETON, sp));
 	this->loadSpriteInfo(eID::SKELETON, "Resources//Images//skeleton_animation.txt");
 
+	//MUMMYMAN
+	sp = new Sprite(spriteHandler, L"Resources//Images//MummyMan.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::SKELETON, sp));
+	this->loadSpriteInfo(eID::MUMMYMAN, "Resources//Images//mummy_man_animation.txt");
+	//BANDAGES
+	sp = new Sprite(spriteHandler, L"Resources//Images//bandages.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::SKELETON, sp));
+	this->loadSpriteInfo(eID::BANDAGE, "Resources//Images//badages_animation.txt");
+
 	//sp = loadXMLDoc(spriteHandler, L"Resources//Maps//test.xml");
 	//sp->setOrigin(GVector2(0.0f, 0.0f));
 	//this->_listSprite[eID::MAPSTAGE1] = sp;

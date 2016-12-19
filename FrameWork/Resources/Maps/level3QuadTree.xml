@@ -120,10 +120,10 @@
         <QNode Id="65812" Level="4" X="4800" Y="0" Width="320" Height="320" />
         <QNode Id="196884" Level="4" X="4800" Y="320" Width="320" Height="320">
           <QNode Id="196884" Level="5" X="4800" Y="320" Width="160" Height="160">
-            <Objects>stair09 stair10 land36 </Objects>
+            <Objects>stair09 stair10 object53 </Objects>
           </QNode>
           <QNode Id="196885" Level="5" X="4960" Y="320" Width="160" Height="160">
-            <Objects>land36 </Objects>
+            <Objects>object53 </Objects>
           </QNode>
           <QNode Id="196887" Level="5" X="4960" Y="480" Width="160" Height="160">
             <Objects>land22 land23 </Objects>
@@ -144,7 +144,7 @@
           </QNode>
         </QNode>
         <QNode Id="131348" Level="4" X="4480" Y="320" Width="320" Height="320">
-          <Objects>land22 stair08 land36 </Objects>
+          <Objects>land22 stair08 object53 </Objects>
         </QNode>
       </QNode>
       <QNode Id="788" Level="3" X="4480" Y="640" Width="640" Height="640">

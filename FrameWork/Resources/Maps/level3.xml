@@ -586,23 +586,17 @@
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
-    <Item Id="2" Name="land35" X="4705" Y="896" Width="29" Height="30">
-      <ActiveBound X="4705" Y="896" Width="29" Height="30" />
-      <Params>
-        <Elem Key="physicBodyDirection" Value="15" />
-      </Params>
-    </Item>
-    <Item Id="2" Name="land36" X="4610" Y="830" Width="509" Height="20">
-      <ActiveBound X="4610" Y="830" Width="509" Height="20" />
-      <Params>
-        <Elem Key="physicBodyDirection" Value="15" />
-      </Params>
-    </Item>
     <Item Id="4" Name="door0" X="3560" Y="642" Width="13" Height="96">
       <ActiveBound X="3560" Y="642" Width="13" Height="96" />
     </Item>
     <Item Id="4" Name="door1" X="2016" Y="1091" Width="12" Height="98">
       <ActiveBound X="2016" Y="1091" Width="12" Height="98" />
+    </Item>
+    <Item Id="2" Name="land35" X="4705" Y="895" Width="27" Height="26">
+      <ActiveBound X="4705" Y="895" Width="27" Height="26" />
+    </Item>
+    <Item Id="2" Name="object53" X="4610" Y="831" Width="508" Height="25">
+      <ActiveBound X="4610" Y="831" Width="508" Height="25" />
     </Item>
   </Objects>
 </Tilesmap>
