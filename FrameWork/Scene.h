@@ -20,8 +20,10 @@ public:
 
 	Viewport* getViewport();
 	Director* getDirector();
+	eID getIdLevel();
 protected:
 	Viewport* _viewport;
 	Director* _director;
+	eID _idLevel;
 };
 

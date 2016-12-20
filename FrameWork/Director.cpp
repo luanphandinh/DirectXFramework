@@ -30,6 +30,10 @@ Viewport* Director::getViewport()
 	return _viewport;
 }
 
+BaseObject * Director::getObjectTracker() {
+	return _objTracker;
+}
+
 void Director::setCurrentViewport(eLevel2Viewport name)
 {
 	if (_currentViewport != name)

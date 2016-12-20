@@ -195,5 +195,22 @@ void Skeleton::changeDirection() {
 	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
 }
 
-void Skeleton::updateSitting() {
+void Skeleton::backward() {
+	_sprite->setScaleX(-this->getScale().x);
+	Movement *movement = (Movement*)this->getComponent("Movement");
+	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
 }
+
+void Skeleton::forward() {
+	_sprite->setScaleX(this->getScale().x);
+	Movement *movement = (Movement*)this->getComponent("Movement");
+	movement->setVelocity(GVector2(movement->getVelocity().x, 0));
+}
+
+void Skeleton::jump() {
+	this->setStatus(eStatus::JUMP);
+
+	auto move = (Movement*)this->_listComponent["Movement"];
+	move->setVelocity(GVector2( 85, 250));
+}
+

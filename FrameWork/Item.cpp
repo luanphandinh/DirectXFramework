@@ -104,7 +104,7 @@ float Item::checkCollision(BaseObject* otherObject, float dt)
 	//	&& collisionBody->checkCollision(otherObject, direction, dt, false))
 	if (collisionBody->checkCollision(otherObject, direction, dt, false))
 	{
-		if (otherObjectID == eID::LAND)
+		if (otherObjectID == eID::LAND && direction == eDirection::TOP)
 		{
 			this->stop();
 		}

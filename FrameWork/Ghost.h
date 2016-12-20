@@ -36,11 +36,14 @@ private:
 	map<string, IComponent*> _listComponent;
 	map<int, Animation*> _animations;
 	BaseObject* prevObject;
-
-	void changeDirection();
+	eDirection _flyingDirection;
+	void updateDirection();
+	void changeDirection(eDirection dir);
 	void flyingUp();
 	void fly();
 	// Init values
+	bool _isHiding;
+
 
 	int hack;
 	bool _isHitted;
@@ -48,5 +51,6 @@ private:
 	void checkIfOutOfScreen();
 	void updateHiding();
 	int _direction;
+
 	BaseObject *_burning;
 };

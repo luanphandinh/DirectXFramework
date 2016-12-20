@@ -43,13 +43,17 @@ private:
 	BaseObject* prevObject;
 	BaseObject *_explosion;
 	BaseObject *_burning;
-
+	eDirection _movingDirection;
 	// Vòng lặp thời gian, giúp knight di chuyển qua lại liên tục
 	StopWatch *_loopwatch;
-	void changeDirection();
+	void updateDirection();
+	void changeDirection(eDirection dir);
 	bool isHitted;
 	eStatus _currentAnimateIndex;
 	void updateCurrentAnimateIndex();
 	StopWatch*	_burstStopWatch;
 	void getHitted();
+
+	bool _checkedWithLand;
+	RECT _checkedLandBounding;
 };

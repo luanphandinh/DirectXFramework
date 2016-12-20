@@ -8,6 +8,10 @@ SpearKnight::SpearKnight(eStatus status, GVector2 pos, int direction) : BaseEnem
 
 	GVector2 v(direction * SPEARKNIGHT_SPEED, 0);
 	GVector2 a(0, 0);
+	if (direction > 0) {
+		_movingDirection = eDirection::RIGHT;
+	}
+	else _movingDirection = eDirection::LEFT;
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
 	this->setStatus(status);
 	this->setPosition(pos);
@@ -22,7 +26,10 @@ SpearKnight::SpearKnight(eStatus status, float x, float y, int direction) :
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SPEARKNIGHT);
 	//_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
 	_sprite->setFrameRect(0, 0, 17.0f, 32.0f);
-
+	if (direction > 0) {
+		_movingDirection = eDirection::RIGHT;
+	}
+	else _movingDirection = eDirection::LEFT;
 	GVector2 pos(x, y);
 	GVector2 v(direction * SPEARKNIGHT_SPEED, 0);
 	GVector2 a(0, 0);
@@ -58,7 +65,6 @@ void SpearKnight::init() {
 	_animations[DYING] = new Animation(_sprite, 0.15f);
 	_animations[DYING]->addFrameRect(eID::SPEARKNIGHT, NULL);
 
-	_loopwatch = new StopWatch();
 
 	//*Test
 	//this->setPosition(GVector2(100,100));
@@ -75,7 +81,7 @@ void SpearKnight::draw(LPD3DXSPRITE spritehandle, Viewport* viewport) {
 	if (this->getStatus() == eStatus::DESTROY || this->getStatus() == eStatus::BURN)
 		return;
 
-	_animations[_currentAnimateIndex]->draw(spritehandle, viewport);
+	_animations[WALKING]->draw(spritehandle, viewport);
 
 }
 
@@ -135,26 +141,55 @@ void SpearKnight::update(float deltatime) {
 		it.second->update(deltatime);
 	}
 
-	if (this->getStatus() != DESTROY) {
-		this->updateCurrentAnimateIndex();
+	updateDirection();
 
-		_animations[_currentAnimateIndex]->update(deltatime);
-
-		if (_loopwatch->isTimeLoop(delay)) {
-			
-			this->changeDirection();
-			delay =2000.0f;
-		}
-	}
+	_animations[WALKING]->update(deltatime);
 }
 
 void SpearKnight::setPosition(GVector2 pos) {
 	_sprite->setPosition(pos);
 }
-void SpearKnight::changeDirection() {
-	_sprite->setScaleX(-this->getScale().x);
+
+void  SpearKnight::updateDirection() {
+	if (!_checkedWithLand) return;
+	
+	//if (_loopwatch == nullptr) {
+	//	_loopwatch = new StopWatch();
+	//}
+
+	//if (_loopwatch != nullptr && _loopwatch->isStopWatch(2000)) {
+	//	if (_movingDirection == eDirection::RIGHT)
+	//		changeDirection(eDirection::LEFT);
+	//	else changeDirection(eDirection::RIGHT);
+	//	SAFE_DELETE(_loopwatch);
+	//}
+
+	if (this->getPositionX() > _checkedLandBounding.right - 16) {
+		changeDirection(LEFT);
+	}
+	else if (this->getPositionX() < _checkedLandBounding.left + 16) {
+		changeDirection(RIGHT);
+	}
+}
+
+void SpearKnight::changeDirection(eDirection dir) 
+{
+	if (!_checkedWithLand) return;
+	
+	if (_movingDirection == dir)
+		return;
+	_movingDirection = dir;
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
+
+	if (_movingDirection == eDirection::RIGHT) {
+		if (this->getScale().x < 0) this->setScaleX(this->getScale().x * (-1));
+		movement->setVelocity(GVector2(SPEARKNIGHT_SPEED, 0));
+	}
+	else if (_movingDirection == eDirection::LEFT) 		{
+		if (this->getScale().x > 0) this->setScaleX(this->getScale().x * (-1));
+		movement->setVelocity(GVector2(-SPEARKNIGHT_SPEED, 0));
+	}
+		
 }
 
 
@@ -168,7 +203,7 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	eDirection direction;
 	if (objectId != eID::LAND && objectId != eID::SIMON) return 0.0f;
 	if (objectId == eID::LAND) {
-		if (collisionBody->checkCollision(object, direction, dt)) {
+		if (collisionBody->checkCollision(object, direction, dt,false)) {
 			if (direction == eDirection::TOP && this->getVelocity().y < 0) {
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
 				auto movement = (Movement*)this->_listComponent["Movement"];
@@ -176,45 +211,13 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
 				this->setStatus(eStatus::WALKING);
-				prevObject = object;
-			}
-			if (direction == eDirection::RIGHT&& this->getVelocity().y < 0) {
-				auto gravity = (Gravity*)this->_listComponent["Gravity"];
-				float moveX, moveY;
-				if (collisionBody->isCollidingIntersected(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-				this->changeDirection();
-				gravity->setStatus(eGravityStatus::SHALLOWED);
+				_checkedWithLand = true;
+				_checkedLandBounding = object->getBounding();
 
-				this->setStatus(eStatus::WALKING);
 				prevObject = object;
-			}
-			if ( direction == eDirection::LEFT && this->getVelocity().y < 0) {
-				auto gravity = (Gravity*)this->_listComponent["Gravity"];
-				float moveX, moveY;
-				if (collisionBody->isCollidingIntersected(object, moveX, moveY, dt))
-				{
-					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
-				}
-				gravity->setStatus(eGravityStatus::SHALLOWED);
-				this->changeDirection();
-
-				this->setStatus(eStatus::WALKING);
-				prevObject = object;
-			}
-			else if (prevObject == object) {
-				auto gravity = (Gravity*)this->_listComponent["Gravity"];
-				gravity->setStatus(eGravityStatus::FALLING_DOWN);
-				//this->setStatus(eStatus::WALKING);
-				prevObject = nullptr;
 			}
 		}
 		
-		//else {
-		//	collisionBody->checkCollision(object, dt, false);
-		//}
 		return 0.0f;
 	}
 	else
@@ -222,41 +225,9 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 	{
 		if (collisionBody->checkCollision(object, direction, dt,false))
 		{
-			//if (object->isInStatus(eStatus::HITTING))
-			//{
-			//	// bị chớp
-			//	this->_animations[_currentAnimateIndex]->enableFlashes(true);
-			//	//this->dropHitpoint(((Simon*)(object))->getDamage());
-			//	//this->dropHitpoint(3);
-			//	isHitted = true;
-			//}
-			//else
-			//{
-				((Simon*)object)->getHitted();
-			//}
+			((Simon*)object)->getHitted();
 		}
-	/*	else 
-		{
-			isHitted = false;
-			this->_animations[_currentAnimateIndex]->enableFlashes(false);
-		}
-*/
-			//	 if (!isHitted)
-			//	 {
-			//		 this->dropHitpoint(((Simon*)(object))->getDamage());
-			//		 //this->dropHitpoint(3);
-			//		 isHitted = true;
-			//	 }
-			//	 else
-			//	 {
-			//		 isHitted = false;
-			//	 }
-			// }
-			// else
-			// {
-			//	 ((Simon*)object)->getHitted();
-			// }
-		 //}
+
 		
 		return 0.0f;
 	}

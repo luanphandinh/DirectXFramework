@@ -9,8 +9,8 @@
 using namespace std;
 
 #define FLEAMAN_SPEED 50
-#define FLEAMAN_JUMP_VEL GVector2(85,100)
-#define FLEAMAN_HIGH_JUMP_VEL GVector2(85,200)
+#define FLEAMAN_JUMP_VEL GVector2(85,150)
+#define FLEAMAN_HIGH_JUMP_VEL GVector2(85,250)
 #define FLEAMAN_HITPOINT 3
 #define FLEAMAN_SCORE 100
 
@@ -55,5 +55,7 @@ private:
 	bool checkIfOutOfScreen();
 	void updateSitting();
 	void jump();
+	void jump2();
 	void highJump();
+	void highJump2();
 };

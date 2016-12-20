@@ -509,8 +509,8 @@
         <Elem Key="DropItemId" Value="2" />
       </Params>
     </Item>
-    <Item Id="39" Name="medusaHeadSpawner0" X="1484" Y="730" Width="30" Height="30">
-      <ActiveBound X="1484" Y="730" Width="400" Height="30" />
+    <Item Id="39" Name="medusaHeadSpawner0" X="1454" Y="760" Width="300" Height="30">
+      <ActiveBound X="1454" Y="760" Width="300" Height="30" />
       <Params>
         <Elem Key="direction" Value="1" />
       </Params>
@@ -889,8 +889,8 @@
     <Item Id="36" Name="bat2" X="281" Y="1089" Width="20" Height="26">
       <ActiveBound X="281" Y="1089" Width="20" Height="26" />
     </Item>
-    <Item Id="39" Name="medusaSpawner101" X="1997" Y="941" Width="48" Height="23">
-      <ActiveBound X="1997" Y="941" Width="48" Height="23" />
+    <Item Id="39" Name="medusaSpawner101" X="1967" Y="971" Width="100" Height="23">
+      <ActiveBound X="1967" Y="971" Width="100" Height="23" />
     </Item>
     <Item Id="7" Name="brick102" X="2784" Y="1088" Width="32" Height="32">
       <ActiveBound X="2784" Y="1088" Width="32" Height="32" />
@@ -1105,14 +1105,17 @@
     <Item Id="39" Name="medusaspawner5" X="2087" Y="1419" Width="37" Height="23">
       <ActiveBound X="2087" Y="1419" Width="37" Height="23" />
     </Item>
-    <Item Id="39" Name="spawner6" X="1857" Y="1114" Width="41" Height="24">
-      <ActiveBound X="1857" Y="1114" Width="41" Height="24" />
+    <Item Id="39" Name="spawner6" X="1657" Y="1140" Width="50" Height="24">
+      <ActiveBound X="1657" Y="1140" Width="50" Height="24" />
     </Item>
     <Item Id="6" Name="c139" X="1937" Y="1425" Width="17" Height="22">
       <ActiveBound X="1937" Y="1425" Width="17" Height="22" />
       <Params>
         <Elem Key="DropItemId" Value="2" />
       </Params>
+    </Item>
+    <Item Id="39" Name="spawner7" X="1868" Y="1136" Width="105" Height="14">
+      <ActiveBound X="1868" Y="1136" Width="105" Height="14" />
     </Item>
   </Objects>
 </Tilesmap>

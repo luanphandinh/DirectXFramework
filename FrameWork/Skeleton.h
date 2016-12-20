@@ -52,8 +52,12 @@ private:
 	StopWatch*	_burstStopWatch;
 	void getHitted();
 
-	bool checkIfOutOfScreen();
+	/*bool checkIfOutOfScreen();
 	void updateSitting();
+	void highJump();*/
+
+	void backward();
+	void forward();
 	void jump();
-	void highJump();
+
 };

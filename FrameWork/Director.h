@@ -41,7 +41,7 @@ public:
 	virtual void updateViewport() = 0;
 	virtual void updateScenario(float deltaTime) = 0;
 	virtual void release() = 0;
-
+	BaseObject* getObjectTracker();
 	
 	void setCurrentViewport(eLevel2Viewport name);
 	void setObjectTracker(BaseObject* objTracker);

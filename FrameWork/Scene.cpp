@@ -19,3 +19,7 @@ Director* Scene::getDirector()
 {
 	return _director;
 }
+
+eID Scene::getIdLevel() {
+	return _idLevel;
+}

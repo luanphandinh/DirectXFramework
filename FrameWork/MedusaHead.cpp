@@ -8,10 +8,10 @@ MedusaHead::MedusaHead(eStatus status, int direction, GVector2 pos,
 	this->_frequence = freq;*/
 	_direction = direction;
 	if (direction == 1)
-		this->_horizontalVeloc = GVector2(120.0f, 0.0f);
+		this->_horizontalVeloc = GVector2(160.0f, 0.0f);
 	else if (direction == -1) 
-		this->_horizontalVeloc = GVector2(-120.0f, 0.0f);
-	this->_amplitude = GVector2(0.0f, 64.0f);
+		this->_horizontalVeloc = GVector2(-160.0f, 0.0f);
+	this->_amplitude = GVector2(0.0f, 90.0f);
 	this->_frequence = 0.7f;
 	_sprite = SpriteManager::getInstance()->getSprite(eID::MEDUSAHEAD);
 	_sprite->setFrameRect(SpriteManager::getInstance()->getSourceRect(this->_id, "normal"));
@@ -181,6 +181,7 @@ IComponent * MedusaHead::getComponent(string) {
 bool MedusaHead::checkIfOutOfScreen() {
 	auto viewport = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT screenBound = viewport->getBounding();
+	GVector2 vpBound = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getCurrentViewportBound();
 	GVector2 position = this->getPosition();
 
 	if (position.x > screenBound.right && _direction > 0) {
@@ -191,6 +192,17 @@ bool MedusaHead::checkIfOutOfScreen() {
 		this->setStatus(eStatus::DESTROY);
 		return true;
 	}
+
+	if (position.x < vpBound.x + 85) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
+	if (position.x > vpBound.y - 85) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
 	return false;
 }
 
