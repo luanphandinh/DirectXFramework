@@ -55,7 +55,7 @@
           </QNode>
         </QNode>
         <QNode Id="131076" Level="4" X="2560" Y="320" Width="320" Height="320">
-          <Objects>stair05 land13 </Objects>
+          <Objects>stair05 land13 raven0 </Objects>
         </QNode>
       </QNode>
       <QNode Id="260" Level="3" X="3200" Y="0" Width="640" Height="640">

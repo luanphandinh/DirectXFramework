@@ -129,6 +129,7 @@
     <ClInclude Include="ObjectSpawner.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="QNode.h" />
+    <ClInclude Include="Raven.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="ScenarioManager.h" />
     <ClInclude Include="Scene.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="ObjectSpawner.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="QNode.cpp" />
+    <ClCompile Include="Raven.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="ScenarioManager.cpp" />
     <ClCompile Include="Scene.cpp" />

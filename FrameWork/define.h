@@ -14,7 +14,7 @@
 #include<math.h>
 #include <algorithm>    // std::find
 #include<vector>
-#include<map>
+#include <map>
 #include <stdio.h>
 #include"utils.h"
 #include <time.h>       /* time */
@@ -83,6 +83,7 @@ enum eID
 	SKELETON = 59,
 	MUMMYMAN = 63,
 	BANDAGE = 64,
+	RAVEN = 65,
 };
 
 enum eItemID

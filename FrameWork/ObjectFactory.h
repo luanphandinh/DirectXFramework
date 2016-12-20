@@ -18,6 +18,7 @@
 #include"Medusa.h"
 #include"Fleaman.h"
 #include"Skeleton.h"
+#include"Raven.h"
 #include"MummyMan.h"
 class ObjectFactory
 {
@@ -41,6 +42,7 @@ private:
 
 	static BaseObject* getFleaman(xml_node node);
 	static BaseObject* getSkeleton(xml_node node);
+	static BaseObject* getRaven(xml_node node);
 
 	static BaseObject* getMummyMan(xml_node node);
 

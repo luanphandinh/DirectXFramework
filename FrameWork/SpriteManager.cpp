@@ -96,6 +96,11 @@ void  SpriteManager::loadResource(LPD3DXSPRITE spriteHandler)
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::FLEAMAN, sp));
 	this->loadSpriteInfo(eID::FLEAMAN, "Resources//Images//fleaman_animation.txt");
 
+	// RAVEN
+	sp = new Sprite(spriteHandler, L"Resources//Images//raven.png");
+	this->_listSprite.insert(pair<eID, Sprite*>(eID::RAVEN, sp));
+	this->loadSpriteInfo(eID::RAVEN, "Resources//Images//raven_animation.txt");
+
 	// SKELETON
 	sp = new Sprite(spriteHandler, L"Resources//Images//skeleton.png");
 	this->_listSprite.insert(pair<eID, Sprite*>(eID::SKELETON, sp));

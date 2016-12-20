@@ -162,6 +162,9 @@ BaseObject* ObjectFactory::getObjectById(xml_node node, eID id)
 	case FLEAMAN:
 		return getFleaman(node);
 		break;
+	case RAVEN:
+		return getRaven(node);
+		break;
 	case SKELETON:
 		return getSkeleton(node);
 		break;
@@ -694,6 +697,37 @@ BaseObject * ObjectFactory::getSkeleton(xml_node node) {
 	skeleton->init();
 
 	return skeleton;
+}
+
+BaseObject * ObjectFactory::getRaven(xml_node node) {
+	auto properties = getObjectProperties(node);
+	if (properties.size() == 0)
+		return nullptr;
+
+	int x, y, direction;
+	eStatus status;
+
+	x = stoi(properties["X"]) + 8;
+	y = stoi(properties["Y"]) - 16;
+
+	if (properties.find("status") != properties.end()) {
+		status = (eStatus)(stoi(properties.find("status")->second));
+	}
+	else {
+		status = eStatus::HANGING;
+	}
+
+	if (properties.find("direction") != properties.end()) {
+		direction = stoi(properties.find("direction")->second);
+	}
+	else {
+		direction = 1;
+	}
+
+	auto raven = new Raven(status, GVector2(x, y), direction);
+	raven->init();
+
+	return raven;
 }
 
 
