@@ -29,8 +29,6 @@ public:
 	void update(float);
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
-	void onCollisionBegin(CollisionEventArg*);
-	void onCollisionEnd(CollisionEventArg*);
 	float checkCollision(BaseObject*, float);
 	void die();
 	void setPosition(GVector2);

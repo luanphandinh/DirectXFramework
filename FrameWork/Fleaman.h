@@ -35,30 +35,31 @@ public:
 	void setPosition(GVector2);
 	GVector2 getVelocity();
 	IComponent* getComponent(string);
-
+	void getHitted();
 private:
 	map<string, IComponent*> _listComponent;
 	map<int, Animation*> _animations;
 	BaseObject* prevObject;
 	BaseObject *_explosion;
 	BaseObject *_burning;
+	int _direction;
 
-	// Vòng lặp thời gian, giúp knight di chuyển qua lại liên tục
-	StopWatch *_stopWatch;
+
 	void changeDirection();
 	bool isHitted;
 	eStatus _currentAnimateIndex;
 	void updateCurrentAnimateIndex();
 	StopWatch*	_burstStopWatch;
-	void getHitted();
-	eDirection _movingDirection;
+	
 
-	void updateDirection();
-	void changeDirection(eDirection dir);
 	bool checkIfOutOfScreen();
 	void updateSitting();
+	
+	bool _canJump;
 	void jump();
-	void jump2();
-	void highJump();
-	void highJump2();
+	StopWatch* _jumpStopWatch;
+
+	eDirection _jumpingDirection;
+	void updateDirection();
+	void changeDirection(eDirection dir);
 };

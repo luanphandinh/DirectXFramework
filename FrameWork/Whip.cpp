@@ -162,6 +162,14 @@ float Whip::checkCollision(BaseObject* otherObject, float dt)
 			}
 			SoundManager::getInstance()->Play(eSoundId::HIT);
 			break;
+		case FLEAMAN:
+			if (object == _listColliding.end() || object._Ptr == nullptr) {
+				((Fleaman*)otherObject)->dropHitpoint(this->_damage);
+				((Fleaman*)otherObject)->getHitted();
+				_listColliding[otherObject] = true;
+			}
+			SoundManager::getInstance()->Play(eSoundId::HIT);
+			break;
 		default:
 			break;
 		}

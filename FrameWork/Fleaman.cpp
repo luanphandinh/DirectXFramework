@@ -5,9 +5,10 @@ Fleaman::Fleaman(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::F
 	_sprite = SpriteManager::getInstance()->getSprite(eID::FLEAMAN);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
 	if (direction > 0) {
-		_movingDirection = eDirection::RIGHT;
+		_jumpingDirection = eDirection::RIGHT;
 	}
-	else _movingDirection = eDirection::LEFT;
+	else _jumpingDirection = eDirection::LEFT;
+	_direction = direction;
 	GVector2 v(0, 0);
 	GVector2 a(0, 0);
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
@@ -42,9 +43,8 @@ void Fleaman::init() {
 
 	_animations[DYING] = new Animation(_sprite, 0.15f);
 	_animations[DYING]->addFrameRect(eID::FLEAMAN, NULL);
-
-	_stopWatch = new StopWatch();
-
+	_canJump = false;
+	this->setHitpoint(1);
 	//*Test
 	//this->setPosition(GVector2(100,100));
 	this->setStatus(eStatus::SITTING);
@@ -57,13 +57,9 @@ void Fleaman::update(float deltatime) {
 	if (this->getStatus() == DESTROY)
 		return;
 
-	if (this->getHitpoint() <= 0 && this->getStatus() != DYING) {
-		this->setStatus(eStatus::DYING);
-		this->die();
-	}
-
-	if (this->getStatus() == eStatus::DYING) {
+	if (this->getHitpoint() <= 0 ) {
 		this->setStatus(eStatus::BURN);
+
 	}
 
 	// Bị nướng
@@ -79,19 +75,26 @@ void Fleaman::update(float deltatime) {
 				this->setStatus(eStatus::DESTROY);
 			}
 		}
+		return;
 	}
+
 	if (this->checkIfOutOfScreen()) return;
-	if (this->getStatus() == eStatus::SITTING) {
+
+	if (!_canJump) {
 		this->updateSitting();
 		return;
 	}
-	else {
 
-		for (auto component : _listComponent) {
-			component.second->update(deltatime);
-		}
-		_animations[this->getStatus()]->update(deltatime);
+	updateDirection();
+
+	jump();
+
+	for (auto component : _listComponent) {
+		component.second->update(deltatime);
 	}
+
+	_animations[this->getStatus()]->update(deltatime);
+
 }
 
 void Fleaman::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
@@ -101,9 +104,8 @@ void Fleaman::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
 		_burning->draw(spritehandle, viewport);
 	if (this->getStatus() == eStatus::DESTROY || this->getStatus() == eStatus::BURN)
 		return;
-
-	//_animations[_currentAnimateIndex]->draw(spritehandle, viewport);
-	_animations[this->getStatus()]->draw(spritehandle, viewport);
+	if(this->isInStatus(eStatus::JUMP) || this->isInStatus(eStatus::SITTING))
+		_animations[this->getStatus()]->draw(spritehandle, viewport);
 
 }
 
@@ -117,7 +119,7 @@ void Fleaman::release() {
 		this->_burning->release();
 	SAFE_DELETE(this->_burning);
 
-	SAFE_DELETE(this->_stopWatch);
+	SAFE_DELETE(this->_jumpStopWatch);
 	//SAFE_DELETE(this->_stopwatch);
 
 	SAFE_DELETE(this->_sprite);
@@ -137,7 +139,7 @@ float Fleaman::checkCollision(BaseObject *object, float dt) {
 			if (direction == eDirection::TOP && this->getVelocity().y < 0) {
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
 				auto movement = (Movement*)this->_listComponent["Movement"];
-				movement->setVelocity(GVector2(movement->getVelocity().x, 0));
+				movement->setVelocity(GVector2(0, 0));
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
 				//this->setStatus(eStatus::JUMP);
@@ -146,14 +148,6 @@ float Fleaman::checkCollision(BaseObject *object, float dt) {
 			else if (prevObject == object) {
 
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
-
-				int chance = rand()%100;
-				if (chance % 2 == 0) {
-					jump();
-				}
-				else {
-					highJump();
-				}
 				gravity->setStatus(eGravityStatus::FALLING_DOWN);
 
 				prevObject = nullptr;
@@ -219,31 +213,68 @@ void Fleaman::updateCurrentAnimateIndex() {
 }
 
 void Fleaman::getHitted() {
+
 }
 
 void Fleaman::updateDirection() {
-	
+	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
+	GVector2 position = this->getPosition();
 
-	
+	if (_jumpingDirection == eDirection::LEFT && _simon->getPositionX() > position.x) {
+		changeDirection(eDirection::RIGHT);
+	}
+	else if (_jumpingDirection == eDirection::RIGHT && _simon->getPositionX() < position.x) {
+		changeDirection(eDirection::LEFT);
+	}
 }
 
 void Fleaman::changeDirection(eDirection dir) {
-	
+	if (_jumpingDirection == dir)
+		return;
+
+	_jumpingDirection = dir;
+
+	Movement *movement = (Movement*)this->getComponent("Movement");
+	if (_jumpingDirection == eDirection::RIGHT) {
+		if (this->getScale().x < 0) this->setScaleX(this->getScale().x * (-1));
+		//movement->setVelocity(GVector2(FLEAMAN_SPEED, 0));
+	}
+	else if (_jumpingDirection == eDirection::LEFT) {
+		if (this->getScale().x > 0) this->setScaleX(this->getScale().x * (-1));
+		//movement->setVelocity(GVector2(-FLEAMAN_SPEED, 0));
+	}
 }
 
 bool Fleaman::checkIfOutOfScreen() {
-	auto viewport = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	auto viewport = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT screenBound = viewport->getBounding();
+	GVector2 vpBound = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getCurrentViewportBound();
 	GVector2 position = this->getPosition();
 
-	if (position.x > screenBound.right) {
+	if (position.x > screenBound.right && _direction > 0) {
 		this->setStatus(eStatus::DESTROY);
 		return true;
 	}
+	else if (position.x < screenBound.left && _direction < 0) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
+	if (position.x < vpBound.x + 85) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
+	if (position.x > vpBound.y - 85) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
 	return false;
 }
 
 void Fleaman::updateSitting() {
+	if (_canJump) return;
 	// track theo simon
 	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	RECT objectBound = objectTracker->getBounding();
@@ -253,6 +284,7 @@ void Fleaman::updateSitting() {
 	int ythis = this->getBounding().bottom;
 	if (xSimon > xthis&&xSimon < xthis + 250 && ySimon<ythis&&ySimon>ythis - 100) {
 		this->setStatus(JUMP);
+		_canJump = true;
 	}
 	else {
 		this->setStatus(SITTING);
@@ -260,17 +292,35 @@ void Fleaman::updateSitting() {
 }
 
 void Fleaman::jump() {
-	this->setStatus(eStatus::JUMP);
-	auto move = (Movement*)this->_listComponent["Movement"];
-	move->setVelocity(GVector2(85,150));
+	if (!_canJump) return;
+	if (_jumpStopWatch == nullptr) {
+		_jumpStopWatch = new StopWatch();
+	}
+
+	if (_jumpStopWatch != nullptr && _jumpStopWatch->isStopWatch(2000)) {
+		SAFE_DELETE(_jumpStopWatch);
+		auto gravity = (Gravity*)this->_listComponent["Gravity"];
+		gravity->setStatus(eGravityStatus::FALLING_DOWN);
+		int chance = rand() % 100;
+		if (chance % 2 == 0) {
+			this->setStatus(eStatus::JUMP);
+			auto move = (Movement*)this->_listComponent["Movement"];
+			if (_jumpingDirection == eDirection::RIGHT)
+				move->setVelocity(GVector2(85, 150));
+			else move->setVelocity(GVector2(-85, 150));
+		}
+		else {
+			this->setStatus(eStatus::JUMP);
+			auto move = (Movement*)this->_listComponent["Movement"];
+			if (_jumpingDirection == eDirection::RIGHT)
+				move->setVelocity(GVector2(85, 250));
+			else move->setVelocity(GVector2(-85, 250));
+		}
+	}
+
+	
 }
 
 
-void Fleaman::highJump() {
-	this->setStatus(eStatus::HIGHJUMP);
-
-	auto move = (Movement*)this->_listComponent["Movement"];
-	move->setVelocity(GVector2(85, 250));
-}
 
 
