@@ -8,7 +8,7 @@
 #include "BaseObject.h"
 #include "EmptyObject.h"
 #include "MedusaHead.h"
-
+#include "Ghost.h"
 [event_receiver(native)]
 class ObjectSpawner : public EmptyObject {
 public:
@@ -55,6 +55,7 @@ private:
 	int _counter;
 	int _maxObject;
 
+	bool _autoUpdateDirection;
 	int _direction;
 	bool _isOnePerOne;
 	RECT _bound;

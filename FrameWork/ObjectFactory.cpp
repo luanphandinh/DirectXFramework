@@ -430,7 +430,7 @@ BaseObject * ObjectFactory::getSpawner(xml_node node) {
 		dir = stoi(properties.find("direction")->second);
 	}
 	else {
-		dir = -1;
+		dir = 0;
 	}
 
 	// time

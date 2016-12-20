@@ -25,8 +25,8 @@ bool PlayScene::init()
 	//simon->setPosition(700, 640);//v3
 	//simon->setPosition(1666, 1000);//v4
 	//simon->setPosition(2700, 1000);//v4
-	//simon->setPosition(1000, 1100);//v5
-	simon->setPosition(1500, 1000);//v5
+	simon->setPosition(1000, 1100);//v5
+	//simon->setPosition(1500, 1000);//v5
 	//simon->setPosition(2500, 1324);//v6
 	//simon->setPosition(1400, 1324);//v6
 

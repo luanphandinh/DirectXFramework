@@ -511,9 +511,6 @@
     </Item>
     <Item Id="39" Name="medusaHeadSpawner0" X="1454" Y="760" Width="300" Height="30">
       <ActiveBound X="1454" Y="760" Width="300" Height="30" />
-      <Params>
-        <Elem Key="direction" Value="1" />
-      </Params>
     </Item>
     <Item Id="35" Name="spearKnight3" X="908" Y="701" Width="34" Height="64">
       <ActiveBound X="908" Y="701" Width="34" Height="64" />
@@ -723,13 +720,6 @@
         <Elem Key="physicBodyDirection" Value="1" />
       </Params>
     </Item>
-    <Item Id="2" Name="land69" X="1014" Y="893" Width="11" Height="66">
-      <ActiveBound X="1014" Y="893" Width="11" Height="66" />
-      <Params>
-        <Elem Key="physicBodyDirection" Value="8" />
-        <Elem Key="canJumpDown" Value="0" />
-      </Params>
-    </Item>
     <Item Id="2" Name="land71" X="258" Y="927" Width="59" Height="6">
       <ActiveBound X="258" Y="927" Width="59" Height="6" />
       <Params>
@@ -742,10 +732,10 @@
         <Elem Key="physicBodyDirection" Value="8" />
       </Params>
     </Item>
-    <Item Id="2" Name="land70" X="63" Y="893" Width="957" Height="6">
-      <ActiveBound X="63" Y="893" Width="957" Height="6" />
+    <Item Id="2" Name="land70" X="63" Y="893" Width="960" Height="20">
+      <ActiveBound X="63" Y="893" Width="960" Height="20" />
       <Params>
-        <Elem Key="physicBodyDirection" Value="1" />
+        <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
     <Item Id="2" Name="land75" X="386" Y="991" Width="60" Height="5">
@@ -760,10 +750,10 @@
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
-    <Item Id="2" Name="land77" X="515" Y="1086" Width="956" Height="10">
-      <ActiveBound X="515" Y="1086" Width="956" Height="10" />
+    <Item Id="2" Name="land77" X="515" Y="1086" Width="956" Height="20">
+      <ActiveBound X="515" Y="1086" Width="956" Height="20" />
       <Params>
-        <Elem Key="physicBodyDirection" Value="1" />
+        <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
     <Item Id="2" Name="land78" X="1471" Y="1150" Width="10" Height="59">
@@ -830,12 +820,6 @@
         <Elem Key="state" Value="1" />
       </Params>
     </Item>
-    <Item Id="55" Name="ghost0" X="680" Y="910" Width="32" Height="32">
-      <ActiveBound X="680" Y="910" Width="32" Height="32" />
-      <Params>
-        <Elem Key="direction" Value="-1" />
-      </Params>
-    </Item>
     <Item Id="55" Name="ghost1" X="950" Y="1100" Width="32" Height="32">
       <ActiveBound X="950" Y="1100" Width="32" Height="32" />
     </Item>
@@ -849,8 +833,8 @@
         <Elem Key="checkWithStair" Value="1" />
       </Params>
     </Item>
-    <Item Id="2" Name="land80" X="1538" Y="1275" Width="447" Height="2">
-      <ActiveBound X="1538" Y="1275" Width="447" Height="2" />
+    <Item Id="2" Name="land80" X="1538" Y="1275" Width="447" Height="20">
+      <ActiveBound X="1538" Y="1275" Width="447" Height="20" />
     </Item>
     <Item Id="2" Name="wall7" X="3009" Y="1534" Width="5" Height="260">
       <ActiveBound X="3009" Y="1534" Width="5" Height="260" />
@@ -1102,9 +1086,6 @@
         <Elem Key="DropItemId" Value="1" />
       </Params>
     </Item>
-    <Item Id="39" Name="medusaspawner5" X="2087" Y="1419" Width="37" Height="23">
-      <ActiveBound X="2087" Y="1419" Width="37" Height="23" />
-    </Item>
     <Item Id="39" Name="spawner6" X="1657" Y="1140" Width="50" Height="24">
       <ActiveBound X="1657" Y="1140" Width="50" Height="24" />
     </Item>
@@ -1116,6 +1097,16 @@
     </Item>
     <Item Id="39" Name="spawner7" X="1868" Y="1136" Width="105" Height="14">
       <ActiveBound X="1868" Y="1136" Width="105" Height="14" />
+    </Item>
+    <Item Id="39" Name="ghostSpawner0" X="672" Y="910" Width="34" Height="36">
+      <ActiveBound X="300" Y="910" Width="600" Height="36" />
+      <Params>
+        <Elem Key="type" Value="55" />
+        <Elem Key="direction" Value="-1" />
+      </Params>
+    </Item>
+    <Item Id="39" Name="medusaSpawer129" X="2402" Y="1472" Width="119" Height="23">
+      <ActiveBound X="2402" Y="1472" Width="119" Height="23" />
     </Item>
   </Objects>
 </Tilesmap>

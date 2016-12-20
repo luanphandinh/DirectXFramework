@@ -5,7 +5,7 @@
 #include "BaseEnemy.h"
 #include "StopWatch.h"
 
-#define GHOST_SPEED 90
+#define GHOST_SPEED 50
 #define GHOST_HITPOINT 20
 #define GHOST_SCORE 100
 
@@ -27,8 +27,8 @@ public:
 
 	float checkCollision(BaseObject*, float);
 	void die();
-	void setPosition(GVector2);
-	GVector2 getVelocity();
+	//void setPosition(GVector2);
+	GVector2 getVelocity() override;
 	int getDirection();
 	IComponent* getComponent(string);
 
@@ -42,8 +42,9 @@ private:
 	void flyingUp();
 	void fly();
 	// Init values
+	GVector2 trackedPosition;
 	bool _isHiding;
-
+	bool _flyUp;
 
 	int hack;
 	bool _isHitted;

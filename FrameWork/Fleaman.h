@@ -51,7 +51,10 @@ private:
 	void updateCurrentAnimateIndex();
 	StopWatch*	_burstStopWatch;
 	void getHitted();
+	eDirection _movingDirection;
 
+	void updateDirection();
+	void changeDirection(eDirection dir);
 	bool checkIfOutOfScreen();
 	void updateSitting();
 	void jump();

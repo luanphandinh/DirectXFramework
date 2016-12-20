@@ -1229,3 +1229,7 @@ void Simon::setFreeze(bool freeze)
 	if (_isFreezed != freeze)
 		_isFreezed = freeze;
 }
+
+void Simon::protect(bool protect) {
+	_isProtected = protect;
+}

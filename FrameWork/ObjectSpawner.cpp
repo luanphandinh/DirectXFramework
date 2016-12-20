@@ -9,6 +9,9 @@ ObjectSpawner::ObjectSpawner(GVector2 position, int width, int height, eID type,
 	//_stopWatch = new StopWatch();
 
 	_direction = direction;
+	if(_direction == 0)
+		_autoUpdateDirection = true;
+	else _autoUpdateDirection = false;
 	_isOnePerOne = false;
 
 	_maxObject = 3;
@@ -30,10 +33,14 @@ void ObjectSpawner::update(float deltatime) {
 	//this->_direction == 1 && this->getPositionX() > vpBounding.left&&this->getPositionY() - 70>vpBounding.bottom
 	// check coi đi tới chưa, chưa tới mới tạo
 	//
+	
 	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+
+	if (this->getPositionY() + 100 < _simon->getPositionY()) return;
+
 	if (isRectangleIntersectedInDescartes(vpBounding, this->getBounding())
 		&& !isContains(vpBounding, this->getBounding()) 
-		&& (this->getPositionY() + 20 > _simon->getPositionY())
+		&&( (this->getPositionY() + 20 > _simon->getPositionY()))
 		) {
 		//bool b = );
 		if (_stopWatch == nullptr) {
@@ -41,20 +48,28 @@ void ObjectSpawner::update(float deltatime) {
 			_stopWatch = new StopWatch();
 		}
 		else _time = 3000;
-		if (_stopWatch->isStopWatch(_time)) {
-			if (_number != -1 && _counter < _number) {
-				_counter++;
-				_listObjects.push_back(getObject(_createType));
+		if (_isOnePerOne == false) {
+			if (_stopWatch->isStopWatch(_time)) {
+				if (_number != -1 && _counter < _number) {
+					_counter++;
+					_listObjects.push_back(getObject(_createType));
 
-				if (_counter < _number)
-					_stopWatch->restart();
-			}
-			else if (_number == -1) {
-				//if (_listObjects.size() < _maxObject)
+					if (_counter < _number)
+						_stopWatch->restart();
+				}
+				else if (_number == -1) {
+					//if (_listObjects.size() < _maxObject)
 					_listObjects.push_back(getObject(_createType));
 					_stopWatch->restart();
+				}
 			}
-		}		
+		}
+		else {
+			if (_listObjects.size() == 0) {
+				_listObjects.push_back(getObject(_createType));
+			}
+		}
+	
 	}
 
 	//else if (this->getPositionX() <= vpBounding.left || this->getPositionY() <= vpBounding.bottom) {
@@ -120,6 +135,14 @@ BaseObject * ObjectSpawner::getObject(eID id) {
 		return medusaHead;
 		break;
 	}
+	case GHOST:
+	{
+		auto ghost = new Ghost(eStatus::HIDING,this->getPosition(),_direction);
+		ghost->init();
+		auto pos = ghost->getPosition();
+		return ghost;
+		break;
+	}
 	default:
 		break;
 	}
@@ -127,6 +150,7 @@ BaseObject * ObjectSpawner::getObject(eID id) {
 
 void  ObjectSpawner::updateDirection()
 {
+	if (!_autoUpdateDirection) return;
 	auto _simon = ((PlayScene*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	if (this->getPositionX() < _simon->getPositionX())
 		_direction = 1;

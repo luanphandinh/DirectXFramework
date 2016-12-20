@@ -227,8 +227,6 @@ float SpearKnight::checkCollision(BaseObject * object, float dt) {
 		{
 			((Simon*)object)->getHitted();
 		}
-
-		
 		return 0.0f;
 	}
 	return 0.0f;

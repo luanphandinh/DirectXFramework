@@ -113,6 +113,7 @@ public:
 	void forceJump();
 	void unforceJump();
 	void setFreeze(bool freeze);
+	void protect(bool protect = true);
 private:
 	map<int, Animation*> _animations;
 	map<string, IComponent*> _componentList;

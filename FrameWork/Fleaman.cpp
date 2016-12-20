@@ -4,7 +4,10 @@
 Fleaman::Fleaman(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::FLEAMAN) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::FLEAMAN);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
-
+	if (direction > 0) {
+		_movingDirection = eDirection::RIGHT;
+	}
+	else _movingDirection = eDirection::LEFT;
 	GVector2 v(0, 0);
 	GVector2 a(0, 0);
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
@@ -48,12 +51,6 @@ void Fleaman::init() {
 	_sprite->drawBounding(false);
 	this->setPhysicBodySide(eDirection::ALL);
 }
-
-//float random_bet_zero_n_one() {
-//	static std::default_random_engine generator(time(0));
-//	static std::uniform_real_distribution<float> distribution(0.0, 1.0);
-//	return distribution(generator);
-//}
 
 void Fleaman::update(float deltatime) {
 
@@ -151,27 +148,6 @@ float Fleaman::checkCollision(BaseObject *object, float dt) {
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
 
 				int chance = rand()%100;
-				int chance2 = rand() % 100;
-
-				auto simon = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-				RECT simonBound = simon->getBounding();
-
-				/*if (chance2 % 2 == 0) {
-					if (chance % 2 == 0) {
-						jump2();
-					}
-					else {
-						highJump2();
-					}
-				}
-				else {
-					if (chance % 2 == 0) {
-						jump();
-					}
-					else {
-						highJump();
-					}
-				}*/
 				if (chance % 2 == 0) {
 					jump();
 				}
@@ -245,6 +221,16 @@ void Fleaman::updateCurrentAnimateIndex() {
 void Fleaman::getHitted() {
 }
 
+void Fleaman::updateDirection() {
+	
+
+	
+}
+
+void Fleaman::changeDirection(eDirection dir) {
+	
+}
+
 bool Fleaman::checkIfOutOfScreen() {
 	auto viewport = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT screenBound = viewport->getBounding();
@@ -279,13 +265,6 @@ void Fleaman::jump() {
 	move->setVelocity(GVector2(85,150));
 }
 
-void Fleaman::jump2() {
-	this->setStatus(eStatus::JUMP);
-	_sprite->setScaleX(-this->getScale().x);
-
-	auto move = (Movement*)this->_listComponent["Movement"];
-	move->setVelocity(GVector2(-85, 150));
-}
 
 void Fleaman::highJump() {
 	this->setStatus(eStatus::HIGHJUMP);
@@ -294,11 +273,4 @@ void Fleaman::highJump() {
 	move->setVelocity(GVector2(85, 250));
 }
 
-void Fleaman::highJump2() {
-	this->setStatus(eStatus::HIGHJUMP);
-	_sprite->setScaleX(-this->getScale().x);
-
-	auto move = (Movement*)this->_listComponent["Movement"];
-	move->setVelocity(GVector2(-85, 250));
-}
 

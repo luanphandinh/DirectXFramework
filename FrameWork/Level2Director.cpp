@@ -173,6 +173,7 @@ bool Level2Director::checkPosition()
 	GVector2 doorPos = _trackedDoor->getPosition();
 	if ((xSimon < doorPos.x + 30 && xSimon > doorPos.x && ySimon < doorPos.y && ySimon> doorPos.y - 100))
 	{
+		_simon->protect(true);
 		return true;
 	}
 	return false;

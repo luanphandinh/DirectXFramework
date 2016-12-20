@@ -42,6 +42,7 @@ void Ghost::init() {
 
 	_stopWatch = new StopWatch();
 
+	_flyUp = false;
 	_isHiding = true;
 	this->hack = 0;
 	this->setHitpoint(2);
@@ -83,21 +84,13 @@ void Ghost::update(float deltaTime) {
 		component.second->update(deltaTime);
 	}
 
-	/*if (hack == 30) {
-		this->setStatus(FLYING);
-		this->fly();
-	}*/
+	this->fly();
 
-	this->flyingUp();
-
-	//this->checkIfOutOfScreen();
-
-	//if (this->getStatus() == eStatus::FLYING || this->getStatus() == eStatus::FLYINGUP)
 	_animations[FLYING]->update(deltaTime);
 }
 
 void Ghost::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) { 
-	//if (_isHiding) return;
+	if (_isHiding) return;
 	if (_burning != nullptr)
 		_burning->draw(spritehandle, viewport);
 	if (this->getStatus() == eStatus::DESTROY || this->isInStatus(eStatus::BURN)) return;
@@ -120,24 +113,24 @@ void Ghost::release() {
 
 
 float Ghost::checkCollision(BaseObject *object, float deltaTime) {
-	if (this->getStatus() == eStatus::DESTROY ||
-		this->isInStatus(eStatus::DYING) ||
-		this->isInStatus(eStatus::HIDING))
+	if (this->getStatus() == eStatus::DESTROY)
 		return 0.0f;
+
+	if (_isHiding) return 0.0f;
 
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
-	if (objectId != eID::SIMON) return 0.0f;
-	if (objectId == eID::SIMON) {
-		if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
-			auto movement = (Movement*)this->_listComponent["Movement"];
-		/*
-			Phần check collision thằng simon ko liên quan nữa nha
-			Chuyển hết sang cho cái roi nó check rồi,chỉ check lúc đụng simon thì cho simon getHitted()
-			với mất máu thôi
-		*/
+	if (objectId != eID::SIMON && objectId != eID::WHIP && objectId != eID::ITEM) return 0.0f;
+	if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
+		if (objectId == eID::SIMON) {
 			((Simon*)object)->getHitted();
+		}
+		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting()) {
+			this->dropHitpoint(1);
+		}
+		else if (objectId == eID::ITEM && ((Item*)object)->getItemType() == eItemType::PICKED_UP) {
+			this->setStatus(eStatus::BURN);
 		}
 
 		return 0.0f;
@@ -146,14 +139,6 @@ float Ghost::checkCollision(BaseObject *object, float deltaTime) {
 
 }
 
-void Ghost::die() {
-
-}
-
-void Ghost::setPosition(GVector2 pos) {
-	_sprite->setPosition(pos);
-
-}
 
 GVector2 Ghost::getVelocity() {
 	auto move = (Movement*)this->_listComponent["Movement"];
@@ -205,17 +190,28 @@ void Ghost::changeDirection(eDirection dir)
 //}
 
 void Ghost::flyingUp() {
+}
+
+void Ghost::fly() {
 	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
 	RECT objectBound = _simon->getBounding();
 	auto viewportTracker = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getViewport();
 	RECT vpBound = viewportTracker->getBounding();
-	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(movement->getVelocity().x, +5));
-}
 
-void Ghost::fly() {
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(movement->getVelocity().x, 0));
+	
+	if (!_flyUp && this->getPositionY() < _simon->getPositionY()) {
+		trackedPosition = _simon->getPosition();
+		_flyUp = true;
+		movement->setVelocity(GVector2(movement->getVelocity().x, 5));
+	}
+	else if (_flyUp && this->getPositionY() > trackedPosition.y) {
+		_flyUp = false;
+		movement->setVelocity(GVector2(movement->getVelocity().x, -5));
+	}
+	/*else {
+		movement->setVelocity(GVector2(movement->getVelocity().x, 0));
+	}*/
 }
 
 void Ghost::checkIfOutOfScreen() {
