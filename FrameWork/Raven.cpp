@@ -1,10 +1,10 @@
 ﻿#include "Raven.h"
-
+#include "PlayScene.h"
 Raven::Raven(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::RAVEN) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::RAVEN);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
 
-	GVector2 v(direction * RAVEN_SPEED, 0);
+	GVector2 v(0, 0);
 	GVector2 a(0, 0);
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
 	this->setStatus(status);
@@ -26,8 +26,8 @@ void Raven::init() {
 	_listComponent["CollisionBody"] = collisionBody;
 
 
-	_animations[eStatus::HANGING] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::HANGING]->addFrameRect(eID::RAVEN, "normal", NULL);
+	_animations[eStatus::LANDING] = new Animation(_sprite, 0.1f);
+	_animations[eStatus::LANDING]->addFrameRect(eID::RAVEN, "normal", NULL);
 
 	_animations[FLYINGDOWN] = new Animation(_sprite, 0.15f);
 	_animations[FLYINGDOWN]->addFrameRect(eID::RAVEN, "fly_01", "fly_02", "fly_03", NULL);
@@ -38,10 +38,11 @@ void Raven::init() {
 	_animations[DYING] = new Animation(_sprite, 0.15f);
 	_animations[DYING]->addFrameRect(eID::RAVEN, NULL);
 
+	_isLanding = true;
 	_stopWatch = new StopWatch();
 	//*Test
 	//this->setPosition(GVector2(300, 200));
-	this->setStatus(eStatus::HANGING);
+	this->setStatus(eStatus::LANDING);
 	_sprite->drawBounding(false);
 
 	this->hack = 0;
@@ -73,26 +74,21 @@ void Raven::update(float deltaTime) {
 		return;
 	}
 
-	if (this->checkIfOutOfScreen()) return;
-	if (this->getStatus() == eStatus::HANGING) {
-		this->updateHanging();
+
+	if (_isLanding) {
+		this->updateLanding();
 		return;
 	}
-	else {
-		if (hack == 30) {
-			this->setStatus(FLYING);
-			this->fly();
-		}
-		if (this->getStatus() == FLYINGDOWN) {
-			hack++;
-			this->flyingDown();
-		}
 
-		for (auto component : _listComponent) {
-			component.second->update(deltaTime);
-		}
-		_animations[this->getStatus()]->update(deltaTime);
+	updateDirection();
+
+	for (auto component : _listComponent) {
+		component.second->update(deltaTime);
 	}
+
+	//this->fly();
+
+	_animations[this->getStatus()]->update(deltaTime);
 }
 
 void Raven::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
@@ -114,7 +110,29 @@ void Raven::release() {
 	SAFE_DELETE(this->_sprite);
 }
 
-float Raven::checkCollision(BaseObject *, float) {
+float Raven::checkCollision(BaseObject *object, float deltaTime) {
+	if (this->getStatus() == eStatus::DESTROY)
+		return 0.0f;
+
+	if (_isLanding) return 0.0f;
+
+	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
+	eID objectId = object->getId();
+	eDirection direction;
+	if (objectId != eID::SIMON && objectId != eID::WHIP && objectId != eID::ITEM) return 0.0f;
+	if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
+		if (objectId == eID::SIMON) {
+			((Simon*)object)->getHitted();
+		}
+		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting()) {
+			this->dropHitpoint(1);
+		}
+		else if (objectId == eID::ITEM && ((Item*)object)->getItemType() == eItemType::PICKED_UP) {
+			this->setStatus(eStatus::BURN);
+		}
+
+		return 0.0f;
+	}
 	return 0.0f;
 }
 
@@ -136,8 +154,37 @@ IComponent * Raven::getComponent(string componentName) {
 	return _listComponent.find(componentName)->second;
 }
 
-void Raven::changeDirection() {
+int Raven::getDirection() {
+	return _direction;
+}
 
+void Raven::updateDirection() {
+	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
+	GVector2 position = this->getPosition();
+
+	if (_flyingDirection == eDirection::LEFT && _simon->getPositionX() > position.x) {
+		changeDirection(eDirection::RIGHT);
+	}
+	else if (_flyingDirection == eDirection::RIGHT && _simon->getPositionX() < position.x) {
+		changeDirection(eDirection::LEFT);
+	}
+}
+
+void Raven::changeDirection(eDirection dir) {
+	if (_flyingDirection == dir)
+		return;
+
+	_flyingDirection = dir;
+
+	Movement *movement = (Movement*)this->getComponent("Movement");
+	if (_flyingDirection == eDirection::RIGHT) {
+		if (this->getScale().x < 0) this->setScaleX(this->getScale().x * (-1));
+		movement->setVelocity(GVector2(RAVEN_SPEED, 0));
+	}
+	else if (_flyingDirection == eDirection::LEFT) {
+		if (this->getScale().x > 0) this->setScaleX(this->getScale().x * (-1));
+		movement->setVelocity(GVector2(-RAVEN_SPEED, 0));
+	}
 }
 
 void Raven::flyingDown() {
@@ -145,13 +192,44 @@ void Raven::flyingDown() {
 }
 
 void Raven::fly() {
+	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
+	RECT objectBound = _simon->getBounding();
+	auto viewportTracker = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getViewport();
+	RECT vpBound = viewportTracker->getBounding();
 
+	Movement *movement = (Movement*)this->getComponent("Movement");
+
+	//if (!_flyUp && this->getPositionY() < _simon->getPositionY()) {
+	//	trackedPosition = _simon->getPosition();
+	//	_flyUp = true;
+	//	movement->setVelocity(GVector2(movement->getVelocity().x, 5));
+	//}
+	//else if (_flyUp && this->getPositionY() > trackedPosition.y) {
+	//	_flyUp = false;
+	//	movement->setVelocity(GVector2(movement->getVelocity().x, -5));
+	//}
 }
 
 bool Raven::checkIfOutOfScreen() {
 	return false;
 }
 
-void Raven::updateHanging() {
+void Raven::updateLanding() {
+	// track theo simon
+	if (!_isLanding) return;
+	auto objectTracker = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
+	RECT objectBound = objectTracker->getBounding();
+	int x = objectTracker->getPositionX();
+	int y = objectTracker->getPositionY();
+	int xthis = this->getPositionX();
+	int ythis = this->getBounding().bottom;
 
+	if (this->getDirection() == -1 && objectBound.right < this->getBounding().left - 100 && objectBound.top>this->getBounding().bottom) {
+		//this->setStatus(FLYINGUP);
+		_isLanding = false;
+	}
+	else if (this->getDirection() == 1 && objectBound.left > this->getBounding().right + 100 && objectBound.top > this->getBounding().bottom) {
+		//this->setStatus(FLYINGUP);
+		_isLanding = false;
+	}
 }

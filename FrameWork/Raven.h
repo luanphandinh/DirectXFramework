@@ -29,13 +29,14 @@ public:
 	void setPosition(GVector2);
 	GVector2 getVelocity();
 	IComponent* getComponent(string);
+	int getDirection();
 
 private:
 	map<string, IComponent*> _listComponent;
 	map<int, Animation*> _animations;
 	BaseObject* prevObject;
-
-	void changeDirection();
+	void updateDirection();
+	void changeDirection(eDirection dir);
 	void flyingDown();
 	void fly();
 	// Init values
@@ -44,7 +45,13 @@ private:
 	bool _isHitted;
 	StopWatch* _stopWatch;
 	bool checkIfOutOfScreen();
-	void updateHanging();
+	void updateLanding();
 	BaseObject *_burning;
 	int _direction;
+
+	GVector2 trackedPosition;
+	bool _flyDown;
+	bool _isLanding;
+	eDirection _flyingDirection;
+
 };

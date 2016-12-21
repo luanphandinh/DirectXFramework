@@ -157,6 +157,8 @@ enum eStatus
 
 	JUMP=(1<<33),
 	HIGHJUMP=(1<<34),
+
+	LANDING=(1<<35),
 };
 
 enum eStairDirection

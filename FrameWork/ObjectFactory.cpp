@@ -714,7 +714,7 @@ BaseObject * ObjectFactory::getRaven(xml_node node) {
 		status = (eStatus)(stoi(properties.find("status")->second));
 	}
 	else {
-		status = eStatus::HANGING;
+		status = eStatus::LANDING;
 	}
 
 	if (properties.find("direction") != properties.end()) {
