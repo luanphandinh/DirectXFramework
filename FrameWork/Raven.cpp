@@ -4,12 +4,18 @@ Raven::Raven(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::RAVEN
 	_sprite = SpriteManager::getInstance()->getSprite(eID::RAVEN);
 	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
 
+	if (direction > 0) {
+		_flyingDirection = eDirection::RIGHT;
+	}
+	else _flyingDirection = eDirection::LEFT;
 	GVector2 v(0, 0);
 	GVector2 a(0, 0);
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
 	this->setStatus(status);
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
+	this->_direction = direction;
+
 	this->setScaleX(direction * SCALE_FACTOR);
 }
 
@@ -39,7 +45,8 @@ void Raven::init() {
 	_animations[DYING]->addFrameRect(eID::RAVEN, NULL);
 
 	_isLanding = true;
-	_stopWatch = new StopWatch();
+	_flyDown = false;
+	//_stopWatch = new StopWatch();
 	//*Test
 	//this->setPosition(GVector2(300, 200));
 	this->setStatus(eStatus::LANDING);
@@ -77,16 +84,19 @@ void Raven::update(float deltaTime) {
 
 	if (_isLanding) {
 		this->updateLanding();
+		//updateDirection();
+
 		return;
 	}
 
-	updateDirection();
+	//updateDirection();
+	if (this->getStatus() == FLYING) {
+		this->fly();
 
+	}
 	for (auto component : _listComponent) {
 		component.second->update(deltaTime);
 	}
-
-	//this->fly();
 
 	_animations[this->getStatus()]->update(deltaTime);
 }
@@ -108,6 +118,9 @@ void Raven::release() {
 		_burning->release();
 	//SAFE_DELETE(this->_loopwatch);
 	SAFE_DELETE(this->_sprite);
+	SAFE_DELETE(this->_stopWatch);
+	SAFE_DELETE(this->_stopWatch2);
+
 }
 
 float Raven::checkCollision(BaseObject *object, float deltaTime) {
@@ -179,11 +192,11 @@ void Raven::changeDirection(eDirection dir) {
 	Movement *movement = (Movement*)this->getComponent("Movement");
 	if (_flyingDirection == eDirection::RIGHT) {
 		if (this->getScale().x < 0) this->setScaleX(this->getScale().x * (-1));
-		movement->setVelocity(GVector2(RAVEN_SPEED, 0));
+		//movement->setVelocity(GVector2(RAVEN_SPEED, 0));
 	}
 	else if (_flyingDirection == eDirection::LEFT) {
 		if (this->getScale().x > 0) this->setScaleX(this->getScale().x * (-1));
-		movement->setVelocity(GVector2(-RAVEN_SPEED, 0));
+		//movement->setVelocity(GVector2(-RAVEN_SPEED, 0));
 	}
 }
 
@@ -199,14 +212,28 @@ void Raven::fly() {
 
 	Movement *movement = (Movement*)this->getComponent("Movement");
 
-	//if (!_flyUp && this->getPositionY() < _simon->getPositionY()) {
+	movement->setVelocity(GVector2Zero);
+
+	if (_stopWatch == nullptr) {
+		_stopWatch = new StopWatch();
+	}
+
+	if (_stopWatch->isStopWatch(1)) {
+		SAFE_DELETE(_stopWatch);
+		movement->setVelocity(GVector2(-40, -50));
+
+	}
+
+
+	//if (!_flyDown && this->getPositionY() > _simon->getPositionY()) {
 	//	trackedPosition = _simon->getPosition();
-	//	_flyUp = true;
-	//	movement->setVelocity(GVector2(movement->getVelocity().x, 5));
+	//	_flyDown = true;
+		//movement->setVelocity(GVector2(-40, -50));
+
 	//}
-	//else if (_flyUp && this->getPositionY() > trackedPosition.y) {
-	//	_flyUp = false;
-	//	movement->setVelocity(GVector2(movement->getVelocity().x, -5));
+	//else if (_flyDown && this->getPositionY() < trackedPosition.y) {
+	//	_flyDown = false;
+	//	//movement->setVelocity(GVector2(movement->getVelocity().x, -5));
 	//}
 }
 
@@ -224,8 +251,8 @@ void Raven::updateLanding() {
 	int xthis = this->getPositionX();
 	int ythis = this->getBounding().bottom;
 
-	if (this->getDirection() == -1 && objectBound.right < this->getBounding().left - 100 && objectBound.top>this->getBounding().bottom) {
-		//this->setStatus(FLYINGUP);
+	if (this->getDirection() == -1 && objectBound.right < this->getBounding().left - 100 && objectBound.top<this->getBounding().bottom) {
+		this->setStatus(FLYING);
 		_isLanding = false;
 	}
 	else if (this->getDirection() == 1 && objectBound.left > this->getBounding().right + 100 && objectBound.top > this->getBounding().bottom) {

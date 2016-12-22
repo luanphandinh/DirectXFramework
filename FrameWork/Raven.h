@@ -44,6 +44,8 @@ private:
 	int hack;
 	bool _isHitted;
 	StopWatch* _stopWatch;
+	StopWatch* _stopWatch2;
+
 	bool checkIfOutOfScreen();
 	void updateLanding();
 	BaseObject *_burning;
