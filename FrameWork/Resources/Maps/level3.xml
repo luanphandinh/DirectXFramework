@@ -606,6 +606,9 @@
     </Item>
     <Item Id="65" Name="raven0" X="2590" Y="735" Width="32" Height="32">
       <ActiveBound X="2590" Y="735" Width="32" Height="32" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
     </Item>
   </Objects>
 </Tilesmap>

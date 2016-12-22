@@ -707,7 +707,7 @@ BaseObject * ObjectFactory::getRaven(xml_node node) {
 	int x, y, direction;
 	eStatus status;
 
-	x = stoi(properties["X"]) + 8;
+	x = stoi(properties["X"]) + 16;
 	y = stoi(properties["Y"]) - 16;
 
 	if (properties.find("status") != properties.end()) {
