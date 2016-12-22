@@ -1,19 +1,21 @@
 ﻿#include "Skeleton.h"
+#include"Level3.h"
 
 Skeleton::Skeleton(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::SKELETON) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SKELETON);
-	_sprite->setFrameRect(0, 0, 32.0f, 16.0f);
+	if (direction > 0) {
+		_jumpingDirection = eDirection::RIGHT;
+	}
+	else _jumpingDirection = eDirection::LEFT;
+	_direction = direction;
 
-	GVector2 v(0, 0);
-	GVector2 a(0, 0);
-	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(a, v, this->_sprite)));
+	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(GVector2Zero, GVector2(100,20), this->_sprite)));
 	this->setStatus(status);
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
 	this->setPhysicBodySide(eDirection::ALL);
 }
-
 Skeleton::~Skeleton() {
 }
 
@@ -30,35 +32,29 @@ void Skeleton::init() {
 	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::NORMAL]->addFrameRect(eID::SKELETON, "normal", NULL);
 
-	_animations[JUMP] = new Animation(_sprite, 0.15f);
-	_animations[JUMP]->addFrameRect(eID::SKELETON, "move_01", "move_02", NULL);
+	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.15f);
+	_animations[eStatus::RUNNING]->addFrameRect(eID::SKELETON, "move_01", "move_02", NULL);
 
-	_animations[HIGHJUMP] = new Animation(_sprite, 0.15f);
-	_animations[HIGHJUMP]->addFrameRect(eID::SKELETON, "move_01", "move_02", NULL);
+	_animations[JUMPING] = new Animation(_sprite, 0.15f);
+	_animations[JUMPING]->addFrameRect(eID::SKELETON, "move_01", "move_02", NULL);
 
-	_animations[DYING] = new Animation(_sprite, 0.15f);
-	_animations[DYING]->addFrameRect(eID::SKELETON, NULL);
 
-	_stopWatch = new StopWatch();
-
-	//*Test
-	//this->setPosition(GVector2(100,100));
-	this->setStatus(eStatus::NORMAL);
+	this->setStatus(eStatus::RUNNING);
 	_sprite->drawBounding(false);
 	this->setPhysicBodySide(eDirection::ALL);
+	
+	auto gravity = (Gravity*)this->_listComponent["Gravity"];
+	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 }
 
 void Skeleton::update(float deltatime) {
+
 	if (this->getStatus() == DESTROY)
 		return;
 
-	if (this->getHitpoint() <= 0 && this->getStatus() != DYING) {
-		this->setStatus(eStatus::DYING);
-		this->die();
-	}
-
-	if (this->getStatus() == eStatus::DYING) {
+	if (this->getHitpoint() <= 0) {
 		this->setStatus(eStatus::BURN);
+
 	}
 
 	// Bị nướng
@@ -74,20 +70,23 @@ void Skeleton::update(float deltatime) {
 				this->setStatus(eStatus::DESTROY);
 			}
 		}
+		return;
 	}
-	//if (this->checkIfOutOfScreen()) return;
-	//if (this->getStatus() == eStatus::SITTING) {
-	//	this->updateSitting();
-	//	return;
-	//}
-	//else {
 
-		for (auto component : _listComponent) {
-			component.second->update(deltatime);
-		}
-		_animations[this->getStatus()]->update(deltatime);
-	/*}*/
+	//if (this->checkIfOutOfScreen()) return;
+
+	updateDirection();
+
+	updateStatus();
+
+	for (auto component : _listComponent) {
+		component.second->update(deltatime);
+	}
+
+	_animations[this->getStatus()]->update(deltatime);
+
 }
+
 
 void Skeleton::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
 	if (this->isInStatus(eStatus::DESTROY)) return;
@@ -96,8 +95,8 @@ void Skeleton::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
 		_burning->draw(spritehandle, viewport);
 	if (this->getStatus() == eStatus::DESTROY || this->getStatus() == eStatus::BURN)
 		return;
-
-	_animations[this->getStatus()]->draw(spritehandle, viewport);
+	if (this->isInStatus(eStatus::JUMPING) || this->isInStatus(eStatus::RUNNING))
+		_animations[this->getStatus()]->draw(spritehandle, viewport);
 
 }
 
@@ -111,7 +110,8 @@ void Skeleton::release() {
 		this->_burning->release();
 	SAFE_DELETE(this->_burning);
 
-	SAFE_DELETE(this->_stopWatch);
+	SAFE_DELETE(this->_jumpStopWatch);
+	SAFE_DELETE(this->_movingStopWatch);
 	//SAFE_DELETE(this->_stopwatch);
 
 	SAFE_DELETE(this->_sprite);
@@ -130,25 +130,42 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 		if (collisionBody->checkCollision(object, direction, dt)) {
 			if (direction == eDirection::TOP && this->getVelocity().y < 0) {
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
-				auto movement = (Movement*)this->_listComponent["Movement"];
-				movement->setVelocity(GVector2(movement->getVelocity().x, 0));
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
+				auto movement = (Movement*)this->_listComponent["Movement"];
+				movement->setVelocity(GVector2(this->getVelocity().x, 0));
+				this->removeStatus(JUMPING);
+				this->setStatus(RUNNING);
 				//this->setStatus(eStatus::JUMP);
 				prevObject = object;
 			}
+			else if (direction == eDirection::LEFT || direction == eDirection::RIGHT)
+			{
+				//this->setStatus(eStatus::NORMAL);
+				//vì khi có va chạm thì vật vẫn còn di chuyển
+				//nên cần dùng hàm dưới để cập nhật lại vị trí khi simon giao với wall(land với hướng va chạm trái phải)
+				float moveX, moveY;
+				if (collisionBody->isCollidingIntersected(object, moveX, moveY, dt))
+				{
+					collisionBody->updateTargetPosition(object, direction, false, GVector2(moveX, moveY));
+				}
+				if (!this->isInStatus(eStatus::JUMPING))
+				{
+					auto move = (Movement*)this->_listComponent["Movement"];
+					move->setVelocity(GVector2(this->getVelocity().x, this->getVelocity().y));
+				}
+				else
+				{
+					auto move = (Movement*)this->_listComponent["Movement"];
+					move->setVelocity(GVector2(this->getVelocity().x, -400));
+				}
+				//enableGravity(false);
+				//_preObject = otherObject;
+			}
 			else if (prevObject == object) {
 
-				/*auto gravity = (Gravity*)this->_listComponent["Gravity"];
-
-				int chance = rand() % 100;
-				if (chance % 2 == 0) {
-					jump();
-				}
-				else {
-					highJump();
-				}
-				gravity->setStatus(eGravityStatus::FALLING_DOWN);*/
+				auto gravity = (Gravity*)this->_listComponent["Gravity"];
+				gravity->setStatus(eGravityStatus::FALLING_DOWN);
 
 				prevObject = nullptr;
 			}
@@ -157,15 +174,15 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 		return 0.0f;
 	}
 	else
-		if (objectId == eID::SIMON) {
-			if (collisionBody->checkCollision(object, direction, dt, false)) {
+	if (objectId == eID::SIMON) {
+		if (collisionBody->checkCollision(object, direction, dt, false)) {
 
-				((Simon*)object)->getHitted();
-			}
-
-
-			return 0.0f;
+			((Simon*)object)->getHitted();
 		}
+
+
+		return 0.0f;
+	}
 	return 0.0f;
 }
 
@@ -192,25 +209,149 @@ IComponent * Skeleton::getComponent(string componentName) {
 void Skeleton::changeDirection() {
 	_sprite->setScaleX(-this->getScale().x);
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
-}
-
-void Skeleton::backward() {
-	_sprite->setScaleX(-this->getScale().x);
-	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(-movement->getVelocity().x, 0));
-}
-
-void Skeleton::forward() {
-	_sprite->setScaleX(this->getScale().x);
-	Movement *movement = (Movement*)this->getComponent("Movement");
 	movement->setVelocity(GVector2(movement->getVelocity().x, 0));
 }
 
-void Skeleton::jump() {
-	this->setStatus(eStatus::JUMP);
+void Skeleton::updateCurrentAnimateIndex() {
+	if (this->isInStatus(eStatus::HIGHJUMP)) {
+		_currentAnimateIndex = eStatus::HIGHJUMP;
+	}
+	if (this->isInStatus(eStatus::JUMP)) {
+		_currentAnimateIndex = eStatus::JUMP;
+	}
+	if ((_currentAnimateIndex & eStatus::FALLING) == eStatus::FALLING) {
+		_currentAnimateIndex = eStatus::FALLING;
+	}
 
-	auto move = (Movement*)this->_listComponent["Movement"];
-	move->setVelocity(GVector2( 85, 250));
+	// chết
+	if (this->isInStatus(eStatus::DYING)) {
+		_currentAnimateIndex = eStatus::DYING;
+	}
 }
 
+void Skeleton::getHitted() {
+
+}
+
+void Skeleton::updateDirection() {
+	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
+	GVector2 position = this->getPosition();
+
+	if (_jumpingDirection == eDirection::LEFT && _simon->getPositionX() > position.x) {
+		changeDirection(eDirection::RIGHT);
+	}
+	else if (_jumpingDirection == eDirection::RIGHT && _simon->getPositionX() < position.x) {
+		changeDirection(eDirection::LEFT);
+	}
+}
+
+void Skeleton::changeDirection(eDirection dir) {
+	if (_jumpingDirection == dir)
+		return;
+
+	_jumpingDirection = dir;
+
+	Movement *movement = (Movement*)this->getComponent("Movement");
+	if (_jumpingDirection == eDirection::RIGHT) {
+		if (this->getScale().x < 0) this->setScaleX(this->getScale().x * (-1));
+		//movement->setVelocity(GVector2(Skeleton_SPEED, 0));
+	}
+	else if (_jumpingDirection == eDirection::LEFT) {
+		if (this->getScale().x > 0) this->setScaleX(this->getScale().x * (-1));
+		//movement->setVelocity(GVector2(-Skeleton_SPEED, 0));
+	}
+}
+
+bool Skeleton::checkIfOutOfScreen() {
+	auto viewport = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT screenBound = viewport->getBounding();
+	GVector2 vpBound = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getCurrentViewportBound();
+	GVector2 position = this->getPosition();
+
+	if (position.x > screenBound.right) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+	else if (position.x < screenBound.left) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
+	if (position.x < vpBound.x + 20) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
+	if (position.x > vpBound.y - 20) {
+		this->setStatus(eStatus::DESTROY);
+		return true;
+	}
+
+	return false;
+}
+
+void Skeleton::updateSitting() {
+	if (_canJump) return;
+	// track theo simon
+	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	RECT objectBound = objectTracker->getBounding();
+	int xSimon = objectTracker->getPositionX();
+	int ySimon = objectTracker->getPositionY();
+	int xthis = this->getPositionX();
+	int ythis = this->getBounding().bottom;
+	if (xSimon > xthis&&xSimon < xthis + 250 && ySimon<ythis&&ySimon>ythis - 100) {
+		this->setStatus(JUMP);
+		_canJump = true;
+	}
+	else {
+		this->setStatus(RUNNING);
+	}
+}
+
+void Skeleton::updateStatus()
+{
+	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
+	int xSimon = objectTracker->getPositionX();
+	int ySimon = objectTracker->getPositionY();
+	if (this->getPositionX() < xSimon - 100)
+	moving();
+}
+
+void Skeleton::moving()
+{
+	if (_movingStopWatch == nullptr) 
+	{
+		_movingStopWatch = new StopWatch();
+		return;
+	}
+	if (_movingStopWatch != nullptr && _movingStopWatch->isStopWatch(500)) 
+	{
+		SAFE_DELETE(_movingStopWatch);
+		auto move = (Movement*)this->_listComponent["Movement"]; 
+		if (this->getVelocity().x >= 0)
+			move->setVelocity(GVector2(-300, this->getVelocity().y));
+		else  if (this->getVelocity().x < 0)
+			move->setVelocity(GVector2(300, this->getVelocity().y));
+	}
+}
+
+void Skeleton::jump() {
+	if (!_canJump) return;
+	if (this->isInStatus(eStatus::JUMPING)) return;
+
+	if (_jumpStopWatch == nullptr) {
+		_jumpStopWatch = new StopWatch();
+	}
+
+	if (_jumpStopWatch != nullptr && _jumpStopWatch->isStopWatch(2000)) {
+		SAFE_DELETE(_jumpStopWatch);
+		auto gravity = (Gravity*)this->_listComponent["Gravity"];
+		gravity->setStatus(eGravityStatus::FALLING_DOWN);
+
+		this->setStatus(eStatus::JUMPING);
+		auto move = (Movement*)this->_listComponent["Movement"];
+		if (_jumpingDirection == eDirection::RIGHT)
+			move->setVelocity(GVector2(85, 250));
+		else move->setVelocity(GVector2(-85, 250));
+	}
+}

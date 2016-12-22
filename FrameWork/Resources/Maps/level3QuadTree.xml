@@ -77,11 +77,11 @@
           <Objects>stair07 land18 land19 </Objects>
         </QNode>
         <QNode Id="66308" Level="4" X="3520" Y="640" Width="320" Height="320">
-          <Objects>land7 wall0 skeleton0 </Objects>
+          <Objects>land7 skeleton0 object56 </Objects>
         </QNode>
         <QNode Id="197380" Level="4" X="3520" Y="960" Width="320" Height="320">
           <QNode Id="197380" Level="5" X="3520" Y="960" Width="160" Height="160">
-            <Objects>land6 wall0 skeleton0 </Objects>
+            <Objects>land6 skeleton0 object56 </Objects>
           </QNode>
           <QNode Id="197381" Level="5" X="3680" Y="960" Width="160" Height="160">
             <Objects>land5 land6 skeleton0 </Objects>
@@ -188,7 +188,7 @@
           <QNode Id="197142" Level="5" X="4160" Y="1120" Width="160" Height="160" />
         </QNode>
         <QNode Id="131604" Level="4" X="3840" Y="960" Width="320" Height="320">
-          <Objects>land1 </Objects>
+          <Objects>land1 object57 </Objects>
         </QNode>
       </QNode>
     </QNode>
