@@ -673,17 +673,20 @@ BaseObject * ObjectFactory::getSkeleton(xml_node node) {
 	if (properties.size() == 0)
 		return nullptr;
 
-	int x, y, direction;
+	int x, y, direction, width, height;
 	eStatus status;
 
-	x = stoi(properties["X"]) + 32;
-	y = stoi(properties["Y"]) - 16;
+	x = stoi(properties["X"]);
+	y = stoi(properties["Y"]);
+	width = stoi(properties["Width"]);
+	height = stoi(properties["Height"]);
 
+	GVector2 pos = GVector2(x + width / 2, y - height / 2);
 	if (properties.find("status") != properties.end()) {
 		status = (eStatus)(stoi(properties.find("status")->second));
 	}
 	else {
-		status = eStatus::NORMAL;
+		status = eStatus::RUNNING;
 	}
 
 	if (properties.find("direction") != properties.end()) {
@@ -693,7 +696,7 @@ BaseObject * ObjectFactory::getSkeleton(xml_node node) {
 		direction = 1;
 	}
 
-	auto skeleton = new Skeleton(status, GVector2(x, y), direction);
+	auto skeleton = new Skeleton(status, pos, direction);
 	skeleton->init();
 
 	return skeleton;

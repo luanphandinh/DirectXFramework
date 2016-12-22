@@ -31,9 +31,7 @@ public:
 	void draw(LPD3DXSPRITE, Viewport*);
 	void release();
 	float checkCollision(BaseObject*, float);
-	void die();
-	void setPosition(GVector2);
-	GVector2 getVelocity();
+	GVector2 getVelocity() override;
 	IComponent* getComponent(string);
 	void getHitted();
 private:
@@ -47,8 +45,7 @@ private:
 
 	void changeDirection();
 	bool isHitted;
-	eStatus _currentAnimateIndex;
-	void updateCurrentAnimateIndex();
+
 	StopWatch*	_burstStopWatch;
 	StopWatch* _movingStopWatch;
 
@@ -61,10 +58,14 @@ private:
 	void moving();
 	StopWatch* _jumpStopWatch;
 
+	BaseObject* _jumpLand;
 	void updateStatus();
-
+	eDirection _movingDirection;
 	eDirection _jumpingDirection;
 	void updateDirection();
 	void changeDirection(eDirection dir);
 
+	bool _canJumpDown;
+	int _speed;
+	RECT _movingBounding;
 };

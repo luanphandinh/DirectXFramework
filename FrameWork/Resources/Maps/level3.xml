@@ -519,8 +519,8 @@
     <Item Id="2" Name="land23" X="4866" Y="671" Width="124" Height="12">
       <ActiveBound X="4866" Y="671" Width="124" Height="12" />
     </Item>
-    <Item Id="59" Name="skeleton0" X="3656" Y="227" Width="41" Height="64">
-      <ActiveBound X="3656" Y="227" Width="41" Height="64" />
+    <Item Id="59" Name="skeleton0" X="3676" Y="257" Width="41" Height="64">
+      <ActiveBound X="3676" Y="257" Width="41" Height="64" />
     </Item>
     <Item Id="2" Name="land24" X="512" Y="927" Width="62" Height="14">
       <ActiveBound X="512" Y="927" Width="62" Height="14" />
@@ -601,14 +601,20 @@
     <Item Id="65" Name="raven0" X="2590" Y="735" Width="32" Height="32">
       <ActiveBound X="2590" Y="735" Width="32" Height="32" />
     </Item>
-    <Item Id="2" Name="object56" X="3614" Y="384" Width="40" Height="234">
-      <ActiveBound X="3614" Y="384" Width="40" Height="234" />
+    <Item Id="2" Name="object56" X="3614" Y="384" Width="40" Height="270">
+      <ActiveBound X="3614" Y="384" Width="40" Height="270" />
       <Params>
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
     <Item Id="59" Name="object57" X="3908" Y="146" Width="81" Height="77">
       <ActiveBound X="3908" Y="146" Width="81" Height="77" />
+    </Item>
+    <Item Id="59" Name="object59" X="3741" Y="165" Width="65" Height="62">
+      <ActiveBound X="3741" Y="165" Width="65" Height="62" />
+    </Item>
+    <Item Id="59" Name="object59" X="2761" Y="586" Width="48" Height="62">
+      <ActiveBound X="2761" Y="586" Width="48" Height="62" />
     </Item>
   </Objects>
 </Tilesmap>

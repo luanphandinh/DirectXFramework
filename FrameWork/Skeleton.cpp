@@ -4,9 +4,9 @@
 Skeleton::Skeleton(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::SKELETON) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SKELETON);
 	if (direction > 0) {
-		_jumpingDirection = eDirection::RIGHT;
+		_movingDirection = eDirection::RIGHT;
 	}
-	else _jumpingDirection = eDirection::LEFT;
+	else _movingDirection = eDirection::LEFT;
 	_direction = direction;
 
 	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(GVector2Zero, GVector2(100,20), this->_sprite)));
@@ -15,6 +15,7 @@ Skeleton::Skeleton(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID:
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
 	this->setPhysicBodySide(eDirection::ALL);
+	
 }
 Skeleton::~Skeleton() {
 }
@@ -24,13 +25,11 @@ void Skeleton::init() {
 	this->setScore(SKELETON_SCORE);
 
 	this->_listComponent.insert(pair<string, IComponent*>("Gravity",
-		new Gravity(GVector2(0, -ENEMY_GRAVITY), (Movement*)(this->getComponent("Movement")))));
+		new Gravity(GVector2(0, -900), (Movement*)(this->getComponent("Movement")))));
 
 	auto collisionBody = new CollisionBody(this);
 	_listComponent["CollisionBody"] = collisionBody;
 
-	_animations[eStatus::NORMAL] = new Animation(_sprite, 0.1f);
-	_animations[eStatus::NORMAL]->addFrameRect(eID::SKELETON, "normal", NULL);
 
 	_animations[eStatus::RUNNING] = new Animation(_sprite, 0.15f);
 	_animations[eStatus::RUNNING]->addFrameRect(eID::SKELETON, "move_01", "move_02", NULL);
@@ -45,6 +44,7 @@ void Skeleton::init() {
 	
 	auto gravity = (Gravity*)this->_listComponent["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
+	_speed = 250;
 }
 
 void Skeleton::update(float deltatime) {
@@ -72,8 +72,6 @@ void Skeleton::update(float deltatime) {
 		}
 		return;
 	}
-
-	//if (this->checkIfOutOfScreen()) return;
 
 	updateDirection();
 
@@ -125,10 +123,34 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
-	if (objectId != eID::LAND && objectId != eID::SIMON) return 0.0f;
+	if (objectId != eID::LAND && objectId != eID::SIMON && objectId != eID::WHIP && objectId != eID::ITEM) return 0.0f;
 	if (objectId == eID::LAND) {
-		if (collisionBody->checkCollision(object, direction, dt)) {
-			if (direction == eDirection::TOP && this->getVelocity().y < 0) {
+		if (collisionBody->checkCollision(object, direction, dt)) 
+		{
+
+			auto land = (Land*)object;
+			_canJumpDown = land->canJump();
+
+			if (prevObject != NULL && land != prevObject)
+			{
+				if (land->getBounding().bottom > prevObject->getBounding().top)
+				{
+					_canJump = true;
+					_jumpLand = land;
+
+					if (land->getPosition().x < _movingBounding.left)
+					{
+						_jumpingDirection = eDirection::LEFT;
+					}
+					else if (land->getPosition().x > _movingBounding.right)
+					{
+						_jumpingDirection = eDirection::RIGHT;
+					}
+				}
+			}
+
+			if (direction == eDirection::TOP && this->getVelocity().y < 0) 
+			{
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
@@ -137,9 +159,12 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 				this->removeStatus(JUMPING);
 				this->setStatus(RUNNING);
 				//this->setStatus(eStatus::JUMP);
+				_movingBounding = object->getBounding();
 				prevObject = object;
 			}
-			else if (direction == eDirection::LEFT || direction == eDirection::RIGHT)
+			else if (((direction == eDirection::LEFT)
+				|| (direction == eDirection::RIGHT))
+				&& (!this->isInStatus(eStatus::JUMPING) || (this->isInStatus(eStatus::JUMPING) && !_canJumpDown)))
 			{
 				//this->setStatus(eStatus::NORMAL);
 				//vì khi có va chạm thì vật vẫn còn di chuyển
@@ -162,11 +187,11 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 				//enableGravity(false);
 				//_preObject = otherObject;
 			}
-			else if (prevObject == object) {
-
+			else if (prevObject == object) 
+			{
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
 				gravity->setStatus(eGravityStatus::FALLING_DOWN);
-
+		
 				prevObject = nullptr;
 			}
 		}
@@ -179,21 +204,16 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 
 			((Simon*)object)->getHitted();
 		}
-
-
-		return 0.0f;
 	}
+	else if (objectId == eID::WHIP && ((Whip*)object)->isHitting() && collisionBody->checkCollision(object, direction, dt, false)) {
+		this->setStatus(eStatus::BURN);
+	}
+	else if (objectId == eID::ITEM && ((Item*)object)->getItemType() == eItemType::PICKED_UP && collisionBody->checkCollision(object, direction, dt, false))
+	{
+		this->setStatus(eStatus::BURN);
+	}
+
 	return 0.0f;
-}
-
-void Skeleton::die() {
-	Gravity *gravity = (Gravity*)this->getComponent("Gravity");
-	gravity->setStatus(eGravityStatus::SHALLOWED);
-}
-
-void Skeleton::setPosition(GVector2 pos) {
-	_sprite->setPosition(pos);
-
 }
 
 GVector2 Skeleton::getVelocity() {
@@ -206,29 +226,6 @@ IComponent * Skeleton::getComponent(string componentName) {
 
 }
 
-void Skeleton::changeDirection() {
-	_sprite->setScaleX(-this->getScale().x);
-	Movement *movement = (Movement*)this->getComponent("Movement");
-	movement->setVelocity(GVector2(movement->getVelocity().x, 0));
-}
-
-void Skeleton::updateCurrentAnimateIndex() {
-	if (this->isInStatus(eStatus::HIGHJUMP)) {
-		_currentAnimateIndex = eStatus::HIGHJUMP;
-	}
-	if (this->isInStatus(eStatus::JUMP)) {
-		_currentAnimateIndex = eStatus::JUMP;
-	}
-	if ((_currentAnimateIndex & eStatus::FALLING) == eStatus::FALLING) {
-		_currentAnimateIndex = eStatus::FALLING;
-	}
-
-	// chết
-	if (this->isInStatus(eStatus::DYING)) {
-		_currentAnimateIndex = eStatus::DYING;
-	}
-}
-
 void Skeleton::getHitted() {
 
 }
@@ -237,74 +234,26 @@ void Skeleton::updateDirection() {
 	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
 	GVector2 position = this->getPosition();
 
-	if (_jumpingDirection == eDirection::LEFT && _simon->getPositionX() > position.x) {
+	if (_movingDirection == eDirection::LEFT && _simon->getPositionX() > position.x) {
 		changeDirection(eDirection::RIGHT);
 	}
-	else if (_jumpingDirection == eDirection::RIGHT && _simon->getPositionX() < position.x) {
+	else if (_movingDirection == eDirection::RIGHT && _simon->getPositionX() < position.x) {
 		changeDirection(eDirection::LEFT);
 	}
 }
 
 void Skeleton::changeDirection(eDirection dir) {
-	if (_jumpingDirection == dir)
+	if (_movingDirection == dir)
 		return;
 
-	_jumpingDirection = dir;
+	_movingDirection = dir;
 
 	Movement *movement = (Movement*)this->getComponent("Movement");
-	if (_jumpingDirection == eDirection::RIGHT) {
+	if (_movingDirection == eDirection::RIGHT) {
 		if (this->getScale().x < 0) this->setScaleX(this->getScale().x * (-1));
-		//movement->setVelocity(GVector2(Skeleton_SPEED, 0));
 	}
-	else if (_jumpingDirection == eDirection::LEFT) {
+	else if (_movingDirection == eDirection::LEFT) {
 		if (this->getScale().x > 0) this->setScaleX(this->getScale().x * (-1));
-		//movement->setVelocity(GVector2(-Skeleton_SPEED, 0));
-	}
-}
-
-bool Skeleton::checkIfOutOfScreen() {
-	auto viewport = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getViewport();
-	RECT screenBound = viewport->getBounding();
-	GVector2 vpBound = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getCurrentViewportBound();
-	GVector2 position = this->getPosition();
-
-	if (position.x > screenBound.right) {
-		this->setStatus(eStatus::DESTROY);
-		return true;
-	}
-	else if (position.x < screenBound.left) {
-		this->setStatus(eStatus::DESTROY);
-		return true;
-	}
-
-	if (position.x < vpBound.x + 20) {
-		this->setStatus(eStatus::DESTROY);
-		return true;
-	}
-
-	if (position.x > vpBound.y - 20) {
-		this->setStatus(eStatus::DESTROY);
-		return true;
-	}
-
-	return false;
-}
-
-void Skeleton::updateSitting() {
-	if (_canJump) return;
-	// track theo simon
-	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
-	RECT objectBound = objectTracker->getBounding();
-	int xSimon = objectTracker->getPositionX();
-	int ySimon = objectTracker->getPositionY();
-	int xthis = this->getPositionX();
-	int ythis = this->getBounding().bottom;
-	if (xSimon > xthis&&xSimon < xthis + 250 && ySimon<ythis&&ySimon>ythis - 100) {
-		this->setStatus(JUMP);
-		_canJump = true;
-	}
-	else {
-		this->setStatus(RUNNING);
 	}
 }
 
@@ -313,8 +262,10 @@ void Skeleton::updateStatus()
 	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	int xSimon = objectTracker->getPositionX();
 	int ySimon = objectTracker->getPositionY();
-	if (this->getPositionX() < xSimon - 100)
-	moving();
+	if (!this->isInStatus(eStatus::JUMPING))
+		moving();
+	if (this->getPositionX() < xSimon - 220 || this->getPositionX() > xSimon + 220)
+		jump();
 }
 
 void Skeleton::moving()
@@ -324,34 +275,44 @@ void Skeleton::moving()
 		_movingStopWatch = new StopWatch();
 		return;
 	}
+	auto move = (Movement*)this->_listComponent["Movement"];
+
 	if (_movingStopWatch != nullptr && _movingStopWatch->isStopWatch(500)) 
 	{
 		SAFE_DELETE(_movingStopWatch);
-		auto move = (Movement*)this->_listComponent["Movement"]; 
+		
 		if (this->getVelocity().x >= 0)
-			move->setVelocity(GVector2(-300, this->getVelocity().y));
+			move->setVelocity(GVector2(-_speed, this->getVelocity().y));
 		else  if (this->getVelocity().x < 0)
-			move->setVelocity(GVector2(300, this->getVelocity().y));
+			move->setVelocity(GVector2(_speed, this->getVelocity().y));
+	}
+
+	if (this->getPositionX() > _movingBounding.right - 16) {
+		move->setVelocity(GVector2(-_speed, this->getVelocity().y));
+	}
+	else if (this->getPositionX() < _movingBounding.left + 16) {
+		move->setVelocity(GVector2(_speed, this->getVelocity().y));
 	}
 }
 
-void Skeleton::jump() {
+void Skeleton::jump() 
+{
 	if (!_canJump) return;
 	if (this->isInStatus(eStatus::JUMPING)) return;
 
-	if (_jumpStopWatch == nullptr) {
-		_jumpStopWatch = new StopWatch();
-	}
+	//if (_jumpStopWatch == nullptr) {
+	//	_jumpStopWatch = new StopWatch();
+	//}
 
-	if (_jumpStopWatch != nullptr && _jumpStopWatch->isStopWatch(2000)) {
+	//if (_jumpStopWatch != nullptr && _jumpStopWatch->isStopWatch(2000)) {
 		SAFE_DELETE(_jumpStopWatch);
 		auto gravity = (Gravity*)this->_listComponent["Gravity"];
 		gravity->setStatus(eGravityStatus::FALLING_DOWN);
-
+		_canJump = false;
 		this->setStatus(eStatus::JUMPING);
 		auto move = (Movement*)this->_listComponent["Movement"];
 		if (_jumpingDirection == eDirection::RIGHT)
-			move->setVelocity(GVector2(85, 250));
-		else move->setVelocity(GVector2(-85, 250));
-	}
+			move->setVelocity(GVector2(85, 450));
+		else move->setVelocity(GVector2(-85, 450));
+	//}
 }
