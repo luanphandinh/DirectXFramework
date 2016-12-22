@@ -50,14 +50,18 @@ private:
 	eStatus _currentAnimateIndex;
 	void updateCurrentAnimateIndex();
 	StopWatch*	_burstStopWatch;
-
+	StopWatch* _movingStopWatch;
 
 	bool checkIfOutOfScreen();
 	void updateSitting();
 
+	bool _highJump;
 	bool _canJump;
 	void jump();
+	void moving();
 	StopWatch* _jumpStopWatch;
+
+	void updateStatus();
 
 	eDirection _jumpingDirection;
 	void updateDirection();

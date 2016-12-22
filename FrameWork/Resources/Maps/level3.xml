@@ -382,12 +382,6 @@
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
-    <Item Id="2" Name="wall0" X="3640" Y="383" Width="8" Height="348">
-      <ActiveBound X="3640" Y="383" Width="8" Height="348" />
-      <Params>
-        <Elem Key="physicBodyDirection" Value="2" />
-      </Params>
-    </Item>
     <Item Id="58" Name="fleaman0" X="4417" Y="190" Width="32" Height="32">
       <ActiveBound X="4417" Y="190" Width="32" Height="32" />
     </Item>
@@ -606,6 +600,15 @@
     </Item>
     <Item Id="65" Name="raven0" X="2590" Y="735" Width="32" Height="32">
       <ActiveBound X="2590" Y="735" Width="32" Height="32" />
+    </Item>
+    <Item Id="2" Name="object56" X="3614" Y="384" Width="40" Height="234">
+      <ActiveBound X="3614" Y="384" Width="40" Height="234" />
+      <Params>
+        <Elem Key="physicBodyDirection" Value="15" />
+      </Params>
+    </Item>
+    <Item Id="59" Name="object57" X="3908" Y="146" Width="81" Height="77">
+      <ActiveBound X="3908" Y="146" Width="81" Height="77" />
     </Item>
   </Objects>
 </Tilesmap>
