@@ -53,7 +53,7 @@ void Sword::initWeaponComponent()
 {
 	if (_type != eItemType::PICKED_UP) return;
 
-	GVector2 veloc = this->initVeloc(SWORD_SPEED);
+	GVector2 veloc = this->initVeloc(SWORD_SPEED * 2);
 
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(veloc);
