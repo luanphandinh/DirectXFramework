@@ -610,12 +610,6 @@
         <Elem Key="physicBodyDirection" Value="15" />
       </Params>
     </Item>
-    <Item Id="59" Name="object57" X="3908" Y="146" Width="81" Height="77">
-      <ActiveBound X="3908" Y="146" Width="81" Height="77" />
-    </Item>
-    <Item Id="59" Name="object59" X="3741" Y="165" Width="65" Height="62">
-      <ActiveBound X="3741" Y="165" Width="65" Height="62" />
-    </Item>
     <Item Id="59" Name="object60" X="2761" Y="576" Width="48" Height="62">
       <ActiveBound X="2761" Y="576" Width="48" Height="62" />
     </Item>

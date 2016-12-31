@@ -259,6 +259,9 @@
     <ClCompile Include="Raven.cpp">
       <Filter>Source Files\Objects\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Bones.cpp">
+      <Filter>Source Files\Objects\Items\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CastlevaniaGame.h">
@@ -521,6 +524,9 @@
     </ClInclude>
     <ClInclude Include="Raven.h">
       <Filter>Header Files\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Bones.h">
+      <Filter>Header Files\Objects\Items\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

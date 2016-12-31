@@ -106,6 +106,7 @@ enum eItemID
 	MONEYCHEST = 15,
 	CHICKEN = 16,
 	CRYSTALBALL = 17,
+	BONES = 18,
 };
 
 //status cho nhân vật

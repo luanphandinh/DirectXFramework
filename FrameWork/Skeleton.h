@@ -68,4 +68,10 @@ private:
 	bool _canJumpDown;
 	int _speed;
 	RECT _movingBounding;
+
+	//objects
+	vector<BaseObject*> _listBones;
+	void createBones();
+	void removeBones();
+	StopWatch* _throwingStopWatch;
 };

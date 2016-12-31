@@ -1,5 +1,6 @@
 ﻿#include "Skeleton.h"
 #include"Level3.h"
+#include"Bones.h"
 
 Skeleton::Skeleton(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID::SKELETON) {
 	_sprite = SpriteManager::getInstance()->getSprite(eID::SKELETON);
@@ -45,6 +46,7 @@ void Skeleton::init() {
 	auto gravity = (Gravity*)this->_listComponent["Gravity"];
 	gravity->setStatus(eGravityStatus::FALLING_DOWN);
 	_speed = 250;
+
 }
 
 void Skeleton::update(float deltatime) {
@@ -73,15 +75,34 @@ void Skeleton::update(float deltatime) {
 		return;
 	}
 
+
+
 	updateDirection();
 
 	updateStatus();
 
-	for (auto component : _listComponent) {
+	if (_throwingStopWatch == nullptr)
+	{
+		_throwingStopWatch = new StopWatch();
+	}
+	else if (_throwingStopWatch != nullptr && _throwingStopWatch->isStopWatch(2000))
+	{
+		createBones();
+		SAFE_DELETE(_throwingStopWatch);
+	}
+
+	for (auto component : _listComponent) 
+	{
 		component.second->update(deltatime);
 	}
 
 	_animations[this->getStatus()]->update(deltatime);
+
+	for (auto object : _listBones)
+	{
+		object->update(deltatime);
+	}
+	removeBones();
 
 }
 
@@ -95,6 +116,11 @@ void Skeleton::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
 		return;
 	if (this->isInStatus(eStatus::JUMPING) || this->isInStatus(eStatus::RUNNING))
 		_animations[this->getStatus()]->draw(spritehandle, viewport);
+
+	for (auto object : _listBones)
+	{
+		object->draw(spritehandle, viewport);
+	}
 
 }
 
@@ -120,6 +146,11 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 		this->isInStatus(eStatus::DYING) || this->isInStatus(eStatus::BURN))
 		return 0.0f;
 
+	for (auto childObject : _listBones)
+	{
+		childObject->checkCollision(object, dt);
+	}
+
 	auto collisionBody = (CollisionBody*)_listComponent["CollisionBody"];
 	eID objectId = object->getId();
 	eDirection direction;
@@ -131,23 +162,23 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 			auto land = (Land*)object;
 			_canJumpDown = land->canJump();
 
-			if (prevObject != NULL && land != prevObject)
-			{
-				if (land->getBounding().bottom > prevObject->getBounding().top)
-				{
-					_canJump = true;
-					_jumpLand = land;
+			//if (prevObject != NULL && land != prevObject)
+			//{
+			//	if (land->getBounding().bottom > prevObject->getBounding().top)
+			//	{
+			//		_canJump = true;
+			//		_jumpLand = land;
 
-					if (land->getPosition().x < _movingBounding.left)
-					{
-						_jumpingDirection = eDirection::LEFT;
-					}
-					else if (land->getPosition().x > _movingBounding.right)
-					{
-						_jumpingDirection = eDirection::RIGHT;
-					}
-				}
-			}
+			//		if (land->getPosition().x < _movingBounding.left)
+			//		{
+			//			_jumpingDirection = eDirection::LEFT;
+			//		}
+			//		else if (land->getPosition().x > _movingBounding.right)
+			//		{
+			//			_jumpingDirection = eDirection::RIGHT;
+			//		}
+			//	}
+			//}
 
 			if (direction == eDirection::TOP /*&& this->getVelocity().y < 0*/) 
 			{
@@ -264,8 +295,8 @@ void Skeleton::updateStatus()
 	int ySimon = objectTracker->getPositionY();
 	if (!this->isInStatus(eStatus::JUMPING))
 		moving();
-	if (this->getPositionX() < xSimon - 220 || this->getPositionX() > xSimon + 220)
-		jump();
+	/*if (this->getPositionX() < xSimon - 220 || this->getPositionX() > xSimon + 220)
+		jump();*/
 }
 
 void Skeleton::moving()
@@ -280,7 +311,6 @@ void Skeleton::moving()
 	if (_movingStopWatch != nullptr && _movingStopWatch->isStopWatch(500)) 
 	{
 		SAFE_DELETE(_movingStopWatch);
-		
 		if (this->getVelocity().x >= 0)
 			move->setVelocity(GVector2(-_speed, this->getVelocity().y));
 		else  if (this->getVelocity().x < 0)
@@ -315,4 +345,34 @@ void Skeleton::jump()
 			move->setVelocity(GVector2(85, 450));
 		else move->setVelocity(GVector2(-85, 450));
 	//}
+}
+
+
+
+
+void Skeleton::createBones()
+{
+	//if (_listObjects.size() > 2) return;
+	Bones* bone = new Bones(this->getPosition(), _movingDirection);
+	bone->init();
+	//_snake = snake;
+	_listBones.push_back(bone);
+}
+
+void Skeleton::removeBones()
+{
+	for (auto object : _listBones)
+	{
+		if (object->getStatus() == eStatus::DESTROY)
+		{
+			object->release();
+
+			remove(_listBones.begin(), _listBones.end(), object);
+			_listBones.pop_back();
+
+			delete object;
+
+			break;
+		}
+	}
 }
