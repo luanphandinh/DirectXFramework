@@ -37,14 +37,12 @@ private:
 	BaseObject* prevObject;
 	void updateDirection();
 	void changeDirection(eDirection dir);
-	void flyingDown();
 	void fly();
 	// Init values
 
 	int hack;
 	bool _isHitted;
 	StopWatch* _stopWatch;
-	StopWatch* _stopWatch2;
 
 	bool checkIfOutOfScreen();
 	void updateLanding();
@@ -55,5 +53,7 @@ private:
 	bool _flyDown;
 	bool _isLanding;
 	eDirection _flyingDirection;
+
+	bool fuck;
 
 };

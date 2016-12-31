@@ -35,9 +35,6 @@ void Raven::init() {
 	_animations[eStatus::LANDING] = new Animation(_sprite, 0.1f);
 	_animations[eStatus::LANDING]->addFrameRect(eID::RAVEN, "normal", NULL);
 
-	_animations[FLYINGDOWN] = new Animation(_sprite, 0.15f);
-	_animations[FLYINGDOWN]->addFrameRect(eID::RAVEN, "fly_01", "fly_02", "fly_03", NULL);
-
 	_animations[FLYING] = new Animation(_sprite, 0.15f);
 	_animations[FLYING]->addFrameRect(eID::RAVEN, "fly_01", "fly_02", "fly_03",NULL);
 
@@ -46,9 +43,8 @@ void Raven::init() {
 
 	_isLanding = true;
 	_flyDown = false;
-	//_stopWatch = new StopWatch();
-	//*Test
-	//this->setPosition(GVector2(300, 200));
+	fuck = false;
+
 	this->setStatus(eStatus::LANDING);
 	_sprite->drawBounding(false);
 
@@ -89,16 +85,13 @@ void Raven::update(float deltaTime) {
 		return;
 	}
 
-	//updateDirection();
-	if (this->getStatus() == FLYING) {
-		this->fly();
+	fly();
 
-	}
 	for (auto component : _listComponent) {
 		component.second->update(deltaTime);
 	}
-
 	_animations[this->getStatus()]->update(deltaTime);
+
 }
 
 void Raven::draw(LPD3DXSPRITE spritehandle, Viewport *viewport) {
@@ -119,8 +112,6 @@ void Raven::release() {
 	//SAFE_DELETE(this->_loopwatch);
 	SAFE_DELETE(this->_sprite);
 	SAFE_DELETE(this->_stopWatch);
-	SAFE_DELETE(this->_stopWatch2);
-
 }
 
 float Raven::checkCollision(BaseObject *object, float deltaTime) {
@@ -136,6 +127,7 @@ float Raven::checkCollision(BaseObject *object, float deltaTime) {
 	if (collisionBody->checkCollision(object, direction, deltaTime, false)) {
 		if (objectId == eID::SIMON) {
 			((Simon*)object)->getHitted();
+			this->dropHitpoint(1);
 		}
 		else if (objectId == eID::WHIP && ((Whip*)object)->isHitting()) {
 			this->dropHitpoint(1);
@@ -200,41 +192,40 @@ void Raven::changeDirection(eDirection dir) {
 	}
 }
 
-void Raven::flyingDown() {
-
-}
-
 void Raven::fly() {
+	if (_isLanding) return;
 	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
 	RECT objectBound = _simon->getBounding();
 	auto viewportTracker = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getViewport();
 	RECT vpBound = viewportTracker->getBounding();
 
-	Movement *movement = (Movement*)this->getComponent("Movement");
-
-	movement->setVelocity(GVector2Zero);
+	auto movement = (Movement*)this->getComponent("Movement");
 
 	if (_stopWatch == nullptr) {
 		_stopWatch = new StopWatch();
 	}
 
-	if (_stopWatch->isStopWatch(1)) {
-		SAFE_DELETE(_stopWatch);
-		movement->setVelocity(GVector2(-40, -50));
 
+
+	if (_stopWatch != nullptr&&_stopWatch->isTimeLoop(1000)) {
+		SAFE_DELETE(_stopWatch);
+		if (this->getStatus() == FLYING) {
+			movement->setVelocity(GVector2(-80, -100));
+		}
 	}
 
 
-	//if (!_flyDown && this->getPositionY() > _simon->getPositionY()) {
-	//	trackedPosition = _simon->getPosition();
-	//	_flyDown = true;
-		//movement->setVelocity(GVector2(-40, -50));
+	int xthis = this->getPositionX();
+	int ythis = this->getBounding().bottom;
+	if (ythis < objectBound.top - 30) {
+		movement->setVelocity(GVector2(80, 0));
+		if (xthis > objectBound.right + 190)
+			fuck = true;
+	}
 
-	//}
-	//else if (_flyDown && this->getPositionY() < trackedPosition.y) {
-	//	_flyDown = false;
-	//	//movement->setVelocity(GVector2(movement->getVelocity().x, -5));
-	//}
+	if (fuck) {
+		movement->setVelocity(GVector2(-120, 0));
+	}
 }
 
 bool Raven::checkIfOutOfScreen() {
@@ -251,12 +242,15 @@ void Raven::updateLanding() {
 	int xthis = this->getPositionX();
 	int ythis = this->getBounding().bottom;
 
-	if (this->getDirection() == -1 && objectBound.right < this->getBounding().left - 100 && objectBound.top<this->getBounding().bottom) {
+	if (this->getDirection() == -1 && objectBound.right > this->getBounding().left - 185&& objectBound.top < this->getBounding().bottom) {
 		this->setStatus(FLYING);
 		_isLanding = false;
 	}
-	else if (this->getDirection() == 1 && objectBound.left > this->getBounding().right + 100 && objectBound.top > this->getBounding().bottom) {
-		//this->setStatus(FLYINGUP);
-		_isLanding = false;
+	else {
+		this->setStatus(LANDING);
 	}
+	//else if (this->getDirection() == 1 && objectBound.left > this->getBounding().right + 50 && objectBound.top > this->getBounding().bottom) {
+	//	//this->setStatus(FLYINGUP);
+	//	_isLanding = false;
+	//}
 }
