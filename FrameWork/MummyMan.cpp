@@ -336,7 +336,7 @@ void MummyMan::updateStatus()
 	auto viewportTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
 	RECT vpBound = viewportTracker->getBounding();
 
-	if (vpBound.left + WINDOW_WIDTH/2 - 20 <  xTracker && xTracker < vpBound.right - WINDOW_WIDTH/2 + 20)
+	if (vpBound.left + WINDOW_WIDTH / 2 - 20 <  xTracker && xTracker < vpBound.right - WINDOW_WIDTH / 2 + 20 && yTracker > 768 && vpBound.left > 4600)
 	{
 		if (_standingStopWatch == nullptr)
 		{

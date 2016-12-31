@@ -751,5 +751,31 @@
     <Item Id="6" Name="c97" X="5049" Y="954" Width="22" Height="26">
       <ActiveBound X="5049" Y="954" Width="22" Height="26" />
     </Item>
+    <Item Id="39" Name="object98" X="4811" Y="105" Width="304" Height="19">
+      <ActiveBound X="4811" Y="105" Width="304" Height="19" />
+      <Params>
+        <Elem Key="type" Value="55" />
+        <Elem Key="direction" Value="-1" />
+        <Elem Key="oneperone" Value="1" />
+      </Params>
+    </Item>
+    <Item Id="39" Name="medusaSpawner" X="4031" Y="648" Width="245" Height="16">
+      <ActiveBound X="4031" Y="648" Width="245" Height="16" />
+    </Item>
+    <Item Id="39" Name="medusaSpawner2" X="4509" Y="650" Width="221" Height="19">
+      <ActiveBound X="4509" Y="650" Width="221" Height="19" />
+    </Item>
+    <Item Id="54" Name="dragonhead1" X="1719" Y="1024" Width="57" Height="94">
+      <ActiveBound X="1719" Y="1024" Width="57" Height="94" />
+    </Item>
+    <Item Id="54" Name="dragonhead2" X="1175" Y="1023" Width="76" Height="92">
+      <ActiveBound X="1175" Y="1023" Width="76" Height="92" />
+    </Item>
+    <Item Id="54" Name="dragonhead3" X="2831" Y="1083" Width="72" Height="84">
+      <ActiveBound X="2831" Y="1083" Width="72" Height="84" />
+    </Item>
+    <Item Id="54" Name="dragonhead4" X="3375" Y="1083" Width="70" Height="82">
+      <ActiveBound X="3375" Y="1083" Width="70" Height="82" />
+    </Item>
   </Objects>
 </Tilesmap>
