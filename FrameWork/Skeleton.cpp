@@ -10,12 +10,13 @@ Skeleton::Skeleton(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID:
 	else _movingDirection = eDirection::LEFT;
 	_direction = direction;
 
-	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(GVector2Zero, GVector2(100,0), this->_sprite)));
+	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(GVector2Zero, GVector2(0,0), this->_sprite)));
 	this->setStatus(status);
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
 	this->setScaleX(direction * SCALE_FACTOR);
 	this->setPhysicBodySide(eDirection::ALL);
+	_isOnLand = false;
 	
 }
 Skeleton::~Skeleton() {
@@ -161,7 +162,7 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 
 			auto land = (Land*)object;
 			_canJumpDown = land->canJump();
-
+			_isOnLand = true;
 			//if (prevObject != NULL && land != prevObject)
 			//{
 			//	if (land->getBounding().bottom > prevObject->getBounding().top)
@@ -262,6 +263,7 @@ void Skeleton::getHitted() {
 }
 
 void Skeleton::updateDirection() {
+	if (!_isOnLand) return;
 	BaseObject* _simon = ((Scene*)SceneManager::getInstance()->getCurrentScene())->getDirector()->getObjectTracker();
 	GVector2 position = this->getPosition();
 
@@ -290,6 +292,7 @@ void Skeleton::changeDirection(eDirection dir) {
 
 void Skeleton::updateStatus()
 {
+	if (!_isOnLand) return;
 	auto objectTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getSimon();
 	int xSimon = objectTracker->getPositionX();
 	int ySimon = objectTracker->getPositionY();

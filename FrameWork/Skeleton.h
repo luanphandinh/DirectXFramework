@@ -74,4 +74,5 @@ private:
 	void createBones();
 	void removeBones();
 	StopWatch* _throwingStopWatch;
+	bool _isOnLand;
 };
