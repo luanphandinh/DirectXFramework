@@ -9,7 +9,7 @@ Skeleton::Skeleton(eStatus status, GVector2 pos, int direction) : BaseEnemy(eID:
 	else _movingDirection = eDirection::LEFT;
 	_direction = direction;
 
-	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(GVector2Zero, GVector2(100,20), this->_sprite)));
+	this->_listComponent.insert(pair<string, IComponent*>("Movement", new Movement(GVector2Zero, GVector2(100,0), this->_sprite)));
 	this->setStatus(status);
 	this->setPosition(pos);
 	this->setScale(SCALE_FACTOR);
@@ -149,13 +149,13 @@ float Skeleton::checkCollision(BaseObject *object, float dt) {
 				}
 			}
 
-			if (direction == eDirection::TOP && this->getVelocity().y < 0) 
+			if (direction == eDirection::TOP /*&& this->getVelocity().y < 0*/) 
 			{
 				auto gravity = (Gravity*)this->_listComponent["Gravity"];
 				gravity->setStatus(eGravityStatus::SHALLOWED);
 
-				auto movement = (Movement*)this->_listComponent["Movement"];
-				movement->setVelocity(GVector2(this->getVelocity().x, 0));
+		/*		auto movement = (Movement*)this->_listComponent["Movement"];
+				movement->setVelocity(GVector2(this->getVelocity().x, 0));*/
 				this->removeStatus(JUMPING);
 				this->setStatus(RUNNING);
 				//this->setStatus(eStatus::JUMP);

@@ -616,8 +616,140 @@
     <Item Id="59" Name="object59" X="3741" Y="165" Width="65" Height="62">
       <ActiveBound X="3741" Y="165" Width="65" Height="62" />
     </Item>
-    <Item Id="59" Name="object59" X="2761" Y="586" Width="48" Height="62">
-      <ActiveBound X="2761" Y="586" Width="48" Height="62" />
+    <Item Id="59" Name="object60" X="2761" Y="576" Width="48" Height="62">
+      <ActiveBound X="2761" Y="576" Width="48" Height="62" />
+    </Item>
+    <Item Id="6" Name="c60" X="5041" Y="150" Width="26" Height="28">
+      <ActiveBound X="5041" Y="150" Width="26" Height="28" />
+      <Params>
+        <Elem Key="DropItemId" Value="5" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c61" X="4915" Y="122" Width="22" Height="28">
+      <ActiveBound X="4915" Y="122" Width="22" Height="28" />
+    </Item>
+    <Item Id="6" Name="c62" X="4789" Y="120" Width="24" Height="25">
+      <ActiveBound X="4789" Y="120" Width="24" Height="25" />
+    </Item>
+    <Item Id="6" Name="c63" X="4529" Y="123" Width="24" Height="24">
+      <ActiveBound X="4529" Y="123" Width="24" Height="24" />
+    </Item>
+    <Item Id="6" Name="c64" X="4662" Y="116" Width="20" Height="20">
+      <ActiveBound X="4662" Y="116" Width="20" Height="20" />
+    </Item>
+    <Item Id="6" Name="c65" X="4407" Y="120" Width="19" Height="21">
+      <ActiveBound X="4407" Y="120" Width="19" Height="21" />
+    </Item>
+    <Item Id="6" Name="c66" X="4280" Y="116" Width="21" Height="18">
+      <ActiveBound X="4280" Y="116" Width="21" Height="18" />
+    </Item>
+    <Item Id="6" Name="c67" X="4149" Y="113" Width="21" Height="15">
+      <ActiveBound X="4149" Y="113" Width="21" Height="15" />
+    </Item>
+    <Item Id="6" Name="c68" X="4022" Y="117" Width="16" Height="18">
+      <ActiveBound X="4022" Y="117" Width="16" Height="18" />
+    </Item>
+    <Item Id="6" Name="c69" X="3767" Y="146" Width="22" Height="21">
+      <ActiveBound X="3767" Y="146" Width="22" Height="21" />
+    </Item>
+    <Item Id="6" Name="c70" X="3892" Y="276" Width="23" Height="20">
+      <ActiveBound X="3892" Y="276" Width="23" Height="20" />
+    </Item>
+    <Item Id="6" Name="c71" X="2356" Y="668" Width="15" Height="24">
+      <ActiveBound X="2356" Y="668" Width="15" Height="24" />
+      <Params>
+        <Elem Key="DropItemId" Value="2" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c72" X="2485" Y="532" Width="21" Height="19">
+      <ActiveBound X="2485" Y="532" Width="21" Height="19" />
+    </Item>
+    <Item Id="6" Name="c73" X="2611" Y="536" Width="21" Height="22">
+      <ActiveBound X="2611" Y="536" Width="21" Height="22" />
+    </Item>
+    <Item Id="6" Name="c74" X="2738" Y="537" Width="22" Height="23">
+      <ActiveBound X="2738" Y="537" Width="22" Height="23" />
+    </Item>
+    <Item Id="6" Name="c75" X="2885" Y="604" Width="19" Height="25">
+      <ActiveBound X="2885" Y="604" Width="19" Height="25" />
+    </Item>
+    <Item Id="6" Name="c76" X="2993" Y="505" Width="19" Height="23">
+      <ActiveBound X="2993" Y="505" Width="19" Height="23" />
+    </Item>
+    <Item Id="6" Name="c77" X="3120" Y="505" Width="16" Height="23">
+      <ActiveBound X="3120" Y="505" Width="16" Height="23" />
+    </Item>
+    <Item Id="6" Name="c78" X="3137" Y="485" Width="3" Height="3">
+      <ActiveBound X="3137" Y="485" Width="3" Height="3" />
+    </Item>
+    <Item Id="6" Name="c79" X="3253" Y="538" Width="19" Height="23">
+      <ActiveBound X="3253" Y="538" Width="19" Height="23" />
+      <Params>
+        <Elem Key="DropItemId" Value="8" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c80" X="3373" Y="538" Width="26" Height="23">
+      <ActiveBound X="3373" Y="538" Width="26" Height="23" />
+    </Item>
+    <Item Id="6" Name="c81" X="3503" Y="625" Width="23" Height="22">
+      <ActiveBound X="3503" Y="625" Width="23" Height="22" />
+      <Params>
+        <Elem Key="DropItemId" Value="3" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c82" X="3635" Y="657" Width="23" Height="15">
+      <ActiveBound X="3635" Y="657" Width="23" Height="15" />
+    </Item>
+    <Item Id="6" Name="c83" X="3782" Y="595" Width="19" Height="19">
+      <ActiveBound X="3782" Y="595" Width="19" Height="19" />
+    </Item>
+    <Item Id="6" Name="c84" X="4668" Y="725" Width="23" Height="19">
+      <ActiveBound X="4668" Y="725" Width="23" Height="19" />
+    </Item>
+    <Item Id="6" Name="c85" X="4806" Y="600" Width="18" Height="23">
+      <ActiveBound X="4806" Y="600" Width="18" Height="23" />
+    </Item>
+    <Item Id="6" Name="c86" X="4927" Y="601" Width="17" Height="22">
+      <ActiveBound X="4927" Y="601" Width="17" Height="22" />
+    </Item>
+    <Item Id="6" Name="c87" X="711" Y="980" Width="18" Height="17">
+      <ActiveBound X="711" Y="980" Width="18" Height="17" />
+    </Item>
+    <Item Id="6" Name="c88" X="819" Y="1044" Width="25" Height="20">
+      <ActiveBound X="819" Y="1044" Width="25" Height="20" />
+    </Item>
+    <Item Id="6" Name="c89" X="1075" Y="1043" Width="21" Height="16">
+      <ActiveBound X="1075" Y="1043" Width="21" Height="16" />
+      <Params>
+        <Elem Key="DropItemId" Value="2" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c90" X="1841" Y="1048" Width="22" Height="22">
+      <ActiveBound X="1841" Y="1048" Width="22" Height="22" />
+    </Item>
+    <Item Id="6" Name="c91" X="1970" Y="1048" Width="13" Height="21">
+      <ActiveBound X="1970" Y="1048" Width="13" Height="21" />
+    </Item>
+    <Item Id="6" Name="c92" X="2100" Y="1052" Width="18" Height="27">
+      <ActiveBound X="2100" Y="1052" Width="18" Height="27" />
+    </Item>
+    <Item Id="6" Name="c93" X="4528" Y="1048" Width="25" Height="28">
+      <ActiveBound X="4528" Y="1048" Width="25" Height="28" />
+    </Item>
+    <Item Id="6" Name="c94" X="4656" Y="1051" Width="19" Height="23">
+      <ActiveBound X="4656" Y="1051" Width="19" Height="23" />
+      <Params>
+        <Elem Key="DropItemId" Value="7" />
+      </Params>
+    </Item>
+    <Item Id="6" Name="c95" X="4784" Y="955" Width="22" Height="26">
+      <ActiveBound X="4784" Y="955" Width="22" Height="26" />
+    </Item>
+    <Item Id="6" Name="c96" X="4925" Y="953" Width="15" Height="20">
+      <ActiveBound X="4925" Y="953" Width="15" Height="20" />
+    </Item>
+    <Item Id="6" Name="c97" X="5049" Y="954" Width="22" Height="26">
+      <ActiveBound X="5049" Y="954" Width="22" Height="26" />
     </Item>
   </Objects>
 </Tilesmap>

@@ -749,7 +749,13 @@ BaseObject* ObjectFactory::getCandle(xml_node node)
 	height = stoi(properties["Height"]);
 
 	GVector2 pos = GVector2(x + width/2,y - height/2);
-	_dropItemId = (eItemID)stoi(properties["DropItemId"]);
+	if (properties.find("DropItemId") != properties.end()) 
+	{
+		_dropItemId = (eItemID)stoi(properties["DropItemId"]);
+	}
+	else {
+		_dropItemId = eItemID::SMALLHEART;
+	}
 
 	auto candle = new Candle(pos,_dropItemId);
 	candle->init();
