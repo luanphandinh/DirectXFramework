@@ -777,5 +777,50 @@
     <Item Id="59" Name="skeleton104" X="3779" Y="1059" Width="52" Height="62">
       <ActiveBound X="3779" Y="1059" Width="52" Height="62" />
     </Item>
+    <Item Id="65" Name="raven1" X="2880" Y="642" Width="32" Height="32">
+      <ActiveBound X="2880" Y="642" Width="32" Height="32" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
+    </Item>
+    <Item Id="65" Name="raven2" X="3008" Y="705" Width="32" Height="32">
+      <ActiveBound X="3008" Y="705" Width="32" Height="32" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
+    </Item>
+    <Item Id="65" Name="raven3" X="3091" Y="480" Width="32" Height="32">
+      <ActiveBound X="3091" Y="480" Width="32" Height="32" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
+    </Item>
+    <Item Id="65" Name="raven4" X="1039" Y="1088" Width="32" Height="32">
+      <ActiveBound X="1039" Y="1088" Width="32" Height="32" />
+      <Params>
+        <Elem Key="direction" Value="-1" />
+      </Params>
+    </Item>
+    <Item Id="65" Name="raven5" X="1472" Y="959" Width="32" Height="32">
+      <ActiveBound X="1472" Y="959" Width="32" Height="32" />
+    </Item>
+    <Item Id="65" Name="raven6" X="1599" Y="959" Width="32" Height="32">
+      <ActiveBound X="1599" Y="959" Width="32" Height="32" />
+    </Item>
+    <Item Id="65" Name="raven7" X="2567" Y="1114" Width="32" Height="32">
+      <ActiveBound X="2567" Y="1114" Width="32" Height="32" />
+    </Item>
+    <Item Id="65" Name="raven8" X="2754" Y="1115" Width="32" Height="32">
+      <ActiveBound X="2754" Y="1115" Width="32" Height="32" />
+    </Item>
+    <Item Id="65" Name="raven9" X="3006" Y="1139" Width="32" Height="32">
+      <ActiveBound X="3006" Y="1139" Width="32" Height="32" />
+    </Item>
+    <Item Id="65" Name="raven10" X="3138" Y="1132" Width="32" Height="32">
+      <ActiveBound X="3138" Y="1132" Width="32" Height="32" />
+    </Item>
+    <Item Id="65" Name="raven11" X="3527" Y="1118" Width="32" Height="32">
+      <ActiveBound X="3527" Y="1118" Width="32" Height="32" />
+    </Item>
   </Objects>
 </Tilesmap>

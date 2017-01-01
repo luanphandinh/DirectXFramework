@@ -207,10 +207,10 @@ void Raven::fly() {
 
 
 
-	if (_stopWatch != nullptr&&_stopWatch->isTimeLoop(1000)) {
+	if (_stopWatch != nullptr&&_stopWatch->isStopWatch(1000)) {
 		SAFE_DELETE(_stopWatch);
 		if (this->getStatus() == FLYING) {
-			movement->setVelocity(GVector2(-80, -100));
+			movement->setVelocity(GVector2(-80,-100));
 		}
 	}
 
@@ -246,11 +246,11 @@ void Raven::updateLanding() {
 		this->setStatus(FLYING);
 		_isLanding = false;
 	}
+	else if (this->getDirection() == -1 && objectBound.right > this->getBounding().left - 70) {
+		this->setStatus(FLYING);
+		_isLanding = false;
+	}
 	else {
 		this->setStatus(LANDING);
 	}
-	//else if (this->getDirection() == 1 && objectBound.left > this->getBounding().right + 50 && objectBound.top > this->getBounding().bottom) {
-	//	//this->setStatus(FLYINGUP);
-	//	_isLanding = false;
-	//}
 }

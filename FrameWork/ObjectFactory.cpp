@@ -724,7 +724,7 @@ BaseObject * ObjectFactory::getRaven(xml_node node) {
 		direction = stoi(properties.find("direction")->second);
 	}
 	else {
-		direction = 1;
+		direction = -1;
 	}
 
 	auto raven = new Raven(status, GVector2(x, y), direction);
