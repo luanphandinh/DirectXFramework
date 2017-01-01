@@ -88,6 +88,7 @@ void Level3Director::switchViewport() {
 		{
 			this->setCurrentViewport(V3);
 			this->_reviveViewport = V3;
+			this->_revivePosition = GVector2(3560,640);
 		}
 		break;
 	case eLevel2Viewport::V3:
@@ -107,6 +108,7 @@ void Level3Director::switchViewport() {
 		{
 			this->setCurrentViewport(V5);
 			this->_reviveViewport = V5;
+			this->_revivePosition = GVector2(2050, 1050);
 		}
 
 		break;
@@ -114,7 +116,7 @@ void Level3Director::switchViewport() {
 		if (pos.x > 4700)
 		{
 			this->setCurrentViewport(V6);
-			this->_reviveViewport = V6;
+			//this->_reviveViewport = V6;
 		}
 
 		break;

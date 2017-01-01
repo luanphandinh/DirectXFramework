@@ -20,13 +20,14 @@ bool Level3::init()
 	simon->init();
 	/*LEVEL 3 POS*/
 
-	simon->setPosition(4300, 100);//v1
-	//simon->setPosition(4900, 195);//v1
+	//simon->setPosition(4300, 100);//v1
+	simon->setPosition(5100, 100);//v1
 	//simon->setPosition(3900, 300);//v1
 	//simon->setPosition(3236, 600);//v2
-	simon->setPosition(2130, 500);//v2
+	//simon->setPosition(2130, 500);//v2
 
 	//simon->setPosition(4736, 600);//v3
+	//simon->setPosition(1900, 1050);//v3
 	//simon->setPosition(4000, 1000);//v5
 	//simon->setPosition(4900, 900);//v5
 
@@ -43,7 +44,7 @@ bool Level3::init()
 
 	_director->init();
 	_director->setObjectTracker(_simon);
-	_director->setCurrentViewport(V2);
+	_director->setCurrentViewport(V1);
 	_viewport = _director->getViewport();
 
 

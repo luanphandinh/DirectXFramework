@@ -16,9 +16,9 @@ CastlevaniaGame::CastlevaniaGame(HINSTANCE hInstance, LPWSTR title) :Game(hInsta
 void CastlevaniaGame::init()
 {
 	Game::init();
-	//SceneManager::getInstance()->addScene(new IntroScene());
+	SceneManager::getInstance()->addScene(new IntroScene());
 	//SceneManager::getInstance()->addScene(new PlayScene());
-	SceneManager::getInstance()->addScene(new Level3());
+	//SceneManager::getInstance()->addScene(new Level3());
 	//SceneManager::getInstance()->addScene(new GameOverScene());
 }
 
