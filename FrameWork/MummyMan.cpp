@@ -142,7 +142,7 @@ void MummyMan::update(float deltaTime)
 		}
 		return;
 	}
-
+	checkIfOutOfScreen();
 	updateDirection();
 
 	for (auto component : _listComponent)
@@ -475,6 +475,25 @@ void MummyMan::removeBandages()
 			delete object;
 
 			break;
+		}
+	}
+}
+
+void MummyMan::checkIfOutOfScreen()
+{	
+	auto viewportTracker = ((Level3*)SceneManager::getInstance()->getCurrentScene())->getViewport();
+	RECT vpBound = viewportTracker->getBounding();
+	if (!isContains(vpBound, this->getBounding()))
+	{
+		if (_direction == eDirection::LEFT)
+		{
+			changeDirection(eDirection::RIGHT);
+			this->setPositionX(vpBound.left + 20);
+		}
+		else if (_direction == eDirection::RIGHT)
+		{
+			changeDirection(eDirection::LEFT);
+			this->setPositionX(vpBound.right - 20);
 		}
 	}
 }

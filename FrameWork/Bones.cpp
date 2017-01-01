@@ -107,10 +107,10 @@ float Bones::checkCollisionWeapon(BaseObject* otherObject, float dt)
 		{
 			this->setStatus(eStatus::BURN);
 		}
-	/*	else if (otherObjectID == eID::ITEM)
+		else if (otherObjectID == eID::ITEM)
 		{
 			this->setStatus(eStatus::BURN);
-		}*/
+		}
 	}
 	return 0.0f;
 }
@@ -120,7 +120,7 @@ void Bones::initWeaponComponent()
 {
 	if (_type != eItemType::PICKED_UP) return;
 
-	GVector2 veloc = this->initVeloc(GVector2(BONES_VELOC.x + 80, BONES_VELOC.y + 500));
+	GVector2 veloc = this->initVeloc(GVector2(BONES_VELOC.x - 20, BONES_VELOC.y + 700));
 
 	auto move = (Movement*)this->_componentList["Movement"];
 	move->setVelocity(veloc);

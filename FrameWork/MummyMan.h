@@ -90,5 +90,6 @@ private:
 	vector<BaseObject*> _listBandages;
 	void createBandages();
 	void removeBandages();
+	void checkIfOutOfScreen();
 };
 
